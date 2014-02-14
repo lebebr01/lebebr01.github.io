@@ -1,0 +1,39 @@
+paginate: 1
+pygments: false
+auto: false
+destination: _site
+permalink: /:year/:month/:day/:title/
+safe: false
+analytics: 
+  provider: google
+  google: 
+     tracking_id: 'UA-43425299-1'
+
+
+title: Educate-R
+tagline: R and data miscellany
+author:
+  name : Brandon LeBeau
+  email : lebebr01@gmail.com
+  github : lebebr01
+  twitter : blebeau11
+
+url: http://educate-r.org
+
+markdown: rdiscount
+pandoc:
+  extensions: [smart, mathjax, indented-code-classes="r"]
+
+JB: 
+  BASE_PATH: http://educate-r.org
+
+  tags_path : /tags.html
+
+  # Settings for analytics helper
+  # Set 'provider' to the analytics provider you want to use.
+  # Set 'provider' to false to turn analytics off globally.
+  #        
+
+
+
+
