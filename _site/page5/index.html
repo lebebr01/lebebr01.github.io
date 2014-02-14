@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Educate-R</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>Educate-R</h2> -->
+     
+  <div class="full">
+    <h1 class="entry-title">
+      <a href="/2014/02/03/Rgui/" title="Picking a gui interface for R" rel="bookmark">Picking a gui interface for R</a>
+    </h1>
+    <div class="entry-content full-content">
+      <p>Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the <em>Deducer</em> package and the <em>Rcmdr</em> package.  Here are my initial thoughts on the switch.</p>
+
+<h3>Which gui to use?</h3>
+
+<p>This ultimately comes down to personal preference, however below I've highlighted my intial thoughts on pros/cons of each package.</p>
+
+<h4>Deducer</h4>
+
+<p><strong>Pros</strong>: <br/>
+- Shows syntax of commands run     <br/>
+- Uses ggplot2 for plots           <br/>
+- Very interactive menu structures<br/>
+- Simple condensed data loading  <br/>
+<strong>Cons</strong>: <br/>
+- Uses Java <br/>
+- Menus differ from PC to MAC <br/>
+- rJava package can be troublesome (not exactly sure why)</p>
+
+<h4>Rcmdr</h4>
+
+<p><strong>Pros</strong>: <br/>
+- Shows syntax of commands run      <br/>
+- Does not use Java                <br/>
+- Very similar data menus across each OS <br/>
+- Opens a new window so students know when it has loaded correctly <br/>
+<strong>Cons</strong>: <br/>
+- Uses base graphics <br/>
+- Data loading structures not integrated</p>
+
+<hr />
+
+<p>In general I prefer the <em>Deducer</em> package as it uses ggplot2 and has a more unified menu structure.  For example, there are not differing menu options for loading data like in <em>Rcmdr</em>.  Instead, <em>Deducer</em> has a single load data menu where it is possible to load many types of data including csv, txt, rda, etc.  This is helpful for students who are not very familiar with differing file types and I do not have to spend 5 minutes explaining it.  <em>Deducer</em> also uses ggplot2 for its graphics which I enjoy much more than base graphics.  In my opinion they look better and the syntax is ultimately easier to create high quality graphics.</p>
+
+<p>My biggest complaint of the <em>Deducer</em> package is that it uses Java.  This is one more thing that the user needs to install and with my class we have had trouble on a few computers getting the <em>rJava</em> package to work properly.  There was also the widely talked about Java exploit that may or may not have been fixed.  Lastly, the differing look of <em>Deducer</em> has made it more difficult for me as I need to have two explanations, one for those on a PC and another for those on a Mac.  Although they are very similar, it has been difficult for me as I do not use a Mac or have access to one for testing purposes.  Therefore, I end up figuring out differences on the fly.</p>
+
+<h3>Concluding thoughts</h3>
+
+<p>I hope to write more about my experiences using both gui systems for my class, but upon initial inspection of them now I definitely prefer <em>Deducer</em>.  The package just has not completely won me over as little problems have made me use both packages in my class so far, primarily due to the error loading the <em>rJava</em> package.</p>
+
+<p>Does anyone else have experience using one or the other in a class before?  I'd enjoy hearing any stories using these or different gui systems for R.</p>
+
+    </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#gui-ref" >gui</a>
+    
+  </p>
+    <p class="comments-link">
+      <a href='/2014/02/03/Rgui/#disqus_thread'>Comments</a>
+    </p>
+    <p class="by-line">
+      <span class="date full-date">
+        <abbr class="published" title="2014-02-03 00:00:00 -0600">03 Feb 2014</abbr>
+      </span>
+    </p>
+    <div class="clear"></div>
+  </div>
+  <div class="rule"><hr/></div>
+
+
+<div class="pagination">
+  <span class="previous">
+    
+      
+      <a href="/page4/" title="Previous Page">&laquo; Previous</a>
+      
+    
+  </span>
+  <span class="next">
+    
+    <a href="/page6/" title="Next Page">Next &raquo;</a>
+    
+  </span>
+</div>
+
+  </div>
+  </div>  
+    </body>
+</html>

@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Educate-R - R</title>
+		<description>Posts categorized as 'R'</description>
+		<link>http://educate-r.org</link>
+		<atom:link href="http://educate-r.org/feed.category.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Picking a gui interface for R</title>
+				<description>&lt;p&gt;Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the &lt;em&gt;Deducer&lt;/em&gt; package and the &lt;em&gt;Rcmdr&lt;/em&gt; package.  Here are my initial thoughts on the switch.&lt;/p&gt;
+
+&lt;h3&gt;Which gui to use?&lt;/h3&gt;
+
+&lt;p&gt;This ultimately comes down to personal preference, however below I've highlighted my intial thoughts on pros/cons of each package.&lt;/p&gt;
+
+&lt;h4&gt;Deducer&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: &lt;br/&gt;
+- Shows syntax of commands run     &lt;br/&gt;
+- Uses ggplot2 for plots           &lt;br/&gt;
+- Very interactive menu structures&lt;br/&gt;
+- Simple condensed data loading  &lt;br/&gt;
+&lt;strong&gt;Cons&lt;/strong&gt;: &lt;br/&gt;
+- Uses Java &lt;br/&gt;
+- Menus differ from PC to MAC &lt;br/&gt;
+- rJava package can be troublesome (not exactly sure why)&lt;/p&gt;
+
+&lt;h4&gt;Rcmdr&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: &lt;br/&gt;
+- Shows syntax of commands run      &lt;br/&gt;
+- Does not use Java                &lt;br/&gt;
+- Very similar data menus across each OS &lt;br/&gt;
+- Opens a new window so students know when it has loaded correctly &lt;br/&gt;
+&lt;strong&gt;Cons&lt;/strong&gt;: &lt;br/&gt;
+- Uses base graphics &lt;br/&gt;
+- Data loading structures not integrated&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In general I prefer the &lt;em&gt;Deducer&lt;/em&gt; package as it uses ggplot2 and has a more unified menu structure.  For example, there are not differing menu options for loading data like in &lt;em&gt;Rcmdr&lt;/em&gt;.  Instead, &lt;em&gt;Deducer&lt;/em&gt; has a single load data menu where it is possible to load many types of data including csv, txt, rda, etc.  This is helpful for students who are not very familiar with differing file types and I do not have to spend 5 minutes explaining it.  &lt;em&gt;Deducer&lt;/em&gt; also uses ggplot2 for its graphics which I enjoy much more than base graphics.  In my opinion they look better and the syntax is ultimately easier to create high quality graphics.&lt;/p&gt;
+
+&lt;p&gt;My biggest complaint of the &lt;em&gt;Deducer&lt;/em&gt; package is that it uses Java.  This is one more thing that the user needs to install and with my class we have had trouble on a few computers getting the &lt;em&gt;rJava&lt;/em&gt; package to work properly.  There was also the widely talked about Java exploit that may or may not have been fixed.  Lastly, the differing look of &lt;em&gt;Deducer&lt;/em&gt; has made it more difficult for me as I need to have two explanations, one for those on a PC and another for those on a Mac.  Although they are very similar, it has been difficult for me as I do not use a Mac or have access to one for testing purposes.  Therefore, I end up figuring out differences on the fly.&lt;/p&gt;
+
+&lt;h3&gt;Concluding thoughts&lt;/h3&gt;
+
+&lt;p&gt;I hope to write more about my experiences using both gui systems for my class, but upon initial inspection of them now I definitely prefer &lt;em&gt;Deducer&lt;/em&gt;.  The package just has not completely won me over as little problems have made me use both packages in my class so far, primarily due to the error loading the &lt;em&gt;rJava&lt;/em&gt; package.&lt;/p&gt;
+
+&lt;p&gt;Does anyone else have experience using one or the other in a class before?  I'd enjoy hearing any stories using these or different gui systems for R.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 03 Feb 2014 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2014/02/03/Rgui/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/02/03/Rgui/</guid>
+			</item>
+		
+			<item>
+				<title>When I use plyr/dplyr</title>
+				<description>&lt;p&gt;My last post I talked about how I use the &lt;em&gt;data.table&lt;/em&gt; package for aggregating and removing duplicate observations.  Although I use the &lt;em&gt;data.table&lt;/em&gt; package quite often, there are many times when I use &lt;em&gt;plyr&lt;/em&gt; (and now the new &lt;em&gt;dplyr&lt;/em&gt;) package, primarily because of its easy, intuitive syntax.&lt;/p&gt;
+
+&lt;h3&gt;Arrange&lt;/h3&gt;
+
+&lt;p&gt;One of my personal favorite functions in the &lt;em&gt;plyr&lt;/em&gt; suite of basic functions is the &lt;em&gt;arrange&lt;/em&gt; function.  The base functions for sorting/ordering are more difficult to use.  Not to mention there have been many times that I have used the &lt;em&gt;base::sort&lt;/em&gt; function when I really need to use the &lt;em&gt;base::order&lt;/em&gt; function (sort to me is the word I think of first).  &lt;em&gt;arrange&lt;/em&gt; is great due to the easy, general syntax used for it as shown below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(dplyr)
+arrange(dataframe, col1, col2, col3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When using the &lt;em&gt;base::order&lt;/em&gt; function, this needs to be done through the indexing operators and is not nearly as intuitive to me.  I always have to think for a second to get it right.  Here are two general examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;dataframe[order(dataframe$col1, dataframe$col2, dataframe$col3), ]
+with(dataframe, dataframe[order(col1, col2, col3), ])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both involve much more typing and are more difficult to read the code in my opinion.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3&gt;Simple, Intuitive syntax&lt;/h3&gt;
+
+&lt;p&gt;The other aspect of the &lt;em&gt;plyr&lt;/em&gt; (and &lt;em&gt;dplyr&lt;/em&gt;) suite of functions that keeps me coming back is their simple, intuitive syntax.  For example, if I am teaching a student how to aggregate or sort, &lt;em&gt;plyr&lt;/em&gt; is my go to package.  Easy to explain, easy to understand.  The common structure across all of the functions is brilliantly programmed and a standard for everyone else to replicate.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3&gt;New! Bonus use for &lt;em&gt;dplyr&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;The new ability to use the &lt;em&gt;chain&lt;/em&gt; function or alternatively the &lt;em&gt;%.%&lt;/em&gt; operator is a great addition to R.  One of the difficulties with code readability in R is the whenever functions are nested together.  By default R interprets from inside to out, not how most of us read written words let alone code.  The &lt;em&gt;chain&lt;/em&gt; function and &lt;em&gt;%.%&lt;/em&gt; operator allows the user to write the functions in the order they will be processed by R, therefore the code can read from left to right.&lt;/p&gt;
+
+&lt;p&gt;Using the mtcars dataset, suppose we wanted to select specific columns, aggregate the miles per gallon and weight by the number of cylinders and automatic transmission status, and filter so we select the rows that have an average miles per gallon greater than 20.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(dplyr)
+mtcars %.% 
+  group_by(cyl, am) %.%
+  select(mpg, cyl, wt, am) %.%
+  summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.%
+  filter(avgmpg &amp;gt; 20)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Output&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## Source: local data frame [3 x 4]
+## Groups: cyl
+## 
+##   cyl am avgmpg avgwt
+## 1   4  0  22.90 2.935
+## 2   4  1  28.07 2.042
+## 3   6  1  20.57 2.755
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compare the above syntax to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;filter(
+  summarise(
+    select(
+      group_by(mtcars, cyl, am),
+      mpg, cyl, wt, am),
+    avgmpg = mean(mpg), avgwt = mean(wt)),
+  avgmpg &amp;gt; 20)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Output&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## Source: local data frame [3 x 4]
+## Groups: cyl
+## 
+##   cyl am avgmpg avgwt
+## 1   4  0  22.90 2.935
+## 2   4  1  28.07 2.042
+## 3   6  1  20.57 2.755
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both chunks give you the same result, however the first one is much easier to see the process taken to get to the end result.  Much easier to adapt the code to add/remove parts of it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;I use both &lt;em&gt;data.table&lt;/em&gt; and &lt;em&gt;plyr&lt;/em&gt;/&lt;em&gt;dplyr&lt;/em&gt; packages.  All of these packages are a great tool for certian data problems.  If I want to write a single line of code to do a lot of manipulations I will tend to use &lt;em&gt;data.table&lt;/em&gt;.  However, if I am writing code where I am doing more exploration or if I am collaborating with others I tend to write my code using &lt;em&gt;plyr&lt;/em&gt;/&lt;em&gt;dplyr&lt;/em&gt;.  The versatility that both packages bring together in tandem is an excellent and powerful combination.  I do not have time to be a complete package elitest, the correct tool for the right data problem is the best solution for me.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 24 Jan 2014 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2014/01/24/usePlyr/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/01/24/usePlyr/</guid>
+			</item>
+		
+			<item>
+				<title>Two of my favorite data.table features</title>
+				<description>&lt;p&gt;When I started to use the &lt;em&gt;data.table&lt;/em&gt; package I was primarily using it to aggregate.  I had read about &lt;em&gt;data.table&lt;/em&gt; and its blazing speed compared to the other options from base or the &lt;em&gt;plyr&lt;/em&gt; package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using &lt;em&gt;data.table&lt;/em&gt; to do the same calculations I didn't need to wait 5 minutes to see the calculated values.&lt;/p&gt;
+
+&lt;p&gt;The speed of &lt;em&gt;data.table&lt;/em&gt; is publicized widely, however there are two features found in &lt;em&gt;data.table&lt;/em&gt; that are not talked about as frequently that I use very often.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;Add aggregated variables to the raw data file&lt;/h2&gt;
+
+&lt;p&gt;The ability to add aggregated variables to the raw data file can be very helpful in numerous data situations.  At Saint Paul Public Schools I used this feature to give differing levels of data to external clients requesting data.  I also used this feature when creating graphics.  Outside of the district world, this feature is extremely helpful when fitting linear mixed models with &lt;em&gt;lme4&lt;/em&gt; or &lt;em&gt;nlme&lt;/em&gt;.  Adding aggregated variables is needed if you want to add variables at any of the cluster levels (unless you calculate them on the fly with the &lt;strong&gt;I()&lt;/strong&gt; command).  Instead of creating a set of aggregated variables in a new data frame and merging back in, &lt;em&gt;data.table&lt;/em&gt; allows you to do it one one command.  Here is a small example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# generate a small dataset
+set.seed(1234)
+smalldat &amp;lt;- data.frame(group1 = rep(1:2, each = 5), 
+                       group2 = rep(c('a','b'), times = 5), 
+                       x = rnorm(10))
+
+# convert to data.frame to data.table
+library(data.table)
+smalldat &amp;lt;- data.table(smalldat)
+
+# convert aggregated variable into raw data file
+smalldat[, aggGroup1 := mean(x), by = group1]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Output&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1
+##  1:      1      a -1.2071   -0.3524
+##  2:      1      b  0.2774   -0.3524
+##  3:      1      a  1.0844   -0.3524
+##  4:      1      b -2.3457   -0.3524
+##  5:      1      a  0.4291   -0.3524
+##  6:      2      b  0.5061   -0.4140
+##  7:      2      a -0.5747   -0.4140
+##  8:      2      b -0.5466   -0.4140
+##  9:      2      a -0.5645   -0.4140
+## 10:      2      b -0.8900   -0.4140
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# aggregate with 2 variables
+smalldat[, aggGroup1.2 := mean(x), by = list(group1, group2)]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Output&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1 aggGroup1.2
+##  1:      1      a -1.2071   -0.3524      0.1022
+##  2:      1      b  0.2774   -0.3524     -1.0341
+##  3:      1      a  1.0844   -0.3524      0.1022
+##  4:      1      b -2.3457   -0.3524     -1.0341
+##  5:      1      a  0.4291   -0.3524      0.1022
+##  6:      2      b  0.5061   -0.4140     -0.3102
+##  7:      2      a -0.5747   -0.4140     -0.5696
+##  8:      2      b -0.5466   -0.4140     -0.3102
+##  9:      2      a -0.5645   -0.4140     -0.5696
+## 10:      2      b -0.8900   -0.4140     -0.3102
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The key part of the syntax is the &lt;strong&gt;:=&lt;/strong&gt;, which tells &lt;em&gt;data.table&lt;/em&gt; to compute an aggregated variable and merge it back into the original data.  This is very compact syntax to create aggregated variables that are automatically placed within the original data.  The only drawback is the inability to create more than one aggregated variable at a time.  If I wanted to created the mean and the median of x for each level of the variable &lt;em&gt;group1&lt;/em&gt;, I would have to write two commands.  If a lot of variables need to be aggregated in this fashion, it may be more concise to create an aggregated data set and merge back into the original.  Below is an example of what I mean by aggregate then merge back:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(plyr)
+
+# create aggregated data
+aggdat1 &amp;lt;- ddply(smalldat, .(group1), summarize,
+                 aggGroup1plyr = mean(x))
+aggdat12 &amp;lt;- ddply(smalldat, .(group1, group2), summarize, 
+                aggGroup1.1plyr = mean(x))
+
+# join back into data
+smalldat &amp;lt;- join(smalldat, aggdat1, by = 'group1')
+smalldat &amp;lt;- join(smalldat, aggdat12, by = c('group1', 'group2'))
+
+# print data
+smalldat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Output&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1 aggGroup1.2 aggGroup1plyr
+##  1:      1      a -1.2071   -0.3524      0.1022       -0.3524
+##  2:      1      b  0.2774   -0.3524     -1.0341       -0.3524
+##  3:      1      a  1.0844   -0.3524      0.1022       -0.3524
+##  4:      1      b -2.3457   -0.3524     -1.0341       -0.3524
+##  5:      1      a  0.4291   -0.3524      0.1022       -0.3524
+##  6:      2      b  0.5061   -0.4140     -0.3102       -0.4140
+##  7:      2      a -0.5747   -0.4140     -0.5696       -0.4140
+##  8:      2      b -0.5466   -0.4140     -0.3102       -0.4140
+##  9:      2      a -0.5645   -0.4140     -0.5696       -0.4140
+## 10:      2      b -0.8900   -0.4140     -0.3102       -0.4140
+##     aggGroup1.1plyr
+##  1:          0.1022
+##  2:         -1.0341
+##  3:          0.1022
+##  4:         -1.0341
+##  5:          0.1022
+##  6:         -0.3102
+##  7:         -0.5696
+##  8:         -0.3102
+##  9:         -0.5696
+## 10:         -0.3102
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above code using plyr likely won't take longer for R to run, however it does take more time to write out the code.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;Removing duplicate observations&lt;/h2&gt;
+
+&lt;p&gt;For most situations, using &lt;em&gt;data.table&lt;/em&gt; has become my go to way to remove duplicate observations.  This is especially useful when it does not matter which value of the variables you want to keep in the final data set (e.g. when values of the variables are repeated).  The ability of &lt;em&gt;data.table&lt;/em&gt; to create keyed values makes it extremely easy to remove duplicate observations based on those keyed variables.&lt;/p&gt;
+
+&lt;p&gt;Using the dataset created above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Set keys - this sorts the data based on these values
+setkeyv(smalldat, c('group1','group2'))
+
+# keep unique observations (I also remove the variable x)
+uniqdat &amp;lt;- subset(unique(smalldat), select = -x)
+
+# print data
+uniqdat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##    group1 group2 aggGroup1 aggGroup1.2 aggGroup1plyr aggGroup1.1plyr
+## 1:      1      a   -0.3524      0.1022       -0.3524          0.1022
+## 2:      1      b   -0.3524     -1.0341       -0.3524         -1.0341
+## 3:      2      a   -0.4140     -0.5696       -0.4140         -0.5696
+## 4:      2      b   -0.4140     -0.3102       -0.4140         -0.3102
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The code above first sets two keys for the data.table.  The key acts as an identifier and the data are automatically sorted based on the key variables.  This is one of the reasons why the &lt;em&gt;data.table&lt;/em&gt; package can be so fast at doing many of its tasks.  Then unique observations are kept.  The &lt;em&gt;unique&lt;/em&gt; function in the &lt;em&gt;data.table&lt;/em&gt; package is similar to the same function in the base package, but when keys are defined for data.table, the &lt;em&gt;unique&lt;/em&gt; function automatically selects unique observations based on those key variables.&lt;/p&gt;
+
+&lt;p&gt;For more complicated cases, I tend to use a combination of &lt;em&gt;order&lt;/em&gt; and &lt;em&gt;duplicated&lt;/em&gt; from base R, however for easy cases where observations are repeated on the variables I want to keep, this is a quick and easy way to remove duplicate observations.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 06 Jan 2014 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2014/01/06/FavDataTable/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/01/06/FavDataTable/</guid>
+			</item>
+		
+			<item>
+				<title>Guessing Correlations&#58; A shiny app</title>
+				<description>&lt;p&gt;A recent hobby of mine (as with many other R users) is to play around with the relatively new R package: &lt;em&gt;shiny&lt;/em&gt;.  I started creating demo applications about a year ago just to figure out how powerful the platform could be, but it was not until this fall that I started creating some applications for others to use.&lt;/p&gt;
+
+&lt;p&gt;I encountered a problem this fall at the University of Arkansas due to the huge Java exploit going public.  As a result of this, Java was blocked on all of the computers in the classrooms that I used for my intro statistics courses.  Most days this does not impact my lectures, however on a few days throughout the semester I use applets to help show certain concepts.&lt;/p&gt;
+
+&lt;p&gt;Enter my solution, create shiny applications that attempts to mimic many of the same features found in the Java applets using &lt;em&gt;shiny&lt;/em&gt;.  The application I've been working on lately is an application that allows users to estimate the correlation based on a scatterplot of data.&lt;/p&gt;
+
+&lt;p&gt;You can run the shiny application from my github page using the following command (make sure you have the shiny package installed first:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;shiny::runGitHub(repo = &amp;quot;shinyApps&amp;quot;, username = &amp;quot;lebebr01&amp;quot;, subdir = &amp;quot;guessCorr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;This should open a session in your browser that looks like the following screenshot:
+&lt;img src=&quot;/figs/GuessingCorrelations.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see from this screenshot, there is a scatterplot in the main window and the user inputs a guess into the text box.  When they hit the 'Submit Guess' button, the grey panel above the scatterplot updates to give hints about the direction the correlation is compared to the guess.  Once the user is within .05 (.05 above or below) the correlation, the correlation is printed in the top text box.&lt;/p&gt;
+
+&lt;p&gt;The app also includes the ability to restrict the range of the scatterplot.  This can be seen in the image below (and can be done on the app by clicking the 'Restriction of Range' checkbox):
+&lt;img src=&quot;/figs/GuessingCorrelationsRR.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When that checkbox is clicked, a new slider shows up that restricts the range of the original scatterplot.  The data that lies outside of the restricted range shows up as a light grey in the updated graph.  Now the user attempts to guess the correlation for the restricted range data.  The correlation for the entire data can be seen in the graph.&lt;/p&gt;
+
+&lt;p&gt;The one thing I was unable to implement was a second button that allows the user to click it to refresh the data to guess at another correlation.  The 'Submit Button' in &lt;em&gt;shiny&lt;/em&gt; is too cumbersome and I could not get two 'Action Buttons' to work side by side, although this may be possible.  The current workaround is to just refresh the page and a new scatterplot will load.  Alternatively, when using the restriction of range feature, changing the range will also generate new data.  Lastly, adding the option for a counter as an indication of how well the user is doing could make it an interesting contest in the classroom.&lt;/p&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 30 Dec 2013 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2013/12/30/guessCorr/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/12/30/guessCorr/</guid>
+			</item>
+		
+			<item>
+				<title>SPSS to R&#58; An R package to convert SPSS syntax</title>
+				<description>&lt;p&gt;My first statistical software package I used as an undergrad was SPSS.  I was fortunate during my senior year at &lt;a href=&quot;http://www.luther.edu&quot;&gt;Luther College&lt;/a&gt; to be initially introduced to &lt;a href=&quot;http://r-project.org&quot;&gt;R&lt;/a&gt;.  I did not realize it at the time (except for the pretty graphics) that this was the start of something big for me.  Fast forward a year to graduate school at the University of Minnesota and the majority of my program was again using SPSS.  Under the tutelage of &lt;a href=&quot;http://www.cehd.umn.edu/edpsych/people/Faculty/Zieffler.html&quot;&gt;Andy&lt;/a&gt; in my first graduate statistics course I started to do analyses in both R and SPSS.  After that I started to do all my analyses in R.  Fast forward five years this time to my first full-time job after graduate school at &lt;a href=&quot;http://www.spps.org&quot;&gt;Saint Paul Public Schools&lt;/a&gt; and again everyone was using SPSS.  Fortunately in my year there I was able to significantly push them toward using R more and more.&lt;/p&gt;
+
+&lt;p&gt;This long introduction motivates the following package I started writing mostly just to play with regular expressions, but kept playing and came up with a package with many routines.  The package I came up with is called &lt;em&gt;SPSStoR&lt;/em&gt; which converts SPSS syntax into R syntax.  Using regular expressions to parse the SPSS syntax to figure out which routine is being run then prints out the R syntax to do the same analysis done by the SPSS syntax.&lt;/p&gt;
+
+&lt;p&gt;As you can imagine, the SPSS language has many routines and this is not all encompassing, however it provides many basic commands such as:
+* Aggregate
+* Correlations
+* Crosstab
+* Sort Cases
+* Descriptives
+* One sample t-test
+* Independent sample t-test
+* Get for sav files (SPSS data files)
+* Master SPSStoR function
+* Graphics
+* Frequencies&lt;/p&gt;
+
+&lt;h1&gt;Examples&lt;/h1&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;You can install the package directly from my github page using the devtools library:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;library(devtools)
+install_github(&amp;quot;SPSStoR&amp;quot;, &amp;quot;lebebr01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:
+  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;library(SPSStoR)
+file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
+              &amp;quot;/getDescExamp.txt&amp;quot;, sep = '')
+spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;h3&gt;Output:&lt;/h3&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
+[2] &amp;quot;library(foreign)&amp;quot;
+[3] &amp;quot;x &amp;lt;- read.spss('/data/hubtemp.sav', to.data.frame = TRUE)&amp;quot;
+[4] &amp;quot;x &amp;lt;- x[order(DIVISION, STORE, -AGE), ]&amp;quot;
+[5] &amp;quot;library(SPSStoR)&amp;quot;
+[6] &amp;quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is another example doing a one-sample t-test:
+  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
+              &amp;quot;/ttestOneSampExamp.txt&amp;quot;, sep = '')
+spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;h3&gt;Output:&lt;/h3&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
+[2] &amp;quot;with(x, t.test(brake, mu = 322, conf.level = .90)&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;h1&gt;Summary&lt;/h1&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Although some working R knowledge is needed to run this package, such as knowledge of installing packages and what an object is, this package may be useful to those trying to figure out a similar command in R.  Over time I hope to slowly add support for more SPSS routines, see my github page for those that I am currently prioritizing.  Let me know via the issues on github if you'd like support for a specific routine or run into problems.&lt;/p&gt;
+
+&lt;p&gt;The package home can be found on github: &lt;a href=&quot;https://github.com/lebebr01/SPSStoR&quot;&gt;SPSStoR&lt;/a&gt;
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+</description>
+				<pubDate>Tue, 26 Nov 2013 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2013/11/26/SPSStoR/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/11/26/SPSStoR/</guid>
+			</item>
+		
+			<item>
+				<title>My Course Slide Generation</title>
+				<description>&lt;p&gt;This past August I took an opportunity to step back into the University academic world as a &lt;a href=&quot;http://http://coehp.uark.edu/12216.php&quot;&gt;Visiting Assistant Professor&lt;/a&gt; at the &lt;a href=&quot;http://www.uark.edu&quot;&gt;University of Arkansas&lt;/a&gt;.  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.&lt;/p&gt;
+
+&lt;p&gt;However, there has been some growing pains, especially regarding creating my own slides for the courses I teach.  Although I am using the same books/curriculum used in previous semesters, I am making my own slides and adding my own pieces as I see fit.  In addition, I do not use powerpoint, which all of the existing slides are in.  Therefore, I am creating my own versions of the slides using a combination of &lt;a href=&quot;http://www.r-project.org/&quot;&gt;R&lt;/a&gt;, &lt;a href=&quot;http://yihui.name/knitr/&quot;&gt;knitr&lt;/a&gt;, &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;markdown&lt;/a&gt;, &lt;a href=&quot;http://johnmacfarlane.net/pandoc/&quot;&gt;pandoc&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/Talks/Tools/Slidy2/&quot;&gt;slidy&lt;/a&gt;, and &lt;a href=&quot;http://www.latex-project.org/&quot;&gt;LaTeX&lt;/a&gt;.  Below is my general process of making my slides and the slides I put online for students to have access to.&lt;/p&gt;
+
+&lt;h2&gt;Step 1 - Create Source File&lt;/h2&gt;
+
+&lt;p&gt;I start with a &lt;em&gt;Rmd&lt;/em&gt; file.  This allows me to embed R code into the source document.  This is particularly useful for me to include plots of distributions, graphically showing how ANOVA works, etc.  Once I am finished editing my &lt;em&gt;Rmd&lt;/em&gt;, if I am using &lt;a href=&quot;http://www.rstudio.com/&quot;&gt;Rstudio&lt;/a&gt; I just use the &lt;em&gt;Knit HTML&lt;/em&gt; button to automatically generate the markdown and HTML file for me.  Alternatively, the &lt;em&gt;knit&lt;/em&gt; command from the &lt;strong&gt;knitr&lt;/strong&gt; package will create the markdown file for you (but not the HTML file, although for me the HTML file is not needed in this step).  The defaults of the &lt;em&gt;knit&lt;/em&gt; command work fine for me.&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;knit(input = &amp;quot;/path/to/file.Rmd&amp;quot;, output = &amp;quot;/path/to/file.md&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Step 2 - Create HTML Presentation&lt;/h2&gt;
+
+&lt;p&gt;Once we have the markdown file, I now use pandoc to create my HTML presentation.  There are a few ways to create HTML presentation slides, but I personally like slidy the best.  I like slidy because it easily fills the whole screen and also allows for content to go over the edges of the slide.  If content goes outside of the edges of a single slide, you can scroll to see the missing content.  I find this useful if I want to blow up an image or have two plots where I can show one then scroll to the second.  The pandoc command I use looks something like this:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Step 3 (Optional) - Edit CSS for HTML Presentation&lt;/h2&gt;
+
+&lt;p&gt;I use a custom CSS file to style my HTML presentation so it uses some of the official colors from the University of Arkansas.  For example, my header titles use the Arkansas red.  To use a custom CSS file, you just need to find the line that mentions CSS in the HTML file and change it to reflect your custom file.  The defaults look good, although perhaps slightly bland.&lt;/p&gt;
+
+&lt;h2&gt;Step 4 - Create pdf slides&lt;/h2&gt;
+
+&lt;p&gt;I then create a different set of slides using LaTeX that I post on the blackboard site for each of my courses.  Pandoc is how I get the &lt;em&gt;tex&lt;/em&gt; file to compile with LaTeX.  The command is very simple:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s inputfile.md -o outfile.tex&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Two things I change, I make sure the base text size is 12 pt.  I also make sure to use the &lt;em&gt;float&lt;/em&gt; package and change any figure positions from &lt;em&gt;htbp&lt;/em&gt; to &lt;em&gt;H&lt;/em&gt; which forces the figures to stay in position and not float around.  Then I compile the resulting &lt;em&gt;tex&lt;/em&gt; using Rstudio or from the command line with:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='bash'&gt;pdflatex -interaction=nonstopmode -synctex=1 outfile.tex&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In my opinion this creates great looking html presentations that are highly customizable.  One thing to note is that by default to get the slideshow, you need to be connected to the internet.  Both &lt;strong&gt;slidy&lt;/strong&gt; and &lt;strong&gt;mathjax&lt;/strong&gt; refer to javascript files that are on downloaded directly from the web.  You should be able to download these files, store them locally, and refer to the local versions.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 18 Nov 2013 00:00:00 -0600</pubDate>
+				<link>http://educate-r.org//2013/11/18/CourseSlidesProcess/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/11/18/CourseSlidesProcess/</guid>
+			</item>
+		
+			<item>
+				<title>Formatting Markdown Tables with R</title>
+				<description>&lt;p&gt;This past summer when the &lt;a href=&quot;http://www.meetup.com/twincitiesrug/&quot;&gt;twin cities R user group&lt;/a&gt; was starting to get back up and running, I offered to present on some R related things that I was working on.  One thing I was working on was a part of my last &lt;a href=&quot;http://http://educate-r.org/2013/09/28/ConditionalFormat/&quot;&gt;post&lt;/a&gt;.  In a response to discussing this during a meeting, I was posed with the problem of how to do this with a markdown table.  I replied I was unsure how to do this directly with R, but it could likely be possible.&lt;/p&gt;
+
+&lt;p&gt;After replying to this e-mail, I went to work thinking about how this could be done.  I knew you could add some CSS to the resulting HTML file, but the question remained how could this be done succintly and with conditional formatting.&lt;/p&gt;
+
+&lt;p&gt;The resulting thought process led me to create the &lt;strong&gt;&lt;a href=&quot;https://github.com/lebebr01/highlightHTML&quot;&gt;highlightHTML&lt;/a&gt;&lt;/strong&gt; which post processes the HTML file to inject some CSS into the HTML file.  Here is a simple example to get you started.&lt;/p&gt;
+
+&lt;p&gt;First you have a table written in markdown that looks like the following:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt; Color Name &lt;/th&gt;
+&lt;th&gt; Number   &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; Blue       &lt;/td&gt;
+&lt;td&gt; 5        &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Green      &lt;/td&gt;
+&lt;td&gt; 35       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Orange     &lt;/td&gt;
+&lt;td&gt; 100      &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Red        &lt;/td&gt;
+&lt;td&gt; 200      &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;Now suppose we want to turn the background color of those less than 5 to blue, and those greater than 100 to red.  To do this using the &lt;strong&gt;highlightHTML&lt;/strong&gt; package, the table would change to this:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt; Color Name &lt;/th&gt;
+&lt;th&gt; Number     &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; Blue       &lt;/td&gt;
+&lt;td&gt; 5  #bgblue &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Green      &lt;/td&gt;
+&lt;td&gt; 35         &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Orange     &lt;/td&gt;
+&lt;td&gt; 100        &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Red        &lt;/td&gt;
+&lt;td&gt; 200 #bgred &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;The addition of the '#bgblue' and '#bgred' tags indicate which cells to change and will also define new id values to assign directly to these cells through CSS.  After adding the tags to the cells to format and converting the markdown file to HTML, it is now time to run the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command within R.  This command will remove the tags from the table, inject CSS into the resulting HTML document, and assign the id to the specific cells.  Below are the commands needed to install the package and post-process the file:&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;library(devtools)
+install_github(repo = &amp;quot;highlightHTML&amp;quot;, username = &amp;quot;lebebr01&amp;quot;)
+library(highlightHTML)
+tags &amp;lt;- c(&amp;quot;#bgred {background-color: #FF0000;}&amp;quot;, &amp;quot;#bgblue {background-color: #0000FF;}&amp;quot;)
+highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;path/to/saved/file&amp;quot;, updateCSS = TRUE,
+    tags = tags)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;This results in an HTML table that looks like the following:&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Color Name&lt;/th&gt;
+&lt;th&gt;Number&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Blue&lt;/td&gt;
+&lt;td id='bgblue'&gt;5 &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Green&lt;/td&gt;
+&lt;td&gt;35&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Orange&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Red&lt;/td&gt;
+&lt;td id='bgred'&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+
+&lt;p&gt;More explanation of the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command, the input argument is the location of the pre-processed HTML file, the output argument is the place the post-processed HTML file is saved (note: if no output argument is given, it will overwrite the input file), the updateCSS argument tells the function whether to inject the CSS or not, finally the tags argument is a vector of the CSS that will be injected into the post-processed HTML file.  The last argument highlights a drawback of the package in it's current state, the user must know some CSS to tell the function what to inject into the HTML file.  On the one hand, CSS is not overly difficult to learn, but some default behavior would be nice.  I hope to add this in the future.&lt;/p&gt;
+
+&lt;p&gt;There you have it, a way to add some formatting to a table written in markdown and being presented in HTML.  Future additions will hopefully add the conditional part into the mix as well.  Stay tuned.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 01 Nov 2013 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2013/11/01/CondFormatMarkdown/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/11/01/CondFormatMarkdown/</guid>
+			</item>
+		
+			<item>
+				<title>Conditional Formatting Tables using R</title>
+				<description>&lt;p&gt;One thing that I had the opportunity to develop while working last year at &lt;a href=&quot;http://spps.org/&quot;&gt;Saint Paul Public Schools&lt;/a&gt; was figuring out a quick, easy, and painless way to do interactive report generation.  When I arrived in the REA department at Saint Paul Public Schools, the report generation process was roughly as follows:&lt;br/&gt;
+1. Do the analysis in SPSS (compute percent proficient for standard tests by various subgroups).&lt;br/&gt;
+2. Format output and copy output into Excel.&lt;br/&gt;
+3. Once in Excel, do lookup tables to generate the report in Excel.&lt;/p&gt;
+
+&lt;p&gt;This process provided a few areas that could introduce errors.  The copying from SPSS into Excel could produce errors and the lookup formula's in Excel can be tricky.  The correct columns need to be specified in the correct destination on another sheet.&lt;/p&gt;
+
+&lt;p&gt;One of the largest pushes in a school district is to receive the district's test score results and quickly as possible.  I felt that I could create an interactive report through the use of &lt;em&gt;R&lt;/em&gt; and &lt;em&gt;LaTeX&lt;/em&gt; that would greatly enhance the workflow and speed of report generation.&lt;/p&gt;
+
+&lt;p&gt;My process involved creating R script files for each report and export the tables for the reports as &lt;em&gt;.tex&lt;/em&gt; files.  The &lt;em&gt;.tex&lt;/em&gt; files were created using the &lt;em&gt;Hmisc&lt;/em&gt; R package, more specifically the &lt;em&gt;latex&lt;/em&gt; function.  The &lt;em&gt;latex&lt;/em&gt; function is great as it offers a lot of control over the output of the resulting &lt;em&gt;.tex&lt;/em&gt; table file.  One thing you can do is conditional formatting of the table, see this document for a more thorough explanation: &lt;a href=&quot;http://biostat.mc.vanderbilt.edu/twiki/pub/Main/StatReport/latexFineControl.pdf&quot;&gt;conditional formatting with the latex function&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is a small minimal example.  In the example, suppose we want to calculate the average Melanoma thickness by the status of the person (i.e. did they die from Melanoma, still alive, or died from other causes).&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;library(MASS)   # Load for Melanoma Data
+library(Hmisc)  # Load for latex function
+library(data.table)  # Used for aggregating&lt;/p&gt;
+
+&lt;p&gt;mela &amp;lt;- data.table(Melanoma)&lt;/p&gt;
+
+&lt;h1&gt;Aggregating&lt;/h1&gt;
+
+&lt;p&gt;mela.status &amp;lt;- mela[, list(avgThick = mean(thickness)), by = status]&lt;/p&gt;
+
+&lt;h1&gt;Conditional formatting&lt;/h1&gt;
+
+&lt;p&gt;cellTex &amp;lt;- matrix(rep(&amp;quot;&amp;quot;, NROW(mela.status) * NCOL(mela.status)),
+                  nrow = NROW(mela.status))
+cellTex[,1] &amp;lt;- ifelse(mela.status$avgThick &amp;gt; 4, &amp;quot;cellcolor{red}&amp;quot;,
+                  ifelse(mela.status$avgThick &amp;lt; 3, &amp;quot;cellcolor{green}&amp;quot;,
+                         &amp;quot;&amp;quot;))&lt;/p&gt;
+
+&lt;h1&gt;Shading alternate rows&lt;/h1&gt;
+
+&lt;p&gt;my.rownamesTexCmd &amp;lt;- rep(&amp;quot;&amp;quot;, nrow(mela.status))
+index &amp;lt;- (1:nrow(mela.status)/2) == (1:nrow(mela.status)%/%2)
+my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
+
+&lt;h1&gt;Creating the .tex file&lt;/h1&gt;
+
+&lt;h1&gt;Note, this is currently printed in R console&lt;/h1&gt;
+
+&lt;p&gt;latex(round(mela.status, 2), title = '', file = '', booktabs = TRUE,
+      rownamesTexCmd = my.rownamesTexCmd, cellTexCmds = cellTex,
+      rowname = NULL)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is the resulting &lt;em&gt;LaTeX&lt;/em&gt; code that is created from the &lt;em&gt;latex&lt;/em&gt; function. The conditional formatting is the &lt;em&gt;\cellcolor{}&lt;/em&gt; commands.  You need to ensure that the color is defined, either as a default color or one you define in the preamble.  Secondly, the \shadeRow command will shade that row and you need to ensure you have the first line below in your preamble.&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='latex'&gt;% Including a similar command in your preamble to define row shading.
+\providecommand{\shadeRow}{\rowcolor[rgb]{0, 0.99, 0}}
+%
+%
+\begin{table}[!tbp]
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{status}&amp;amp;\multicolumn{1}{c}{avgThick}\tabularnewline
+\midrule
+ $3$&amp;amp;   $3.72$\tabularnewline
+\shadeRow   $2$&amp;amp;\cellcolor{green}   $2.24$\tabularnewline
+  $1$&amp;amp;\cellcolor{red}   $4.31$\tabularnewline
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+</description>
+				<pubDate>Sat, 28 Sep 2013 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2013/09/28/ConditionalFormat/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/09/28/ConditionalFormat/</guid>
+			</item>
+		
+			<item>
+				<title>Blog Logo</title>
+				<description>&lt;p&gt;Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: &lt;a href=&quot;http://educate-r.org/projects.html&quot;&gt;R packages&lt;/a&gt;.  In addition, I'll likely talk about various topics with statistics, teaching, research, or R in general.&lt;/p&gt;
+
+&lt;p&gt;For my first post, I want to highlight my code to generate my blog logo.  The code took a lot of trial and error and definitely is dependent on the size of the image file that is outputted.  By far the most difficult part of the logo was the R logo, specifically the grey oval of the R logo.  I tried to get the oval to change sizes at the correct point and to do this I created a size variable in my data.frame and passed this variable to &lt;strong&gt;ggplot2&lt;/strong&gt; to make the size change.  It isn't perfect, but is a bit unique.&lt;/p&gt;
+
+&lt;p&gt;The next logo I need to develop is my favicon.ico.  Send me suggestions in the comments of this post.&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;### Creating words with connected points.
+capE &amp;lt;- data.frame(x = c(1.5,1,1,1.25,1,1,1.5),
+                   y = c(3,3,2,2,2,1,1))
+capE$time &amp;lt;- 1:nrow(capE)&lt;/p&gt;
+
+&lt;p&gt;letd &amp;lt;- data.frame(x = c(2, 1.75, 1.65, 1.75, 2, 2),
+                   y = c(2,2,1.5,1,1,2.5))
+letd$time &amp;lt;- 1:nrow(letd)&lt;/p&gt;
+
+&lt;p&gt;letu &amp;lt;- data.frame(x = c(2.2, 2.2, 2.35, 2.55, 2.55, 2.55),
+                   y = c(2,1.15,1,1.15,2,1))
+letu$time &amp;lt;- 1:nrow(letu)&lt;/p&gt;
+
+&lt;p&gt;letc &amp;lt;- data.frame(x = c(3.05, 2.8, 2.7, 2.8, 3.05),
+                   y = c(2,2,1.5,1,1))
+letc$time &amp;lt;- 1:nrow(letc)&lt;/p&gt;
+
+&lt;p&gt;leta &amp;lt;- data.frame(x = c(3.55, 3.35, 3.2, 3.35, 3.55, 3.55, 3.55),
+                   y = c(1.85, 2, 1.5, 1, 1.15, 1.85, 1))
+leta$time &amp;lt;- 1:nrow(leta)&lt;/p&gt;
+
+&lt;p&gt;lett &amp;lt;- data.frame(x = c(3.75, 3.75, 3.575, 3.925, 3.75, 3.75),
+                   y = c(2.5, 2.25, 2.25, 2.25, 2.25, 1))
+lett$time &amp;lt;- 1:nrow(lett)&lt;/p&gt;
+
+&lt;p&gt;lete &amp;lt;- data.frame(x = c(4.3, 4.05, 3.95, 4.125, 4.3, 4.125, 3.95),
+                   y = c(1.05, 1, 1.75, 2, 1.75, 1.6, 1.75))
+lete$time &amp;lt;- 1:nrow(lete)&lt;/p&gt;
+
+&lt;p&gt;rlogo &amp;lt;- data.frame(x = c(5.1, 5.1, 5.3, 5.4, 5.45, 5.4, 5.3, 5.1, 5.2,
+                          5.25, 5.35, 5.45),
+                    y = c(.5, 2, 2, 1.85, 1.675, 1.4, 1.25, 1.25, 1.25,
+                          1.2, 1.05, .5))
+rlogo$time &amp;lt;- 1:nrow(rlogo)&lt;/p&gt;
+
+&lt;p&gt;rcirclogo &amp;lt;- data.frame(x = c(5.6, 5.6, 5.55, 5.45, 5.35, 5.25, 5.15,
+                              5.05, 4.95, 4.85,4.75,  4.75, 4.75,
+                              4.8, 4.95, 5.05, 5.15, 5.25, 5.35, 5.45,
+                              5.55, 5.6, 5.6),
+                        y= c(1.65, 1.8, 2, 2.15, 2.25, 2.3, 2.3, 2.25,
+                             2.15, 2.05, 1.85, 1.7, 1.55,
+                             1.35, 1.15, 1.05, .95, .95, 1.05, 1.15,
+                             1.35, 1.55, 1.65),
+                        size = c(2.25, 2.75, 3, 3.5, 4, 4, 4.5, 5, 5,
+                                 5, 5, 5, 5, 4.5, 4, 3.75, 3.25, 3,
+                                 2.75, 2.5, 2.25, 2.25, 2))
+rcirclogo$time &amp;lt;- 1:nrow(rcirclogo)&lt;/p&gt;
+
+&lt;p&gt;library(ggplot2)
+library(scales)&lt;/p&gt;
+
+&lt;p&gt;p &amp;lt;- ggplot(capE, aes(x = x, y = y)) + theme_bw()
+p + geom_path(lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letd, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letu, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letc, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = leta, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = lett,lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = lete, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = rcirclogo, aes(size = size), color = &amp;quot;grey&amp;quot;,
+            lineend = &amp;quot;round&amp;quot;, linejoin = &amp;quot;bevel&amp;quot;) +
+  geom_path(data = rlogo, color = &amp;quot;steelblue&amp;quot;, lwd = 6,
+            lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = rlogo, color = &amp;quot;grey60&amp;quot;, lwd = .5,
+            lineend= &amp;quot;round&amp;quot;) +
+  theme(legend.position = &amp;quot;none&amp;quot;, text = element_blank(),
+        panel.grid = element_blank(),
+        plot.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+                                       color = NA),
+        panel.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+                                        color = NA),
+        panel.border = element_blank(),
+        axis.line = element_blank(), axis.ticks = element_blank(),
+        line = element_blank()) + scale_size(range = c(2, 8))&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/logo.png&quot; alt=&quot;plot of chunk logo&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 11 Sep 2013 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2013/09/11/BlogLogo/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/09/11/BlogLogo/</guid>
+			</item>
+		
+	</channel>
+</rss>
