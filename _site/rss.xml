@@ -311,310 +311,6 @@ symbolWidth: 40,
 			</item>
 		
 			<item>
-				<title>Interactive charts with rCharts</title>
-				<description>&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
-
-&lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
-
-&lt;p&gt;Using &lt;em&gt;highcharts.js&lt;/em&gt; that is integrated into &lt;em&gt;rCharts&lt;/em&gt; I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
-
-h1 &amp;lt;- hPlot(x = &quot;GenSerCor&quot;, y = &quot;percent&quot;, group = &quot;FitSerCor&quot;, data = converge)
-h1$yAxis(title = list(text = &quot;Convergence Rate&quot;), min = 0, max = 100, tickInterval = 10)
-h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;),
-         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
-h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
-h1$plotOptions(series = list(lineWidth = 4))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-
-
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-
-
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-
-
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
-
-
-&lt;p&gt;
- &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    height: 400px;
-    font-size: 200%;
-  }&lt;br/&gt;
-  &lt;/style&gt;&lt;/p&gt;
-
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
-
-
-&lt;script type='text/javascript'&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            800,
-&quot;height&quot;:            400,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null 
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false 
-},
-&quot;title&quot;: {
- &quot;text&quot;: null 
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: 'bold',
-   fontSize: '30px'
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + '%';
-  },
-  style: {
-   fontSize: '18px'
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-} 
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         68.38 
-],
-[
- &quot;AR1&quot;,
-         64.88 
-],
-[
- &quot;MA1&quot;,
-         55.12 
-],
-[
- &quot;MA2&quot;,
-         61.98 
-],
-[
- &quot;ARMA&quot;,
-         42.17 
-] 
-],
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Solid',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-          65.1 
-],
-[
- &quot;AR1&quot;,
-         60.45 
-],
-[
- &quot;MA1&quot;,
-         63.68 
-],
-[
- &quot;MA2&quot;,
-         54.88 
-],
-[
- &quot;ARMA&quot;,
-          63.6 
-] 
-],
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         72.48 
-],
-[
- &quot;AR1&quot;,
-         93.88 
-],
-[
- &quot;MA1&quot;,
-         92.23 
-],
-[
- &quot;MA2&quot;,
-         95.62 
-],
-[
- &quot;ARMA&quot;,
-         98.37 
-] 
-],
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Dash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         71.02 
-],
-[
- &quot;AR1&quot;,
-         81.37 
-],
-[
- &quot;MA1&quot;,
-         69.15 
-],
-[
- &quot;MA2&quot;,
-          84.5 
-],
-[
- &quot;ARMA&quot;,
-         88.02 
-] 
-],
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         67.23 
-],
-[
- &quot;AR1&quot;,
-         70.78 
-],
-[
- &quot;MA1&quot;,
-         65.93 
-],
-[
- &quot;MA2&quot;,
-         68.83 
-],
-[
- &quot;ARMA&quot;,
-          72.9 
-] 
-],
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: 'DashDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-} 
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: 'bold',
-   fontSize: '30px'
- }
-},
-labels: {
- style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
-} 
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null 
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot; 
-} 
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:              4 
-} 
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;, 
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: 'left'
-  }
- }
-} 
-});
-        });
-    })(jQuery);
-&lt;/script&gt;
-
-
-&lt;p&gt;I edited the javascript manually to get some of the effects that I was looking for.  For example, the differing line styles and adding the ability to zoom.  It is possible to add this directly through &lt;em&gt;rCharts&lt;/em&gt;, however I found it much more cumbersome compared to editing the effects I wanted manually.  I find the &lt;em&gt;rCharts&lt;/em&gt; framework is nice to give the user the barebones needed to produce an interactive plot that can be put into an HTML slideshow.  Once getting the general structure, it is easy to look at the documentation for the javascript library and customize the plot yourself.  I personally use &lt;em&gt;slidy&lt;/em&gt; for that aspect and that is where I will use plots like this in the future.  Creating these plots has also helped me to start learning some basics of Javascript which has been on my wish list for the last year or so.&lt;/p&gt;
-</description>
-				<pubDate>Fri, 14 Feb 2014 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2014/02/14/rcharts/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/02/14/rcharts/</guid>
-			</item>
-		
-			<item>
 				<title>Picking a gui interface for R</title>
 				<description>&lt;p&gt;Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the &lt;em&gt;Deducer&lt;/em&gt; package and the &lt;em&gt;Rcmdr&lt;/em&gt; package.  Here are my initial thoughts on the switch.&lt;/p&gt;
 
@@ -1237,6 +933,98 @@ my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
 				<pubDate>Sat, 28 Sep 2013 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2013/09/28/ConditionalFormat/</link>
 				<guid isPermaLink="true">http://educate-r.org//2013/09/28/ConditionalFormat/</guid>
+			</item>
+		
+			<item>
+				<title>Blog Logo</title>
+				<description>&lt;p&gt;Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: &lt;a href=&quot;http://educate-r.org/projects.html&quot;&gt;R packages&lt;/a&gt;.  In addition, I'll likely talk about various topics with statistics, teaching, research, or R in general.&lt;/p&gt;
+
+&lt;p&gt;For my first post, I want to highlight my code to generate my blog logo.  The code took a lot of trial and error and definitely is dependent on the size of the image file that is outputted.  By far the most difficult part of the logo was the R logo, specifically the grey oval of the R logo.  I tried to get the oval to change sizes at the correct point and to do this I created a size variable in my data.frame and passed this variable to &lt;strong&gt;ggplot2&lt;/strong&gt; to make the size change.  It isn't perfect, but is a bit unique.&lt;/p&gt;
+
+&lt;p&gt;The next logo I need to develop is my favicon.ico.  Send me suggestions in the comments of this post.&lt;/p&gt;
+
+&lt;p&gt;  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='r'&gt;### Creating words with connected points.
+capE &amp;lt;- data.frame(x = c(1.5,1,1,1.25,1,1,1.5),
+                   y = c(3,3,2,2,2,1,1))
+capE$time &amp;lt;- 1:nrow(capE)&lt;/p&gt;
+
+&lt;p&gt;letd &amp;lt;- data.frame(x = c(2, 1.75, 1.65, 1.75, 2, 2),
+                   y = c(2,2,1.5,1,1,2.5))
+letd$time &amp;lt;- 1:nrow(letd)&lt;/p&gt;
+
+&lt;p&gt;letu &amp;lt;- data.frame(x = c(2.2, 2.2, 2.35, 2.55, 2.55, 2.55),
+                   y = c(2,1.15,1,1.15,2,1))
+letu$time &amp;lt;- 1:nrow(letu)&lt;/p&gt;
+
+&lt;p&gt;letc &amp;lt;- data.frame(x = c(3.05, 2.8, 2.7, 2.8, 3.05),
+                   y = c(2,2,1.5,1,1))
+letc$time &amp;lt;- 1:nrow(letc)&lt;/p&gt;
+
+&lt;p&gt;leta &amp;lt;- data.frame(x = c(3.55, 3.35, 3.2, 3.35, 3.55, 3.55, 3.55),
+                   y = c(1.85, 2, 1.5, 1, 1.15, 1.85, 1))
+leta$time &amp;lt;- 1:nrow(leta)&lt;/p&gt;
+
+&lt;p&gt;lett &amp;lt;- data.frame(x = c(3.75, 3.75, 3.575, 3.925, 3.75, 3.75),
+                   y = c(2.5, 2.25, 2.25, 2.25, 2.25, 1))
+lett$time &amp;lt;- 1:nrow(lett)&lt;/p&gt;
+
+&lt;p&gt;lete &amp;lt;- data.frame(x = c(4.3, 4.05, 3.95, 4.125, 4.3, 4.125, 3.95),
+                   y = c(1.05, 1, 1.75, 2, 1.75, 1.6, 1.75))
+lete$time &amp;lt;- 1:nrow(lete)&lt;/p&gt;
+
+&lt;p&gt;rlogo &amp;lt;- data.frame(x = c(5.1, 5.1, 5.3, 5.4, 5.45, 5.4, 5.3, 5.1, 5.2,
+                          5.25, 5.35, 5.45),
+                    y = c(.5, 2, 2, 1.85, 1.675, 1.4, 1.25, 1.25, 1.25,
+                          1.2, 1.05, .5))
+rlogo$time &amp;lt;- 1:nrow(rlogo)&lt;/p&gt;
+
+&lt;p&gt;rcirclogo &amp;lt;- data.frame(x = c(5.6, 5.6, 5.55, 5.45, 5.35, 5.25, 5.15,
+                              5.05, 4.95, 4.85,4.75,  4.75, 4.75,
+                              4.8, 4.95, 5.05, 5.15, 5.25, 5.35, 5.45,
+                              5.55, 5.6, 5.6),
+                        y= c(1.65, 1.8, 2, 2.15, 2.25, 2.3, 2.3, 2.25,
+                             2.15, 2.05, 1.85, 1.7, 1.55,
+                             1.35, 1.15, 1.05, .95, .95, 1.05, 1.15,
+                             1.35, 1.55, 1.65),
+                        size = c(2.25, 2.75, 3, 3.5, 4, 4, 4.5, 5, 5,
+                                 5, 5, 5, 5, 4.5, 4, 3.75, 3.25, 3,
+                                 2.75, 2.5, 2.25, 2.25, 2))
+rcirclogo$time &amp;lt;- 1:nrow(rcirclogo)&lt;/p&gt;
+
+&lt;p&gt;library(ggplot2)
+library(scales)&lt;/p&gt;
+
+&lt;p&gt;p &amp;lt;- ggplot(capE, aes(x = x, y = y)) + theme_bw()
+p + geom_path(lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letd, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letu, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = letc, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = leta, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = lett,lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = lete, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = rcirclogo, aes(size = size), color = &amp;quot;grey&amp;quot;,
+            lineend = &amp;quot;round&amp;quot;, linejoin = &amp;quot;bevel&amp;quot;) +
+  geom_path(data = rlogo, color = &amp;quot;steelblue&amp;quot;, lwd = 6,
+            lineend = &amp;quot;round&amp;quot;) +
+  geom_path(data = rlogo, color = &amp;quot;grey60&amp;quot;, lwd = .5,
+            lineend= &amp;quot;round&amp;quot;) +
+  theme(legend.position = &amp;quot;none&amp;quot;, text = element_blank(),
+        panel.grid = element_blank(),
+        plot.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+                                       color = NA),
+        panel.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+                                        color = NA),
+        panel.border = element_blank(),
+        axis.line = element_blank(), axis.ticks = element_blank(),
+        line = element_blank()) + scale_size(range = c(2, 8))&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/logo.png&quot; alt=&quot;plot of chunk logo&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 11 Sep 2013 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2013/09/11/BlogLogo/</link>
+				<guid isPermaLink="true">http://educate-r.org//2013/09/11/BlogLogo/</guid>
 			</item>
 		
 	</channel>
