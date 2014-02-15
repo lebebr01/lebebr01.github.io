@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-02-15T11:22:27-06:00</updated>
+ <updated>2014-02-15T11:27:00-06:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -17,9 +17,9 @@
    <link href="http://lebebr01.github.com/2014/02/14/rcharts/"/>
    <updated>2014-02-14T00:00:00-06:00</updated>
    <id>http://lebebr01.github.com/2014/02/14/rcharts</id>
-   <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that I can look up values, zoom in, etc.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
 
-&lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it into directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
+&lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
 
 &lt;p&gt;Using &lt;em&gt;highcharts.js&lt;/em&gt; that is integrated into &lt;em&gt;rCharts&lt;/em&gt; I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.&lt;/p&gt;
 
