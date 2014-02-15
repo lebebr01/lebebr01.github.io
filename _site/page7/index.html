@@ -58,49 +58,305 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/02/03/Rgui/" title="Picking a gui interface for R" rel="bookmark">Picking a gui interface for R</a>
+      <a href="/2014/02/14/rcharts/" title="Interactive charts with rCharts" rel="bookmark">Interactive charts with rCharts</a>
     </h1>
     <div class="entry-content full-content">
-      <p>Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the <em>Deducer</em> package and the <em>Rcmdr</em> package.  Here are my initial thoughts on the switch.</p>
+      <p>I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that I can look up values, zoom in, etc.</p>
 
-<h3>Which gui to use?</h3>
+<p>I initially explored both <a href="http://plot.ly">plot.ly</a> and <a href="http://ramnathv.github.io/rCharts/">rCharts</a>, but ended up using <em>rCharts</em> as I found I was more easily able to put it into directly into my presentation.  It may be possible with <em>plot.ly</em> but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.</p>
 
-<p>This ultimately comes down to personal preference, however below I've highlighted my intial thoughts on pros/cons of each package.</p>
+<p>Using <em>highcharts.js</em> that is integrated into <em>rCharts</em> I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.</p>
 
-<h4>Deducer</h4>
+<pre><code class="r">library(rCharts)
 
-<p><strong>Pros</strong>: <br/>
-- Shows syntax of commands run     <br/>
-- Uses ggplot2 for plots           <br/>
-- Very interactive menu structures<br/>
-- Simple condensed data loading  <br/>
-<strong>Cons</strong>: <br/>
-- Uses Java <br/>
-- Menus differ from PC to MAC <br/>
-- rJava package can be troublesome (not exactly sure why)</p>
+h1 &lt;- hPlot(x = "GenSerCor", y = "percent", group = "FitSerCor", data = converge)
+h1$yAxis(title = list(text = "Convergence Rate"), min = 0, max = 100, tickInterval = 10)
+h1$xAxis(title = list(text = "Generated Serial Correlation Structure"),
+         categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
+h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Fitted SC"))
+h1$plotOptions(series = list(lineWidth = 4))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+</code></pre>
 
-<h4>Rcmdr</h4>
+<script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
 
-<p><strong>Pros</strong>: <br/>
-- Shows syntax of commands run      <br/>
-- Does not use Java                <br/>
-- Very similar data menus across each OS <br/>
-- Opens a new window so students know when it has loaded correctly <br/>
-<strong>Cons</strong>: <br/>
-- Uses base graphics <br/>
-- Data loading structures not integrated</p>
 
-<hr />
+<script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
 
-<p>In general I prefer the <em>Deducer</em> package as it uses ggplot2 and has a more unified menu structure.  For example, there are not differing menu options for loading data like in <em>Rcmdr</em>.  Instead, <em>Deducer</em> has a single load data menu where it is possible to load many types of data including csv, txt, rda, etc.  This is helpful for students who are not very familiar with differing file types and I do not have to spend 5 minutes explaining it.  <em>Deducer</em> also uses ggplot2 for its graphics which I enjoy much more than base graphics.  In my opinion they look better and the syntax is ultimately easier to create high quality graphics.</p>
 
-<p>My biggest complaint of the <em>Deducer</em> package is that it uses Java.  This is one more thing that the user needs to install and with my class we have had trouble on a few computers getting the <em>rJava</em> package to work properly.  There was also the widely talked about Java exploit that may or may not have been fixed.  Lastly, the differing look of <em>Deducer</em> has made it more difficult for me as I need to have two explanations, one for those on a PC and another for those on a Mac.  Although they are very similar, it has been difficult for me as I do not use a Mac or have access to one for testing purposes.  Therefore, I end up figuring out differences on the fly.</p>
+<script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
 
-<h3>Concluding thoughts</h3>
 
-<p>I hope to write more about my experiences using both gui systems for my class, but upon initial inspection of them now I definitely prefer <em>Deducer</em>.  The package just has not completely won me over as little problems have made me use both packages in my class so far, primarily due to the error loading the <em>rJava</em> package.</p>
+<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script>
 
-<p>Does anyone else have experience using one or the other in a class before?  I'd enjoy hearing any stories using these or different gui systems for R.</p>
+
+<p>
+ <style>
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 400px;
+    font-size: 200%;
+  }<br/>
+  </style></p>
+
+<div id = 'chart1' class = 'rChart highcharts'></div>
+
+
+<script type='text/javascript'>
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ "dom": "chart1",
+"width":            800,
+"height":            400,
+"credits": {
+ "href": null,
+"text": null 
+},
+"exporting": {
+ "enabled": false 
+},
+"title": {
+ "text": null 
+},
+"yAxis": [
+ {
+ title: {
+ text: "Convergence Rate",
+  style: {
+   fontWeight: 'bold',
+   fontSize: '30px'
+   }
+ },
+ labels: {
+  formatter: function() {
+   return this.value + '%';
+  },
+  style: {
+   fontSize: '18px'
+  }
+ },
+"min":              0,
+"max":            100,
+"tickInterval":             10 ,
+minRange: 10
+} 
+],
+"series": [
+ {
+ "data": [
+ [
+ "Ind",
+         68.38 
+],
+[
+ "AR1",
+         64.88 
+],
+[
+ "MA1",
+         55.12 
+],
+[
+ "MA2",
+         61.98 
+],
+[
+ "ARMA",
+         42.17 
+] 
+],
+"color": "#e41a1c",
+"name": "AR1",
+"type": null,
+dashStyle: 'Solid',
+"marker": {
+ "radius":              6
+} 
+},
+{
+ "data": [
+ [
+ "Ind",
+          65.1 
+],
+[
+ "AR1",
+         60.45 
+],
+[
+ "MA1",
+         63.68 
+],
+[
+ "MA2",
+         54.88 
+],
+[
+ "ARMA",
+          63.6 
+] 
+],
+"color": "#377eb8",
+"name": "ARMA",
+"type": null,
+dashStyle: 'ShortDash',
+"marker": {
+ "radius":              6 
+} 
+},
+{
+ "data": [
+ [
+ "Ind",
+         72.48 
+],
+[
+ "AR1",
+         93.88 
+],
+[
+ "MA1",
+         92.23 
+],
+[
+ "MA2",
+         95.62 
+],
+[
+ "ARMA",
+         98.37 
+] 
+],
+"color": "#4daf4a",
+"name": "Ind",
+"type": null,
+dashStyle: 'Dash',
+"marker": {
+ "radius":              6 
+} 
+},
+{
+ "data": [
+ [
+ "Ind",
+         71.02 
+],
+[
+ "AR1",
+         81.37 
+],
+[
+ "MA1",
+         69.15 
+],
+[
+ "MA2",
+          84.5 
+],
+[
+ "ARMA",
+         88.02 
+] 
+],
+"color": "#984ea3",
+"name": "MA1",
+"type": null,
+dashStyle: 'ShortDot',
+"marker": {
+ "radius":              6
+} 
+},
+{
+ "data": [
+ [
+ "Ind",
+         67.23 
+],
+[
+ "AR1",
+         70.78 
+],
+[
+ "MA1",
+         65.93 
+],
+[
+ "MA2",
+         68.83 
+],
+[
+ "ARMA",
+          72.9 
+] 
+],
+"color": "#ff7f00",
+"name": "MA2",
+"type": null,
+dashStyle: 'DashDot',
+"marker": {
+ "radius":              6 
+} 
+} 
+],
+"xAxis": [
+ {
+ title: {
+ text: "Generated Serial Correlation Structure",
+  style:{
+   fontWeight: 'bold',
+   fontSize: '30px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+"categories": [ "Ind", "AR1", "MA1", "MA2", "ARMA" ] 
+} 
+],
+"subtitle": {
+ "text": null 
+},
+"legend": {
+ "verticalAlign": "top",
+"align": "right",
+"layout": "vertical",
+symbolWidth: 40,
+"title": {
+ "text": "Fitted SC" 
+} 
+},
+"plotOptions": {
+ "series": {
+ "lineWidth":              4 
+} 
+},
+"id": "chart1",
+"chart": {
+ "renderTo": "chart1", 
+ zoomType: "y",
+ "style": {
+ fontSize: "24px"
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+} 
+});
+        });
+    })(jQuery);
+</script>
+
+
+<p>I edited the javascript manually to get some of the effects that I was looking for.  For example, the differing line styles and adding the ability to zoom.  It is possible to add this directly through <em>rCharts</em>, however I found it much more cumbersome compared to editing the effects I wanted manually.  I find the <em>rCharts</em> framework is nice to give the user the barebones needed to produce an interactive plot that can be put into an HTML slideshow.  Once getting the general structure, it is easy to look at the documentation for the javascript library and customize the plot yourself.  I personally use <em>slidy</em> for that aspect and that is where I will use plots like this in the future.  Creating these plots has also helped me to start learning some basics of Javascript which has been on my wish list for the last year or so.</p>
 
     </div>
   <p class="alt-font tight">
@@ -108,15 +364,17 @@
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#gui-ref" >gui</a>
+    <a href="/tags.html#rCharts-ref" >rCharts</a>
+    
+    <a href="/tags.html#javascript-ref" >javascript</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/02/03/Rgui/#disqus_thread'>Comments</a>
+      <a href='/2014/02/14/rcharts/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-02-03 00:00:00 -0600">03 Feb 2014</abbr>
+        <abbr class="published" title="2014-02-14 00:00:00 -0600">14 Feb 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>

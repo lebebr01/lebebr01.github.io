@@ -4,13 +4,317 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-02-15T10:51:01-06:00</updated>
+ <updated>2014-02-15T11:22:27-06:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Interactive charts with rCharts</title>
+   <link href="http://lebebr01.github.com/2014/02/14/rcharts/"/>
+   <updated>2014-02-14T00:00:00-06:00</updated>
+   <id>http://lebebr01.github.com/2014/02/14/rcharts</id>
+   <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that I can look up values, zoom in, etc.&lt;/p&gt;
+
+&lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it into directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;em&gt;highcharts.js&lt;/em&gt; that is integrated into &lt;em&gt;rCharts&lt;/em&gt; I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
+
+h1 &amp;lt;- hPlot(x = &quot;GenSerCor&quot;, y = &quot;percent&quot;, group = &quot;FitSerCor&quot;, data = converge)
+h1$yAxis(title = list(text = &quot;Convergence Rate&quot;), min = 0, max = 100, tickInterval = 10)
+h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;),
+         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
+h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
+h1$plotOptions(series = list(lineWidth = 4))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+
+
+&lt;p&gt;
+ &lt;style&gt;
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 400px;
+    font-size: 200%;
+  }&lt;br/&gt;
+  &lt;/style&gt;&lt;/p&gt;
+
+&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+
+
+&lt;script type='text/javascript'&gt;
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ &quot;dom&quot;: &quot;chart1&quot;,
+&quot;width&quot;:            800,
+&quot;height&quot;:            400,
+&quot;credits&quot;: {
+ &quot;href&quot;: null,
+&quot;text&quot;: null 
+},
+&quot;exporting&quot;: {
+ &quot;enabled&quot;: false 
+},
+&quot;title&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;yAxis&quot;: [
+ {
+ title: {
+ text: &quot;Convergence Rate&quot;,
+  style: {
+   fontWeight: 'bold',
+   fontSize: '30px'
+   }
+ },
+ labels: {
+  formatter: function() {
+   return this.value + '%';
+  },
+  style: {
+   fontSize: '18px'
+  }
+ },
+&quot;min&quot;:              0,
+&quot;max&quot;:            100,
+&quot;tickInterval&quot;:             10 ,
+minRange: 10
+} 
+],
+&quot;series&quot;: [
+ {
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+         68.38 
+],
+[
+ &quot;AR1&quot;,
+         64.88 
+],
+[
+ &quot;MA1&quot;,
+         55.12 
+],
+[
+ &quot;MA2&quot;,
+         61.98 
+],
+[
+ &quot;ARMA&quot;,
+         42.17 
+] 
+],
+&quot;color&quot;: &quot;#e41a1c&quot;,
+&quot;name&quot;: &quot;AR1&quot;,
+&quot;type&quot;: null,
+dashStyle: 'Solid',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+          65.1 
+],
+[
+ &quot;AR1&quot;,
+         60.45 
+],
+[
+ &quot;MA1&quot;,
+         63.68 
+],
+[
+ &quot;MA2&quot;,
+         54.88 
+],
+[
+ &quot;ARMA&quot;,
+          63.6 
+] 
+],
+&quot;color&quot;: &quot;#377eb8&quot;,
+&quot;name&quot;: &quot;ARMA&quot;,
+&quot;type&quot;: null,
+dashStyle: 'ShortDash',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6 
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+         72.48 
+],
+[
+ &quot;AR1&quot;,
+         93.88 
+],
+[
+ &quot;MA1&quot;,
+         92.23 
+],
+[
+ &quot;MA2&quot;,
+         95.62 
+],
+[
+ &quot;ARMA&quot;,
+         98.37 
+] 
+],
+&quot;color&quot;: &quot;#4daf4a&quot;,
+&quot;name&quot;: &quot;Ind&quot;,
+&quot;type&quot;: null,
+dashStyle: 'Dash',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6 
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+         71.02 
+],
+[
+ &quot;AR1&quot;,
+         81.37 
+],
+[
+ &quot;MA1&quot;,
+         69.15 
+],
+[
+ &quot;MA2&quot;,
+          84.5 
+],
+[
+ &quot;ARMA&quot;,
+         88.02 
+] 
+],
+&quot;color&quot;: &quot;#984ea3&quot;,
+&quot;name&quot;: &quot;MA1&quot;,
+&quot;type&quot;: null,
+dashStyle: 'ShortDot',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+         67.23 
+],
+[
+ &quot;AR1&quot;,
+         70.78 
+],
+[
+ &quot;MA1&quot;,
+         65.93 
+],
+[
+ &quot;MA2&quot;,
+         68.83 
+],
+[
+ &quot;ARMA&quot;,
+          72.9 
+] 
+],
+&quot;color&quot;: &quot;#ff7f00&quot;,
+&quot;name&quot;: &quot;MA2&quot;,
+&quot;type&quot;: null,
+dashStyle: 'DashDot',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6 
+} 
+} 
+],
+&quot;xAxis&quot;: [
+ {
+ title: {
+ text: &quot;Generated Serial Correlation Structure&quot;,
+  style:{
+   fontWeight: 'bold',
+   fontSize: '30px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
+} 
+],
+&quot;subtitle&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;legend&quot;: {
+ &quot;verticalAlign&quot;: &quot;top&quot;,
+&quot;align&quot;: &quot;right&quot;,
+&quot;layout&quot;: &quot;vertical&quot;,
+symbolWidth: 40,
+&quot;title&quot;: {
+ &quot;text&quot;: &quot;Fitted SC&quot; 
+} 
+},
+&quot;plotOptions&quot;: {
+ &quot;series&quot;: {
+ &quot;lineWidth&quot;:              4 
+} 
+},
+&quot;id&quot;: &quot;chart1&quot;,
+&quot;chart&quot;: {
+ &quot;renderTo&quot;: &quot;chart1&quot;, 
+ zoomType: &quot;y&quot;,
+ &quot;style&quot;: {
+ fontSize: &quot;24px&quot;
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+} 
+});
+        });
+    })(jQuery);
+&lt;/script&gt;
+
+
+&lt;p&gt;I edited the javascript manually to get some of the effects that I was looking for.  For example, the differing line styles and adding the ability to zoom.  It is possible to add this directly through &lt;em&gt;rCharts&lt;/em&gt;, however I found it much more cumbersome compared to editing the effects I wanted manually.  I find the &lt;em&gt;rCharts&lt;/em&gt; framework is nice to give the user the barebones needed to produce an interactive plot that can be put into an HTML slideshow.  Once getting the general structure, it is easy to look at the documentation for the javascript library and customize the plot yourself.  I personally use &lt;em&gt;slidy&lt;/em&gt; for that aspect and that is where I will use plots like this in the future.  Creating these plots has also helped me to start learning some basics of Javascript which has been on my wish list for the last year or so.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Picking a gui interface for R</title>

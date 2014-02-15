@@ -1,0 +1,67 @@
+---
+layout: post
+title: Interactive charts with rCharts
+tags: [R, rCharts, javascript]
+---
+
+I have a few upcoming presentations as a part of job interviews. To prepare for these interviews I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations.
+
+I initially explored both [plot.ly](http://plot.ly) and [rCharts](http://ramnathv.github.io/rCharts/), but ended up using *rCharts* as I was more easily able to put it into my presentation.  It may be possible with *plot.ly* but I did not want to put in the time to figure it out.
+
+Using *highcharts.js* that is integrated into *rCharts* I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.
+
+```{r setup, warning=FALSE, error=FALSE, message=FALSE, echo=FALSE, tidy = FALSE}
+setwd("/home/brandon/Dropbox/Dissertation/SimulationCode/ModelData")
+
+##Reading in modelData
+load("modelDataFinalb.Rdata")
+
+##Generating relative bias statistics
+load("/home/brandon/Dropbox/Dissertation/SimulationCode/Data/modelParams3.Rdata")
+modelData$relBiasB0 <- modelData$biasB0/fixed.param[1]
+modelData$relBiasB1 <- modelData$biasB1/fixed.param[2]
+modelData$relBiasB2 <- modelData$biasB2/fixed.param[3]
+modelData$relBiasB3 <- modelData$biasB3/fixed.param[4]
+modelData$relBiasB4 <- modelData$biasB4/fixed.param[5]
+modelData$relBiasb0 <- modelData$biasb0/random.param[1]
+modelData$relBiasb1 <- modelData$biasb1/random.param[2]
+modelData$relBiasRes <- modelData$biasRes/errorVar
+modelData$relBiasAR1 <- modelData$biasAR1/serCor.param[1]
+modelData$relBiasMA1 <- modelData$biasMA1/serCor.param[2]
+modelData$relBiasMA2 <- modelData$biasMA2/serCor.param[3]
+
+##Calculating if z values are greater than 1.96
+modelData$t1B0 <- ifelse(abs(modelData$zB0) > 1.96, 1, 0)
+modelData$t1B1 <- ifelse(abs(modelData$zB1) > 1.96, 1, 0)
+modelData$t1B2 <- ifelse(abs(modelData$zB2) > 1.96, 1, 0)
+modelData$t1B3 <- ifelse(abs(modelData$zB3) > 1.96, 1, 0)
+modelData$t1B4 <- ifelse(abs(modelData$zB4) > 1.96, 1, 0)
+
+#Using doBy to summarize results
+#library(doBy)
+library(data.table)
+convergePer <- function(x) {
+  (length(x)/(500*12))
+}
+
+modelData <- data.table(modelData)
+converge <- modelData[, list(converge = length(biasB0)/(500*12)), 
+                      by = list(GenSerCor, FitSerCor)]
+converge$GenSC <- with(converge, ifelse(GenSerCor == "Ind", 0, ifelse(
+  GenSerCor == "AR1", 1, ifelse(GenSerCor == "MA1", 2, ifelse(
+    GenSerCor == "MA2", 3, 4)))))
+converge$percent <- round(converge$converge*100, 2)
+```
+
+```{r rchart, tidy = FALSE, results='asis'}
+library(rCharts)
+
+h1 <- hPlot(x = "GenSerCor", y = "percent", group = "FitSerCor", data = converge)
+h1$yAxis(title = list(text = "Convergence Rate"), min = 0, max = 100, tickInterval = 10)
+h1$xAxis(title = list(text = "Generated Serial Correlation Structure"),
+         categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
+h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Fitted SC"))
+h1$plotOptions(series = list(lineWidth = 4))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+```
+
