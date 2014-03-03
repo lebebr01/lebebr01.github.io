@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>rCharts with slidy</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -54,14 +54,13 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/03/03/rChartsslidy/" title="rCharts with slidy" rel="bookmark">rCharts with slidy</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>My last post I talked about using <em>rCharts</em> to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use <em>slidy</em> to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a <em>slidy</em> html presentation.</p>
+   <!-- <h2>rCharts with slidy</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2014/03/03/rChartsslidy/" title="rCharts with slidy" rel="bookmark">rCharts with slidy</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>My last post I talked about using <em>rCharts</em> to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use <em>slidy</em> to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a <em>slidy</em> html presentation.</p>
 
 <p>First off, I did not use <em>rCharts</em> and <em>knitr</em> in tandem, but that would make the workflow a bit easier.  The major thing you'd want to remember is to make sure to add the following chunk option: <strong>results = 'asis'</strong>.  This will ensure that the raw html printed from <em>rCharts</em> will be included in the markdown file as is.</p>
 
@@ -719,7 +718,8 @@ symbolWidth: 40,
 
 <p>That should give you a html presentation with an interactive Javascript based figure.</p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -734,33 +734,34 @@ symbolWidth: 40,
     <a href="/tags.html#slidy-ref" >slidy</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/03/03/rChartsslidy/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-03-03 00:00:00 -0600">03 Mar 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page9/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page11/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2014-03-03 00:00:00 -0600">March 03 2014</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2014/03/03/rChartsslidy/";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

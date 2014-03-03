@@ -58,14 +58,16 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/02/15/rcharts/" title="Interactive charts with rCharts" rel="bookmark">Interactive charts with rCharts</a>
+      <a href="/2014/03/03/rChartsslidy/" title="rCharts with slidy" rel="bookmark">rCharts with slidy</a>
     </h1>
     <div class="entry-content full-content">
-      <p>I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.</p>
+      <p>My last post I talked about using <em>rCharts</em> to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use <em>slidy</em> to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a <em>slidy</em> html presentation.</p>
 
-<p>I initially explored both <a href="http://plot.ly">plot.ly</a> and <a href="http://ramnathv.github.io/rCharts/">rCharts</a>, but ended up using <em>rCharts</em> as I found I was more easily able to put it directly into my presentation.  It may be possible with <em>plot.ly</em> but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.</p>
+<p>First off, I did not use <em>rCharts</em> and <em>knitr</em> in tandem, but that would make the workflow a bit easier.  The major thing you'd want to remember is to make sure to add the following chunk option: <strong>results = 'asis'</strong>.  This will ensure that the raw html printed from <em>rCharts</em> will be included in the markdown file as is.</p>
 
-<p>Using <em>highcharts.js</em> that is integrated into <em>rCharts</em> I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.</p>
+<p>I personally just copy and pasted the javascript into my markdown presentation (instead of using <em>knitr</em> as talked about above).  This was easier for me as I edited many specific options in the raw Javascript to come to my final version (and created a boxplot from scratch).  It would be possible to make all the edits directly through the <em>rCharts</em> framework, but I found it easier to edit the raw Javascript by looking at the highcharts.js documentation to get the figure I was looking for.</p>
+
+<p>For those who did not see my last post, here is the R code I used to create my graphic:</p>
 
 <pre><code class="r">library(rCharts)
 
@@ -78,20 +80,14 @@ h1$plotOptions(series = list(lineWidth = 4))
 h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 </code></pre>
 
-<script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
+<p>After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.</p>
 
-
-<script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
-
-
-<script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
-
-
-<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script>
-
-
-<p>
- <style>
+<p>  <div>
+    <pre><code class='javascript'>&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+ &lt;style&gt;
   .rChart {
     display: block;
     margin-left: auto;
@@ -100,35 +96,32 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
     height: 400px;
     font-size: 200%;
   }<br/>
-  </style></p>
-
-<div id = 'chart1' class = 'rChart highcharts'></div>
-
-
-<script type='text/javascript'>
+  &lt;/style&gt;
+&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+&lt;script type='text/javascript'&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
- "dom": "chart1",
-"width":            800,
-"height":            400,
-"credits": {
- "href": null,
-"text": null 
+ &quot;dom&quot;: &quot;chart1&quot;,
+&quot;width&quot;:            800,
+&quot;height&quot;:            400,
+&quot;credits&quot;: {
+ &quot;href&quot;: null,
+&quot;text&quot;: null
 },
-"exporting": {
- "enabled": false 
+&quot;exporting&quot;: {
+ &quot;enabled&quot;: false
 },
-"title": {
- "text": null 
+&quot;title&quot;: {
+ &quot;text&quot;: null
 },
-"yAxis": [
+&quot;yAxis&quot;: [
  {
  title: {
- text: "Convergence Rate",
+ text: &quot;Convergence Rate&quot;,
   style: {
    fontWeight: 'bold',
-   fontSize: '30px'
+   fontSize: '20px'
    }
  },
  labels: {
@@ -139,176 +132,211 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
    fontSize: '18px'
   }
  },
-"min":              0,
-"max":            100,
-"tickInterval":             10 ,
+&quot;min&quot;:              0,
+&quot;max&quot;:            100,
+&quot;tickInterval&quot;:             10 ,
 minRange: 10
-} 
+}
 ],
-"series": [
+&quot;series&quot;: [
  {
- "data": [
- [
- "Ind",
-         68.38 
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+   68.38
 ],
-[
- "AR1",
-         64.88 
+[ &quot;AR1&quot;,
+   64.88
 ],
-[
- "MA1",
-         55.12 
+[ &quot;MA1&quot;,
+   55.12
 ],
-[
- "MA2",
-         61.98 
+[ &quot;MA2&quot;,
+   61.98
 ],
-[
- "ARMA",
-         42.17 
-] 
+[ &quot;ARMA&quot;,
+   42.17
+]
 ],
-"color": "#e41a1c",
-"name": "AR1",
-"type": null,
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#e41a1c'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#e41a1c&quot;,
+&quot;name&quot;: &quot;AR1&quot;,
+&quot;type&quot;: null,
 dashStyle: 'Solid',
-"marker": {
- "radius":              6
-} 
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
 },
 {
- "data": [
- [
- "Ind",
-          65.1 
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+  65.1
 ],
-[
- "AR1",
-         60.45 
+[ &quot;AR1&quot;,
+   60.45
 ],
-[
- "MA1",
-         63.68 
+[ &quot;MA1&quot;,
+  63.68
 ],
-[
- "MA2",
-         54.88 
+[ &quot;MA2&quot;,
+  54.88
 ],
-[
- "ARMA",
-          63.6 
-] 
+[ &quot;ARMA&quot;,
+   63.6
+]
 ],
-"color": "#377eb8",
-"name": "ARMA",
-"type": null,
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#377eb8'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#377eb8&quot;,
+&quot;name&quot;: &quot;ARMA&quot;,
+&quot;type&quot;: null,
 dashStyle: 'ShortDash',
-"marker": {
- "radius":              6 
-} 
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
 },
 {
- "data": [
- [
- "Ind",
-         72.48 
+ &quot;data&quot;: [
+ [&quot;Ind&quot;,
+  72.48
 ],
-[
- "AR1",
-         93.88 
+[ &quot;AR1&quot;,
+  93.88
 ],
-[
- "MA1",
-         92.23 
+[ &quot;MA1&quot;,
+  92.23
 ],
-[
- "MA2",
-         95.62 
+[ &quot;MA2&quot;,
+  95.62
 ],
-[
- "ARMA",
-         98.37 
-] 
+[ &quot;ARMA&quot;,
+  98.37
+]
 ],
-"color": "#4daf4a",
-"name": "Ind",
-"type": null,
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#4daf4a'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#4daf4a&quot;,
+&quot;name&quot;: &quot;Ind&quot;,
+&quot;type&quot;: null,
 dashStyle: 'Dash',
-"marker": {
- "radius":              6 
-} 
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
 },
 {
- "data": [
- [
- "Ind",
-         71.02 
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+  71.02
 ],
-[
- "AR1",
-         81.37 
+[ &quot;AR1&quot;,
+   81.37
 ],
-[
- "MA1",
-         69.15 
+[ &quot;MA1&quot;,
+   69.15
 ],
-[
- "MA2",
-          84.5 
+[ &quot;MA2&quot;,
+   84.5
 ],
-[
- "ARMA",
-         88.02 
-] 
+[ &quot;ARMA&quot;,
+   88.02
+]
 ],
-"color": "#984ea3",
-"name": "MA1",
-"type": null,
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#984ea3'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#984ea3&quot;,
+&quot;name&quot;: &quot;MA1&quot;,
+&quot;type&quot;: null,
 dashStyle: 'ShortDot',
-"marker": {
- "radius":              6
-} 
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
 },
 {
- "data": [
- [
- "Ind",
-         67.23 
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+   67.23
 ],
-[
- "AR1",
-         70.78 
+[ &quot;AR1&quot;,
+   70.78
 ],
-[
- "MA1",
-         65.93 
+[ &quot;MA1&quot;,
+   65.93
 ],
-[
- "MA2",
-         68.83 
+[ &quot;MA2&quot;,
+   68.83
 ],
-[
- "ARMA",
-          72.9 
-] 
+[ &quot;ARMA&quot;,
+   72.9
+]
 ],
-"color": "#ff7f00",
-"name": "MA2",
-"type": null,
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#ff7f00'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#ff7f00&quot;,
+&quot;name&quot;: &quot;MA2&quot;,
+&quot;type&quot;: null,
 dashStyle: 'DashDot',
-"marker": {
- "radius":              6 
-} 
-} 
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+}
 ],
-"xAxis": [
+&quot;xAxis&quot;: [
  {
  title: {
- text: "Generated Serial Correlation Structure",
+ text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
    fontWeight: 'bold',
-   fontSize: '30px'
+   fontSize: '20px'
  }
 },
 labels: {
@@ -317,46 +345,379 @@ labels: {
   fontWeight: 'bold'
  }
 },
-"categories": [ "Ind", "AR1", "MA1", "MA2", "ARMA" ] 
-} 
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
+}
 ],
-"subtitle": {
- "text": null 
+&quot;subtitle&quot;: {
+ &quot;text&quot;: null
 },
-"legend": {
- "verticalAlign": "top",
-"align": "right",
-"layout": "vertical",
+&quot;legend&quot;: {
+ &quot;verticalAlign&quot;: &quot;top&quot;,
+&quot;align&quot;: &quot;right&quot;,
+&quot;layout&quot;: &quot;vertical&quot;,
 symbolWidth: 40,
-"title": {
- "text": "Fitted SC" 
-} 
+&quot;title&quot;: {
+ &quot;text&quot;: &quot;Fitted SC&quot;
+}
 },
-"plotOptions": {
- "series": {
- "lineWidth":              4 
-} 
+&quot;plotOptions&quot;: {
+ &quot;series&quot;: {
+ &quot;lineWidth&quot;:   4
+}
 },
-"id": "chart1",
-"chart": {
- "renderTo": "chart1", 
- zoomType: "y",
- "style": {
- fontSize: "24px"
+&quot;id&quot;: &quot;chart1&quot;,
+&quot;chart&quot;: {
+ &quot;renderTo&quot;: &quot;chart1&quot;,
+ zoomType: &quot;y&quot;,
+ &quot;style&quot;: {
+ fontSize: &quot;24px&quot;
  },
  resetZoomButton: {
   position: {
    align: 'left'
   }
  }
-} 
+}
 });
         });
     })(jQuery);
-</script>
+&lt;/script&gt;</code></pre>
+  </div></p>
 
+<p>Once you have that in markdown format, you can turn it into a <em>slidy</em> html presentation with the following command in <em>pandoc</em>:</p>
 
-<p>I edited the javascript manually to get some of the effects that I was looking for.  For example, the differing line styles and adding the ability to zoom.  It is possible to add this directly through <em>rCharts</em>, however I found it much more cumbersome compared to editing the effects I wanted manually.  I find the <em>rCharts</em> framework is nice to give the user the barebones needed to produce an interactive plot that can be put into an HTML slideshow.  Once getting the general structure, it is easy to look at the documentation for the javascript library and customize the plot yourself.  I personally use <em>slidy</em> for that aspect and that is where I will use plots like this in the future.  Creating these plots has also helped me to start learning some basics of Javascript which has been on my wish list for the last year or so.</p>
+<p>  <div>
+    <pre><code class='bash'>pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre>
+  </div></p>
+
+<p>This gives you a file that looks something like this:</p>
+
+<p>  <div>
+    <pre><code class='html'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
+ &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot; /&gt;
+  &lt;meta name=&quot;generator&quot; content=&quot;pandoc&quot; /&gt;
+  &lt;meta name=&quot;author&quot; content=&quot;Your Name&quot; /&gt;
+  &lt;title&gt;Witty Title&lt;/title&gt;
+  &lt;style type=&quot;text/css&quot;&gt;code{white-space: pre;}&lt;/style&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen, projection, print&quot;
+    href=&quot;http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css&quot; /&gt;
+&lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
+    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+ &lt;style&gt;
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 800px;
+    font-size: 200%;
+  }<br/>
+  &lt;/style&gt;
+&lt;script src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;MathJax.Hub.Queue([&quot;Typeset&quot;,MathJax.Hub]);&lt;/script&gt;
+ &lt;!--   &lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
+    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id = 'chart1' class = 'rChart'&gt;&lt;/div&gt;
+&lt;script type='text/javascript'&gt;
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ &quot;dom&quot;: &quot;chart1&quot;,
+&quot;width&quot;:            1000,
+&quot;height&quot;:            600,
+&quot;credits&quot;: {
+ &quot;href&quot;: null,
+&quot;text&quot;: null
+},
+&quot;exporting&quot;: {
+ &quot;enabled&quot;: false
+},
+&quot;title&quot;: {
+ &quot;text&quot;: null
+},
+&quot;yAxis&quot;: [
+ {
+ title: {
+ text: &quot;Convergence Rate&quot;,
+  style: {
+   fontWeight: 'bold',
+   fontSize: '20px'
+   }
+ },
+ labels: {
+  formatter: function() {
+   return this.value + '%';
+  },
+  style: {
+   fontSize: '18px'
+  }
+ },
+&quot;min&quot;:              0,
+&quot;max&quot;:            100,
+&quot;tickInterval&quot;:             10 ,
+minRange: 10
+}
+],
+&quot;series&quot;: [
+ {
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+  68.38
+],
+[ &quot;AR1&quot;,
+  64.88
+],
+[ &quot;MA1&quot;,
+  55.12
+],
+[ &quot;MA2&quot;,
+  61.98
+],
+[ &quot;ARMA&quot;,
+  42.17
+]
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#e41a1c'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#e41a1c&quot;,
+&quot;name&quot;: &quot;AR1&quot;,
+&quot;type&quot;: null,
+dashStyle: 'Solid',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+},
+{
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+  65.1
+],
+[ &quot;AR1&quot;,
+  60.45
+],
+[ &quot;MA1&quot;,
+  63.68
+],
+[ &quot;MA2&quot;,
+  54.88
+],
+[ &quot;ARMA&quot;,
+   63.6
+]
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#377eb8'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#377eb8&quot;,
+&quot;name&quot;: &quot;ARMA&quot;,
+&quot;type&quot;: null,
+dashStyle: 'ShortDash',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+},
+{
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+  72.48
+],
+[ &quot;AR1&quot;,
+  93.88
+],
+[ &quot;MA1&quot;,
+   92.23
+],
+[ &quot;MA2&quot;,
+   95.62
+],
+[ &quot;ARMA&quot;,
+   98.37
+]
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#4daf4a'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#4daf4a&quot;,
+&quot;name&quot;: &quot;Ind&quot;,
+&quot;type&quot;: null,
+dashStyle: 'Dash',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+},
+{
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+   71.02
+],
+[ &quot;AR1&quot;,
+   81.37
+],
+[ &quot;MA1&quot;,
+   69.15
+],
+[ &quot;MA2&quot;,
+   84.5
+],
+[ &quot;ARMA&quot;,
+   88.02
+]
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#984ea3'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#984ea3&quot;,
+&quot;name&quot;: &quot;MA1&quot;,
+&quot;type&quot;: null,
+dashStyle: 'ShortDot',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+},
+{
+ &quot;data&quot;: [
+ [ &quot;Ind&quot;,
+   67.23
+],
+[ &quot;AR1&quot;,
+   70.78
+],
+[ &quot;MA1&quot;,
+   65.93
+],
+[ &quot;MA2&quot;,
+   68.83
+],
+[ &quot;ARMA&quot;,
+    72.9
+]
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });              <br/>
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#ff7f00'
+                });
+            }
+        },
+&quot;color&quot;: &quot;#ff7f00&quot;,
+&quot;name&quot;: &quot;MA2&quot;,
+&quot;type&quot;: null,
+dashStyle: 'DashDot',
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+}
+}
+],
+&quot;xAxis&quot;: [
+ {
+ title: {
+ text: &quot;Generated Serial Correlation Structure&quot;,
+  style:{
+   fontWeight: 'bold',
+   fontSize: '20px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
+}
+],
+&quot;subtitle&quot;: {
+ &quot;text&quot;: null
+},
+&quot;legend&quot;: {
+ &quot;verticalAlign&quot;: &quot;top&quot;,
+&quot;align&quot;: &quot;right&quot;,
+&quot;layout&quot;: &quot;vertical&quot;,
+symbolWidth: 40,
+&quot;title&quot;: {
+ &quot;text&quot;: &quot;Fitted SC&quot;
+}
+},
+&quot;plotOptions&quot;: {
+ &quot;series&quot;: {
+ &quot;lineWidth&quot;:              4
+}
+},
+&quot;id&quot;: &quot;chart1&quot;,
+&quot;chart&quot;: {
+ &quot;renderTo&quot;: &quot;chart1&quot;,
+ zoomType: &quot;y&quot;,
+ &quot;style&quot;: {
+ fontSize: &quot;24px&quot;
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+}
+});
+        });
+    })(jQuery);
+&lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div></p>
+
+<p>That should give you a html presentation with an interactive Javascript based figure.</p>
 
     </div>
   <p class="alt-font tight">
@@ -368,13 +729,17 @@ symbolWidth: 40,
     
     <a href="/tags.html#javascript-ref" >javascript</a>
     
+    <a href="/tags.html#html-ref" >html</a>
+    
+    <a href="/tags.html#slidy-ref" >slidy</a>
+    
   </p>
     <p class="comments-link">
-      <a href='/2014/02/15/rcharts/#disqus_thread'>Comments</a>
+      <a href='/2014/03/03/rChartsslidy/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-02-15 00:00:00 -0600">15 Feb 2014</abbr>
+        <abbr class="published" title="2014-03-03 00:00:00 -0600">03 Mar 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>
