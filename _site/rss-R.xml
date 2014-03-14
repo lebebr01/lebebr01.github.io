@@ -7,6 +7,70 @@
 		<atom:link href="http://educate-r.org/feed.category.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Update to highlightHTML package</title>
+				<description>&lt;p&gt;I've added a new functionality to my &lt;em&gt;highlightHTML&lt;/em&gt; package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.&lt;/p&gt;
+
+&lt;p&gt;Up to now, my package only worked with tables, see my old post that talks about this if you are interested: &lt;a href=&quot;http://educate-r.org/2013/11/01/CondFormatMarkdown/&quot;&gt;highlight tables&lt;/a&gt;.  My update adds a similar functionality to text itself by including span tags in the document.&lt;/p&gt;
+
+&lt;p&gt;The following code will install the package with the new feature from github:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(devtools)
+install_github(repo = &quot;highlightHTML&quot;, username = &quot;lebebr01&quot;, ref = &quot;testing&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the package is installed, the new function is called &lt;strong&gt;highlightHTMLtext&lt;/strong&gt;. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.&lt;/p&gt;
+
+&lt;p&gt;Here is an example using the HTML file that comes with the package and which can also be found in the help file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(highlightHTML)
+file &amp;lt;- system.file('examples', package = 'highlightHTML')
+file1 &amp;lt;- paste(file, &quot;bgtext.html&quot;, sep = &quot;/&quot;)
+
+# Change background color and text color with CSS
+tags &amp;lt;- c(&quot;#bgblack {background-color: black; color: white;}&quot;,
+  &quot;#bgblue {background-color: #0000FF; color: white;}&quot;)
+
+# Post-process HTML file
+highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
+  tags = tags, browse = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.&lt;/p&gt;
+
+&lt;p&gt;My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: &lt;a href=&quot;https://github.com/lebebr01/highlightHTML&quot;&gt;report bugs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3&gt;Before and After HTML&lt;/h3&gt;
+
+&lt;p&gt;Here is what the body of the HTML file looks like before running the function:
+  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='html'&gt;&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Test of Text&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;Testing the ability to change the {#bgblue color} of the text.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;Can also do {#bgblack multiple words of text}&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;This is what the HTML document looks like after running the function:
+  &lt;div&gt;
+    &lt;pre&gt;&lt;code class='html'&gt;&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Test of Text&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;Testing the ability to change the &amp;lt;span id='bgblue'&amp;gt; color&amp;lt;/span&amp;gt; of the text.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;Can also do &amp;lt;span id='bgblack'&amp;gt; multiple words of text&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span id='bgblack'&amp;gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The braces identify the location of the span tags and the custom CSS id tag to format the text.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 14 Mar 2014 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2014/03/14/htmltext/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/03/14/htmltext/</guid>
+			</item>
+		
+			<item>
 				<title>rCharts with slidy</title>
 				<description>&lt;p&gt;My last post I talked about using &lt;em&gt;rCharts&lt;/em&gt; to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use &lt;em&gt;slidy&lt;/em&gt; to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a &lt;em&gt;slidy&lt;/em&gt; html presentation.&lt;/p&gt;
 
@@ -1522,82 +1586,6 @@ highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;
 				<pubDate>Fri, 01 Nov 2013 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2013/11/01/CondFormatMarkdown/</link>
 				<guid isPermaLink="true">http://educate-r.org//2013/11/01/CondFormatMarkdown/</guid>
-			</item>
-		
-			<item>
-				<title>Conditional Formatting Tables using R</title>
-				<description>&lt;p&gt;One thing that I had the opportunity to develop while working last year at &lt;a href=&quot;http://spps.org/&quot;&gt;Saint Paul Public Schools&lt;/a&gt; was figuring out a quick, easy, and painless way to do interactive report generation.  When I arrived in the REA department at Saint Paul Public Schools, the report generation process was roughly as follows:&lt;br/&gt;
-1. Do the analysis in SPSS (compute percent proficient for standard tests by various subgroups).&lt;br/&gt;
-2. Format output and copy output into Excel.&lt;br/&gt;
-3. Once in Excel, do lookup tables to generate the report in Excel.&lt;/p&gt;
-
-&lt;p&gt;This process provided a few areas that could introduce errors.  The copying from SPSS into Excel could produce errors and the lookup formula's in Excel can be tricky.  The correct columns need to be specified in the correct destination on another sheet.&lt;/p&gt;
-
-&lt;p&gt;One of the largest pushes in a school district is to receive the district's test score results and quickly as possible.  I felt that I could create an interactive report through the use of &lt;em&gt;R&lt;/em&gt; and &lt;em&gt;LaTeX&lt;/em&gt; that would greatly enhance the workflow and speed of report generation.&lt;/p&gt;
-
-&lt;p&gt;My process involved creating R script files for each report and export the tables for the reports as &lt;em&gt;.tex&lt;/em&gt; files.  The &lt;em&gt;.tex&lt;/em&gt; files were created using the &lt;em&gt;Hmisc&lt;/em&gt; R package, more specifically the &lt;em&gt;latex&lt;/em&gt; function.  The &lt;em&gt;latex&lt;/em&gt; function is great as it offers a lot of control over the output of the resulting &lt;em&gt;.tex&lt;/em&gt; table file.  One thing you can do is conditional formatting of the table, see this document for a more thorough explanation: &lt;a href=&quot;http://biostat.mc.vanderbilt.edu/twiki/pub/Main/StatReport/latexFineControl.pdf&quot;&gt;conditional formatting with the latex function&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is a small minimal example.  In the example, suppose we want to calculate the average Melanoma thickness by the status of the person (i.e. did they die from Melanoma, still alive, or died from other causes).&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(MASS)   # Load for Melanoma Data
-library(Hmisc)  # Load for latex function
-library(data.table)  # Used for aggregating&lt;/p&gt;
-
-&lt;p&gt;mela &amp;lt;- data.table(Melanoma)&lt;/p&gt;
-
-&lt;h1&gt;Aggregating&lt;/h1&gt;
-
-&lt;p&gt;mela.status &amp;lt;- mela[, list(avgThick = mean(thickness)), by = status]&lt;/p&gt;
-
-&lt;h1&gt;Conditional formatting&lt;/h1&gt;
-
-&lt;p&gt;cellTex &amp;lt;- matrix(rep(&amp;quot;&amp;quot;, NROW(mela.status) * NCOL(mela.status)),
-                  nrow = NROW(mela.status))
-cellTex[,1] &amp;lt;- ifelse(mela.status$avgThick &amp;gt; 4, &amp;quot;cellcolor{red}&amp;quot;,
-                  ifelse(mela.status$avgThick &amp;lt; 3, &amp;quot;cellcolor{green}&amp;quot;,
-                         &amp;quot;&amp;quot;))&lt;/p&gt;
-
-&lt;h1&gt;Shading alternate rows&lt;/h1&gt;
-
-&lt;p&gt;my.rownamesTexCmd &amp;lt;- rep(&amp;quot;&amp;quot;, nrow(mela.status))
-index &amp;lt;- (1:nrow(mela.status)/2) == (1:nrow(mela.status)%/%2)
-my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
-
-&lt;h1&gt;Creating the .tex file&lt;/h1&gt;
-
-&lt;h1&gt;Note, this is currently printed in R console&lt;/h1&gt;
-
-&lt;p&gt;latex(round(mela.status, 2), title = '', file = '', booktabs = TRUE,
-      rownamesTexCmd = my.rownamesTexCmd, cellTexCmds = cellTex,
-      rowname = NULL)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;Below is the resulting &lt;em&gt;LaTeX&lt;/em&gt; code that is created from the &lt;em&gt;latex&lt;/em&gt; function. The conditional formatting is the &lt;em&gt;\cellcolor{}&lt;/em&gt; commands.  You need to ensure that the color is defined, either as a default color or one you define in the preamble.  Secondly, the \shadeRow command will shade that row and you need to ensure you have the first line below in your preamble.&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='latex'&gt;% Including a similar command in your preamble to define row shading.
-\providecommand{\shadeRow}{\rowcolor[rgb]{0, 0.99, 0}}
-%
-%
-\begin{table}[!tbp]
-\begin{center}
-\begin{tabular}{rr}
-\toprule
-\multicolumn{1}{c}{status}&amp;amp;\multicolumn{1}{c}{avgThick}\tabularnewline
-\midrule
- $3$&amp;amp;   $3.72$\tabularnewline
-\shadeRow   $2$&amp;amp;\cellcolor{green}   $2.24$\tabularnewline
-  $1$&amp;amp;\cellcolor{red}   $4.31$\tabularnewline
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-</description>
-				<pubDate>Sat, 28 Sep 2013 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2013/09/28/ConditionalFormat/</link>
-				<guid isPermaLink="true">http://educate-r.org//2013/09/28/ConditionalFormat/</guid>
 			</item>
 		
 	</channel>

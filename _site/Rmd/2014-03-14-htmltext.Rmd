@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Update to highlightHTML package</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -54,59 +54,62 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
+   <!-- <h2>Update to highlightHTML package</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/Rmd/2014-03-14-htmltext.Rmd" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
+  </h1>
+  <div class="entry-content full-content">
+    I've added a new functionality to my *highlightHTML* package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.  
 
-<p>Up to now, my package only worked with tables, see my old post that talks about this if you are interested: <a href="http://educate-r.org/2013/11/01/CondFormatMarkdown/">highlight tables</a>.  My update adds a similar functionality to text itself by including span tags in the document.</p>
+Up to now, my package only worked with tables, see my old post that talks about this if you are interested: http://educate-r.org/2013/11/01/CondFormatMarkdown/.  My update adds a similar functionality to text itself by including span tags in the document.
 
-<p>The following code will install the package with the new feature from github:</p>
+The following code will install the package with the new feature from github:
+```{r install, eval=FALSE}
+library(devtools)
+install_github(repo = 'highlightHTML', username = 'lebebr01', ref = 'testing')
+```
 
-<pre><code class="r">library(devtools)
-install_github(repo = "highlightHTML", username = "lebebr01", ref = "testing")
-</code></pre>
+Once the package is installed, the new function is called **highlightHTMLtext**. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.  
 
-<p>Once the package is installed, the new function is called <strong>highlightHTMLtext</strong>. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.</p>
+Here is an example using the HTML file that comes with the package and which can also be found in the help file.
 
-<p>Here is an example using the HTML file that comes with the package and which can also be found in the help file.</p>
-
-<pre><code class="r">library(highlightHTML)
-file &lt;- system.file('examples', package = 'highlightHTML')
-file1 &lt;- paste(file, "bgtext.html", sep = "/")
+```{r highlight,  tidy = FALSE, warning = FALSE, message = FALSE, error=FALSE, eval=FALSE}
+library(highlightHTML)
+file <- system.file('examples', package = 'highlightHTML')
+file1 <- paste(file, "bgtext.html", sep = "/")
 
 # Change background color and text color with CSS
-tags &lt;- c("#bgblack {background-color: black; color: white;}",
+tags <- c("#bgblack {background-color: black; color: white;}",
   "#bgblue {background-color: #0000FF; color: white;}")
 
 # Post-process HTML file
 highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
   tags = tags, browse = TRUE)
-</code></pre>
+```
 
-<p>If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.</p>
+If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.
 
-<p>My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: <a href="https://github.com/lebebr01/highlightHTML">report bugs</a>.</p>
+My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: https://github.com/lebebr01/highlightHTML
 
-<hr />
+****************
 
-<h3>Before and After HTML</h3>
-
-<p>Here is what the body of the HTML file looks like before running the function:
+### Before and After HTML
+Here is what the body of the HTML file looks like before running the function:
   <div>
     <pre><code class='html'>&lt;body&gt;
 &lt;h1&gt;Test of Text&lt;/h1&gt;
+
 &lt;p&gt;Testing the ability to change the {#bgblue color} of the text.&lt;/p&gt;
+
 &lt;p&gt;Can also do {#bgblack multiple words of text}&lt;/p&gt;
+
 &lt;p&gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&lt;/p&gt;
 &lt;/body&gt;</code></pre>
-  </div></p>
+  </div>
 
-<p>This is what the HTML document looks like after running the function:
+
+This is what the HTML document looks like after running the function:
   <div>
     <pre><code class='html'>&lt;body&gt;
 &lt;h1&gt;Test of Text&lt;/h1&gt;
@@ -114,11 +117,14 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
 &lt;p&gt;Can also do &lt;span id='bgblack'&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span id='bgblack'&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
 &lt;/body&gt;</code></pre>
-  </div></p>
+  </div>
 
-<p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
 
-    </div>
+The braces identify the location of the span tags.
+
+
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -131,33 +137,34 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
     <a href="/tags.html#HTML-ref" >HTML</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/03/14/htmltext/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-03-14 00:00:00 -0500">14 Mar 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page2/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page4/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title=""></abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/Rmd/2014-03-14-htmltext.Rmd";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

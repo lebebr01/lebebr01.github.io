@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Update to highlightHTML package</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -54,14 +54,13 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
+   <!-- <h2>Update to highlightHTML package</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
 
 <p>Up to now, my package only worked with tables, see my old post that talks about this if you are interested: <a href="http://educate-r.org/2013/11/01/CondFormatMarkdown/">highlight tables</a>.  My update adds a similar functionality to text itself by including span tags in the document.</p>
 
@@ -118,7 +117,8 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
 
 <p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -131,33 +131,34 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
     <a href="/tags.html#HTML-ref" >HTML</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/03/14/htmltext/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-03-14 00:00:00 -0500">14 Mar 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page2/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page4/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2014-03-14 00:00:00 -0500">March 14 2014</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2014/03/14/htmltext/";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

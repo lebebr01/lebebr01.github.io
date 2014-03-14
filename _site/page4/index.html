@@ -58,666 +58,65 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/03/03/rChartsslidy/" title="rCharts with slidy" rel="bookmark">rCharts with slidy</a>
+      <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
     </h1>
     <div class="entry-content full-content">
-      <p>My last post I talked about using <em>rCharts</em> to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use <em>slidy</em> to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a <em>slidy</em> html presentation.</p>
+      <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
 
-<p>First off, I did not use <em>rCharts</em> and <em>knitr</em> in tandem, but that would make the workflow a bit easier.  The major thing you'd want to remember is to make sure to add the following chunk option: <strong>results = 'asis'</strong>.  This will ensure that the raw html printed from <em>rCharts</em> will be included in the markdown file as is.</p>
+<p>Up to now, my package only worked with tables, see my old post that talks about this if you are interested: <a href="http://educate-r.org/2013/11/01/CondFormatMarkdown/">highlight tables</a>.  My update adds a similar functionality to text itself by including span tags in the document.</p>
 
-<p>I personally just copy and pasted the javascript into my markdown presentation (instead of using <em>knitr</em> as talked about above).  This was easier for me as I edited many specific options in the raw Javascript to come to my final version (and created a boxplot from scratch).  It would be possible to make all the edits directly through the <em>rCharts</em> framework, but I found it easier to edit the raw Javascript by looking at the highcharts.js documentation to get the figure I was looking for.</p>
+<p>The following code will install the package with the new feature from github:</p>
 
-<p>For those who did not see my last post, here is the R code I used to create my graphic:</p>
-
-<pre><code class="r">library(rCharts)
-
-h1 &lt;- hPlot(x = "GenSerCor", y = "percent", group = "FitSerCor", data = converge)
-h1$yAxis(title = list(text = "Convergence Rate"), min = 0, max = 100, tickInterval = 10)
-h1$xAxis(title = list(text = "Generated Serial Correlation Structure"),
-         categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
-h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Fitted SC"))
-h1$plotOptions(series = list(lineWidth = 4))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+<pre><code class="r">library(devtools)
+install_github(repo = "highlightHTML", username = "lebebr01", ref = "testing")
 </code></pre>
 
-<p>After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.</p>
+<p>Once the package is installed, the new function is called <strong>highlightHTMLtext</strong>. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.</p>
 
-<p>  <div>
-    <pre><code class='javascript'>&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
- &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    height: 400px;
-    font-size: 200%;
-  }<br/>
-  &lt;/style&gt;
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            800,
-&quot;height&quot;:            400,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false
-},
-&quot;title&quot;: {
- &quot;text&quot;: null
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + '%';
-  },
-  style: {
-   fontSize: '18px'
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-}
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   68.38
-],
-[ &quot;AR1&quot;,
-   64.88
-],
-[ &quot;MA1&quot;,
-   55.12
-],
-[ &quot;MA2&quot;,
-   61.98
-],
-[ &quot;ARMA&quot;,
-   42.17
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#e41a1c'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Solid',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  65.1
-],
-[ &quot;AR1&quot;,
-   60.45
-],
-[ &quot;MA1&quot;,
-  63.68
-],
-[ &quot;MA2&quot;,
-  54.88
-],
-[ &quot;ARMA&quot;,
-   63.6
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#377eb8'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [&quot;Ind&quot;,
-  72.48
-],
-[ &quot;AR1&quot;,
-  93.88
-],
-[ &quot;MA1&quot;,
-  92.23
-],
-[ &quot;MA2&quot;,
-  95.62
-],
-[ &quot;ARMA&quot;,
-  98.37
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#4daf4a'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Dash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  71.02
-],
-[ &quot;AR1&quot;,
-   81.37
-],
-[ &quot;MA1&quot;,
-   69.15
-],
-[ &quot;MA2&quot;,
-   84.5
-],
-[ &quot;ARMA&quot;,
-   88.02
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#984ea3'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   67.23
-],
-[ &quot;AR1&quot;,
-   70.78
-],
-[ &quot;MA1&quot;,
-   65.93
-],
-[ &quot;MA2&quot;,
-   68.83
-],
-[ &quot;ARMA&quot;,
-   72.9
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#ff7f00'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: 'DashDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-}
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
- }
-},
-labels: {
- style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
-}
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot;
-}
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:   4
-}
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;,
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: 'left'
-  }
- }
-}
-});
-        });
-    })(jQuery);
-&lt;/script&gt;</code></pre>
+<p>Here is an example using the HTML file that comes with the package and which can also be found in the help file.</p>
+
+<pre><code class="r">library(highlightHTML)
+file &lt;- system.file('examples', package = 'highlightHTML')
+file1 &lt;- paste(file, "bgtext.html", sep = "/")
+
+# Change background color and text color with CSS
+tags &lt;- c("#bgblack {background-color: black; color: white;}",
+  "#bgblue {background-color: #0000FF; color: white;}")
+
+# Post-process HTML file
+highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
+  tags = tags, browse = TRUE)
+</code></pre>
+
+<p>If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.</p>
+
+<p>My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: <a href="https://github.com/lebebr01/highlightHTML">report bugs</a>.</p>
+
+<hr />
+
+<h3>Before and After HTML</h3>
+
+<p>Here is what the body of the HTML file looks like before running the function:
+  <div>
+    <pre><code class='html'>&lt;body&gt;
+&lt;h1&gt;Test of Text&lt;/h1&gt;
+&lt;p&gt;Testing the ability to change the {#bgblue color} of the text.&lt;/p&gt;
+&lt;p&gt;Can also do {#bgblack multiple words of text}&lt;/p&gt;
+&lt;p&gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&lt;/p&gt;
+&lt;/body&gt;</code></pre>
   </div></p>
 
-<p>Once you have that in markdown format, you can turn it into a <em>slidy</em> html presentation with the following command in <em>pandoc</em>:</p>
-
-<p>  <div>
-    <pre><code class='bash'>pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre>
+<p>This is what the HTML document looks like after running the function:
+  <div>
+    <pre><code class='html'>&lt;body&gt;
+&lt;h1&gt;Test of Text&lt;/h1&gt;
+&lt;p&gt;Testing the ability to change the &lt;span id='bgblue'&gt; color&lt;/span&gt; of the text.&lt;/p&gt;
+&lt;p&gt;Can also do &lt;span id='bgblack'&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span id='bgblack'&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;</code></pre>
   </div></p>
 
-<p>This gives you a file that looks something like this:</p>
-
-<p>  <div>
-    <pre><code class='html'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
- &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot; /&gt;
-  &lt;meta name=&quot;generator&quot; content=&quot;pandoc&quot; /&gt;
-  &lt;meta name=&quot;author&quot; content=&quot;Your Name&quot; /&gt;
-  &lt;title&gt;Witty Title&lt;/title&gt;
-  &lt;style type=&quot;text/css&quot;&gt;code{white-space: pre;}&lt;/style&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen, projection, print&quot;
-    href=&quot;http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css&quot; /&gt;
-&lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
-    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
- &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1000px;
-    height: 800px;
-    font-size: 200%;
-  }<br/>
-  &lt;/style&gt;
-&lt;script src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;MathJax.Hub.Queue([&quot;Typeset&quot;,MathJax.Hub]);&lt;/script&gt;
- &lt;!--   &lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
-    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id = 'chart1' class = 'rChart'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            1000,
-&quot;height&quot;:            600,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false
-},
-&quot;title&quot;: {
- &quot;text&quot;: null
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + '%';
-  },
-  style: {
-   fontSize: '18px'
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-}
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  68.38
-],
-[ &quot;AR1&quot;,
-  64.88
-],
-[ &quot;MA1&quot;,
-  55.12
-],
-[ &quot;MA2&quot;,
-  61.98
-],
-[ &quot;ARMA&quot;,
-  42.17
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#e41a1c'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Solid',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  65.1
-],
-[ &quot;AR1&quot;,
-  60.45
-],
-[ &quot;MA1&quot;,
-  63.68
-],
-[ &quot;MA2&quot;,
-  54.88
-],
-[ &quot;ARMA&quot;,
-   63.6
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#377eb8'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  72.48
-],
-[ &quot;AR1&quot;,
-  93.88
-],
-[ &quot;MA1&quot;,
-   92.23
-],
-[ &quot;MA2&quot;,
-   95.62
-],
-[ &quot;ARMA&quot;,
-   98.37
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#4daf4a'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: 'Dash',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   71.02
-],
-[ &quot;AR1&quot;,
-   81.37
-],
-[ &quot;MA1&quot;,
-   69.15
-],
-[ &quot;MA2&quot;,
-   84.5
-],
-[ &quot;ARMA&quot;,
-   88.02
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#984ea3'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: 'ShortDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   67.23
-],
-[ &quot;AR1&quot;,
-   70.78
-],
-[ &quot;MA1&quot;,
-   65.93
-],
-[ &quot;MA2&quot;,
-   68.83
-],
-[ &quot;ARMA&quot;,
-    72.9
-]
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });              <br/>
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#ff7f00'
-                });
-            }
-        },
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: 'DashDot',
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-}
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
- }
-},
-labels: {
- style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
-}
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot;
-}
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:              4
-}
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;,
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: 'left'
-  }
- }
-}
-});
-        });
-    })(jQuery);
-&lt;/script&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-  </div></p>
-
-<p>That should give you a html presentation with an interactive Javascript based figure.</p>
+<p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
 
     </div>
   <p class="alt-font tight">
@@ -725,21 +124,19 @@ symbolWidth: 40,
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#rCharts-ref" >rCharts</a>
+    <a href="/tags.html#highlightHTML-ref" >highlightHTML</a>
     
-    <a href="/tags.html#javascript-ref" >javascript</a>
+    <a href="/tags.html#markdown-ref" >markdown</a>
     
-    <a href="/tags.html#html-ref" >html</a>
-    
-    <a href="/tags.html#slidy-ref" >slidy</a>
+    <a href="/tags.html#HTML-ref" >HTML</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/03/03/rChartsslidy/#disqus_thread'>Comments</a>
+      <a href='/2014/03/14/htmltext/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-03-03 00:00:00 -0600">03 Mar 2014</abbr>
+        <abbr class="published" title="2014-03-14 00:00:00 -0500">14 Mar 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>
