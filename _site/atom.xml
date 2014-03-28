@@ -4,13 +4,72 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-03-14T14:46:49-05:00</updated>
+ <updated>2014-03-27T21:07:40-05:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Evolution of Code</title>
+   <link href="http://lebebr01.github.com/2014/03/27/evolvecode/"/>
+   <updated>2014-03-27T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.com/2014/03/27/evolvecode</id>
+   <content type="html">&lt;p&gt;Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.&lt;/p&gt;
+
+&lt;p&gt;Now back to my realization.  As I mentioned, I was scraping some data from &lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;CFB Data Warehouse&lt;/a&gt; for a project that I'm working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;  ##Identifying correct tables
+    tb &amp;lt;- vector(&quot;list&quot;, length(tableNodes))
+      for(i in 1:length(tableNodes)){
+        tb[[i]] &amp;lt;- readHTMLTable(tableNodes[[i]])
+      }
+
+  ##Tables that are the correct length
+    tabNum &amp;lt;- matrix(nrow=length(tableNodes), ncol=2)
+    tabNum[,1] &amp;lt;- sapply(tb, length)
+    tabNum[,2] &amp;lt;- 1:length(tableNodes)
+
+   Num &amp;lt;- subset(tabNum, tabNum[,1] == 7)[,2]
+
+  ##Selecting and combining tables
+if(length(Num) == 5){
+   tb1 &amp;lt;- tb[[Num[3]]]
+   tb1$Other &amp;lt;- 0
+   tb2 &amp;lt;- tb[[Num[5]]]
+   tb2$Other &amp;lt;- 1
+   tab &amp;lt;- rbind(tb1, tb2)
+ } else { 
+  if(length(Num) ==3){
+   tab &amp;lt;- tb[[Num[3]]]
+   tab$Other &amp;lt;- 1
+ } else {
+  tab &amp;lt;- matrix(NA, ncol= 8, nrow=1)  
+ }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This code was looped over many different pages and was run once for every page.  Essentially the code is complicated and inconsistent, but at the time 3 years ago the code ran and that was enough for me.  Extract the data from the website no matter how much code was needed to do the work.  This was back in an era when I was just becoming familiar with much or &lt;em&gt;R&lt;/em&gt;, the &lt;em&gt;XML&lt;/em&gt; package, and attempting to scrape data from a messy/complicated site.&lt;/p&gt;
+
+&lt;p&gt;My new code to extract the tables looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# extracting tables
+  tabs &amp;lt;- lapply(seq(3, length(Nodes), 1), function(x) 
+    readHTMLTable(Nodes[[x]], stringsAsFactors = FALSE))
+
+  # Combine tables
+  bowl &amp;lt;- do.call(&quot;rbind&quot;, tabs)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much cleaner, simpler, more consistent, and quite possibly quicker.  The ability to focus on speed, readability, and consistency is something that comes later after one becomes more comfortable with the language.  I have been focusing on this for awhile, but these stark differences and ease I was able to adapt my old code especially struck me this time.  I haven't decided if this evolution for me is &lt;em&gt;mastery&lt;/em&gt; or &lt;em&gt;expert&lt;/em&gt; status of the r language, but I now feel I have progressed to a point where I feel confident and am able to shift my focus from having code that works, to code that is now clean, consistent, and readable.&lt;/p&gt;
+
+&lt;p&gt;Has anyone else had similar epiphanies with their code?&lt;/p&gt;
+
+&lt;p&gt;Lastly, if you want to see the raw code, go to the github page: &lt;a href=&quot;https://github.com/lebebr01/cfbFootball&quot;&gt;https://github.com/lebebr01/cfbFootball&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Update to highlightHTML package</title>

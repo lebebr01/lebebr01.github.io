@@ -58,65 +58,60 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
+      <a href="/2014/03/27/evolvecode/" title="Evolution of Code" rel="bookmark">Evolution of Code</a>
     </h1>
     <div class="entry-content full-content">
-      <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
+      <p>Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.</p>
 
-<p>Up to now, my package only worked with tables, see my old post that talks about this if you are interested: <a href="http://educate-r.org/2013/11/01/CondFormatMarkdown/">highlight tables</a>.  My update adds a similar functionality to text itself by including span tags in the document.</p>
+<p>Now back to my realization.  As I mentioned, I was scraping some data from <a href="http://www.cfbdatawarehouse.com/">CFB Data Warehouse</a> for a project that I'm working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.</p>
 
-<p>The following code will install the package with the new feature from github:</p>
+<pre><code class="r">  ##Identifying correct tables
+    tb &lt;- vector("list", length(tableNodes))
+      for(i in 1:length(tableNodes)){
+        tb[[i]] &lt;- readHTMLTable(tableNodes[[i]])
+      }
 
-<pre><code class="r">library(devtools)
-install_github(repo = "highlightHTML", username = "lebebr01", ref = "testing")
+  ##Tables that are the correct length
+    tabNum &lt;- matrix(nrow=length(tableNodes), ncol=2)
+    tabNum[,1] &lt;- sapply(tb, length)
+    tabNum[,2] &lt;- 1:length(tableNodes)
+
+   Num &lt;- subset(tabNum, tabNum[,1] == 7)[,2]
+
+  ##Selecting and combining tables
+if(length(Num) == 5){
+   tb1 &lt;- tb[[Num[3]]]
+   tb1$Other &lt;- 0
+   tb2 &lt;- tb[[Num[5]]]
+   tb2$Other &lt;- 1
+   tab &lt;- rbind(tb1, tb2)
+ } else { 
+  if(length(Num) ==3){
+   tab &lt;- tb[[Num[3]]]
+   tab$Other &lt;- 1
+ } else {
+  tab &lt;- matrix(NA, ncol= 8, nrow=1)  
+ }
+ }
 </code></pre>
 
-<p>Once the package is installed, the new function is called <strong>highlightHTMLtext</strong>. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.</p>
+<p>This code was looped over many different pages and was run once for every page.  Essentially the code is complicated and inconsistent, but at the time 3 years ago the code ran and that was enough for me.  Extract the data from the website no matter how much code was needed to do the work.  This was back in an era when I was just becoming familiar with much or <em>R</em>, the <em>XML</em> package, and attempting to scrape data from a messy/complicated site.</p>
 
-<p>Here is an example using the HTML file that comes with the package and which can also be found in the help file.</p>
+<p>My new code to extract the tables looks like this:</p>
 
-<pre><code class="r">library(highlightHTML)
-file &lt;- system.file('examples', package = 'highlightHTML')
-file1 &lt;- paste(file, "bgtext.html", sep = "/")
+<pre><code class="r"># extracting tables
+  tabs &lt;- lapply(seq(3, length(Nodes), 1), function(x) 
+    readHTMLTable(Nodes[[x]], stringsAsFactors = FALSE))
 
-# Change background color and text color with CSS
-tags &lt;- c("#bgblack {background-color: black; color: white;}",
-  "#bgblue {background-color: #0000FF; color: white;}")
-
-# Post-process HTML file
-highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
-  tags = tags, browse = TRUE)
+  # Combine tables
+  bowl &lt;- do.call("rbind", tabs)
 </code></pre>
 
-<p>If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.</p>
+<p>Much cleaner, simpler, more consistent, and quite possibly quicker.  The ability to focus on speed, readability, and consistency is something that comes later after one becomes more comfortable with the language.  I have been focusing on this for awhile, but these stark differences and ease I was able to adapt my old code especially struck me this time.  I haven't decided if this evolution for me is <em>mastery</em> or <em>expert</em> status of the r language, but I now feel I have progressed to a point where I feel confident and am able to shift my focus from having code that works, to code that is now clean, consistent, and readable.</p>
 
-<p>My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: <a href="https://github.com/lebebr01/highlightHTML">report bugs</a>.</p>
+<p>Has anyone else had similar epiphanies with their code?</p>
 
-<hr />
-
-<h3>Before and After HTML</h3>
-
-<p>Here is what the body of the HTML file looks like before running the function:
-  <div>
-    <pre><code class='html'>&lt;body&gt;
-&lt;h1&gt;Test of Text&lt;/h1&gt;
-&lt;p&gt;Testing the ability to change the {#bgblue color} of the text.&lt;/p&gt;
-&lt;p&gt;Can also do {#bgblack multiple words of text}&lt;/p&gt;
-&lt;p&gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-  </div></p>
-
-<p>This is what the HTML document looks like after running the function:
-  <div>
-    <pre><code class='html'>&lt;body&gt;
-&lt;h1&gt;Test of Text&lt;/h1&gt;
-&lt;p&gt;Testing the ability to change the &lt;span id='bgblue'&gt; color&lt;/span&gt; of the text.&lt;/p&gt;
-&lt;p&gt;Can also do &lt;span id='bgblack'&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span id='bgblack'&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-  </div></p>
-
-<p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
+<p>Lastly, if you want to see the raw code, go to the github page: <a href="https://github.com/lebebr01/cfbFootball">https://github.com/lebebr01/cfbFootball</a>.</p>
 
     </div>
   <p class="alt-font tight">
@@ -124,19 +119,19 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#highlightHTML-ref" >highlightHTML</a>
+    <a href="/tags.html#code-ref" >code</a>
     
-    <a href="/tags.html#markdown-ref" >markdown</a>
+    <a href="/tags.html#XML-ref" >XML</a>
     
-    <a href="/tags.html#HTML-ref" >HTML</a>
+    <a href="/tags.html#evolution-ref" >evolution</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/03/14/htmltext/#disqus_thread'>Comments</a>
+      <a href='/2014/03/27/evolvecode/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-03-14 00:00:00 -0500">14 Mar 2014</abbr>
+        <abbr class="published" title="2014-03-27 00:00:00 -0500">27 Mar 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>
@@ -153,6 +148,8 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
     
   </span>
   <span class="next">
+    
+    <a href="/page13/" title="Next Page">Next &raquo;</a>
     
   </span>
 </div>
