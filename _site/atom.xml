@@ -4,13 +4,242 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-03-27T21:07:40-05:00</updated>
+ <updated>2014-04-02T22:59:29-05:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>AERA Preview</title>
+   <link href="http://lebebr01.github.com/2014/04/02/aerapreview/"/>
+   <updated>2014-04-02T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.com/2014/04/02/aerapreview</id>
+   <content type="html">&lt;p&gt;The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.&lt;/p&gt;
+
+&lt;p&gt;In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.&lt;/p&gt;
+
+&lt;p&gt;Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the &lt;em&gt;rChart&lt;/em&gt; package to get started.  Here is my r code to generate the initial chart:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
+h1 &amp;lt;- hPlot(x = &quot;fitSerCor2&quot;, y = &quot;avgt1e&quot;, group = &quot;missRE&quot;, data = intmean)
+h1$yAxis(title = list(text = &quot;Empirical Type I Error Rate&quot;), min = 0.00, max = 0.2, tickInterval = 0.05)
+h1$xAxis(title = list(text = &quot;Fitted Serial Correlation Structure&quot;),
+         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
+h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Miss RE&quot;))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As in one of my prior posts about &lt;em&gt;rCharts&lt;/em&gt; I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:&lt;/p&gt;
+
+&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+
+
+&lt;p&gt;
+ &lt;style&gt;
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 600px;
+    font-size: 200%;
+  }&lt;br/&gt;
+  &lt;/style&gt;&lt;/p&gt;
+
+&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+
+
+&lt;script type='text/javascript'&gt;
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ &quot;dom&quot;: &quot;chart1&quot;,
+&quot;width&quot;:            800,
+&quot;height&quot;:            400,
+&quot;credits&quot;: {
+ &quot;href&quot;: null,
+&quot;text&quot;: null 
+},
+&quot;exporting&quot;: {
+ &quot;enabled&quot;: false 
+},
+&quot;title&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;yAxis&quot;: [
+ {
+ &quot;title&quot;: {
+ &quot;text&quot;: &quot;Empirical Type I Error Rate&quot;,
+   style: {
+   fontWeight: 'bold',
+   fontSize: '20px'
+   }
+},
+labels: {
+  style: {
+   fontSize: '18px'
+  }
+ },
+&quot;min&quot;:              0,
+&quot;max&quot;:            0.2,
+&quot;tickInterval&quot;:           0.05 
+} 
+],
+&quot;series&quot;: [
+ {
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+0.0519
+],
+ [
+ &quot;AR1&quot;,
+0.0635
+],
+[
+ &quot;MA1&quot;,
+0.0639
+],
+[
+ &quot;MA2&quot;,
+0.0665
+], 
+[
+ &quot;ARMA&quot;,
+0.0656
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#e41a1c'
+                }); 
+            }
+        },
+&quot;color&quot;: &quot;#e41a1c&quot;,
+&quot;name&quot;: &quot;0&quot;,
+&quot;type&quot;: null,
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+0.1837
+],
+ [
+ &quot;AR1&quot;,
+0.0864
+],
+[
+ &quot;MA1&quot;,
+0.1155
+],
+[
+ &quot;MA2&quot;,
+0.0999
+], 
+[
+ &quot;ARMA&quot;,
+0.0896
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#377eb8'
+                }); 
+            }
+        },
+&quot;color&quot;: &quot;#377eb8&quot;,
+&quot;name&quot;: &quot;1&quot;,
+&quot;type&quot;: null,
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+} 
+],
+&quot;xAxis&quot;: [
+ {
+ &quot;title&quot;: {
+ &quot;text&quot;: &quot;Fitted Serial Correlation Structure&quot;,
+ style:{
+   fontWeight: 'bold',
+   fontSize: '20px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
+} 
+],
+&quot;subtitle&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;legend&quot;: {
+ &quot;verticalAlign&quot;: &quot;top&quot;,
+&quot;align&quot;: &quot;right&quot;,
+&quot;layout&quot;: &quot;vertical&quot;,
+symbolWidth: 40,
+&quot;title&quot;: {
+ &quot;text&quot;: &quot;Miss RE&quot; 
+} 
+},
+&quot;plotOptions&quot;: {
+ &quot;series&quot;: {
+ &quot;lineWidth&quot;:              4 
+} 
+},
+&quot;id&quot;: &quot;chart1&quot;,
+&quot;chart&quot;: {
+ &quot;renderTo&quot;: &quot;chart1&quot;,
+  zoomType: &quot;y&quot;,
+   &quot;style&quot;: {
+ fontSize: &quot;24px&quot;
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+} 
+});
+        });
+    })(jQuery);
+&lt;/script&gt;
+
+
+&lt;p&gt;If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Evolution of Code</title>

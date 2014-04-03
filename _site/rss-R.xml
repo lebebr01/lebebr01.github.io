@@ -7,6 +7,235 @@
 		<atom:link href="http://educate-r.org/feed.category.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>AERA Preview</title>
+				<description>&lt;p&gt;The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.&lt;/p&gt;
+
+&lt;p&gt;In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.&lt;/p&gt;
+
+&lt;p&gt;Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the &lt;em&gt;rChart&lt;/em&gt; package to get started.  Here is my r code to generate the initial chart:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
+h1 &amp;lt;- hPlot(x = &quot;fitSerCor2&quot;, y = &quot;avgt1e&quot;, group = &quot;missRE&quot;, data = intmean)
+h1$yAxis(title = list(text = &quot;Empirical Type I Error Rate&quot;), min = 0.00, max = 0.2, tickInterval = 0.05)
+h1$xAxis(title = list(text = &quot;Fitted Serial Correlation Structure&quot;),
+         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
+h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Miss RE&quot;))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As in one of my prior posts about &lt;em&gt;rCharts&lt;/em&gt; I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:&lt;/p&gt;
+
+&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+
+
+&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+
+
+&lt;p&gt;
+ &lt;style&gt;
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 600px;
+    font-size: 200%;
+  }&lt;br/&gt;
+  &lt;/style&gt;&lt;/p&gt;
+
+&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+
+
+&lt;script type='text/javascript'&gt;
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ &quot;dom&quot;: &quot;chart1&quot;,
+&quot;width&quot;:            800,
+&quot;height&quot;:            400,
+&quot;credits&quot;: {
+ &quot;href&quot;: null,
+&quot;text&quot;: null 
+},
+&quot;exporting&quot;: {
+ &quot;enabled&quot;: false 
+},
+&quot;title&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;yAxis&quot;: [
+ {
+ &quot;title&quot;: {
+ &quot;text&quot;: &quot;Empirical Type I Error Rate&quot;,
+   style: {
+   fontWeight: 'bold',
+   fontSize: '20px'
+   }
+},
+labels: {
+  style: {
+   fontSize: '18px'
+  }
+ },
+&quot;min&quot;:              0,
+&quot;max&quot;:            0.2,
+&quot;tickInterval&quot;:           0.05 
+} 
+],
+&quot;series&quot;: [
+ {
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+0.0519
+],
+ [
+ &quot;AR1&quot;,
+0.0635
+],
+[
+ &quot;MA1&quot;,
+0.0639
+],
+[
+ &quot;MA2&quot;,
+0.0665
+], 
+[
+ &quot;ARMA&quot;,
+0.0656
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#e41a1c'
+                }); 
+            }
+        },
+&quot;color&quot;: &quot;#e41a1c&quot;,
+&quot;name&quot;: &quot;0&quot;,
+&quot;type&quot;: null,
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+},
+{
+ &quot;data&quot;: [
+ [
+ &quot;Ind&quot;,
+0.1837
+],
+ [
+ &quot;AR1&quot;,
+0.0864
+],
+[
+ &quot;MA1&quot;,
+0.1155
+],
+[
+ &quot;MA2&quot;,
+0.0999
+], 
+[
+ &quot;ARMA&quot;,
+0.0896
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#377eb8'
+                }); 
+            }
+        },
+&quot;color&quot;: &quot;#377eb8&quot;,
+&quot;name&quot;: &quot;1&quot;,
+&quot;type&quot;: null,
+&quot;marker&quot;: {
+ &quot;radius&quot;:              6
+} 
+} 
+],
+&quot;xAxis&quot;: [
+ {
+ &quot;title&quot;: {
+ &quot;text&quot;: &quot;Fitted Serial Correlation Structure&quot;,
+ style:{
+   fontWeight: 'bold',
+   fontSize: '20px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
+} 
+],
+&quot;subtitle&quot;: {
+ &quot;text&quot;: null 
+},
+&quot;legend&quot;: {
+ &quot;verticalAlign&quot;: &quot;top&quot;,
+&quot;align&quot;: &quot;right&quot;,
+&quot;layout&quot;: &quot;vertical&quot;,
+symbolWidth: 40,
+&quot;title&quot;: {
+ &quot;text&quot;: &quot;Miss RE&quot; 
+} 
+},
+&quot;plotOptions&quot;: {
+ &quot;series&quot;: {
+ &quot;lineWidth&quot;:              4 
+} 
+},
+&quot;id&quot;: &quot;chart1&quot;,
+&quot;chart&quot;: {
+ &quot;renderTo&quot;: &quot;chart1&quot;,
+  zoomType: &quot;y&quot;,
+   &quot;style&quot;: {
+ fontSize: &quot;24px&quot;
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+} 
+});
+        });
+    })(jQuery);
+&lt;/script&gt;
+
+
+&lt;p&gt;If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.&lt;/p&gt;
+</description>
+				<pubDate>Wed, 02 Apr 2014 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2014/04/02/aerapreview/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/04/02/aerapreview/</guid>
+			</item>
+		
+			<item>
 				<title>Evolution of Code</title>
 				<description>&lt;p&gt;Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.&lt;/p&gt;
 
@@ -1483,53 +1712,6 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
 				<pubDate>Tue, 26 Nov 2013 00:00:00 -0600</pubDate>
 				<link>http://educate-r.org//2013/11/26/SPSStoR/</link>
 				<guid isPermaLink="true">http://educate-r.org//2013/11/26/SPSStoR/</guid>
-			</item>
-		
-			<item>
-				<title>My Course Slide Generation</title>
-				<description>&lt;p&gt;This past August I took an opportunity to step back into the University academic world as a &lt;a href=&quot;http://http://coehp.uark.edu/12216.php&quot;&gt;Visiting Assistant Professor&lt;/a&gt; at the &lt;a href=&quot;http://www.uark.edu&quot;&gt;University of Arkansas&lt;/a&gt;.  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.&lt;/p&gt;
-
-&lt;p&gt;However, there has been some growing pains, especially regarding creating my own slides for the courses I teach.  Although I am using the same books/curriculum used in previous semesters, I am making my own slides and adding my own pieces as I see fit.  In addition, I do not use powerpoint, which all of the existing slides are in.  Therefore, I am creating my own versions of the slides using a combination of &lt;a href=&quot;http://www.r-project.org/&quot;&gt;R&lt;/a&gt;, &lt;a href=&quot;http://yihui.name/knitr/&quot;&gt;knitr&lt;/a&gt;, &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;markdown&lt;/a&gt;, &lt;a href=&quot;http://johnmacfarlane.net/pandoc/&quot;&gt;pandoc&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/Talks/Tools/Slidy2/&quot;&gt;slidy&lt;/a&gt;, and &lt;a href=&quot;http://www.latex-project.org/&quot;&gt;LaTeX&lt;/a&gt;.  Below is my general process of making my slides and the slides I put online for students to have access to.&lt;/p&gt;
-
-&lt;h2&gt;Step 1 - Create Source File&lt;/h2&gt;
-
-&lt;p&gt;I start with a &lt;em&gt;Rmd&lt;/em&gt; file.  This allows me to embed R code into the source document.  This is particularly useful for me to include plots of distributions, graphically showing how ANOVA works, etc.  Once I am finished editing my &lt;em&gt;Rmd&lt;/em&gt;, if I am using &lt;a href=&quot;http://www.rstudio.com/&quot;&gt;Rstudio&lt;/a&gt; I just use the &lt;em&gt;Knit HTML&lt;/em&gt; button to automatically generate the markdown and HTML file for me.  Alternatively, the &lt;em&gt;knit&lt;/em&gt; command from the &lt;strong&gt;knitr&lt;/strong&gt; package will create the markdown file for you (but not the HTML file, although for me the HTML file is not needed in this step).  The defaults of the &lt;em&gt;knit&lt;/em&gt; command work fine for me.&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;knit(input = &amp;quot;/path/to/file.Rmd&amp;quot;, output = &amp;quot;/path/to/file.md&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;h2&gt;Step 2 - Create HTML Presentation&lt;/h2&gt;
-
-&lt;p&gt;Once we have the markdown file, I now use pandoc to create my HTML presentation.  There are a few ways to create HTML presentation slides, but I personally like slidy the best.  I like slidy because it easily fills the whole screen and also allows for content to go over the edges of the slide.  If content goes outside of the edges of a single slide, you can scroll to see the missing content.  I find this useful if I want to blow up an image or have two plots where I can show one then scroll to the second.  The pandoc command I use looks something like this:&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;h2&gt;Step 3 (Optional) - Edit CSS for HTML Presentation&lt;/h2&gt;
-
-&lt;p&gt;I use a custom CSS file to style my HTML presentation so it uses some of the official colors from the University of Arkansas.  For example, my header titles use the Arkansas red.  To use a custom CSS file, you just need to find the line that mentions CSS in the HTML file and change it to reflect your custom file.  The defaults look good, although perhaps slightly bland.&lt;/p&gt;
-
-&lt;h2&gt;Step 4 - Create pdf slides&lt;/h2&gt;
-
-&lt;p&gt;I then create a different set of slides using LaTeX that I post on the blackboard site for each of my courses.  Pandoc is how I get the &lt;em&gt;tex&lt;/em&gt; file to compile with LaTeX.  The command is very simple:&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s inputfile.md -o outfile.tex&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;Two things I change, I make sure the base text size is 12 pt.  I also make sure to use the &lt;em&gt;float&lt;/em&gt; package and change any figure positions from &lt;em&gt;htbp&lt;/em&gt; to &lt;em&gt;H&lt;/em&gt; which forces the figures to stay in position and not float around.  Then I compile the resulting &lt;em&gt;tex&lt;/em&gt; using Rstudio or from the command line with:&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pdflatex -interaction=nonstopmode -synctex=1 outfile.tex&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;In my opinion this creates great looking html presentations that are highly customizable.  One thing to note is that by default to get the slideshow, you need to be connected to the internet.  Both &lt;strong&gt;slidy&lt;/strong&gt; and &lt;strong&gt;mathjax&lt;/strong&gt; refer to javascript files that are on downloaded directly from the web.  You should be able to download these files, store them locally, and refer to the local versions.&lt;/p&gt;
-</description>
-				<pubDate>Mon, 18 Nov 2013 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2013/11/18/CourseSlidesProcess/</link>
-				<guid isPermaLink="true">http://educate-r.org//2013/11/18/CourseSlidesProcess/</guid>
 			</item>
 		
 	</channel>

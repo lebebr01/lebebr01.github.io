@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>AERA Preview</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -54,57 +54,45 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/04/02/aerapreview/" title="AERA Preview" rel="bookmark">AERA Preview</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.</p>
+   <!-- <h2>AERA Preview</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/Rmd/2014-04-02-aerapreview.Rmd" title="AERA Preview" rel="bookmark">AERA Preview</a>
+  </h1>
+  <div class="entry-content full-content">
+    The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.
 
-<p>In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.</p>
+In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.
 
-<p>Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the <em>rChart</em> package to get started.  Here is my r code to generate the initial chart:</p>
+Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the *rChart* package to get started.  Here is my r code to generate the initial chart:
 
-<pre><code class="r">library(rCharts)
-h1 &lt;- hPlot(x = "fitSerCor2", y = "avgt1e", group = "missRE", data = intmean)
+```{r chart, eval=FALSE, tidy=FALSE}
+library(rCharts)
+h1 <- hPlot(x = "fitSerCor2", y = "avgt1e", group = "missRE", data = intmean)
 h1$yAxis(title = list(text = "Empirical Type I Error Rate"), min = 0.00, max = 0.2, tickInterval = 0.05)
 h1$xAxis(title = list(text = "Fitted Serial Correlation Structure"),
          categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
 h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Miss RE"))
 h1$print('chart1', include_assets = TRUE, cdn = TRUE)
-</code></pre>
+```
 
-<p>As in one of my prior posts about <em>rCharts</em> I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:</p>
+As in one of my prior posts about *rCharts* I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:
 
 <script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
-
-
 <script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
-
-
 <script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
-
-
-<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script>
-
-
-<p>
+<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script> 
  <style>
   .rChart {
     display: block;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
-    width: 800px;
-    height: 600px;
+    width: 1000px;
+    height: 800px;
     font-size: 200%;
-  }<br/>
-  </style></p>
-
+  }  
+  </style>
 <div id = 'chart1' class = 'rChart highcharts'></div>
-
-
 <script type='text/javascript'>
     (function($){
         $(function () {
@@ -280,10 +268,11 @@ symbolWidth: 40,
     })(jQuery);
 </script>
 
+If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.
 
-<p>If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.</p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -296,33 +285,34 @@ symbolWidth: 40,
     <a href="/tags.html#AERA-ref" >AERA</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/04/02/aerapreview/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-04-02 00:00:00 -0500">02 Apr 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/blog.html" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page3/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title=""></abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/Rmd/2014-04-02-aerapreview.Rmd";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

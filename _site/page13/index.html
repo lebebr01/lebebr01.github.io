@@ -58,60 +58,230 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/03/27/evolvecode/" title="Evolution of Code" rel="bookmark">Evolution of Code</a>
+      <a href="/2014/04/02/aerapreview/" title="AERA Preview" rel="bookmark">AERA Preview</a>
     </h1>
     <div class="entry-content full-content">
-      <p>Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.</p>
+      <p>The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.</p>
 
-<p>Now back to my realization.  As I mentioned, I was scraping some data from <a href="http://www.cfbdatawarehouse.com/">CFB Data Warehouse</a> for a project that I'm working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.</p>
+<p>In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.</p>
 
-<pre><code class="r">  ##Identifying correct tables
-    tb &lt;- vector("list", length(tableNodes))
-      for(i in 1:length(tableNodes)){
-        tb[[i]] &lt;- readHTMLTable(tableNodes[[i]])
-      }
+<p>Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the <em>rChart</em> package to get started.  Here is my r code to generate the initial chart:</p>
 
-  ##Tables that are the correct length
-    tabNum &lt;- matrix(nrow=length(tableNodes), ncol=2)
-    tabNum[,1] &lt;- sapply(tb, length)
-    tabNum[,2] &lt;- 1:length(tableNodes)
-
-   Num &lt;- subset(tabNum, tabNum[,1] == 7)[,2]
-
-  ##Selecting and combining tables
-if(length(Num) == 5){
-   tb1 &lt;- tb[[Num[3]]]
-   tb1$Other &lt;- 0
-   tb2 &lt;- tb[[Num[5]]]
-   tb2$Other &lt;- 1
-   tab &lt;- rbind(tb1, tb2)
- } else { 
-  if(length(Num) ==3){
-   tab &lt;- tb[[Num[3]]]
-   tab$Other &lt;- 1
- } else {
-  tab &lt;- matrix(NA, ncol= 8, nrow=1)  
- }
- }
+<pre><code class="r">library(rCharts)
+h1 &lt;- hPlot(x = "fitSerCor2", y = "avgt1e", group = "missRE", data = intmean)
+h1$yAxis(title = list(text = "Empirical Type I Error Rate"), min = 0.00, max = 0.2, tickInterval = 0.05)
+h1$xAxis(title = list(text = "Fitted Serial Correlation Structure"),
+         categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
+h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Miss RE"))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 </code></pre>
 
-<p>This code was looped over many different pages and was run once for every page.  Essentially the code is complicated and inconsistent, but at the time 3 years ago the code ran and that was enough for me.  Extract the data from the website no matter how much code was needed to do the work.  This was back in an era when I was just becoming familiar with much or <em>R</em>, the <em>XML</em> package, and attempting to scrape data from a messy/complicated site.</p>
+<p>As in one of my prior posts about <em>rCharts</em> I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:</p>
 
-<p>My new code to extract the tables looks like this:</p>
+<script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
 
-<pre><code class="r"># extracting tables
-  tabs &lt;- lapply(seq(3, length(Nodes), 1), function(x) 
-    readHTMLTable(Nodes[[x]], stringsAsFactors = FALSE))
 
-  # Combine tables
-  bowl &lt;- do.call("rbind", tabs)
-</code></pre>
+<script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
 
-<p>Much cleaner, simpler, more consistent, and quite possibly quicker.  The ability to focus on speed, readability, and consistency is something that comes later after one becomes more comfortable with the language.  I have been focusing on this for awhile, but these stark differences and ease I was able to adapt my old code especially struck me this time.  I haven't decided if this evolution for me is <em>mastery</em> or <em>expert</em> status of the r language, but I now feel I have progressed to a point where I feel confident and am able to shift my focus from having code that works, to code that is now clean, consistent, and readable.</p>
 
-<p>Has anyone else had similar epiphanies with their code?</p>
+<script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
 
-<p>Lastly, if you want to see the raw code, go to the github page: <a href="https://github.com/lebebr01/cfbFootball">https://github.com/lebebr01/cfbFootball</a>.</p>
+
+<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script>
+
+
+<p>
+ <style>
+  .rChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 600px;
+    font-size: 200%;
+  }<br/>
+  </style></p>
+
+<div id = 'chart1' class = 'rChart highcharts'></div>
+
+
+<script type='text/javascript'>
+    (function($){
+        $(function () {
+            var chart = new Highcharts.Chart({
+ "dom": "chart1",
+"width":            800,
+"height":            400,
+"credits": {
+ "href": null,
+"text": null 
+},
+"exporting": {
+ "enabled": false 
+},
+"title": {
+ "text": null 
+},
+"yAxis": [
+ {
+ "title": {
+ "text": "Empirical Type I Error Rate",
+   style: {
+   fontWeight: 'bold',
+   fontSize: '20px'
+   }
+},
+labels: {
+  style: {
+   fontSize: '18px'
+  }
+ },
+"min":              0,
+"max":            0.2,
+"tickInterval":           0.05 
+} 
+],
+"series": [
+ {
+ "data": [
+ [
+ "Ind",
+0.0519
+],
+ [
+ "AR1",
+0.0635
+],
+[
+ "MA1",
+0.0639
+],
+[
+ "MA2",
+0.0665
+], 
+[
+ "ARMA",
+0.0656
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#e41a1c'
+                }); 
+            }
+        },
+"color": "#e41a1c",
+"name": "0",
+"type": null,
+"marker": {
+ "radius":              6
+} 
+},
+{
+ "data": [
+ [
+ "Ind",
+0.1837
+],
+ [
+ "AR1",
+0.0864
+],
+[
+ "MA1",
+0.1155
+],
+[
+ "MA2",
+0.0999
+], 
+[
+ "ARMA",
+0.0896
+],
+],
+events: {
+            mouseOver: function () {
+                this.update({
+                    color: 'black'
+                });                
+            },
+            mouseOut: function () {
+                this.update({
+                    color: '#377eb8'
+                }); 
+            }
+        },
+"color": "#377eb8",
+"name": "1",
+"type": null,
+"marker": {
+ "radius":              6
+} 
+} 
+],
+"xAxis": [
+ {
+ "title": {
+ "text": "Fitted Serial Correlation Structure",
+ style:{
+   fontWeight: 'bold',
+   fontSize: '20px'
+ }
+},
+labels: {
+ style: {
+  fontSize: '18px',
+  fontWeight: 'bold'
+ }
+},
+"categories": [ "Ind", "AR1", "MA1", "MA2", "ARMA" ] 
+} 
+],
+"subtitle": {
+ "text": null 
+},
+"legend": {
+ "verticalAlign": "top",
+"align": "right",
+"layout": "vertical",
+symbolWidth: 40,
+"title": {
+ "text": "Miss RE" 
+} 
+},
+"plotOptions": {
+ "series": {
+ "lineWidth":              4 
+} 
+},
+"id": "chart1",
+"chart": {
+ "renderTo": "chart1",
+  zoomType: "y",
+   "style": {
+ fontSize: "24px"
+ },
+ resetZoomButton: {
+  position: {
+   align: 'left'
+  }
+ }
+} 
+});
+        });
+    })(jQuery);
+</script>
+
+
+<p>If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.</p>
 
     </div>
   <p class="alt-font tight">
@@ -119,19 +289,19 @@ if(length(Num) == 5){
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#code-ref" >code</a>
+    <a href="/tags.html#rCharts-ref" >rCharts</a>
     
-    <a href="/tags.html#XML-ref" >XML</a>
+    <a href="/tags.html#Javascript-ref" >Javascript</a>
     
-    <a href="/tags.html#evolution-ref" >evolution</a>
+    <a href="/tags.html#AERA-ref" >AERA</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/03/27/evolvecode/#disqus_thread'>Comments</a>
+      <a href='/2014/04/02/aerapreview/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-03-27 00:00:00 -0500">27 Mar 2014</abbr>
+        <abbr class="published" title="2014-04-02 00:00:00 -0500">02 Apr 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>
@@ -148,6 +318,8 @@ if(length(Num) == 5){
     
   </span>
   <span class="next">
+    
+    <a href="/page14/" title="Next Page">Next &raquo;</a>
     
   </span>
 </div>
