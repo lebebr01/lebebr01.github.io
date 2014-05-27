@@ -9,7 +9,9 @@ group: menu
 - - - -
 
 ![floatright](images/twitProfileSmall.jpg)
-I am currently a Visiting Assistant Professor in the [Educational Statistics and Research Methods](http://edfd.uark.edu/) program at the [University of Arkansas](http://uark.edu) in Fayetteville, Arkansas.  I re-entered the world of academia after working for a year at Saint Paul Public Schools in Minnesota.  I am excited for this new transition and to develop my course materials for a few introductory statistics courses as well as more fully develop my teaching philosophy.
+I am about to transistion to a tenure track position in the [Educational Measurement and Statistics](http://www.education.uiowa.edu/pq/measstat) program at the [University of Iowa](http://www.uiowa.edu/).  This position is a bit unique as I will be working half time with the [Iowa Testing Program](https://itp.education.uiowa.edu/) and also half time as a faculty member.  I am excited to embark on this new adventure and move back closer to family and friends.
+
+I am wrapping up my position as Visiting Assistant Professor in the [Educational Statistics and Research Methods](http://edfd.uark.edu/) program at the [University of Arkansas](http://uark.edu) in Fayetteville, Arkansas.  Prior to this, I worked for a year at [Saint Paul Public Schools](http://www.spps.org) as an Assessment Specialist in the Research, Evaluation, and Assessment department.
 
 I recently graduated from the [Quantitative Methods in Education](http://www.cehd.umn.edu/EdPsych/programs/QME/) program at the University of Minnesota in February 2013.  While there I specialized in applied statistics and became interested in longitudinal modeling and computational methods.  I also enjoy computing in general and have become proficient in numerous statistical programming languages, especially *R*.  
 

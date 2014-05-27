@@ -58,230 +58,42 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/04/02/aerapreview/" title="AERA Preview" rel="bookmark">AERA Preview</a>
+      <a href="/2014/05/27/rguirevisit/" title="R gui Revisited" rel="bookmark">R gui Revisited</a>
     </h1>
     <div class="entry-content full-content">
-      <p>The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.</p>
+      <p>A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (<a href="http://educate-r.org/2014/02/03/Rgui/">original post</a>).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.</p>
 
-<p>In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.</p>
+<h4>Things that went well</h4>
 
-<p>Here is a sneak peak of some of the results from my paper in the form of an interactive chart using the <em>rChart</em> package to get started.  Here is my r code to generate the initial chart:</p>
+<hr />
 
-<pre><code class="r">library(rCharts)
-h1 &lt;- hPlot(x = "fitSerCor2", y = "avgt1e", group = "missRE", data = intmean)
-h1$yAxis(title = list(text = "Empirical Type I Error Rate"), min = 0.00, max = 0.2, tickInterval = 0.05)
-h1$xAxis(title = list(text = "Fitted Serial Correlation Structure"),
-         categories = c("Ind", "AR1", "MA1", "MA2", "ARMA"))
-h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Miss RE"))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
-</code></pre>
+<p>Many students by the end were starting to understand the power of R (even through a gui structure).  Most were able to create new variables, run statistical analyses, produce basic graphs or figures, and even understand a few basic commands. They also enjoyed that the language and program were free and they could bring their laptops to class when we were going to talk about doing something new in R.</p>
 
-<p>As in one of my prior posts about <em>rCharts</em> I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:</p>
+<p>I also did not hear any stories of a gui system crashing (which was one complaint of <em>Deducer</em> in the comments of my last post).  I had students using either <em>Deducer</em> or <em>Rcmdr</em>, but whenever possible steered them toward <em>Deducer</em> as it is a bit more user friendly (in my opinion) and uses <em>ggplot2</em> by default for graphics.  Although <em>Deducer</em> did crash on me once while demonstrating something during class, I did not hear any students complain about it.</p>
 
-<script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
+<p>During the last two weeks of the course when more assignments surrounding basic inferential methods were due, students were becoming much more confident and better able to navigate the R gui menus.  I do also think that the students did appreciate the simpleness of the R output, only giving you what you ask for (as compared to SPSS that gives you extremely more than you ask for). One part of any gui system is to figure out the menu structure and understand the basic language of the menu.  Once I was able to point students to the correct menus, give them correct names for statistical procedures, and also point out specific R terminology they were much more comfortable doing things on their own (and even on occasion trying new things on their own).</p>
 
+<h4>Things that went poorly</h4>
 
-<script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
+<hr />
 
+<p>Using both <em>Deducer</em> and <em>Rcmdr</em> in the class.  I did not want to do this initially, but was forced to do it as I was unsure initially why some students were getting an error (it is based on the Java version installed).  I should have spent more time trying to transition students to <em>Deducer</em> after figuring out the error, however did not want to have them learn a new system after starting to learn <em>Rcmdr</em>.</p>
 
-<script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
+<p>Another sticky spot was that I did not have students learn <em>Markdown</em>, therefore students were copying and pasting output into Word. If anyone has tried this in the past, it usually does not format the best.  In the future (definitely for a PhD level course) I would have students learn <em>Markdown</em> as it would likely not take more than an hour.</p>
 
+<p>Students using <em>Rcmdr</em> had difficulty created dichotomous variables from a continuous variable.  With <em>Rcmdr</em>, one needs to know some basic R commands (like <em>ifelse</em>) in order to create dichotomous variables.  This is not something that I spent much time going over in class and was a definite stumbling block for many students.</p>
 
-<script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js></script>
+<p>An unfortunate aspect of any course where students need to learn software (or just any type of material in general) is that some students do not feel the software is something they are going to use down the road.  As a result, a handful of students seemed to be a bit more obstinate regarding the use of R (and my guess would have been a similar reaction to using SPSS).</p>
 
+<p>Lastly, I did not have assignments that focused specifically on learning R.  If I ever teach a course of this level again (which may not occur at my new job at the University of Iowa) I would definitely have more regular small assignments to accomplish more data manipulation tasks, such as creating a new variable, turn a variable into a factor, etc.</p>
 
-<p>
- <style>
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    height: 600px;
-    font-size: 200%;
-  }<br/>
-  </style></p>
+<h4>Summary</h4>
 
-<div id = 'chart1' class = 'rChart highcharts'></div>
+<hr />
 
+<p>In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.</p>
 
-<script type='text/javascript'>
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- "dom": "chart1",
-"width":            800,
-"height":            400,
-"credits": {
- "href": null,
-"text": null 
-},
-"exporting": {
- "enabled": false 
-},
-"title": {
- "text": null 
-},
-"yAxis": [
- {
- "title": {
- "text": "Empirical Type I Error Rate",
-   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
-   }
-},
-labels: {
-  style: {
-   fontSize: '18px'
-  }
- },
-"min":              0,
-"max":            0.2,
-"tickInterval":           0.05 
-} 
-],
-"series": [
- {
- "data": [
- [
- "Ind",
-0.0519
-],
- [
- "AR1",
-0.0635
-],
-[
- "MA1",
-0.0639
-],
-[
- "MA2",
-0.0665
-], 
-[
- "ARMA",
-0.0656
-],
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#e41a1c'
-                }); 
-            }
-        },
-"color": "#e41a1c",
-"name": "0",
-"type": null,
-"marker": {
- "radius":              6
-} 
-},
-{
- "data": [
- [
- "Ind",
-0.1837
-],
- [
- "AR1",
-0.0864
-],
-[
- "MA1",
-0.1155
-],
-[
- "MA2",
-0.0999
-], 
-[
- "ARMA",
-0.0896
-],
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: 'black'
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: '#377eb8'
-                }); 
-            }
-        },
-"color": "#377eb8",
-"name": "1",
-"type": null,
-"marker": {
- "radius":              6
-} 
-} 
-],
-"xAxis": [
- {
- "title": {
- "text": "Fitted Serial Correlation Structure",
- style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
- }
-},
-labels: {
- style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
- }
-},
-"categories": [ "Ind", "AR1", "MA1", "MA2", "ARMA" ] 
-} 
-],
-"subtitle": {
- "text": null 
-},
-"legend": {
- "verticalAlign": "top",
-"align": "right",
-"layout": "vertical",
-symbolWidth: 40,
-"title": {
- "text": "Miss RE" 
-} 
-},
-"plotOptions": {
- "series": {
- "lineWidth":              4 
-} 
-},
-"id": "chart1",
-"chart": {
- "renderTo": "chart1",
-  zoomType: "y",
-   "style": {
- fontSize: "24px"
- },
- resetZoomButton: {
-  position: {
-   align: 'left'
-  }
- }
-} 
-});
-        });
-    })(jQuery);
-</script>
-
-
-<p>If anyone is attending AERA this year and wants to listen to my presentation as well as others dealing with Methodological Considerations in Modeling Latent Growth (the title of the session) stop by the Convention Center on Sunday, April 6th from 4:05 to 5:35 pm in room 117.  Even if you do not want to hear about modeling latent growth, but would rather talk about r, perhaps we can meetup somewhere else.</p>
+<p>With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I'm imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use <em>Deducer</em>.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).</p>
 
     </div>
   <p class="alt-font tight">
@@ -289,19 +101,15 @@ symbolWidth: 40,
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#rCharts-ref" >rCharts</a>
-    
-    <a href="/tags.html#Javascript-ref" >Javascript</a>
-    
-    <a href="/tags.html#AERA-ref" >AERA</a>
+    <a href="/tags.html#gui-ref" >gui</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/04/02/aerapreview/#disqus_thread'>Comments</a>
+      <a href='/2014/05/27/rguirevisit/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-04-02 00:00:00 -0500">02 Apr 2014</abbr>
+        <abbr class="published" title="2014-05-27 00:00:00 -0500">27 May 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>

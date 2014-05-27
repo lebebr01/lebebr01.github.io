@@ -7,6 +7,47 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>R gui Revisited</title>
+				<description>&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui/&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
+
+&lt;h4&gt;Things that went well&lt;/h4&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Many students by the end were starting to understand the power of R (even through a gui structure).  Most were able to create new variables, run statistical analyses, produce basic graphs or figures, and even understand a few basic commands. They also enjoyed that the language and program were free and they could bring their laptops to class when we were going to talk about doing something new in R.&lt;/p&gt;
+
+&lt;p&gt;I also did not hear any stories of a gui system crashing (which was one complaint of &lt;em&gt;Deducer&lt;/em&gt; in the comments of my last post).  I had students using either &lt;em&gt;Deducer&lt;/em&gt; or &lt;em&gt;Rcmdr&lt;/em&gt;, but whenever possible steered them toward &lt;em&gt;Deducer&lt;/em&gt; as it is a bit more user friendly (in my opinion) and uses &lt;em&gt;ggplot2&lt;/em&gt; by default for graphics.  Although &lt;em&gt;Deducer&lt;/em&gt; did crash on me once while demonstrating something during class, I did not hear any students complain about it.&lt;/p&gt;
+
+&lt;p&gt;During the last two weeks of the course when more assignments surrounding basic inferential methods were due, students were becoming much more confident and better able to navigate the R gui menus.  I do also think that the students did appreciate the simpleness of the R output, only giving you what you ask for (as compared to SPSS that gives you extremely more than you ask for). One part of any gui system is to figure out the menu structure and understand the basic language of the menu.  Once I was able to point students to the correct menus, give them correct names for statistical procedures, and also point out specific R terminology they were much more comfortable doing things on their own (and even on occasion trying new things on their own).&lt;/p&gt;
+
+&lt;h4&gt;Things that went poorly&lt;/h4&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Using both &lt;em&gt;Deducer&lt;/em&gt; and &lt;em&gt;Rcmdr&lt;/em&gt; in the class.  I did not want to do this initially, but was forced to do it as I was unsure initially why some students were getting an error (it is based on the Java version installed).  I should have spent more time trying to transition students to &lt;em&gt;Deducer&lt;/em&gt; after figuring out the error, however did not want to have them learn a new system after starting to learn &lt;em&gt;Rcmdr&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another sticky spot was that I did not have students learn &lt;em&gt;Markdown&lt;/em&gt;, therefore students were copying and pasting output into Word. If anyone has tried this in the past, it usually does not format the best.  In the future (definitely for a PhD level course) I would have students learn &lt;em&gt;Markdown&lt;/em&gt; as it would likely not take more than an hour.&lt;/p&gt;
+
+&lt;p&gt;Students using &lt;em&gt;Rcmdr&lt;/em&gt; had difficulty created dichotomous variables from a continuous variable.  With &lt;em&gt;Rcmdr&lt;/em&gt;, one needs to know some basic R commands (like &lt;em&gt;ifelse&lt;/em&gt;) in order to create dichotomous variables.  This is not something that I spent much time going over in class and was a definite stumbling block for many students.&lt;/p&gt;
+
+&lt;p&gt;An unfortunate aspect of any course where students need to learn software (or just any type of material in general) is that some students do not feel the software is something they are going to use down the road.  As a result, a handful of students seemed to be a bit more obstinate regarding the use of R (and my guess would have been a similar reaction to using SPSS).&lt;/p&gt;
+
+&lt;p&gt;Lastly, I did not have assignments that focused specifically on learning R.  If I ever teach a course of this level again (which may not occur at my new job at the University of Iowa) I would definitely have more regular small assignments to accomplish more data manipulation tasks, such as creating a new variable, turn a variable into a factor, etc.&lt;/p&gt;
+
+&lt;h4&gt;Summary&lt;/h4&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.&lt;/p&gt;
+
+&lt;p&gt;With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I'm imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use &lt;em&gt;Deducer&lt;/em&gt;.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).&lt;/p&gt;
+</description>
+				<pubDate>Tue, 27 May 2014 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2014/05/27/rguirevisit/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/05/27/rguirevisit/</guid>
+			</item>
+		
+			<item>
 				<title>AERA Preview</title>
 				<description>&lt;p&gt;The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.&lt;/p&gt;
 
@@ -1634,84 +1675,6 @@ uniqdat
 				<pubDate>Mon, 30 Dec 2013 00:00:00 -0600</pubDate>
 				<link>http://educate-r.org//2013/12/30/guessCorr/</link>
 				<guid isPermaLink="true">http://educate-r.org//2013/12/30/guessCorr/</guid>
-			</item>
-		
-			<item>
-				<title>SPSS to R&#58; An R package to convert SPSS syntax</title>
-				<description>&lt;p&gt;My first statistical software package I used as an undergrad was SPSS.  I was fortunate during my senior year at &lt;a href=&quot;http://www.luther.edu&quot;&gt;Luther College&lt;/a&gt; to be initially introduced to &lt;a href=&quot;http://r-project.org&quot;&gt;R&lt;/a&gt;.  I did not realize it at the time (except for the pretty graphics) that this was the start of something big for me.  Fast forward a year to graduate school at the University of Minnesota and the majority of my program was again using SPSS.  Under the tutelage of &lt;a href=&quot;http://www.cehd.umn.edu/edpsych/people/Faculty/Zieffler.html&quot;&gt;Andy&lt;/a&gt; in my first graduate statistics course I started to do analyses in both R and SPSS.  After that I started to do all my analyses in R.  Fast forward five years this time to my first full-time job after graduate school at &lt;a href=&quot;http://www.spps.org&quot;&gt;Saint Paul Public Schools&lt;/a&gt; and again everyone was using SPSS.  Fortunately in my year there I was able to significantly push them toward using R more and more.&lt;/p&gt;
-
-&lt;p&gt;This long introduction motivates the following package I started writing mostly just to play with regular expressions, but kept playing and came up with a package with many routines.  The package I came up with is called &lt;em&gt;SPSStoR&lt;/em&gt; which converts SPSS syntax into R syntax.  Using regular expressions to parse the SPSS syntax to figure out which routine is being run then prints out the R syntax to do the same analysis done by the SPSS syntax.&lt;/p&gt;
-
-&lt;p&gt;As you can imagine, the SPSS language has many routines and this is not all encompassing, however it provides many basic commands such as:
-* Aggregate
-* Correlations
-* Crosstab
-* Sort Cases
-* Descriptives
-* One sample t-test
-* Independent sample t-test
-* Get for sav files (SPSS data files)
-* Master SPSStoR function
-* Graphics
-* Frequencies&lt;/p&gt;
-
-&lt;h1&gt;Examples&lt;/h1&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;You can install the package directly from my github page using the devtools library:&lt;/p&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(devtools)
-install_github(&amp;quot;SPSStoR&amp;quot;, &amp;quot;lebebr01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(SPSStoR)
-file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &amp;quot;/getDescExamp.txt&amp;quot;, sep = '')
-spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;h3&gt;Output:&lt;/h3&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
-[2] &amp;quot;library(foreign)&amp;quot;
-[3] &amp;quot;x &amp;lt;- read.spss('/data/hubtemp.sav', to.data.frame = TRUE)&amp;quot;
-[4] &amp;quot;x &amp;lt;- x[order(DIVISION, STORE, -AGE), ]&amp;quot;
-[5] &amp;quot;library(SPSStoR)&amp;quot;
-[6] &amp;quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is another example doing a one-sample t-test:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &amp;quot;/ttestOneSampExamp.txt&amp;quot;, sep = '')
-spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;h3&gt;Output:&lt;/h3&gt;
-
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
-[2] &amp;quot;with(x, t.test(brake, mu = 322, conf.level = .90)&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;h1&gt;Summary&lt;/h1&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Although some working R knowledge is needed to run this package, such as knowledge of installing packages and what an object is, this package may be useful to those trying to figure out a similar command in R.  Over time I hope to slowly add support for more SPSS routines, see my github page for those that I am currently prioritizing.  Let me know via the issues on github if you'd like support for a specific routine or run into problems.&lt;/p&gt;
-
-&lt;p&gt;The package home can be found on github: &lt;a href=&quot;https://github.com/lebebr01/SPSStoR&quot;&gt;SPSStoR&lt;/a&gt;
-&lt;br&gt;
-&lt;br&gt;&lt;/p&gt;
-</description>
-				<pubDate>Tue, 26 Nov 2013 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2013/11/26/SPSStoR/</link>
-				<guid isPermaLink="true">http://educate-r.org//2013/11/26/SPSStoR/</guid>
 			</item>
 		
 	</channel>
