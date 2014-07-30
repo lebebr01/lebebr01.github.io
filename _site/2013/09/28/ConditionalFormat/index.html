@@ -73,47 +73,40 @@
 
 <p>Here is a small minimal example.  In the example, suppose we want to calculate the average Melanoma thickness by the status of the person (i.e. did they die from Melanoma, still alive, or died from other causes).</p>
 
-<p>  <div>
-    <pre><code class='r'>library(MASS)   # Load for Melanoma Data
+<div class="highlight"><pre><code class="language-r" data-lang="r">library(MASS)   # Load for Melanoma Data
 library(Hmisc)  # Load for latex function
-library(data.table)  # Used for aggregating</p>
+library(data.table)  # Used for aggregating
 
-<p>mela &lt;- data.table(Melanoma)</p>
+mela &lt;- data.table(Melanoma)
 
-<h1>Aggregating</h1>
+# Aggregating
+mela.status &lt;- mela[, list(avgThick = mean(thickness)), by = status]
 
-<p>mela.status &lt;- mela[, list(avgThick = mean(thickness)), by = status]</p>
-
-<h1>Conditional formatting</h1>
-
-<p>cellTex &lt;- matrix(rep(&quot;&quot;, NROW(mela.status) * NCOL(mela.status)),
+# Conditional formatting
+cellTex &lt;- matrix(rep(&quot;&quot;, NROW(mela.status) * NCOL(mela.status)),
                   nrow = NROW(mela.status))
 cellTex[,1] &lt;- ifelse(mela.status$avgThick &gt; 4, &quot;cellcolor{red}&quot;,
                   ifelse(mela.status$avgThick &lt; 3, &quot;cellcolor{green}&quot;,
-                         &quot;&quot;))</p>
+                         &quot;&quot;))
 
-<h1>Shading alternate rows</h1>
-
-<p>my.rownamesTexCmd &lt;- rep(&quot;&quot;, nrow(mela.status))
+# Shading alternate rows
+my.rownamesTexCmd &lt;- rep(&quot;&quot;, nrow(mela.status))
 index &lt;- (1:nrow(mela.status)/2) == (1:nrow(mela.status)%/%2)
-my.rownamesTexCmd[index] &lt;- &quot;shadeRow&quot;</p>
+my.rownamesTexCmd[index] &lt;- &quot;shadeRow&quot;
 
-<h1>Creating the .tex file</h1>
-
-<h1>Note, this is currently printed in R console</h1>
-
-<p>latex(round(mela.status, 2), title = '', file = '', booktabs = TRUE,
+# Creating the .tex file
+# Note, this is currently printed in R console
+latex(round(mela.status, 2), title = &#39;&#39;, file = &#39;&#39;, booktabs = TRUE, 
       rownamesTexCmd = my.rownamesTexCmd, cellTexCmds = cellTex,
-      rowname = NULL)</code></pre>
-  </div></p>
+      rowname = NULL)</code></pre></div>
+
 
 <p>Below is the resulting <em>LaTeX</em> code that is created from the <em>latex</em> function. The conditional formatting is the <em>\cellcolor{}</em> commands.  You need to ensure that the color is defined, either as a default color or one you define in the preamble.  Secondly, the \shadeRow command will shade that row and you need to ensure you have the first line below in your preamble.</p>
 
-<p>  <div>
-    <pre><code class='latex'>% Including a similar command in your preamble to define row shading.
+<div class="highlight"><pre><code class="language-latex" data-lang="latex">% Including a similar command in your preamble to define row shading.
 \providecommand{\shadeRow}{\rowcolor[rgb]{0, 0.99, 0}}
-%
-%
+% 
+% 
 \begin{table}[!tbp]
 \begin{center}
 \begin{tabular}{rr}
@@ -126,8 +119,10 @@ my.rownamesTexCmd[index] &lt;- &quot;shadeRow&quot;</p>
 \bottomrule
 \end{tabular}
 \end{center}
-\end{table}</code></pre>
-  </div></p>
+\end{table}</code></pre></div>
+
+
+
 
     <div class="clear"></div>
   </div>

@@ -83,43 +83,40 @@
 
 <p>You can install the package directly from my github page using the devtools library:</p>
 
-<p>  <div>
-    <pre><code class='r'>library(devtools)
-install_github(&quot;SPSStoR&quot;, &quot;lebebr01&quot;)</code></pre>
-  </div></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">library(devtools)
+install_github(&quot;SPSStoR&quot;, &quot;lebebr01&quot;)</code></pre></div>
 
-<p>Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:
-  <div>
-    <pre><code class='r'>library(SPSStoR)
-file &lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &quot;/getDescExamp.txt&quot;, sep = '')
-spss_to_r(file)</code></pre>
-  </div></p>
+
+<p>Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">library(SPSStoR)
+file &lt;- paste(system.file(&#39;SPSSsyntax&#39;, package = &#39;SPSStoR&#39;), 
+              &quot;/getDescExamp.txt&quot;, sep = &#39;&#39;)
+spss_to_r(file)</code></pre></div>
+
 
 <h3>Output:</h3>
 
-<p>  <div>
-    <pre><code class='r'>[1] &quot;# x is the name of your data frame&quot;
+<div class="highlight"><pre><code class="language-r" data-lang="r">[1] &quot;# x is the name of your data frame&quot;
 [2] &quot;library(foreign)&quot;
-[3] &quot;x &lt;- read.spss('/data/hubtemp.sav', to.data.frame = TRUE)&quot;
+[3] &quot;x &lt;- read.spss(&#39;/data/hubtemp.sav&#39;, to.data.frame = TRUE)&quot;
 [4] &quot;x &lt;- x[order(DIVISION, STORE, -AGE), ]&quot;
 [5] &quot;library(SPSStoR)&quot;
-[6] &quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&quot;</code></pre>
-  </div></p>
+[6] &quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&quot;</code></pre></div>
 
-<p>Here is another example doing a one-sample t-test:
-  <div>
-    <pre><code class='r'>file &lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &quot;/ttestOneSampExamp.txt&quot;, sep = '')
-spss_to_r(file)</code></pre>
-  </div></p>
+
+<p>Here is another example doing a one-sample t-test:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">file &lt;- paste(system.file(&#39;SPSSsyntax&#39;, package = &#39;SPSStoR&#39;), 
+              &quot;/ttestOneSampExamp.txt&quot;, sep = &#39;&#39;)
+spss_to_r(file)</code></pre></div>
+
 
 <h3>Output:</h3>
 
-<p>  <div>
-    <pre><code class='r'>[1] &quot;# x is the name of your data frame&quot;
-[2] &quot;with(x, t.test(brake, mu = 322, conf.level = .90)&quot;</code></pre>
-  </div></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">[1] &quot;# x is the name of your data frame&quot;
+[2] &quot;with(x, t.test(brake, mu = 322, conf.level = .90)&quot;</code></pre></div>
+
 
 <h1>Summary</h1>
 

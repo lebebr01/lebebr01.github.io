@@ -96,8 +96,7 @@ My next step is to develop a master function to wrap these other functions so on
 
 ### Before and After HTML
 Here is what the body of the HTML file looks like before running the function:
-  <div>
-    <pre><code class='html'>&lt;body&gt;
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;body&gt;
 &lt;h1&gt;Test of Text&lt;/h1&gt;
 
 &lt;p&gt;Testing the ability to change the {#bgblue color} of the text.&lt;/p&gt;
@@ -105,20 +104,15 @@ Here is what the body of the HTML file looks like before running the function:
 &lt;p&gt;Can also do {#bgblack multiple words of text}&lt;/p&gt;
 
 &lt;p&gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-  </div>
-
+&lt;/body&gt;</code></pre></div>
 
 This is what the HTML document looks like after running the function:
-  <div>
-    <pre><code class='html'>&lt;body&gt;
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;body&gt;
 &lt;h1&gt;Test of Text&lt;/h1&gt;
-&lt;p&gt;Testing the ability to change the &lt;span id='bgblue'&gt; color&lt;/span&gt; of the text.&lt;/p&gt;
-&lt;p&gt;Can also do &lt;span id='bgblack'&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span id='bgblack'&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-  </div>
-
+&lt;p&gt;Testing the ability to change the &lt;span id=&#39;bgblue&#39;&gt; color&lt;/span&gt; of the text.&lt;/p&gt;
+&lt;p&gt;Can also do &lt;span id=&#39;bgblack&#39;&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span id=&#39;bgblack&#39;&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;</code></pre></div>
 
 The braces identify the location of the span tags.
 

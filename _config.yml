@@ -1,5 +1,5 @@
 paginate: 1
-pygments: false
+highlighter: null
 auto: false
 destination: _site
 permalink: /:year/:month/:day/:title/

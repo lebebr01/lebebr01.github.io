@@ -58,42 +58,61 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/05/27/rguirevisit/" title="R gui Revisited" rel="bookmark">R gui Revisited</a>
+      <a href="/2014/07/30/highlightHTML/" title="Format Markdown Documents in R" rel="bookmark">Format Markdown Documents in R</a>
     </h1>
     <div class="entry-content full-content">
-      <p>A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (<a href="http://educate-r.org/2014/02/03/Rgui/">original post</a>).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.</p>
+      <p>Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.</p>
 
-<h4>Things that went well</h4>
+<p>The <strong><a href="https://github.com/lebebr01/highlightHTML">highlightHTML</a></strong> package aims to develop a flexible approach to add formatting to an html document by injecting CSS into the file.  To do this, tags are created within the markdown document telling the R routine where to look for these tags.  If you are familiar with the Twitterverse, this package will be equally comfortable.  The tags take the form of the hashtags on Twitter.  As an example, #bgblue, would be a command to change the background to blue.</p>
 
-<hr />
+<p>The next thing needed by the package is to tell how much of the word, sentence, or header that should be affected by the tag.  To do this, add braces before the tag and include all the content you want to be affected by the tag.  For example, {#bggold this example will have a blue background}.</p>
 
-<p>Many students by the end were starting to understand the power of R (even through a gui structure).  Most were able to create new variables, run statistical analyses, produce basic graphs or figures, and even understand a few basic commands. They also enjoyed that the language and program were free and they could bring their laptops to class when we were going to talk about doing something new in R.</p>
+<p>Once any tags you want to include are in the markdown document, then the document can be converted into a html file using programs such as <em>knitr</em>, <em>pandoc</em>, the RStudio "knit HTML" button (or any others).  Once the resulting html file is compiled, then run the html file through the <strong>highlightHTML</strong> package and the html file is searched for the tags, the tags are changed to CSS ids, and by default the CSS tags will be inserted automatically back into the document.</p>
 
-<p>I also did not hear any stories of a gui system crashing (which was one complaint of <em>Deducer</em> in the comments of my last post).  I had students using either <em>Deducer</em> or <em>Rcmdr</em>, but whenever possible steered them toward <em>Deducer</em> as it is a bit more user friendly (in my opinion) and uses <em>ggplot2</em> by default for graphics.  Although <em>Deducer</em> did crash on me once while demonstrating something during class, I did not hear any students complain about it.</p>
-
-<p>During the last two weeks of the course when more assignments surrounding basic inferential methods were due, students were becoming much more confident and better able to navigate the R gui menus.  I do also think that the students did appreciate the simpleness of the R output, only giving you what you ask for (as compared to SPSS that gives you extremely more than you ask for). One part of any gui system is to figure out the menu structure and understand the basic language of the menu.  Once I was able to point students to the correct menus, give them correct names for statistical procedures, and also point out specific R terminology they were much more comfortable doing things on their own (and even on occasion trying new things on their own).</p>
-
-<h4>Things that went poorly</h4>
+<h3>Minimal Example</h3>
 
 <hr />
 
-<p>Using both <em>Deducer</em> and <em>Rcmdr</em> in the class.  I did not want to do this initially, but was forced to do it as I was unsure initially why some students were getting an error (it is based on the Java version installed).  I should have spent more time trying to transition students to <em>Deducer</em> after figuring out the error, however did not want to have them learn a new system after starting to learn <em>Rcmdr</em>.</p>
+<p>A markdown document that looks like the following:</p>
 
-<p>Another sticky spot was that I did not have students learn <em>Markdown</em>, therefore students were copying and pasting output into Word. If anyone has tried this in the past, it usually does not format the best.  In the future (definitely for a PhD level course) I would have students learn <em>Markdown</em> as it would likely not take more than an hour.</p>
+<div class="highlight"><pre><code class="language-markdown" data-lang="markdown"># Test of {#colgold highlightHTML} package
 
-<p>Students using <em>Rcmdr</em> had difficulty created dichotomous variables from a continuous variable.  With <em>Rcmdr</em>, one needs to know some basic R commands (like <em>ifelse</em>) in order to create dichotomous variables.  This is not something that I spent much time going over in class and was a definite stumbling block for many students.</p>
+Can highlight {#bgblack multiple words}.
 
-<p>An unfortunate aspect of any course where students need to learn software (or just any type of material in general) is that some students do not feel the software is something they are going to use down the road.  As a result, a handful of students seemed to be a bit more obstinate regarding the use of R (and my guess would have been a similar reaction to using SPSS).</p>
+Even tables:
 
-<p>Lastly, I did not have assignments that focused specifically on learning R.  If I ever teach a course of this level again (which may not occur at my new job at the University of Iowa) I would definitely have more regular small assignments to accomplish more data manipulation tasks, such as creating a new variable, turn a variable into a factor, etc.</p>
+| Color Name | Number     |  
+|------------|------------|  
+| Blue       | 5  #bgblue |  
+| Green      | 35         |  
+| Orange     | 100        |  
+| Red        | 200 #bgred |</code></pre></div>
 
-<h4>Summary</h4>
+
+<p>You would then convert the markdown above into a html file (I hit the knit HTML button in RStudio for this file), then run the following commands in R (assuming the highlightHTML package is not installed):</p>
+
+<pre><code class="r">library(devtools)
+install_github(repo = "highlightHTML", username = "lebebr01")
+library(highlightHTML)
+
+tags &lt;- c("#bgred {background-color: red;}", "#bgblue {background-color: blue;}",
+          "#colgold {color: gold;}", "#bgblack {background-color: black; color: white;}")
+highlightHTML(input = "path/to/infile.html", output = "path/to/outfile.html", 
+              updateCSS = TRUE, tags = tags, browse = TRUE)
+</code></pre>
+
+<p>This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
+<img src="figs/mwe.png" alt="" /></p>
+
+<p>You can also go to this link to see the post-processed file: <a href="educate-r.org/mwe.html">educate-r.org/mwe.html</a>.</p>
+
+<h3>Upcoming Features</h3>
 
 <hr />
 
-<p>In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.</p>
+<p>Currently the package assumes that you know CSS and can supply your own tags.  In the future I'd like to relax this and allow for some basic tags that work without needing to supply the CSS.  I'm hoping to allow background color and text color changes to be made without needing to specify the CSS.  For example, when specifying #bgblue in the markdown file, the R program knows that you want the background color (bg) to be blue.</p>
 
-<p>With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I'm imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use <em>Deducer</em>.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).</p>
+<p>Try it out and let me know of new features or bugs as you work through the package.</p>
 
     </div>
   <p class="alt-font tight">
@@ -101,15 +120,23 @@
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#gui-ref" >gui</a>
+    <a href="/tags.html#highlightHTML-ref" >highlightHTML</a>
+    
+    <a href="/tags.html#package-ref" >package</a>
+    
+    <a href="/tags.html#CSS-ref" >CSS</a>
+    
+    <a href="/tags.html#markdown-ref" >markdown</a>
+    
+    <a href="/tags.html#html-ref" >html</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/05/27/rguirevisit/#disqus_thread'>Comments</a>
+      <a href='/2014/07/30/highlightHTML/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-05-27 00:00:00 -0500">27 May 2014</abbr>
+        <abbr class="published" title="2014-07-30 00:00:00 -0500">30 Jul 2014</abbr>
       </span>
     </p>
     <div class="clear"></div>

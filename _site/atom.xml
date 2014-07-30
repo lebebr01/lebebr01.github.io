@@ -4,13 +4,73 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-05-27T18:12:21-05:00</updated>
+ <updated>2014-07-30T15:12:08-05:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Format Markdown Documents in R</title>
+   <link href="http://lebebr01.github.com/2014/07/30/highlightHTML/"/>
+   <updated>2014-07-30T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.com/2014/07/30/highlightHTML</id>
+   <content type="html">&lt;p&gt;Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;&lt;a href=&quot;https://github.com/lebebr01/highlightHTML&quot;&gt;highlightHTML&lt;/a&gt;&lt;/strong&gt; package aims to develop a flexible approach to add formatting to an html document by injecting CSS into the file.  To do this, tags are created within the markdown document telling the R routine where to look for these tags.  If you are familiar with the Twitterverse, this package will be equally comfortable.  The tags take the form of the hashtags on Twitter.  As an example, #bgblue, would be a command to change the background to blue.&lt;/p&gt;
+
+&lt;p&gt;The next thing needed by the package is to tell how much of the word, sentence, or header that should be affected by the tag.  To do this, add braces before the tag and include all the content you want to be affected by the tag.  For example, {#bggold this example will have a blue background}.&lt;/p&gt;
+
+&lt;p&gt;Once any tags you want to include are in the markdown document, then the document can be converted into a html file using programs such as &lt;em&gt;knitr&lt;/em&gt;, &lt;em&gt;pandoc&lt;/em&gt;, the RStudio &quot;knit HTML&quot; button (or any others).  Once the resulting html file is compiled, then run the html file through the &lt;strong&gt;highlightHTML&lt;/strong&gt; package and the html file is searched for the tags, the tags are changed to CSS ids, and by default the CSS tags will be inserted automatically back into the document.&lt;/p&gt;
+
+&lt;h3&gt;Minimal Example&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;A markdown document that looks like the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;# Test of {#colgold highlightHTML} package
+
+Can highlight {#bgblack multiple words}.
+
+Even tables:
+
+| Color Name | Number     |  
+|------------|------------|  
+| Blue       | 5  #bgblue |  
+| Green      | 35         |  
+| Orange     | 100        |  
+| Red        | 200 #bgred |&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You would then convert the markdown above into a html file (I hit the knit HTML button in RStudio for this file), then run the following commands in R (assuming the highlightHTML package is not installed):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(devtools)
+install_github(repo = &quot;highlightHTML&quot;, username = &quot;lebebr01&quot;)
+library(highlightHTML)
+
+tags &amp;lt;- c(&quot;#bgred {background-color: red;}&quot;, &quot;#bgblue {background-color: blue;}&quot;,
+          &quot;#colgold {color: gold;}&quot;, &quot;#bgblack {background-color: black; color: white;}&quot;)
+highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/outfile.html&quot;, 
+              updateCSS = TRUE, tags = tags, browse = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
+&lt;img src=&quot;figs/mwe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;educate-r.org/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Upcoming Features&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Currently the package assumes that you know CSS and can supply your own tags.  In the future I&#39;d like to relax this and allow for some basic tags that work without needing to supply the CSS.  I&#39;m hoping to allow background color and text color changes to be made without needing to specify the CSS.  For example, when specifying #bgblue in the markdown file, the R program knows that you want the background color (bg) to be blue.&lt;/p&gt;
+
+&lt;p&gt;Try it out and let me know of new features or bugs as you work through the package.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>R gui Revisited</title>
@@ -49,7 +109,7 @@
 
 &lt;p&gt;In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.&lt;/p&gt;
 
-&lt;p&gt;With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I'm imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use &lt;em&gt;Deducer&lt;/em&gt;.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).&lt;/p&gt;
+&lt;p&gt;With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I&#39;m imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use &lt;em&gt;Deducer&lt;/em&gt;.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).&lt;/p&gt;
 </content>
  </entry>
  
@@ -70,21 +130,21 @@ h1$yAxis(title = list(text = &quot;Empirical Type I Error Rate&quot;), min = 0.0
 h1$xAxis(title = list(text = &quot;Fitted Serial Correlation Structure&quot;),
          categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
 h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Miss RE&quot;))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;As in one of my prior posts about &lt;em&gt;rCharts&lt;/em&gt; I manually added a few features to the Javascript manually.  I find that easier than bundling lists upon lists to achieve the desired result.  Below is the final image:&lt;/p&gt;
 
-&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
 
 
 &lt;p&gt;
@@ -99,10 +159,10 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
   }&lt;br/&gt;
   &lt;/style&gt;&lt;/p&gt;
 
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
 
 
-&lt;script type='text/javascript'&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -124,13 +184,13 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
  &quot;title&quot;: {
  &quot;text&quot;: &quot;Empirical Type I Error Rate&quot;,
    style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
    }
 },
 labels: {
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
@@ -165,12 +225,12 @@ labels: {
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
+                    color: &#39;#e41a1c&#39;
                 }); 
             }
         },
@@ -207,12 +267,12 @@ events: {
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
+                    color: &#39;#377eb8&#39;
                 }); 
             }
         },
@@ -229,14 +289,14 @@ events: {
  &quot;title&quot;: {
  &quot;text&quot;: &quot;Fitted Serial Correlation Structure&quot;,
  style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
 &quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
@@ -268,7 +328,7 @@ symbolWidth: 40,
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
 } 
@@ -287,9 +347,9 @@ symbolWidth: 40,
    <link href="http://lebebr01.github.com/2014/03/27/evolvecode/"/>
    <updated>2014-03-27T00:00:00-05:00</updated>
    <id>http://lebebr01.github.com/2014/03/27/evolvecode</id>
-   <content type="html">&lt;p&gt;Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I&#39;ve slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I&#39;ve started to work through some python.&lt;/p&gt;
 
-&lt;p&gt;Now back to my realization.  As I mentioned, I was scraping some data from &lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;CFB Data Warehouse&lt;/a&gt; for a project that I'm working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.&lt;/p&gt;
+&lt;p&gt;Now back to my realization.  As I mentioned, I was scraping some data from &lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;CFB Data Warehouse&lt;/a&gt; for a project that I&#39;m working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;  ##Identifying correct tables
     tb &amp;lt;- vector(&quot;list&quot;, length(tableNodes))
@@ -333,7 +393,7 @@ if(length(Num) == 5){
   bowl &amp;lt;- do.call(&quot;rbind&quot;, tabs)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Much cleaner, simpler, more consistent, and quite possibly quicker.  The ability to focus on speed, readability, and consistency is something that comes later after one becomes more comfortable with the language.  I have been focusing on this for awhile, but these stark differences and ease I was able to adapt my old code especially struck me this time.  I haven't decided if this evolution for me is &lt;em&gt;mastery&lt;/em&gt; or &lt;em&gt;expert&lt;/em&gt; status of the r language, but I now feel I have progressed to a point where I feel confident and am able to shift my focus from having code that works, to code that is now clean, consistent, and readable.&lt;/p&gt;
+&lt;p&gt;Much cleaner, simpler, more consistent, and quite possibly quicker.  The ability to focus on speed, readability, and consistency is something that comes later after one becomes more comfortable with the language.  I have been focusing on this for awhile, but these stark differences and ease I was able to adapt my old code especially struck me this time.  I haven&#39;t decided if this evolution for me is &lt;em&gt;mastery&lt;/em&gt; or &lt;em&gt;expert&lt;/em&gt; status of the r language, but I now feel I have progressed to a point where I feel confident and am able to shift my focus from having code that works, to code that is now clean, consistent, and readable.&lt;/p&gt;
 
 &lt;p&gt;Has anyone else had similar epiphanies with their code?&lt;/p&gt;
 
@@ -346,7 +406,7 @@ if(length(Num) == 5){
    <link href="http://lebebr01.github.com/2014/03/14/htmltext/"/>
    <updated>2014-03-14T00:00:00-05:00</updated>
    <id>http://lebebr01.github.com/2014/03/14/htmltext</id>
-   <content type="html">&lt;p&gt;I've added a new functionality to my &lt;em&gt;highlightHTML&lt;/em&gt; package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I&#39;ve added a new functionality to my &lt;em&gt;highlightHTML&lt;/em&gt; package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.&lt;/p&gt;
 
 &lt;p&gt;Up to now, my package only worked with tables, see my old post that talks about this if you are interested: &lt;a href=&quot;http://educate-r.org/2013/11/01/CondFormatMarkdown/&quot;&gt;highlight tables&lt;/a&gt;.  My update adds a similar functionality to text itself by including span tags in the document.&lt;/p&gt;
 
@@ -361,7 +421,7 @@ install_github(repo = &quot;highlightHTML&quot;, username = &quot;lebebr01&quot;
 &lt;p&gt;Here is an example using the HTML file that comes with the package and which can also be found in the help file.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(highlightHTML)
-file &amp;lt;- system.file('examples', package = 'highlightHTML')
+file &amp;lt;- system.file(&#39;examples&#39;, package = &#39;highlightHTML&#39;)
 file1 &amp;lt;- paste(file, &quot;bgtext.html&quot;, sep = &quot;/&quot;)
 
 # Change background color and text color with CSS
@@ -381,25 +441,25 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
 
 &lt;h3&gt;Before and After HTML&lt;/h3&gt;
 
-&lt;p&gt;Here is what the body of the HTML file looks like before running the function:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='html'&gt;&amp;lt;body&amp;gt;
+&lt;p&gt;Here is what the body of the HTML file looks like before running the function:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&amp;lt;body&amp;gt;
 &amp;lt;h1&amp;gt;Test of Text&amp;lt;/h1&amp;gt;
 &amp;lt;p&amp;gt;Testing the ability to change the {#bgblue color} of the text.&amp;lt;/p&amp;gt;
 &amp;lt;p&amp;gt;Can also do {#bgblack multiple words of text}&amp;lt;/p&amp;gt;
 &amp;lt;p&amp;gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&amp;lt;/p&amp;gt;
-&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This is what the HTML document looks like after running the function:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='html'&gt;&amp;lt;body&amp;gt;
+
+&lt;p&gt;This is what the HTML document looks like after running the function:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&amp;lt;body&amp;gt;
 &amp;lt;h1&amp;gt;Test of Text&amp;lt;/h1&amp;gt;
-&amp;lt;p&amp;gt;Testing the ability to change the &amp;lt;span id='bgblue'&amp;gt; color&amp;lt;/span&amp;gt; of the text.&amp;lt;/p&amp;gt;
-&amp;lt;p&amp;gt;Can also do &amp;lt;span id='bgblack'&amp;gt; multiple words of text&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
-&amp;lt;p&amp;gt;&amp;lt;span id='bgblack'&amp;gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
-&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&amp;lt;p&amp;gt;Testing the ability to change the &amp;lt;span id=&amp;#39;bgblue&amp;#39;&amp;gt; color&amp;lt;/span&amp;gt; of the text.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;Can also do &amp;lt;span id=&amp;#39;bgblack&amp;#39;&amp;gt; multiple words of text&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span id=&amp;#39;bgblack&amp;#39;&amp;gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;The braces identify the location of the span tags and the custom CSS id tag to format the text.&lt;/p&gt;
 </content>
@@ -412,7 +472,7 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
    <id>http://lebebr01.github.com/2014/03/03/rChartsslidy</id>
    <content type="html">&lt;p&gt;My last post I talked about using &lt;em&gt;rCharts&lt;/em&gt; to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use &lt;em&gt;slidy&lt;/em&gt; to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a &lt;em&gt;slidy&lt;/em&gt; html presentation.&lt;/p&gt;
 
-&lt;p&gt;First off, I did not use &lt;em&gt;rCharts&lt;/em&gt; and &lt;em&gt;knitr&lt;/em&gt; in tandem, but that would make the workflow a bit easier.  The major thing you'd want to remember is to make sure to add the following chunk option: &lt;strong&gt;results = 'asis'&lt;/strong&gt;.  This will ensure that the raw html printed from &lt;em&gt;rCharts&lt;/em&gt; will be included in the markdown file as is.&lt;/p&gt;
+&lt;p&gt;First off, I did not use &lt;em&gt;rCharts&lt;/em&gt; and &lt;em&gt;knitr&lt;/em&gt; in tandem, but that would make the workflow a bit easier.  The major thing you&#39;d want to remember is to make sure to add the following chunk option: &lt;strong&gt;results = &#39;asis&#39;&lt;/strong&gt;.  This will ensure that the raw html printed from &lt;em&gt;rCharts&lt;/em&gt; will be included in the markdown file as is.&lt;/p&gt;
 
 &lt;p&gt;I personally just copy and pasted the javascript into my markdown presentation (instead of using &lt;em&gt;knitr&lt;/em&gt; as talked about above).  This was easier for me as I edited many specific options in the raw Javascript to come to my final version (and created a boxplot from scratch).  It would be possible to make all the edits directly through the &lt;em&gt;rCharts&lt;/em&gt; framework, but I found it easier to edit the raw Javascript by looking at the highcharts.js documentation to get the figure I was looking for.&lt;/p&gt;
 
@@ -426,28 +486,27 @@ h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;)
          categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
 h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
 h1$plotOptions(series = list(lineWidth = 4))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='javascript'&gt;&amp;lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&amp;gt;&amp;lt;/script&amp;gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.jquery.com/jquery-1.9.1.min.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/highcharts.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/highcharts-more.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/modules/exporting.js&amp;gt;&amp;lt;/script&amp;gt; 
  &amp;lt;style&amp;gt;
   .rChart {
     display: block;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
     width: 800px;
     height: 400px;
     font-size: 200%;
-  }&lt;br/&gt;
+  }  
   &amp;lt;/style&amp;gt;
-&amp;lt;div id = 'chart1' class = 'rChart highcharts'&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
+&amp;lt;div id = &amp;#39;chart1&amp;#39; class = &amp;#39;rChart highcharts&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39;&amp;gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -456,249 +515,249 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 &amp;quot;height&amp;quot;:            400,
 &amp;quot;credits&amp;quot;: {
  &amp;quot;href&amp;quot;: null,
-&amp;quot;text&amp;quot;: null
+&amp;quot;text&amp;quot;: null 
 },
 &amp;quot;exporting&amp;quot;: {
- &amp;quot;enabled&amp;quot;: false
+ &amp;quot;enabled&amp;quot;: false 
 },
 &amp;quot;title&amp;quot;: {
- &amp;quot;text&amp;quot;: null
+ &amp;quot;text&amp;quot;: null 
 },
 &amp;quot;yAxis&amp;quot;: [
  {
  title: {
  text: &amp;quot;Convergence Rate&amp;quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &amp;#39;bold&amp;#39;,
+   fontSize: &amp;#39;20px&amp;#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &amp;#39;%&amp;#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &amp;#39;18px&amp;#39;
   }
  },
 &amp;quot;min&amp;quot;:              0,
 &amp;quot;max&amp;quot;:            100,
 &amp;quot;tickInterval&amp;quot;:             10 ,
 minRange: 10
-}
+} 
 ],
 &amp;quot;series&amp;quot;: [
  {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-   68.38
+   68.38 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   64.88
+   64.88 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   55.12
+   55.12 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   61.98
+   61.98 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   42.17
-]
+   42.17 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
-                });
+                    color: &amp;#39;#e41a1c&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#e41a1c&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;AR1&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'Solid',
+dashStyle: &amp;#39;Solid&amp;#39;,
 &amp;quot;marker&amp;quot;: {
  &amp;quot;radius&amp;quot;:              6
-}
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-  65.1
+  65.1 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   60.45
+   60.45 
 ],
 [ &amp;quot;MA1&amp;quot;,
-  63.68
+  63.68 
 ],
 [ &amp;quot;MA2&amp;quot;,
-  54.88
+  54.88 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   63.6
-]
+   63.6 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
-                });
+                    color: &amp;#39;#377eb8&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#377eb8&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;ARMA&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &amp;#39;ShortDash&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [&amp;quot;Ind&amp;quot;,
-  72.48
+  72.48 
 ],
 [ &amp;quot;AR1&amp;quot;,
-  93.88
+  93.88 
 ],
 [ &amp;quot;MA1&amp;quot;,
-  92.23
+  92.23 
 ],
 [ &amp;quot;MA2&amp;quot;,
-  95.62
+  95.62 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-  98.37
-]
+  98.37 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
-                });
+                    color: &amp;#39;#4daf4a&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#4daf4a&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;Ind&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'Dash',
+dashStyle: &amp;#39;Dash&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-  71.02
+  71.02 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   81.37
+   81.37 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   69.15
+   69.15 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   84.5
+   84.5 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   88.02
-]
+   88.02 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
-                });
+                    color: &amp;#39;#984ea3&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#984ea3&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;MA1&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &amp;#39;ShortDot&amp;#39;,
 &amp;quot;marker&amp;quot;: {
  &amp;quot;radius&amp;quot;:              6
-}
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-   67.23
+   67.23 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   70.78
+   70.78 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   65.93
+   65.93 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   68.83
+   68.83 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   72.9
-]
+   72.9 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
-                });
+                    color: &amp;#39;#ff7f00&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#ff7f00&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;MA2&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &amp;#39;DashDot&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
+} 
 ],
 &amp;quot;xAxis&amp;quot;: [
  {
  title: {
  text: &amp;quot;Generated Serial Correlation Structure&amp;quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &amp;#39;bold&amp;#39;,
+   fontSize: &amp;#39;20px&amp;#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &amp;#39;18px&amp;#39;,
+  fontWeight: &amp;#39;bold&amp;#39;
  }
 },
-&amp;quot;categories&amp;quot;: [ &amp;quot;Ind&amp;quot;, &amp;quot;AR1&amp;quot;, &amp;quot;MA1&amp;quot;, &amp;quot;MA2&amp;quot;, &amp;quot;ARMA&amp;quot; ]
-}
+&amp;quot;categories&amp;quot;: [ &amp;quot;Ind&amp;quot;, &amp;quot;AR1&amp;quot;, &amp;quot;MA1&amp;quot;, &amp;quot;MA2&amp;quot;, &amp;quot;ARMA&amp;quot; ] 
+} 
 ],
 &amp;quot;subtitle&amp;quot;: {
- &amp;quot;text&amp;quot;: null
+ &amp;quot;text&amp;quot;: null 
 },
 &amp;quot;legend&amp;quot;: {
  &amp;quot;verticalAlign&amp;quot;: &amp;quot;top&amp;quot;,
@@ -706,43 +765,41 @@ labels: {
 &amp;quot;layout&amp;quot;: &amp;quot;vertical&amp;quot;,
 symbolWidth: 40,
 &amp;quot;title&amp;quot;: {
- &amp;quot;text&amp;quot;: &amp;quot;Fitted SC&amp;quot;
-}
+ &amp;quot;text&amp;quot;: &amp;quot;Fitted SC&amp;quot; 
+} 
 },
 &amp;quot;plotOptions&amp;quot;: {
  &amp;quot;series&amp;quot;: {
- &amp;quot;lineWidth&amp;quot;:   4
-}
+ &amp;quot;lineWidth&amp;quot;:   4 
+} 
 },
 &amp;quot;id&amp;quot;: &amp;quot;chart1&amp;quot;,
 &amp;quot;chart&amp;quot;: {
- &amp;quot;renderTo&amp;quot;: &amp;quot;chart1&amp;quot;,
+ &amp;quot;renderTo&amp;quot;: &amp;quot;chart1&amp;quot;, 
  zoomType: &amp;quot;y&amp;quot;,
  &amp;quot;style&amp;quot;: {
  fontSize: &amp;quot;24px&amp;quot;
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &amp;#39;left&amp;#39;
   }
  }
-}
+} 
 });
         });
     })(jQuery);
-&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;Once you have that in markdown format, you can turn it into a &lt;em&gt;slidy&lt;/em&gt; html presentation with the following command in &lt;em&gt;pandoc&lt;/em&gt;:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;This gives you a file that looks something like this:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='html'&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
 &amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD XHTML 1.0 Strict//EN&amp;quot;
  &amp;quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&amp;quot;&amp;gt;
 &amp;lt;html xmlns=&amp;quot;http://www.w3.org/1999/xhtml&amp;quot;&amp;gt;
@@ -757,27 +814,27 @@ symbolWidth: 40,
     href=&amp;quot;http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css&amp;quot; /&amp;gt;
 &amp;lt;script src=&amp;quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&amp;quot;
     charset=&amp;quot;utf-8&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.jquery.com/jquery-1.9.1.min.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/highcharts.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/highcharts-more.js&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39; src=http://code.highcharts.com/modules/exporting.js&amp;gt;&amp;lt;/script&amp;gt;
  &amp;lt;style&amp;gt;
   .rChart {
     display: block;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
     width: 1000px;
     height: 800px;
     font-size: 200%;
-  }&lt;br/&gt;
+  }  
   &amp;lt;/style&amp;gt;
 &amp;lt;script src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;MathJax.Hub.Queue([&amp;quot;Typeset&amp;quot;,MathJax.Hub]);&amp;lt;/script&amp;gt;
  &amp;lt;!--   &amp;lt;script src=&amp;quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&amp;quot;
     charset=&amp;quot;utf-8&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;
 &amp;lt;/head&amp;gt;
 &amp;lt;body&amp;gt;
-&amp;lt;div id = 'chart1' class = 'rChart'&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
+&amp;lt;div id = &amp;#39;chart1&amp;#39; class = &amp;#39;rChart&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script type=&amp;#39;text/javascript&amp;#39;&amp;gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -786,249 +843,249 @@ symbolWidth: 40,
 &amp;quot;height&amp;quot;:            600,
 &amp;quot;credits&amp;quot;: {
  &amp;quot;href&amp;quot;: null,
-&amp;quot;text&amp;quot;: null
+&amp;quot;text&amp;quot;: null 
 },
 &amp;quot;exporting&amp;quot;: {
- &amp;quot;enabled&amp;quot;: false
+ &amp;quot;enabled&amp;quot;: false 
 },
 &amp;quot;title&amp;quot;: {
- &amp;quot;text&amp;quot;: null
+ &amp;quot;text&amp;quot;: null 
 },
 &amp;quot;yAxis&amp;quot;: [
  {
  title: {
  text: &amp;quot;Convergence Rate&amp;quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &amp;#39;bold&amp;#39;,
+   fontSize: &amp;#39;20px&amp;#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &amp;#39;%&amp;#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &amp;#39;18px&amp;#39;
   }
  },
 &amp;quot;min&amp;quot;:              0,
 &amp;quot;max&amp;quot;:            100,
 &amp;quot;tickInterval&amp;quot;:             10 ,
 minRange: 10
-}
+} 
 ],
 &amp;quot;series&amp;quot;: [
  {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-  68.38
+  68.38 
 ],
 [ &amp;quot;AR1&amp;quot;,
-  64.88
+  64.88 
 ],
 [ &amp;quot;MA1&amp;quot;,
-  55.12
+  55.12 
 ],
 [ &amp;quot;MA2&amp;quot;,
-  61.98
+  61.98 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-  42.17
-]
+  42.17 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
-                });
+                    color: &amp;#39;#e41a1c&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#e41a1c&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;AR1&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'Solid',
+dashStyle: &amp;#39;Solid&amp;#39;,
 &amp;quot;marker&amp;quot;: {
  &amp;quot;radius&amp;quot;:              6
-}
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-  65.1
+  65.1 
 ],
 [ &amp;quot;AR1&amp;quot;,
-  60.45
+  60.45 
 ],
 [ &amp;quot;MA1&amp;quot;,
-  63.68
+  63.68 
 ],
 [ &amp;quot;MA2&amp;quot;,
-  54.88
+  54.88 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   63.6
-]
+   63.6 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
-                });
+                    color: &amp;#39;#377eb8&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#377eb8&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;ARMA&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &amp;#39;ShortDash&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-  72.48
+  72.48 
 ],
 [ &amp;quot;AR1&amp;quot;,
-  93.88
+  93.88 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   92.23
+   92.23 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   95.62
+   95.62 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   98.37
-]
+   98.37 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
-                });
+                    color: &amp;#39;#4daf4a&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#4daf4a&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;Ind&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'Dash',
+dashStyle: &amp;#39;Dash&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-   71.02
+   71.02 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   81.37
+   81.37 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   69.15
+   69.15 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   84.5
+   84.5 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-   88.02
-]
+   88.02 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
-                });
+                    color: &amp;#39;#984ea3&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#984ea3&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;MA1&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &amp;#39;ShortDot&amp;#39;,
 &amp;quot;marker&amp;quot;: {
  &amp;quot;radius&amp;quot;:              6
-}
+} 
 },
 {
  &amp;quot;data&amp;quot;: [
  [ &amp;quot;Ind&amp;quot;,
-   67.23
+   67.23 
 ],
 [ &amp;quot;AR1&amp;quot;,
-   70.78
+   70.78 
 ],
 [ &amp;quot;MA1&amp;quot;,
-   65.93
+   65.93 
 ],
 [ &amp;quot;MA2&amp;quot;,
-   68.83
+   68.83 
 ],
 [ &amp;quot;ARMA&amp;quot;,
-    72.9
-]
+    72.9 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              &lt;br/&gt;
+                    color: &amp;#39;black&amp;#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
-                });
+                    color: &amp;#39;#ff7f00&amp;#39;
+                }); 
             }
         },
 &amp;quot;color&amp;quot;: &amp;quot;#ff7f00&amp;quot;,
 &amp;quot;name&amp;quot;: &amp;quot;MA2&amp;quot;,
 &amp;quot;type&amp;quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &amp;#39;DashDot&amp;#39;,
 &amp;quot;marker&amp;quot;: {
- &amp;quot;radius&amp;quot;:              6
-}
-}
+ &amp;quot;radius&amp;quot;:              6 
+} 
+} 
 ],
 &amp;quot;xAxis&amp;quot;: [
  {
  title: {
  text: &amp;quot;Generated Serial Correlation Structure&amp;quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &amp;#39;bold&amp;#39;,
+   fontSize: &amp;#39;20px&amp;#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &amp;#39;18px&amp;#39;,
+  fontWeight: &amp;#39;bold&amp;#39;
  }
 },
-&amp;quot;categories&amp;quot;: [ &amp;quot;Ind&amp;quot;, &amp;quot;AR1&amp;quot;, &amp;quot;MA1&amp;quot;, &amp;quot;MA2&amp;quot;, &amp;quot;ARMA&amp;quot; ]
-}
+&amp;quot;categories&amp;quot;: [ &amp;quot;Ind&amp;quot;, &amp;quot;AR1&amp;quot;, &amp;quot;MA1&amp;quot;, &amp;quot;MA2&amp;quot;, &amp;quot;ARMA&amp;quot; ] 
+} 
 ],
 &amp;quot;subtitle&amp;quot;: {
- &amp;quot;text&amp;quot;: null
+ &amp;quot;text&amp;quot;: null 
 },
 &amp;quot;legend&amp;quot;: {
  &amp;quot;verticalAlign&amp;quot;: &amp;quot;top&amp;quot;,
@@ -1036,35 +1093,35 @@ labels: {
 &amp;quot;layout&amp;quot;: &amp;quot;vertical&amp;quot;,
 symbolWidth: 40,
 &amp;quot;title&amp;quot;: {
- &amp;quot;text&amp;quot;: &amp;quot;Fitted SC&amp;quot;
-}
+ &amp;quot;text&amp;quot;: &amp;quot;Fitted SC&amp;quot; 
+} 
 },
 &amp;quot;plotOptions&amp;quot;: {
  &amp;quot;series&amp;quot;: {
- &amp;quot;lineWidth&amp;quot;:              4
-}
+ &amp;quot;lineWidth&amp;quot;:              4 
+} 
 },
 &amp;quot;id&amp;quot;: &amp;quot;chart1&amp;quot;,
 &amp;quot;chart&amp;quot;: {
- &amp;quot;renderTo&amp;quot;: &amp;quot;chart1&amp;quot;,
+ &amp;quot;renderTo&amp;quot;: &amp;quot;chart1&amp;quot;, 
  zoomType: &amp;quot;y&amp;quot;,
  &amp;quot;style&amp;quot;: {
  fontSize: &amp;quot;24px&amp;quot;
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &amp;#39;left&amp;#39;
   }
  }
-}
+} 
 });
         });
     })(jQuery);
 &amp;lt;/script&amp;gt;
 &amp;lt;/div&amp;gt;
 &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;That should give you a html presentation with an interactive Javascript based figure.&lt;/p&gt;
 </content>
@@ -1075,7 +1132,7 @@ symbolWidth: 40,
    <link href="http://lebebr01.github.com/2014/02/15/rcharts/"/>
    <updated>2014-02-15T00:00:00-06:00</updated>
    <id>http://lebebr01.github.com/2014/02/15/rcharts</id>
-   <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I'm attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I&#39;m attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
 
 &lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
 
@@ -1089,19 +1146,19 @@ h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;)
          categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
 h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
 h1$plotOptions(series = list(lineWidth = 4))
-h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
 
 
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
 
 
 &lt;p&gt;
@@ -1116,10 +1173,10 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
   }&lt;br/&gt;
   &lt;/style&gt;&lt;/p&gt;
 
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
 
 
-&lt;script type='text/javascript'&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -1141,16 +1198,16 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
  title: {
  text: &quot;Convergence Rate&quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '30px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;30px&#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &#39;%&#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
@@ -1186,7 +1243,7 @@ minRange: 10
 &quot;color&quot;: &quot;#e41a1c&quot;,
 &quot;name&quot;: &quot;AR1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Solid',
+dashStyle: &#39;Solid&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -1217,7 +1274,7 @@ dashStyle: 'Solid',
 &quot;color&quot;: &quot;#377eb8&quot;,
 &quot;name&quot;: &quot;ARMA&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &#39;ShortDash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -1248,7 +1305,7 @@ dashStyle: 'ShortDash',
 &quot;color&quot;: &quot;#4daf4a&quot;,
 &quot;name&quot;: &quot;Ind&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Dash',
+dashStyle: &#39;Dash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -1279,7 +1336,7 @@ dashStyle: 'Dash',
 &quot;color&quot;: &quot;#984ea3&quot;,
 &quot;name&quot;: &quot;MA1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &#39;ShortDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -1310,7 +1367,7 @@ dashStyle: 'ShortDot',
 &quot;color&quot;: &quot;#ff7f00&quot;,
 &quot;name&quot;: &quot;MA2&quot;,
 &quot;type&quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &#39;DashDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -1321,14 +1378,14 @@ dashStyle: 'DashDot',
  title: {
  text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '30px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;30px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
 &quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
@@ -1360,7 +1417,7 @@ symbolWidth: 40,
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
 } 
@@ -1383,7 +1440,7 @@ symbolWidth: 40,
 
 &lt;h3&gt;Which gui to use?&lt;/h3&gt;
 
-&lt;p&gt;This ultimately comes down to personal preference, however below I've highlighted my intial thoughts on pros/cons of each package.&lt;/p&gt;
+&lt;p&gt;This ultimately comes down to personal preference, however below I&#39;ve highlighted my intial thoughts on pros/cons of each package.&lt;/p&gt;
 
 &lt;h4&gt;Deducer&lt;/h4&gt;
 
@@ -1418,7 +1475,7 @@ symbolWidth: 40,
 
 &lt;p&gt;I hope to write more about my experiences using both gui systems for my class, but upon initial inspection of them now I definitely prefer &lt;em&gt;Deducer&lt;/em&gt;.  The package just has not completely won me over as little problems have made me use both packages in my class so far, primarily due to the error loading the &lt;em&gt;rJava&lt;/em&gt; package.&lt;/p&gt;
 
-&lt;p&gt;Does anyone else have experience using one or the other in a class before?  I'd enjoy hearing any stories using these or different gui systems for R.&lt;/p&gt;
+&lt;p&gt;Does anyone else have experience using one or the other in a class before?  I&#39;d enjoy hearing any stories using these or different gui systems for R.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1515,7 +1572,7 @@ mtcars %.%
    <link href="http://lebebr01.github.com/2014/01/06/FavDataTable/"/>
    <updated>2014-01-06T00:00:00-06:00</updated>
    <id>http://lebebr01.github.com/2014/01/06/FavDataTable</id>
-   <content type="html">&lt;p&gt;When I started to use the &lt;em&gt;data.table&lt;/em&gt; package I was primarily using it to aggregate.  I had read about &lt;em&gt;data.table&lt;/em&gt; and its blazing speed compared to the other options from base or the &lt;em&gt;plyr&lt;/em&gt; package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using &lt;em&gt;data.table&lt;/em&gt; to do the same calculations I didn't need to wait 5 minutes to see the calculated values.&lt;/p&gt;
+   <content type="html">&lt;p&gt;When I started to use the &lt;em&gt;data.table&lt;/em&gt; package I was primarily using it to aggregate.  I had read about &lt;em&gt;data.table&lt;/em&gt; and its blazing speed compared to the other options from base or the &lt;em&gt;plyr&lt;/em&gt; package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using &lt;em&gt;data.table&lt;/em&gt; to do the same calculations I didn&#39;t need to wait 5 minutes to see the calculated values.&lt;/p&gt;
 
 &lt;p&gt;The speed of &lt;em&gt;data.table&lt;/em&gt; is publicized widely, however there are two features found in &lt;em&gt;data.table&lt;/em&gt; that are not talked about as frequently that I use very often.&lt;/p&gt;
 
@@ -1528,7 +1585,7 @@ mtcars %.%
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# generate a small dataset
 set.seed(1234)
 smalldat &amp;lt;- data.frame(group1 = rep(1:2, each = 5), 
-                       group2 = rep(c('a','b'), times = 5), 
+                       group2 = rep(c(&#39;a&#39;,&#39;b&#39;), times = 5), 
                        x = rnorm(10))
 
 # convert to data.frame to data.table
@@ -1584,8 +1641,8 @@ aggdat12 &amp;lt;- ddply(smalldat, .(group1, group2), summarize,
                 aggGroup1.1plyr = mean(x))
 
 # join back into data
-smalldat &amp;lt;- join(smalldat, aggdat1, by = 'group1')
-smalldat &amp;lt;- join(smalldat, aggdat12, by = c('group1', 'group2'))
+smalldat &amp;lt;- join(smalldat, aggdat1, by = &#39;group1&#39;)
+smalldat &amp;lt;- join(smalldat, aggdat12, by = c(&#39;group1&#39;, &#39;group2&#39;))
 
 # print data
 smalldat
@@ -1617,7 +1674,7 @@ smalldat
 ## 10:         -0.3102
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The above code using plyr likely won't take longer for R to run, however it does take more time to write out the code.&lt;/p&gt;
+&lt;p&gt;The above code using plyr likely won&#39;t take longer for R to run, however it does take more time to write out the code.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1628,7 +1685,7 @@ smalldat
 &lt;p&gt;Using the dataset created above:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Set keys - this sorts the data based on these values
-setkeyv(smalldat, c('group1','group2'))
+setkeyv(smalldat, c(&#39;group1&#39;,&#39;group2&#39;))
 
 # keep unique observations (I also remove the variable x)
 uniqdat &amp;lt;- subset(unique(smalldat), select = -x)
@@ -1659,25 +1716,24 @@ uniqdat
 
 &lt;p&gt;I encountered a problem this fall at the University of Arkansas due to the huge Java exploit going public.  As a result of this, Java was blocked on all of the computers in the classrooms that I used for my intro statistics courses.  Most days this does not impact my lectures, however on a few days throughout the semester I use applets to help show certain concepts.&lt;/p&gt;
 
-&lt;p&gt;Enter my solution, create shiny applications that attempts to mimic many of the same features found in the Java applets using &lt;em&gt;shiny&lt;/em&gt;.  The application I've been working on lately is an application that allows users to estimate the correlation based on a scatterplot of data.&lt;/p&gt;
+&lt;p&gt;Enter my solution, create shiny applications that attempts to mimic many of the same features found in the Java applets using &lt;em&gt;shiny&lt;/em&gt;.  The application I&#39;ve been working on lately is an application that allows users to estimate the correlation based on a scatterplot of data.&lt;/p&gt;
 
 &lt;p&gt;You can run the shiny application from my github page using the following command (make sure you have the shiny package installed first:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;shiny::runGitHub(repo = &amp;quot;shinyApps&amp;quot;, username = &amp;quot;lebebr01&amp;quot;, subdir = &amp;quot;guessCorr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;shiny::runGitHub(repo = &amp;quot;shinyApps&amp;quot;, username = &amp;quot;lebebr01&amp;quot;, subdir = &amp;quot;guessCorr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;This should open a session in your browser that looks like the following screenshot:
 &lt;img src=&quot;/figs/GuessingCorrelations.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As you can see from this screenshot, there is a scatterplot in the main window and the user inputs a guess into the text box.  When they hit the 'Submit Guess' button, the grey panel above the scatterplot updates to give hints about the direction the correlation is compared to the guess.  Once the user is within .05 (.05 above or below) the correlation, the correlation is printed in the top text box.&lt;/p&gt;
+&lt;p&gt;As you can see from this screenshot, there is a scatterplot in the main window and the user inputs a guess into the text box.  When they hit the &#39;Submit Guess&#39; button, the grey panel above the scatterplot updates to give hints about the direction the correlation is compared to the guess.  Once the user is within .05 (.05 above or below) the correlation, the correlation is printed in the top text box.&lt;/p&gt;
 
-&lt;p&gt;The app also includes the ability to restrict the range of the scatterplot.  This can be seen in the image below (and can be done on the app by clicking the 'Restriction of Range' checkbox):
+&lt;p&gt;The app also includes the ability to restrict the range of the scatterplot.  This can be seen in the image below (and can be done on the app by clicking the &#39;Restriction of Range&#39; checkbox):
 &lt;img src=&quot;/figs/GuessingCorrelationsRR.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;When that checkbox is clicked, a new slider shows up that restricts the range of the original scatterplot.  The data that lies outside of the restricted range shows up as a light grey in the updated graph.  Now the user attempts to guess the correlation for the restricted range data.  The correlation for the entire data can be seen in the graph.&lt;/p&gt;
 
-&lt;p&gt;The one thing I was unable to implement was a second button that allows the user to click it to refresh the data to guess at another correlation.  The 'Submit Button' in &lt;em&gt;shiny&lt;/em&gt; is too cumbersome and I could not get two 'Action Buttons' to work side by side, although this may be possible.  The current workaround is to just refresh the page and a new scatterplot will load.  Alternatively, when using the restriction of range feature, changing the range will also generate new data.  Lastly, adding the option for a counter as an indication of how well the user is doing could make it an interesting contest in the classroom.&lt;/p&gt;
+&lt;p&gt;The one thing I was unable to implement was a second button that allows the user to click it to refresh the data to guess at another correlation.  The &#39;Submit Button&#39; in &lt;em&gt;shiny&lt;/em&gt; is too cumbersome and I could not get two &#39;Action Buttons&#39; to work side by side, although this may be possible.  The current workaround is to just refresh the page and a new scatterplot will load.  Alternatively, when using the restriction of range feature, changing the range will also generate new data.  Lastly, adding the option for a counter as an indication of how well the user is doing could make it an interesting contest in the classroom.&lt;/p&gt;
 
 &lt;p&gt;Enjoy.&lt;/p&gt;
 </content>
@@ -1711,49 +1767,46 @@ uniqdat
 
 &lt;p&gt;You can install the package directly from my github page using the devtools library:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(devtools)
-install_github(&amp;quot;SPSStoR&amp;quot;, &amp;quot;lebebr01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;library(devtools)
+install_github(&amp;quot;SPSStoR&amp;quot;, &amp;quot;lebebr01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(SPSStoR)
-file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &amp;quot;/getDescExamp.txt&amp;quot;, sep = '')
-spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you install the package, I&#39;ve included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;library(SPSStoR)
+file &amp;lt;- paste(system.file(&amp;#39;SPSSsyntax&amp;#39;, package = &amp;#39;SPSStoR&amp;#39;), 
+              &amp;quot;/getDescExamp.txt&amp;quot;, sep = &amp;#39;&amp;#39;)
+spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;h3&gt;Output:&lt;/h3&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
 [2] &amp;quot;library(foreign)&amp;quot;
-[3] &amp;quot;x &amp;lt;- read.spss('/data/hubtemp.sav', to.data.frame = TRUE)&amp;quot;
+[3] &amp;quot;x &amp;lt;- read.spss(&amp;#39;/data/hubtemp.sav&amp;#39;, to.data.frame = TRUE)&amp;quot;
 [4] &amp;quot;x &amp;lt;- x[order(DIVISION, STORE, -AGE), ]&amp;quot;
 [5] &amp;quot;library(SPSStoR)&amp;quot;
-[6] &amp;quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+[6] &amp;quot;with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here is another example doing a one-sample t-test:
-  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;file &amp;lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
-              &amp;quot;/ttestOneSampExamp.txt&amp;quot;, sep = '')
-spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is another example doing a one-sample t-test:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;file &amp;lt;- paste(system.file(&amp;#39;SPSSsyntax&amp;#39;, package = &amp;#39;SPSStoR&amp;#39;), 
+              &amp;quot;/ttestOneSampExamp.txt&amp;quot;, sep = &amp;#39;&amp;#39;)
+spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;h3&gt;Output:&lt;/h3&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
-[2] &amp;quot;with(x, t.test(brake, mu = 322, conf.level = .90)&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;[1] &amp;quot;# x is the name of your data frame&amp;quot;
+[2] &amp;quot;with(x, t.test(brake, mu = 322, conf.level = .90)&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;h1&gt;Summary&lt;/h1&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;Although some working R knowledge is needed to run this package, such as knowledge of installing packages and what an object is, this package may be useful to those trying to figure out a similar command in R.  Over time I hope to slowly add support for more SPSS routines, see my github page for those that I am currently prioritizing.  Let me know via the issues on github if you'd like support for a specific routine or run into problems.&lt;/p&gt;
+&lt;p&gt;Although some working R knowledge is needed to run this package, such as knowledge of installing packages and what an object is, this package may be useful to those trying to figure out a similar command in R.  Over time I hope to slowly add support for more SPSS routines, see my github page for those that I am currently prioritizing.  Let me know via the issues on github if you&#39;d like support for a specific routine or run into problems.&lt;/p&gt;
 
 &lt;p&gt;The package home can be found on github: &lt;a href=&quot;https://github.com/lebebr01/SPSStoR&quot;&gt;SPSStoR&lt;/a&gt;
 &lt;br&gt;
@@ -1774,17 +1827,15 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I start with a &lt;em&gt;Rmd&lt;/em&gt; file.  This allows me to embed R code into the source document.  This is particularly useful for me to include plots of distributions, graphically showing how ANOVA works, etc.  Once I am finished editing my &lt;em&gt;Rmd&lt;/em&gt;, if I am using &lt;a href=&quot;http://www.rstudio.com/&quot;&gt;Rstudio&lt;/a&gt; I just use the &lt;em&gt;Knit HTML&lt;/em&gt; button to automatically generate the markdown and HTML file for me.  Alternatively, the &lt;em&gt;knit&lt;/em&gt; command from the &lt;strong&gt;knitr&lt;/strong&gt; package will create the markdown file for you (but not the HTML file, although for me the HTML file is not needed in this step).  The defaults of the &lt;em&gt;knit&lt;/em&gt; command work fine for me.&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;knit(input = &amp;quot;/path/to/file.Rmd&amp;quot;, output = &amp;quot;/path/to/file.md&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;knit(input = &amp;quot;/path/to/file.Rmd&amp;quot;, output = &amp;quot;/path/to/file.md&amp;quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;h2&gt;Step 2 - Create HTML Presentation&lt;/h2&gt;
 
 &lt;p&gt;Once we have the markdown file, I now use pandoc to create my HTML presentation.  There are a few ways to create HTML presentation slides, but I personally like slidy the best.  I like slidy because it easily fills the whole screen and also allows for content to go over the edges of the slide.  If content goes outside of the edges of a single slide, you can scroll to see the missing content.  I find this useful if I want to blow up an image or have two plots where I can show one then scroll to the second.  The pandoc command I use looks something like this:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;h2&gt;Step 3 (Optional) - Edit CSS for HTML Presentation&lt;/h2&gt;
 
@@ -1794,15 +1845,13 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I then create a different set of slides using LaTeX that I post on the blackboard site for each of my courses.  Pandoc is how I get the &lt;em&gt;tex&lt;/em&gt; file to compile with LaTeX.  The command is very simple:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pandoc -s inputfile.md -o outfile.tex&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pandoc -s inputfile.md -o outfile.tex&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;Two things I change, I make sure the base text size is 12 pt.  I also make sure to use the &lt;em&gt;float&lt;/em&gt; package and change any figure positions from &lt;em&gt;htbp&lt;/em&gt; to &lt;em&gt;H&lt;/em&gt; which forces the figures to stay in position and not float around.  Then I compile the resulting &lt;em&gt;tex&lt;/em&gt; using Rstudio or from the command line with:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='bash'&gt;pdflatex -interaction=nonstopmode -synctex=1 outfile.tex&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pdflatex -interaction=nonstopmode -synctex=1 outfile.tex&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;In my opinion this creates great looking html presentations that are highly customizable.  One thing to note is that by default to get the slideshow, you need to be connected to the internet.  Both &lt;strong&gt;slidy&lt;/strong&gt; and &lt;strong&gt;mathjax&lt;/strong&gt; refer to javascript files that are on downloaded directly from the web.  You should be able to download these files, store them locally, and refer to the local versions.&lt;/p&gt;
 </content>
@@ -1879,16 +1928,15 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;
 &lt;/table&gt;
 
 
-&lt;p&gt;The addition of the '#bgblue' and '#bgred' tags indicate which cells to change and will also define new id values to assign directly to these cells through CSS.  After adding the tags to the cells to format and converting the markdown file to HTML, it is now time to run the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command within R.  This command will remove the tags from the table, inject CSS into the resulting HTML document, and assign the id to the specific cells.  Below are the commands needed to install the package and post-process the file:&lt;/p&gt;
+&lt;p&gt;The addition of the &#39;#bgblue&#39; and &#39;#bgred&#39; tags indicate which cells to change and will also define new id values to assign directly to these cells through CSS.  After adding the tags to the cells to format and converting the markdown file to HTML, it is now time to run the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command within R.  This command will remove the tags from the table, inject CSS into the resulting HTML document, and assign the id to the specific cells.  Below are the commands needed to install the package and post-process the file:&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(devtools)
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;library(devtools)
 install_github(repo = &amp;quot;highlightHTML&amp;quot;, username = &amp;quot;lebebr01&amp;quot;)
 library(highlightHTML)
 tags &amp;lt;- c(&amp;quot;#bgred {background-color: #FF0000;}&amp;quot;, &amp;quot;#bgblue {background-color: #0000FF;}&amp;quot;)
-highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;path/to/saved/file&amp;quot;, updateCSS = TRUE,
-    tags = tags)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;path/to/saved/file&amp;quot;, updateCSS = TRUE, 
+    tags = tags)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;This results in an HTML table that looks like the following:&lt;/p&gt;
 
@@ -1900,7 +1948,7 @@ highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;
 &lt;/thead&gt;&lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Blue&lt;/td&gt;
-&lt;td id='bgblue'&gt;5 &lt;/td&gt;
+&lt;td id=&#39;bgblue&#39;&gt;5 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Green&lt;/td&gt;
@@ -1912,12 +1960,12 @@ highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Red&lt;/td&gt;
-&lt;td id='bgred'&gt;200&lt;/td&gt;
+&lt;td id=&#39;bgred&#39;&gt;200&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
 
 
-&lt;p&gt;More explanation of the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command, the input argument is the location of the pre-processed HTML file, the output argument is the place the post-processed HTML file is saved (note: if no output argument is given, it will overwrite the input file), the updateCSS argument tells the function whether to inject the CSS or not, finally the tags argument is a vector of the CSS that will be injected into the post-processed HTML file.  The last argument highlights a drawback of the package in it's current state, the user must know some CSS to tell the function what to inject into the HTML file.  On the one hand, CSS is not overly difficult to learn, but some default behavior would be nice.  I hope to add this in the future.&lt;/p&gt;
+&lt;p&gt;More explanation of the &lt;em&gt;highlightHTMLcells&lt;/em&gt; command, the input argument is the location of the pre-processed HTML file, the output argument is the place the post-processed HTML file is saved (note: if no output argument is given, it will overwrite the input file), the updateCSS argument tells the function whether to inject the CSS or not, finally the tags argument is a vector of the CSS that will be injected into the post-processed HTML file.  The last argument highlights a drawback of the package in it&#39;s current state, the user must know some CSS to tell the function what to inject into the HTML file.  On the one hand, CSS is not overly difficult to learn, but some default behavior would be nice.  I hope to add this in the future.&lt;/p&gt;
 
 &lt;p&gt;There you have it, a way to add some formatting to a table written in markdown and being presented in HTML.  Future additions will hopefully add the conditional part into the mix as well.  Stay tuned.&lt;/p&gt;
 </content>
@@ -1933,55 +1981,48 @@ highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;
 2. Format output and copy output into Excel.&lt;br/&gt;
 3. Once in Excel, do lookup tables to generate the report in Excel.&lt;/p&gt;
 
-&lt;p&gt;This process provided a few areas that could introduce errors.  The copying from SPSS into Excel could produce errors and the lookup formula's in Excel can be tricky.  The correct columns need to be specified in the correct destination on another sheet.&lt;/p&gt;
+&lt;p&gt;This process provided a few areas that could introduce errors.  The copying from SPSS into Excel could produce errors and the lookup formula&#39;s in Excel can be tricky.  The correct columns need to be specified in the correct destination on another sheet.&lt;/p&gt;
 
-&lt;p&gt;One of the largest pushes in a school district is to receive the district's test score results and quickly as possible.  I felt that I could create an interactive report through the use of &lt;em&gt;R&lt;/em&gt; and &lt;em&gt;LaTeX&lt;/em&gt; that would greatly enhance the workflow and speed of report generation.&lt;/p&gt;
+&lt;p&gt;One of the largest pushes in a school district is to receive the district&#39;s test score results and quickly as possible.  I felt that I could create an interactive report through the use of &lt;em&gt;R&lt;/em&gt; and &lt;em&gt;LaTeX&lt;/em&gt; that would greatly enhance the workflow and speed of report generation.&lt;/p&gt;
 
 &lt;p&gt;My process involved creating R script files for each report and export the tables for the reports as &lt;em&gt;.tex&lt;/em&gt; files.  The &lt;em&gt;.tex&lt;/em&gt; files were created using the &lt;em&gt;Hmisc&lt;/em&gt; R package, more specifically the &lt;em&gt;latex&lt;/em&gt; function.  The &lt;em&gt;latex&lt;/em&gt; function is great as it offers a lot of control over the output of the resulting &lt;em&gt;.tex&lt;/em&gt; table file.  One thing you can do is conditional formatting of the table, see this document for a more thorough explanation: &lt;a href=&quot;http://biostat.mc.vanderbilt.edu/twiki/pub/Main/StatReport/latexFineControl.pdf&quot;&gt;conditional formatting with the latex function&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Here is a small minimal example.  In the example, suppose we want to calculate the average Melanoma thickness by the status of the person (i.e. did they die from Melanoma, still alive, or died from other causes).&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;library(MASS)   # Load for Melanoma Data
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;library(MASS)   # Load for Melanoma Data
 library(Hmisc)  # Load for latex function
-library(data.table)  # Used for aggregating&lt;/p&gt;
+library(data.table)  # Used for aggregating
 
-&lt;p&gt;mela &amp;lt;- data.table(Melanoma)&lt;/p&gt;
+mela &amp;lt;- data.table(Melanoma)
 
-&lt;h1&gt;Aggregating&lt;/h1&gt;
+# Aggregating
+mela.status &amp;lt;- mela[, list(avgThick = mean(thickness)), by = status]
 
-&lt;p&gt;mela.status &amp;lt;- mela[, list(avgThick = mean(thickness)), by = status]&lt;/p&gt;
-
-&lt;h1&gt;Conditional formatting&lt;/h1&gt;
-
-&lt;p&gt;cellTex &amp;lt;- matrix(rep(&amp;quot;&amp;quot;, NROW(mela.status) * NCOL(mela.status)),
+# Conditional formatting
+cellTex &amp;lt;- matrix(rep(&amp;quot;&amp;quot;, NROW(mela.status) * NCOL(mela.status)),
                   nrow = NROW(mela.status))
 cellTex[,1] &amp;lt;- ifelse(mela.status$avgThick &amp;gt; 4, &amp;quot;cellcolor{red}&amp;quot;,
                   ifelse(mela.status$avgThick &amp;lt; 3, &amp;quot;cellcolor{green}&amp;quot;,
-                         &amp;quot;&amp;quot;))&lt;/p&gt;
+                         &amp;quot;&amp;quot;))
 
-&lt;h1&gt;Shading alternate rows&lt;/h1&gt;
-
-&lt;p&gt;my.rownamesTexCmd &amp;lt;- rep(&amp;quot;&amp;quot;, nrow(mela.status))
+# Shading alternate rows
+my.rownamesTexCmd &amp;lt;- rep(&amp;quot;&amp;quot;, nrow(mela.status))
 index &amp;lt;- (1:nrow(mela.status)/2) == (1:nrow(mela.status)%/%2)
-my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
+my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;
 
-&lt;h1&gt;Creating the .tex file&lt;/h1&gt;
-
-&lt;h1&gt;Note, this is currently printed in R console&lt;/h1&gt;
-
-&lt;p&gt;latex(round(mela.status, 2), title = '', file = '', booktabs = TRUE,
+# Creating the .tex file
+# Note, this is currently printed in R console
+latex(round(mela.status, 2), title = &amp;#39;&amp;#39;, file = &amp;#39;&amp;#39;, booktabs = TRUE, 
       rownamesTexCmd = my.rownamesTexCmd, cellTexCmds = cellTex,
-      rowname = NULL)&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+      rowname = NULL)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;Below is the resulting &lt;em&gt;LaTeX&lt;/em&gt; code that is created from the &lt;em&gt;latex&lt;/em&gt; function. The conditional formatting is the &lt;em&gt;\cellcolor{}&lt;/em&gt; commands.  You need to ensure that the color is defined, either as a default color or one you define in the preamble.  Secondly, the \shadeRow command will shade that row and you need to ensure you have the first line below in your preamble.&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='latex'&gt;% Including a similar command in your preamble to define row shading.
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;% Including a similar command in your preamble to define row shading.
 \providecommand{\shadeRow}{\rowcolor[rgb]{0, 0.99, 0}}
-%
-%
+% 
+% 
 \begin{table}[!tbp]
 \begin{center}
 \begin{tabular}{rr}
@@ -1994,8 +2035,10 @@ my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
 \bottomrule
 \end{tabular}
 \end{center}
-\end{table}&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+\end{table}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
 </content>
  </entry>
  
@@ -2004,88 +2047,89 @@ my.rownamesTexCmd[index] &amp;lt;- &amp;quot;shadeRow&amp;quot;&lt;/p&gt;
    <link href="http://lebebr01.github.com/2013/09/11/BlogLogo/"/>
    <updated>2013-09-11T00:00:00-05:00</updated>
    <id>http://lebebr01.github.com/2013/09/11/BlogLogo</id>
-   <content type="html">&lt;p&gt;Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: &lt;a href=&quot;http://educate-r.org/projects.html&quot;&gt;R packages&lt;/a&gt;.  In addition, I'll likely talk about various topics with statistics, teaching, research, or R in general.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: &lt;a href=&quot;http://educate-r.org/projects.html&quot;&gt;R packages&lt;/a&gt;.  In addition, I&#39;ll likely talk about various topics with statistics, teaching, research, or R in general.&lt;/p&gt;
 
-&lt;p&gt;For my first post, I want to highlight my code to generate my blog logo.  The code took a lot of trial and error and definitely is dependent on the size of the image file that is outputted.  By far the most difficult part of the logo was the R logo, specifically the grey oval of the R logo.  I tried to get the oval to change sizes at the correct point and to do this I created a size variable in my data.frame and passed this variable to &lt;strong&gt;ggplot2&lt;/strong&gt; to make the size change.  It isn't perfect, but is a bit unique.&lt;/p&gt;
+&lt;p&gt;For my first post, I want to highlight my code to generate my blog logo.  The code took a lot of trial and error and definitely is dependent on the size of the image file that is outputted.  By far the most difficult part of the logo was the R logo, specifically the grey oval of the R logo.  I tried to get the oval to change sizes at the correct point and to do this I created a size variable in my data.frame and passed this variable to &lt;strong&gt;ggplot2&lt;/strong&gt; to make the size change.  It isn&#39;t perfect, but is a bit unique.&lt;/p&gt;
 
 &lt;p&gt;The next logo I need to develop is my favicon.ico.  Send me suggestions in the comments of this post.&lt;/p&gt;
 
-&lt;p&gt;  &lt;div&gt;
-    &lt;pre&gt;&lt;code class='r'&gt;### Creating words with connected points.
-capE &amp;lt;- data.frame(x = c(1.5,1,1,1.25,1,1,1.5),
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;### Creating words with connected points.
+capE &amp;lt;- data.frame(x = c(1.5,1,1,1.25,1,1,1.5), 
                    y = c(3,3,2,2,2,1,1))
-capE$time &amp;lt;- 1:nrow(capE)&lt;/p&gt;
+capE$time &amp;lt;- 1:nrow(capE)
 
-&lt;p&gt;letd &amp;lt;- data.frame(x = c(2, 1.75, 1.65, 1.75, 2, 2),
+letd &amp;lt;- data.frame(x = c(2, 1.75, 1.65, 1.75, 2, 2), 
                    y = c(2,2,1.5,1,1,2.5))
-letd$time &amp;lt;- 1:nrow(letd)&lt;/p&gt;
+letd$time &amp;lt;- 1:nrow(letd)
 
-&lt;p&gt;letu &amp;lt;- data.frame(x = c(2.2, 2.2, 2.35, 2.55, 2.55, 2.55),
+letu &amp;lt;- data.frame(x = c(2.2, 2.2, 2.35, 2.55, 2.55, 2.55), 
                    y = c(2,1.15,1,1.15,2,1))
-letu$time &amp;lt;- 1:nrow(letu)&lt;/p&gt;
+letu$time &amp;lt;- 1:nrow(letu)
 
-&lt;p&gt;letc &amp;lt;- data.frame(x = c(3.05, 2.8, 2.7, 2.8, 3.05),
+letc &amp;lt;- data.frame(x = c(3.05, 2.8, 2.7, 2.8, 3.05), 
                    y = c(2,2,1.5,1,1))
-letc$time &amp;lt;- 1:nrow(letc)&lt;/p&gt;
+letc$time &amp;lt;- 1:nrow(letc)
 
-&lt;p&gt;leta &amp;lt;- data.frame(x = c(3.55, 3.35, 3.2, 3.35, 3.55, 3.55, 3.55),
+leta &amp;lt;- data.frame(x = c(3.55, 3.35, 3.2, 3.35, 3.55, 3.55, 3.55), 
                    y = c(1.85, 2, 1.5, 1, 1.15, 1.85, 1))
-leta$time &amp;lt;- 1:nrow(leta)&lt;/p&gt;
+leta$time &amp;lt;- 1:nrow(leta)
 
-&lt;p&gt;lett &amp;lt;- data.frame(x = c(3.75, 3.75, 3.575, 3.925, 3.75, 3.75),
+lett &amp;lt;- data.frame(x = c(3.75, 3.75, 3.575, 3.925, 3.75, 3.75), 
                    y = c(2.5, 2.25, 2.25, 2.25, 2.25, 1))
-lett$time &amp;lt;- 1:nrow(lett)&lt;/p&gt;
+lett$time &amp;lt;- 1:nrow(lett)
 
-&lt;p&gt;lete &amp;lt;- data.frame(x = c(4.3, 4.05, 3.95, 4.125, 4.3, 4.125, 3.95),
+lete &amp;lt;- data.frame(x = c(4.3, 4.05, 3.95, 4.125, 4.3, 4.125, 3.95), 
                    y = c(1.05, 1, 1.75, 2, 1.75, 1.6, 1.75))
-lete$time &amp;lt;- 1:nrow(lete)&lt;/p&gt;
+lete$time &amp;lt;- 1:nrow(lete)
 
-&lt;p&gt;rlogo &amp;lt;- data.frame(x = c(5.1, 5.1, 5.3, 5.4, 5.45, 5.4, 5.3, 5.1, 5.2,
+rlogo &amp;lt;- data.frame(x = c(5.1, 5.1, 5.3, 5.4, 5.45, 5.4, 5.3, 5.1, 5.2,
                           5.25, 5.35, 5.45),
                     y = c(.5, 2, 2, 1.85, 1.675, 1.4, 1.25, 1.25, 1.25,
                           1.2, 1.05, .5))
-rlogo$time &amp;lt;- 1:nrow(rlogo)&lt;/p&gt;
+rlogo$time &amp;lt;- 1:nrow(rlogo)
 
-&lt;p&gt;rcirclogo &amp;lt;- data.frame(x = c(5.6, 5.6, 5.55, 5.45, 5.35, 5.25, 5.15,
+rcirclogo &amp;lt;- data.frame(x = c(5.6, 5.6, 5.55, 5.45, 5.35, 5.25, 5.15,
                               5.05, 4.95, 4.85,4.75,  4.75, 4.75,
                               4.8, 4.95, 5.05, 5.15, 5.25, 5.35, 5.45,
                               5.55, 5.6, 5.6),
                         y= c(1.65, 1.8, 2, 2.15, 2.25, 2.3, 2.3, 2.25,
-                             2.15, 2.05, 1.85, 1.7, 1.55,
+                             2.15, 2.05, 1.85, 1.7, 1.55, 
                              1.35, 1.15, 1.05, .95, .95, 1.05, 1.15,
                              1.35, 1.55, 1.65),
                         size = c(2.25, 2.75, 3, 3.5, 4, 4, 4.5, 5, 5,
                                  5, 5, 5, 5, 4.5, 4, 3.75, 3.25, 3,
                                  2.75, 2.5, 2.25, 2.25, 2))
-rcirclogo$time &amp;lt;- 1:nrow(rcirclogo)&lt;/p&gt;
+rcirclogo$time &amp;lt;- 1:nrow(rcirclogo)
 
-&lt;p&gt;library(ggplot2)
-library(scales)&lt;/p&gt;
 
-&lt;p&gt;p &amp;lt;- ggplot(capE, aes(x = x, y = y)) + theme_bw()
-p + geom_path(lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = letd, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = letu, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = letc, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = leta, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = lett,lwd = 3, lineend = &amp;quot;round&amp;quot;) +
+
+library(ggplot2)
+library(scales)
+
+p &amp;lt;- ggplot(capE, aes(x = x, y = y)) + theme_bw()
+p + geom_path(lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = letd, lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = letu, lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = letc, lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = leta, lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = lett,lwd = 3, lineend = &amp;quot;round&amp;quot;) + 
   geom_path(data = lete, lwd = 3, lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = rcirclogo, aes(size = size), color = &amp;quot;grey&amp;quot;,
-            lineend = &amp;quot;round&amp;quot;, linejoin = &amp;quot;bevel&amp;quot;) +
-  geom_path(data = rlogo, color = &amp;quot;steelblue&amp;quot;, lwd = 6,
-            lineend = &amp;quot;round&amp;quot;) +
-  geom_path(data = rlogo, color = &amp;quot;grey60&amp;quot;, lwd = .5,
+  geom_path(data = rcirclogo, aes(size = size), color = &amp;quot;grey&amp;quot;, 
+            lineend = &amp;quot;round&amp;quot;, linejoin = &amp;quot;bevel&amp;quot;) + 
+  geom_path(data = rlogo, color = &amp;quot;steelblue&amp;quot;, lwd = 6, 
+            lineend = &amp;quot;round&amp;quot;) + 
+  geom_path(data = rlogo, color = &amp;quot;grey60&amp;quot;, lwd = .5, 
             lineend= &amp;quot;round&amp;quot;) +
-  theme(legend.position = &amp;quot;none&amp;quot;, text = element_blank(),
+  theme(legend.position = &amp;quot;none&amp;quot;, text = element_blank(), 
         panel.grid = element_blank(),
-        plot.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+        plot.background = element_rect(fill = &amp;quot;transparent&amp;quot;, 
                                        color = NA),
-        panel.background = element_rect(fill = &amp;quot;transparent&amp;quot;,
+        panel.background = element_rect(fill = &amp;quot;transparent&amp;quot;, 
                                         color = NA),
         panel.border = element_blank(),
         axis.line = element_blank(), axis.ticks = element_blank(),
-        line = element_blank()) + scale_size(range = c(2, 8))&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+        line = element_blank()) + scale_size(range = c(2, 8))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/logo.png&quot; alt=&quot;plot of chunk logo&quot; /&gt;&lt;/p&gt;
 </content>

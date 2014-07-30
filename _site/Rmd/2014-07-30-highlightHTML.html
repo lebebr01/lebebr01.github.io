@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Format Markdown Documents in R</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -54,14 +54,13 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/07/30/highlightHTML/" title="Format Markdown Documents in R" rel="bookmark">Format Markdown Documents in R</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.</p>
+   <!-- <h2>Format Markdown Documents in R</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/Rmd/2014-07-30-highlightHTML.html" title="Format Markdown Documents in R" rel="bookmark">Format Markdown Documents in R</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.</p>
 
 <p>The <strong><a href="https://github.com/lebebr01/highlightHTML">highlightHTML</a></strong> package aims to develop a flexible approach to add formatting to an html document by injecting CSS into the file.  To do this, tags are created within the markdown document telling the R routine where to look for these tags.  If you are familiar with the Twitterverse, this package will be equally comfortable.  The tags take the form of the hashtags on Twitter.  As an example, #bgblue, would be a command to change the background to blue.</p>
 
@@ -114,7 +113,8 @@ highlightHTML(input = "path/to/infile.html", output = "path/to/outfile.html",
 
 <p>Try it out and let me know of new features or bugs as you work through the package.</p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -131,33 +131,34 @@ highlightHTML(input = "path/to/infile.html", output = "path/to/outfile.html",
     <a href="/tags.html#html-ref" >html</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/07/30/highlightHTML/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-07-30 00:00:00 -0500">30 Jul 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/blog.html" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page3/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title=""></abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/Rmd/2014-07-30-highlightHTML.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

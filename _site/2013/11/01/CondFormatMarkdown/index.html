@@ -128,14 +128,13 @@
 
 <p>The addition of the '#bgblue' and '#bgred' tags indicate which cells to change and will also define new id values to assign directly to these cells through CSS.  After adding the tags to the cells to format and converting the markdown file to HTML, it is now time to run the <em>highlightHTMLcells</em> command within R.  This command will remove the tags from the table, inject CSS into the resulting HTML document, and assign the id to the specific cells.  Below are the commands needed to install the package and post-process the file:</p>
 
-<p>  <div>
-    <pre><code class='r'>library(devtools)
+<div class="highlight"><pre><code class="language-r" data-lang="r">library(devtools)
 install_github(repo = &quot;highlightHTML&quot;, username = &quot;lebebr01&quot;)
 library(highlightHTML)
 tags &lt;- c(&quot;#bgred {background-color: #FF0000;}&quot;, &quot;#bgblue {background-color: #0000FF;}&quot;)
-highlightHTMLcells(input = &quot;path/to/file&quot;, output = &quot;path/to/saved/file&quot;, updateCSS = TRUE,
-    tags = tags)</code></pre>
-  </div></p>
+highlightHTMLcells(input = &quot;path/to/file&quot;, output = &quot;path/to/saved/file&quot;, updateCSS = TRUE, 
+    tags = tags)</code></pre></div>
+
 
 <p>This results in an HTML table that looks like the following:</p>
 

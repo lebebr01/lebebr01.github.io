@@ -81,23 +81,22 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 
 <p>After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.</p>
 
-<p>  <div>
-    <pre><code class='javascript'>&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt; 
  &lt;style&gt;
   .rChart {
     display: block;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
     width: 800px;
     height: 400px;
     font-size: 200%;
-  }<br/>
+  }  
   &lt;/style&gt;
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -106,249 +105,249 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 &quot;height&quot;:            400,
 &quot;credits&quot;: {
  &quot;href&quot;: null,
-&quot;text&quot;: null
+&quot;text&quot;: null 
 },
 &quot;exporting&quot;: {
- &quot;enabled&quot;: false
+ &quot;enabled&quot;: false 
 },
 &quot;title&quot;: {
- &quot;text&quot;: null
+ &quot;text&quot;: null 
 },
 &quot;yAxis&quot;: [
  {
  title: {
  text: &quot;Convergence Rate&quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &#39;%&#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
 &quot;max&quot;:            100,
 &quot;tickInterval&quot;:             10 ,
 minRange: 10
-}
+} 
 ],
 &quot;series&quot;: [
  {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-   68.38
+   68.38 
 ],
 [ &quot;AR1&quot;,
-   64.88
+   64.88 
 ],
 [ &quot;MA1&quot;,
-   55.12
+   55.12 
 ],
 [ &quot;MA2&quot;,
-   61.98
+   61.98 
 ],
 [ &quot;ARMA&quot;,
-   42.17
-]
+   42.17 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
-                });
+                    color: &#39;#e41a1c&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#e41a1c&quot;,
 &quot;name&quot;: &quot;AR1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Solid',
+dashStyle: &#39;Solid&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
-}
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-  65.1
+  65.1 
 ],
 [ &quot;AR1&quot;,
-   60.45
+   60.45 
 ],
 [ &quot;MA1&quot;,
-  63.68
+  63.68 
 ],
 [ &quot;MA2&quot;,
-  54.88
+  54.88 
 ],
 [ &quot;ARMA&quot;,
-   63.6
-]
+   63.6 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
-                });
+                    color: &#39;#377eb8&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#377eb8&quot;,
 &quot;name&quot;: &quot;ARMA&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &#39;ShortDash&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
+ &quot;radius&quot;:              6 
+} 
 },
 {
  &quot;data&quot;: [
  [&quot;Ind&quot;,
-  72.48
+  72.48 
 ],
 [ &quot;AR1&quot;,
-  93.88
+  93.88 
 ],
 [ &quot;MA1&quot;,
-  92.23
+  92.23 
 ],
 [ &quot;MA2&quot;,
-  95.62
+  95.62 
 ],
 [ &quot;ARMA&quot;,
-  98.37
-]
+  98.37 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
-                });
+                    color: &#39;#4daf4a&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#4daf4a&quot;,
 &quot;name&quot;: &quot;Ind&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Dash',
+dashStyle: &#39;Dash&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
+ &quot;radius&quot;:              6 
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-  71.02
+  71.02 
 ],
 [ &quot;AR1&quot;,
-   81.37
+   81.37 
 ],
 [ &quot;MA1&quot;,
-   69.15
+   69.15 
 ],
 [ &quot;MA2&quot;,
-   84.5
+   84.5 
 ],
 [ &quot;ARMA&quot;,
-   88.02
-]
+   88.02 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
-                });
+                    color: &#39;#984ea3&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#984ea3&quot;,
 &quot;name&quot;: &quot;MA1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &#39;ShortDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
-}
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-   67.23
+   67.23 
 ],
 [ &quot;AR1&quot;,
-   70.78
+   70.78 
 ],
 [ &quot;MA1&quot;,
-   65.93
+   65.93 
 ],
 [ &quot;MA2&quot;,
-   68.83
+   68.83 
 ],
 [ &quot;ARMA&quot;,
-   72.9
-]
+   72.9 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
-                });
+                    color: &#39;#ff7f00&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#ff7f00&quot;,
 &quot;name&quot;: &quot;MA2&quot;,
 &quot;type&quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &#39;DashDot&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-}
+ &quot;radius&quot;:              6 
+} 
+} 
 ],
 &quot;xAxis&quot;: [
  {
  title: {
  text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
-}
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
+} 
 ],
 &quot;subtitle&quot;: {
- &quot;text&quot;: null
+ &quot;text&quot;: null 
 },
 &quot;legend&quot;: {
  &quot;verticalAlign&quot;: &quot;top&quot;,
@@ -356,43 +355,41 @@ labels: {
 &quot;layout&quot;: &quot;vertical&quot;,
 symbolWidth: 40,
 &quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot;
-}
+ &quot;text&quot;: &quot;Fitted SC&quot; 
+} 
 },
 &quot;plotOptions&quot;: {
  &quot;series&quot;: {
- &quot;lineWidth&quot;:   4
-}
+ &quot;lineWidth&quot;:   4 
+} 
 },
 &quot;id&quot;: &quot;chart1&quot;,
 &quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;,
+ &quot;renderTo&quot;: &quot;chart1&quot;, 
  zoomType: &quot;y&quot;,
  &quot;style&quot;: {
  fontSize: &quot;24px&quot;
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
-}
+} 
 });
         });
     })(jQuery);
-&lt;/script&gt;</code></pre>
-  </div></p>
+&lt;/script&gt;</code></pre></div>
+
 
 <p>Once you have that in markdown format, you can turn it into a <em>slidy</em> html presentation with the following command in <em>pandoc</em>:</p>
 
-<p>  <div>
-    <pre><code class='bash'>pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre>
-  </div></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre></div>
+
 
 <p>This gives you a file that looks something like this:</p>
 
-<p>  <div>
-    <pre><code class='html'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
@@ -407,27 +404,27 @@ symbolWidth: 40,
     href=&quot;http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css&quot; /&gt;
 &lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
     charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
  &lt;style&gt;
   .rChart {
     display: block;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
     width: 1000px;
     height: 800px;
     font-size: 200%;
-  }<br/>
+  }  
   &lt;/style&gt;
 &lt;script src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;MathJax.Hub.Queue([&quot;Typeset&quot;,MathJax.Hub]);&lt;/script&gt;
  &lt;!--   &lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
     charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; --&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div id = 'chart1' class = 'rChart'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart&#39;&gt;&lt;/div&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -436,249 +433,249 @@ symbolWidth: 40,
 &quot;height&quot;:            600,
 &quot;credits&quot;: {
  &quot;href&quot;: null,
-&quot;text&quot;: null
+&quot;text&quot;: null 
 },
 &quot;exporting&quot;: {
- &quot;enabled&quot;: false
+ &quot;enabled&quot;: false 
 },
 &quot;title&quot;: {
- &quot;text&quot;: null
+ &quot;text&quot;: null 
 },
 &quot;yAxis&quot;: [
  {
  title: {
  text: &quot;Convergence Rate&quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &#39;%&#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
 &quot;max&quot;:            100,
 &quot;tickInterval&quot;:             10 ,
 minRange: 10
-}
+} 
 ],
 &quot;series&quot;: [
  {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-  68.38
+  68.38 
 ],
 [ &quot;AR1&quot;,
-  64.88
+  64.88 
 ],
 [ &quot;MA1&quot;,
-  55.12
+  55.12 
 ],
 [ &quot;MA2&quot;,
-  61.98
+  61.98 
 ],
 [ &quot;ARMA&quot;,
-  42.17
-]
+  42.17 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
-                });
+                    color: &#39;#e41a1c&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#e41a1c&quot;,
 &quot;name&quot;: &quot;AR1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Solid',
+dashStyle: &#39;Solid&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
-}
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-  65.1
+  65.1 
 ],
 [ &quot;AR1&quot;,
-  60.45
+  60.45 
 ],
 [ &quot;MA1&quot;,
-  63.68
+  63.68 
 ],
 [ &quot;MA2&quot;,
-  54.88
+  54.88 
 ],
 [ &quot;ARMA&quot;,
-   63.6
-]
+   63.6 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
-                });
+                    color: &#39;#377eb8&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#377eb8&quot;,
 &quot;name&quot;: &quot;ARMA&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &#39;ShortDash&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
+ &quot;radius&quot;:              6 
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-  72.48
+  72.48 
 ],
 [ &quot;AR1&quot;,
-  93.88
+  93.88 
 ],
 [ &quot;MA1&quot;,
-   92.23
+   92.23 
 ],
 [ &quot;MA2&quot;,
-   95.62
+   95.62 
 ],
 [ &quot;ARMA&quot;,
-   98.37
-]
+   98.37 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
-                });
+                    color: &#39;#4daf4a&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#4daf4a&quot;,
 &quot;name&quot;: &quot;Ind&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Dash',
+dashStyle: &#39;Dash&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
+ &quot;radius&quot;:              6 
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-   71.02
+   71.02 
 ],
 [ &quot;AR1&quot;,
-   81.37
+   81.37 
 ],
 [ &quot;MA1&quot;,
-   69.15
+   69.15 
 ],
 [ &quot;MA2&quot;,
-   84.5
+   84.5 
 ],
 [ &quot;ARMA&quot;,
-   88.02
-]
+   88.02 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
-                });
+                    color: &#39;#984ea3&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#984ea3&quot;,
 &quot;name&quot;: &quot;MA1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &#39;ShortDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
-}
+} 
 },
 {
  &quot;data&quot;: [
  [ &quot;Ind&quot;,
-   67.23
+   67.23 
 ],
 [ &quot;AR1&quot;,
-   70.78
+   70.78 
 ],
 [ &quot;MA1&quot;,
-   65.93
+   65.93 
 ],
 [ &quot;MA2&quot;,
-   68.83
+   68.83 
 ],
 [ &quot;ARMA&quot;,
-    72.9
-]
+    72.9 
+] 
 ],
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
-                });              <br/>
+                    color: &#39;black&#39;
+                });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
-                });
+                    color: &#39;#ff7f00&#39;
+                }); 
             }
         },
 &quot;color&quot;: &quot;#ff7f00&quot;,
 &quot;name&quot;: &quot;MA2&quot;,
 &quot;type&quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &#39;DashDot&#39;,
 &quot;marker&quot;: {
- &quot;radius&quot;:              6
-}
-}
+ &quot;radius&quot;:              6 
+} 
+} 
 ],
 &quot;xAxis&quot;: [
  {
  title: {
  text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ]
-}
+&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
+} 
 ],
 &quot;subtitle&quot;: {
- &quot;text&quot;: null
+ &quot;text&quot;: null 
 },
 &quot;legend&quot;: {
  &quot;verticalAlign&quot;: &quot;top&quot;,
@@ -686,35 +683,35 @@ labels: {
 &quot;layout&quot;: &quot;vertical&quot;,
 symbolWidth: 40,
 &quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot;
-}
+ &quot;text&quot;: &quot;Fitted SC&quot; 
+} 
 },
 &quot;plotOptions&quot;: {
  &quot;series&quot;: {
- &quot;lineWidth&quot;:              4
-}
+ &quot;lineWidth&quot;:              4 
+} 
 },
 &quot;id&quot;: &quot;chart1&quot;,
 &quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;,
+ &quot;renderTo&quot;: &quot;chart1&quot;, 
  zoomType: &quot;y&quot;,
  &quot;style&quot;: {
  fontSize: &quot;24px&quot;
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
-}
+} 
 });
         });
     })(jQuery);
 &lt;/script&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-  </div></p>
+&lt;/html&gt;</code></pre></div>
+
 
 <p>That should give you a html presentation with an interactive Javascript based figure.</p>
 

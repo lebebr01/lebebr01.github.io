@@ -82,11 +82,10 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 
 After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.
 
-  <div>
-    <pre><code class='javascript'>&lt;script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt; 
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt; 
  &lt;style&gt;
   .rChart {
     display: block;
@@ -97,8 +96,8 @@ After I ran this command in R, I edited the resulting Javascript code that was p
     font-size: 200%;
   }  
   &lt;/style&gt;
-&lt;div id = 'chart1' class = 'rChart highcharts'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -120,16 +119,16 @@ After I ran this command in R, I edited the resulting Javascript code that was p
  title: {
  text: &quot;Convergence Rate&quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &#39;%&#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
@@ -165,19 +164,19 @@ minRange: 10
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
+                    color: &#39;#e41a1c&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#e41a1c&quot;,
 &quot;name&quot;: &quot;AR1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Solid',
+dashStyle: &#39;Solid&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -208,19 +207,19 @@ dashStyle: 'Solid',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
+                    color: &#39;#377eb8&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#377eb8&quot;,
 &quot;name&quot;: &quot;ARMA&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &#39;ShortDash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -251,19 +250,19 @@ dashStyle: 'ShortDash',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
+                    color: &#39;#4daf4a&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#4daf4a&quot;,
 &quot;name&quot;: &quot;Ind&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Dash',
+dashStyle: &#39;Dash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -294,19 +293,19 @@ dashStyle: 'Dash',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
+                    color: &#39;#984ea3&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#984ea3&quot;,
 &quot;name&quot;: &quot;MA1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &#39;ShortDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -337,19 +336,19 @@ dashStyle: 'ShortDot',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
+                    color: &#39;#ff7f00&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#ff7f00&quot;,
 &quot;name&quot;: &quot;MA2&quot;,
 &quot;type&quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &#39;DashDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -360,14 +359,14 @@ dashStyle: 'DashDot',
  title: {
  text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
 &quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
@@ -399,28 +398,22 @@ symbolWidth: 40,
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
 } 
 });
         });
     })(jQuery);
-&lt;/script&gt;</code></pre>
-  </div>
-
+&lt;/script&gt;</code></pre></div>
 
 Once you have that in markdown format, you can turn it into a *slidy* html presentation with the following command in *pandoc*:
 
-  <div>
-    <pre><code class='bash'>pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre>
-  </div>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre></div>
 
 This gives you a file that looks something like this:
 
-  <div>
-    <pre><code class='html'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
@@ -434,10 +427,10 @@ This gives you a file that looks something like this:
   &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen, projection, print&quot;
     href=&quot;stylesheets/slidy.css&quot; /&gt;
 &lt;script src=&quot;stylesheets/slidy.js&quot; charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=stylesheets/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=stylesheets/highcharts.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=stylesheets/highcharts-more.js&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src=stylesheets/exporting.js&gt;&lt;/script&gt; 
+&lt;script type=&#39;text/javascript&#39; src=stylesheets/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=stylesheets/highcharts.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=stylesheets/highcharts-more.js&gt;&lt;/script&gt;
+&lt;script type=&#39;text/javascript&#39; src=stylesheets/exporting.js&gt;&lt;/script&gt; 
  &lt;style&gt;
   .rChart {
     display: block;
@@ -453,8 +446,8 @@ This gives you a file that looks something like this:
     charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; --&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div id = 'chart1' class = 'rChart'&gt;&lt;/div&gt;
-&lt;script type='text/javascript'&gt;
+&lt;div id = &#39;chart1&#39; class = &#39;rChart&#39;&gt;&lt;/div&gt;
+&lt;script type=&#39;text/javascript&#39;&gt;
     (function($){
         $(function () {
             var chart = new Highcharts.Chart({
@@ -476,16 +469,16 @@ This gives you a file that looks something like this:
  title: {
  text: &quot;Convergence Rate&quot;,
   style: {
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
    }
  },
  labels: {
   formatter: function() {
-   return this.value + '%';
+   return this.value + &#39;%&#39;;
   },
   style: {
-   fontSize: '18px'
+   fontSize: &#39;18px&#39;
   }
  },
 &quot;min&quot;:              0,
@@ -521,19 +514,19 @@ minRange: 10
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#e41a1c'
+                    color: &#39;#e41a1c&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#e41a1c&quot;,
 &quot;name&quot;: &quot;AR1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Solid',
+dashStyle: &#39;Solid&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -564,19 +557,19 @@ dashStyle: 'Solid',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#377eb8'
+                    color: &#39;#377eb8&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#377eb8&quot;,
 &quot;name&quot;: &quot;ARMA&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDash',
+dashStyle: &#39;ShortDash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -607,19 +600,19 @@ dashStyle: 'ShortDash',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#4daf4a'
+                    color: &#39;#4daf4a&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#4daf4a&quot;,
 &quot;name&quot;: &quot;Ind&quot;,
 &quot;type&quot;: null,
-dashStyle: 'Dash',
+dashStyle: &#39;Dash&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -650,19 +643,19 @@ dashStyle: 'Dash',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#984ea3'
+                    color: &#39;#984ea3&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#984ea3&quot;,
 &quot;name&quot;: &quot;MA1&quot;,
 &quot;type&quot;: null,
-dashStyle: 'ShortDot',
+dashStyle: &#39;ShortDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6
 } 
@@ -693,19 +686,19 @@ dashStyle: 'ShortDot',
 events: {
             mouseOver: function () {
                 this.update({
-                    color: 'black'
+                    color: &#39;black&#39;
                 });                
             },
             mouseOut: function () {
                 this.update({
-                    color: '#ff7f00'
+                    color: &#39;#ff7f00&#39;
                 }); 
             }
         },
 &quot;color&quot;: &quot;#ff7f00&quot;,
 &quot;name&quot;: &quot;MA2&quot;,
 &quot;type&quot;: null,
-dashStyle: 'DashDot',
+dashStyle: &#39;DashDot&#39;,
 &quot;marker&quot;: {
  &quot;radius&quot;:              6 
 } 
@@ -716,14 +709,14 @@ dashStyle: 'DashDot',
  title: {
  text: &quot;Generated Serial Correlation Structure&quot;,
   style:{
-   fontWeight: 'bold',
-   fontSize: '20px'
+   fontWeight: &#39;bold&#39;,
+   fontSize: &#39;20px&#39;
  }
 },
 labels: {
  style: {
-  fontSize: '18px',
-  fontWeight: 'bold'
+  fontSize: &#39;18px&#39;,
+  fontWeight: &#39;bold&#39;
  }
 },
 &quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
@@ -755,7 +748,7 @@ symbolWidth: 40,
  },
  resetZoomButton: {
   position: {
-   align: 'left'
+   align: &#39;left&#39;
   }
  }
 } 
@@ -765,9 +758,7 @@ symbolWidth: 40,
 &lt;/script&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-  </div>
-
+&lt;/html&gt;</code></pre></div>
 
 That should give you a html presentation with an interactive Javascript based figure.
 
