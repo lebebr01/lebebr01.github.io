@@ -7,6 +7,60 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Stacked bar charts, why not a line graph?</title>
+				<description>&lt;p&gt;I often see graphs that are poorly implemented in that they do not achieve their goal.  One such type of graph that I see are dodged bar charts.  Here is an example of a dodged bar chart summarizing the number of all star players by team (focusing specifically on the AL central division) and year from the &lt;em&gt;Lahman&lt;/em&gt; r package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+
+AllstarFull$selected &amp;lt;- 1
+
+numAS &amp;lt;- AllstarFull  %&amp;gt;% 
+  filter(yearID &amp;gt; 2006, lgID == &#39;AL&#39;, teamID %in% c(&#39;MIN&#39;, &#39;CLE&#39;, &#39;DET&#39;, &#39;CHA&#39;, &#39;KCA&#39;)) %&amp;gt;%
+  group_by(teamID, yearID) %&amp;gt;%
+  summarise(number = sum(selected))
+
+b &amp;lt;- ggplot(numAS, aes(x = teamID, y = number, fill = factor(yearID))) + theme_bw()
+b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
+  scale_fill_brewer(&quot;Year&quot;, palette = &quot;Dark2&quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;figs/bar.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note: If you are curious from the above graph, there appears to be two typos in the teamIDs, where CHA should be CHW (Chicago White Sox) and KCA should be KCR (Kansas City Royals).&lt;/p&gt;
+
+&lt;p&gt;The plot above can be good for a few things, predominantly for comparison within a team. It is more difficult to compare between teams (although not impossible).  One way to possibly improve the plot would be to add the number either above each bar or inside of each bar.  This can be done in &lt;em&gt;ggplot2&lt;/em&gt; with the &lt;em&gt;geom_text&lt;/em&gt; function.  For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;b &amp;lt;- ggplot(numAS, aes(x = teamID, y = number, fill = factor(yearID))) + theme_bw()
+b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
+  scale_fill_brewer(&quot;Year&quot;, palette = &quot;Dark2&quot;) + 
+  geom_text(aes(label = number), position = position_dodge(width = 0.9), 
+            vjust = 1.5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;figs/bartext.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A better alternative to a dodged bar chart in my opinion would be a simple line graph.  The line graph simplifies the graph to only include one variable on the x-axis and uses colors or shapes to differentiate the teams. See below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;l &amp;lt;- ggplot(numAS, aes(x = yearID, y = number, color = teamID, shape = teamID))
+l + geom_point(size = 4) + geom_line(size = 1) +
+  scale_y_continuous(limits = c(0, 7), expand = c(0,0)) + 
+  scale_color_brewer(&quot;Team&quot;, palette = &quot;Dark2&quot;) + scale_shape_discrete(&quot;Team&quot;) + 
+  xlab(&quot;Year&quot;) + theme_bw()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;figs/line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. As always, you could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  You could see my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 05 Aug 2014 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2014/08/05/trendgraphics/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/08/05/trendgraphics/</guid>
+			</item>
+		
+			<item>
 				<title>Format Markdown Documents in R</title>
 				<description>&lt;p&gt;Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.&lt;/p&gt;
 
@@ -51,7 +105,7 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 &lt;p&gt;This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
 &lt;img src=&quot;figs/mwe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;educate-r.org/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3&gt;Upcoming Features&lt;/h3&gt;
 
@@ -1559,146 +1613,6 @@ mtcars %.%
 				<pubDate>Fri, 24 Jan 2014 00:00:00 -0600</pubDate>
 				<link>http://educate-r.org//2014/01/24/usePlyr/</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/01/24/usePlyr/</guid>
-			</item>
-		
-			<item>
-				<title>Two of my favorite data.table features</title>
-				<description>&lt;p&gt;When I started to use the &lt;em&gt;data.table&lt;/em&gt; package I was primarily using it to aggregate.  I had read about &lt;em&gt;data.table&lt;/em&gt; and its blazing speed compared to the other options from base or the &lt;em&gt;plyr&lt;/em&gt; package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using &lt;em&gt;data.table&lt;/em&gt; to do the same calculations I didn&#39;t need to wait 5 minutes to see the calculated values.&lt;/p&gt;
-
-&lt;p&gt;The speed of &lt;em&gt;data.table&lt;/em&gt; is publicized widely, however there are two features found in &lt;em&gt;data.table&lt;/em&gt; that are not talked about as frequently that I use very often.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2&gt;Add aggregated variables to the raw data file&lt;/h2&gt;
-
-&lt;p&gt;The ability to add aggregated variables to the raw data file can be very helpful in numerous data situations.  At Saint Paul Public Schools I used this feature to give differing levels of data to external clients requesting data.  I also used this feature when creating graphics.  Outside of the district world, this feature is extremely helpful when fitting linear mixed models with &lt;em&gt;lme4&lt;/em&gt; or &lt;em&gt;nlme&lt;/em&gt;.  Adding aggregated variables is needed if you want to add variables at any of the cluster levels (unless you calculate them on the fly with the &lt;strong&gt;I()&lt;/strong&gt; command).  Instead of creating a set of aggregated variables in a new data frame and merging back in, &lt;em&gt;data.table&lt;/em&gt; allows you to do it one one command.  Here is a small example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# generate a small dataset
-set.seed(1234)
-smalldat &amp;lt;- data.frame(group1 = rep(1:2, each = 5), 
-                       group2 = rep(c(&#39;a&#39;,&#39;b&#39;), times = 5), 
-                       x = rnorm(10))
-
-# convert to data.frame to data.table
-library(data.table)
-smalldat &amp;lt;- data.table(smalldat)
-
-# convert aggregated variable into raw data file
-smalldat[, aggGroup1 := mean(x), by = group1]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4&gt;Output&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1
-##  1:      1      a -1.2071   -0.3524
-##  2:      1      b  0.2774   -0.3524
-##  3:      1      a  1.0844   -0.3524
-##  4:      1      b -2.3457   -0.3524
-##  5:      1      a  0.4291   -0.3524
-##  6:      2      b  0.5061   -0.4140
-##  7:      2      a -0.5747   -0.4140
-##  8:      2      b -0.5466   -0.4140
-##  9:      2      a -0.5645   -0.4140
-## 10:      2      b -0.8900   -0.4140
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# aggregate with 2 variables
-smalldat[, aggGroup1.2 := mean(x), by = list(group1, group2)]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4&gt;Output&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1 aggGroup1.2
-##  1:      1      a -1.2071   -0.3524      0.1022
-##  2:      1      b  0.2774   -0.3524     -1.0341
-##  3:      1      a  1.0844   -0.3524      0.1022
-##  4:      1      b -2.3457   -0.3524     -1.0341
-##  5:      1      a  0.4291   -0.3524      0.1022
-##  6:      2      b  0.5061   -0.4140     -0.3102
-##  7:      2      a -0.5747   -0.4140     -0.5696
-##  8:      2      b -0.5466   -0.4140     -0.3102
-##  9:      2      a -0.5645   -0.4140     -0.5696
-## 10:      2      b -0.8900   -0.4140     -0.3102
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The key part of the syntax is the &lt;strong&gt;:=&lt;/strong&gt;, which tells &lt;em&gt;data.table&lt;/em&gt; to compute an aggregated variable and merge it back into the original data.  This is very compact syntax to create aggregated variables that are automatically placed within the original data.  The only drawback is the inability to create more than one aggregated variable at a time.  If I wanted to created the mean and the median of x for each level of the variable &lt;em&gt;group1&lt;/em&gt;, I would have to write two commands.  If a lot of variables need to be aggregated in this fashion, it may be more concise to create an aggregated data set and merge back into the original.  Below is an example of what I mean by aggregate then merge back:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(plyr)
-
-# create aggregated data
-aggdat1 &amp;lt;- ddply(smalldat, .(group1), summarize,
-                 aggGroup1plyr = mean(x))
-aggdat12 &amp;lt;- ddply(smalldat, .(group1, group2), summarize, 
-                aggGroup1.1plyr = mean(x))
-
-# join back into data
-smalldat &amp;lt;- join(smalldat, aggdat1, by = &#39;group1&#39;)
-smalldat &amp;lt;- join(smalldat, aggdat12, by = c(&#39;group1&#39;, &#39;group2&#39;))
-
-# print data
-smalldat
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4&gt;Output&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##     group1 group2       x aggGroup1 aggGroup1.2 aggGroup1plyr
-##  1:      1      a -1.2071   -0.3524      0.1022       -0.3524
-##  2:      1      b  0.2774   -0.3524     -1.0341       -0.3524
-##  3:      1      a  1.0844   -0.3524      0.1022       -0.3524
-##  4:      1      b -2.3457   -0.3524     -1.0341       -0.3524
-##  5:      1      a  0.4291   -0.3524      0.1022       -0.3524
-##  6:      2      b  0.5061   -0.4140     -0.3102       -0.4140
-##  7:      2      a -0.5747   -0.4140     -0.5696       -0.4140
-##  8:      2      b -0.5466   -0.4140     -0.3102       -0.4140
-##  9:      2      a -0.5645   -0.4140     -0.5696       -0.4140
-## 10:      2      b -0.8900   -0.4140     -0.3102       -0.4140
-##     aggGroup1.1plyr
-##  1:          0.1022
-##  2:         -1.0341
-##  3:          0.1022
-##  4:         -1.0341
-##  5:          0.1022
-##  6:         -0.3102
-##  7:         -0.5696
-##  8:         -0.3102
-##  9:         -0.5696
-## 10:         -0.3102
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above code using plyr likely won&#39;t take longer for R to run, however it does take more time to write out the code.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2&gt;Removing duplicate observations&lt;/h2&gt;
-
-&lt;p&gt;For most situations, using &lt;em&gt;data.table&lt;/em&gt; has become my go to way to remove duplicate observations.  This is especially useful when it does not matter which value of the variables you want to keep in the final data set (e.g. when values of the variables are repeated).  The ability of &lt;em&gt;data.table&lt;/em&gt; to create keyed values makes it extremely easy to remove duplicate observations based on those keyed variables.&lt;/p&gt;
-
-&lt;p&gt;Using the dataset created above:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Set keys - this sorts the data based on these values
-setkeyv(smalldat, c(&#39;group1&#39;,&#39;group2&#39;))
-
-# keep unique observations (I also remove the variable x)
-uniqdat &amp;lt;- subset(unique(smalldat), select = -x)
-
-# print data
-uniqdat
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##    group1 group2 aggGroup1 aggGroup1.2 aggGroup1plyr aggGroup1.1plyr
-## 1:      1      a   -0.3524      0.1022       -0.3524          0.1022
-## 2:      1      b   -0.3524     -1.0341       -0.3524         -1.0341
-## 3:      2      a   -0.4140     -0.5696       -0.4140         -0.5696
-## 4:      2      b   -0.4140     -0.3102       -0.4140         -0.3102
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The code above first sets two keys for the data.table.  The key acts as an identifier and the data are automatically sorted based on the key variables.  This is one of the reasons why the &lt;em&gt;data.table&lt;/em&gt; package can be so fast at doing many of its tasks.  Then unique observations are kept.  The &lt;em&gt;unique&lt;/em&gt; function in the &lt;em&gt;data.table&lt;/em&gt; package is similar to the same function in the base package, but when keys are defined for data.table, the &lt;em&gt;unique&lt;/em&gt; function automatically selects unique observations based on those key variables.&lt;/p&gt;
-
-&lt;p&gt;For more complicated cases, I tend to use a combination of &lt;em&gt;order&lt;/em&gt; and &lt;em&gt;duplicated&lt;/em&gt; from base R, however for easy cases where observations are repeated on the variables I want to keep, this is a quick and easy way to remove duplicate observations.&lt;/p&gt;
-</description>
-				<pubDate>Mon, 06 Jan 2014 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2014/01/06/FavDataTable/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/01/06/FavDataTable/</guid>
 			</item>
 		
 	</channel>

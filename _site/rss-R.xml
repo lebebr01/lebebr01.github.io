@@ -51,7 +51,7 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 &lt;p&gt;This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
 &lt;img src=&quot;figs/mwe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;educate-r.org/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3&gt;Upcoming Features&lt;/h3&gt;
 
