@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Stacked bar charts, why not a line graph?
+title: Dodged bar charts, why not a line graph?
 categories: graphics, r, ggplot2, trend
 ---
 
