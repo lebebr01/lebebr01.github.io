@@ -27,7 +27,7 @@ b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
   scale_fill_brewer(&quot;Year&quot;, palette = &quot;Dark2&quot;) 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;/figs/bar.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/bar.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note: If you are curious from the above graph, there appears to be two typos in the teamIDs, where CHA should be CHW (Chicago White Sox) and KCA should be KCR (Kansas City Royals).&lt;/p&gt;
 
@@ -40,7 +40,7 @@ b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
             vjust = 1.5)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;/figs/bartext.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/bartext.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;A better alternative to a dodged bar chart in my opinion would be a simple line graph.  The line graph simplifies the graph to only include one variable on the x-axis and uses colors or shapes to differentiate the teams. See below.&lt;/p&gt;
 
@@ -51,7 +51,7 @@ l + geom_point(size = 4) + geom_line(size = 1) +
   xlab(&quot;Year&quot;) + theme_bw()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;/figs/line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. As always, you could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  You could see my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
@@ -103,7 +103,7 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
-&lt;img src=&quot;/figs/mwe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://educate-r.org/figs/mwe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can also go to this link to see the post-processed file: &lt;a href=&quot;/mwe.html&quot;&gt;educate-r.org/mwe.html&lt;/a&gt;.&lt;/p&gt;
 

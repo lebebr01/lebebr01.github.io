@@ -25,7 +25,7 @@ b + geom_bar(stat = "identity", position = "dodge") +
   scale_fill_brewer("Year", palette = "Dark2") 
 ```
 
-![](/figs/bar.png) 
+![](http://educate-r.org/figs/bar.png) 
 
 Note: If you are curious from the above graph, there appears to be two typos in the teamIDs, where CHA should be CHW (Chicago White Sox) and KCA should be KCR (Kansas City Royals).
 
@@ -40,7 +40,7 @@ b + geom_bar(stat = "identity", position = "dodge") +
             vjust = 1.5)
 ```
 
-![](/figs/bartext.png) 
+![](http://educate-r.org/figs/bartext.png) 
 
 A better alternative to a dodged bar chart in my opinion would be a simple line graph.  The line graph simplifies the graph to only include one variable on the x-axis and uses colors or shapes to differentiate the teams. See below.
 
@@ -53,7 +53,7 @@ l + geom_point(size = 4) + geom_line(size = 1) +
   xlab("Year") + theme_bw()
 ```
 
-![](/figs/line.png) 
+![](http://educate-r.org/figs/line.png) 
 
 This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. As always, you could improve this by making it interactive with *rCharts*.  You could see my post on *rCharts* [here](/2014/02/15/rcharts/) and [here](/2014/03/03/rChartsslidy/).
 
