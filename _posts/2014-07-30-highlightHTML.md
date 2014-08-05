@@ -47,7 +47,7 @@ highlightHTML(input = "path/to/infile.html", output = "path/to/outfile.html",
 ```
 
 This command will process the html file, look for tags, change the tags to CSS ids, inject the CSS into the document, and lastly open the output file in the browser to see how it looks.  The example above would look like the following after the above commands:
-![](figs/mwe.png)
+![](/figs/mwe.png)
 
 You can also go to this link to see the post-processed file: [educate-r.org/mwe.html](/mwe.html).
 
