@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.com/"/>
- <updated>2014-08-06T14:35:43-05:00</updated>
+ <updated>2014-08-06T14:36:32-05:00</updated>
  <id>http://lebebr01.github.com/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -62,7 +62,7 @@ l + geom_point(size = 4) + geom_line(size = 1) +
 
 &lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. You could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  You could see my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. You could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  See my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
