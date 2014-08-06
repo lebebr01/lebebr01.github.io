@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Dodged bar charts, why not a line graph?
-categories: graphics, r, ggplot2, trend
+tags: [graphics, R, ggplot2, trend]
 ---
 
 I often see graphs that are poorly implemented in that they do not achieve their goal.  One such type of graph that I see are dodged bar charts.  Here is an example of a dodged bar chart summarizing the number of all star players by team (focusing specifically on the AL central division) and year from the *Lahman* r package:
