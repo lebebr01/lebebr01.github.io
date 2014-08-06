@@ -55,5 +55,5 @@ l + geom_point(size = 4) + geom_line(size = 1) +
 
 ![](http://educate-r.org/figs/line.png) 
 
-This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. As always, you could improve this by making it interactive with *rCharts*.  You could see my post on *rCharts* [here](/2014/02/15/rcharts/) and [here](/2014/03/03/rChartsslidy/).
+This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. You could improve this by making it interactive with *rCharts*.  You could see my post on *rCharts* [here](/2014/02/15/rcharts/) and [here](/2014/03/03/rChartsslidy/).
 
