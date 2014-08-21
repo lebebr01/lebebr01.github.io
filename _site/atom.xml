@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Brandon LeBeau</title>
- <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
- <link href="http://lebebr01.github.com/"/>
- <updated>2014-08-21T09:22:41-05:00</updated>
- <id>http://lebebr01.github.com/</id>
+ <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
+ <link href="http://lebebr01.github.io/"/>
+ <updated>2014-08-21T09:35:22-05:00</updated>
+ <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Dodged bar charts, why not a line graph?</title>
-   <link href="http://lebebr01.github.com/2014/08/05/trendgraphics/"/>
+   <link href="http://lebebr01.github.io/2014/08/05/trendgraphics/"/>
    <updated>2014-08-05T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/08/05/trendgraphics</id>
+   <id>http://lebebr01.github.io/2014/08/05/trendgraphics</id>
    <content type="html">&lt;p&gt;I often see graphs that are poorly implemented in that they do not achieve their goal.  One such type of graph that I see are dodged bar charts.  Here is an example of a dodged bar chart summarizing the number of all star players by team (focusing specifically on the AL central division) and year from the &lt;em&gt;Lahman&lt;/em&gt; r package:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(Lahman)
@@ -68,9 +68,9 @@ l + geom_point(size = 4) + geom_line(size = 1) +
  
  <entry>
    <title>Format Markdown Documents in R</title>
-   <link href="http://lebebr01.github.com/2014/07/30/highlightHTML/"/>
+   <link href="http://lebebr01.github.io/2014/07/30/highlightHTML/"/>
    <updated>2014-07-30T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/07/30/highlightHTML</id>
+   <id>http://lebebr01.github.io/2014/07/30/highlightHTML</id>
    <content type="html">&lt;p&gt;Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.&lt;/p&gt;
 
 &lt;p&gt;The &lt;strong&gt;&lt;a href=&quot;https://github.com/lebebr01/highlightHTML&quot;&gt;highlightHTML&lt;/a&gt;&lt;/strong&gt; package aims to develop a flexible approach to add formatting to an html document by injecting CSS into the file.  To do this, tags are created within the markdown document telling the R routine where to look for these tags.  If you are familiar with the Twitterverse, this package will be equally comfortable.  The tags take the form of the hashtags on Twitter.  As an example, #bgblue, would be a command to change the background to blue.&lt;/p&gt;
@@ -128,9 +128,9 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
  
  <entry>
    <title>R gui Revisited</title>
-   <link href="http://lebebr01.github.com/2014/05/27/rguirevisit/"/>
+   <link href="http://lebebr01.github.io/2014/05/27/rguirevisit/"/>
    <updated>2014-05-27T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/05/27/rguirevisit</id>
+   <id>http://lebebr01.github.io/2014/05/27/rguirevisit</id>
    <content type="html">&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui/&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
 
 &lt;h4&gt;Things that went well&lt;/h4&gt;
@@ -169,9 +169,9 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
  
  <entry>
    <title>AERA Preview</title>
-   <link href="http://lebebr01.github.com/2014/04/02/aerapreview/"/>
+   <link href="http://lebebr01.github.io/2014/04/02/aerapreview/"/>
    <updated>2014-04-02T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/04/02/aerapreview</id>
+   <id>http://lebebr01.github.io/2014/04/02/aerapreview</id>
    <content type="html">&lt;p&gt;The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.&lt;/p&gt;
 
 &lt;p&gt;In this paper, I have compiled numerous monte carlo studies perform a quantitative synthesis of the literature.  I have focused primarily on longitudinal linear mixed models as that was what my dissertation topic, and practically speaking, I already had many monte carlo studies in hand making the task a bit simpler.&lt;/p&gt;
@@ -398,9 +398,9 @@ symbolWidth: 40,
  
  <entry>
    <title>Evolution of Code</title>
-   <link href="http://lebebr01.github.com/2014/03/27/evolvecode/"/>
+   <link href="http://lebebr01.github.io/2014/03/27/evolvecode/"/>
    <updated>2014-03-27T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/03/27/evolvecode</id>
+   <id>http://lebebr01.github.io/2014/03/27/evolvecode</id>
    <content type="html">&lt;p&gt;Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I&#39;ve slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I&#39;ve started to work through some python.&lt;/p&gt;
 
 &lt;p&gt;Now back to my realization.  As I mentioned, I was scraping some data from &lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;CFB Data Warehouse&lt;/a&gt; for a project that I&#39;m working on with a colleague and was adapting some code that was written about 3 years ago.  The problem was that my old code was broken.  The original code was about 100 lines of code just to select the correct table and format it.  Here is a chunk of the original code to select the correct table.&lt;/p&gt;
@@ -457,9 +457,9 @@ if(length(Num) == 5){
  
  <entry>
    <title>Update to highlightHTML package</title>
-   <link href="http://lebebr01.github.com/2014/03/14/htmltext/"/>
+   <link href="http://lebebr01.github.io/2014/03/14/htmltext/"/>
    <updated>2014-03-14T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2014/03/14/htmltext</id>
+   <id>http://lebebr01.github.io/2014/03/14/htmltext</id>
    <content type="html">&lt;p&gt;I&#39;ve added a new functionality to my &lt;em&gt;highlightHTML&lt;/em&gt; package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.&lt;/p&gt;
 
 &lt;p&gt;Up to now, my package only worked with tables, see my old post that talks about this if you are interested: &lt;a href=&quot;http://educate-r.org/2013/11/01/CondFormatMarkdown/&quot;&gt;highlight tables&lt;/a&gt;.  My update adds a similar functionality to text itself by including span tags in the document.&lt;/p&gt;
@@ -521,9 +521,9 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
  
  <entry>
    <title>rCharts with slidy</title>
-   <link href="http://lebebr01.github.com/2014/03/03/rChartsslidy/"/>
+   <link href="http://lebebr01.github.io/2014/03/03/rChartsslidy/"/>
    <updated>2014-03-03T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2014/03/03/rChartsslidy</id>
+   <id>http://lebebr01.github.io/2014/03/03/rChartsslidy</id>
    <content type="html">&lt;p&gt;My last post I talked about using &lt;em&gt;rCharts&lt;/em&gt; to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use &lt;em&gt;slidy&lt;/em&gt; to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a &lt;em&gt;slidy&lt;/em&gt; html presentation.&lt;/p&gt;
 
 &lt;p&gt;First off, I did not use &lt;em&gt;rCharts&lt;/em&gt; and &lt;em&gt;knitr&lt;/em&gt; in tandem, but that would make the workflow a bit easier.  The major thing you&#39;d want to remember is to make sure to add the following chunk option: &lt;strong&gt;results = &#39;asis&#39;&lt;/strong&gt;.  This will ensure that the raw html printed from &lt;em&gt;rCharts&lt;/em&gt; will be included in the markdown file as is.&lt;/p&gt;
@@ -1183,9 +1183,9 @@ symbolWidth: 40,
  
  <entry>
    <title>Interactive charts with rCharts</title>
-   <link href="http://lebebr01.github.com/2014/02/15/rcharts/"/>
+   <link href="http://lebebr01.github.io/2014/02/15/rcharts/"/>
    <updated>2014-02-15T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2014/02/15/rcharts</id>
+   <id>http://lebebr01.github.io/2014/02/15/rcharts</id>
    <content type="html">&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I&#39;m attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
 
 &lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
@@ -1487,9 +1487,9 @@ symbolWidth: 40,
  
  <entry>
    <title>Picking a gui interface for R</title>
-   <link href="http://lebebr01.github.com/2014/02/03/Rgui/"/>
+   <link href="http://lebebr01.github.io/2014/02/03/Rgui/"/>
    <updated>2014-02-03T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2014/02/03/Rgui</id>
+   <id>http://lebebr01.github.io/2014/02/03/Rgui</id>
    <content type="html">&lt;p&gt;Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the &lt;em&gt;Deducer&lt;/em&gt; package and the &lt;em&gt;Rcmdr&lt;/em&gt; package.  Here are my initial thoughts on the switch.&lt;/p&gt;
 
 &lt;h3&gt;Which gui to use?&lt;/h3&gt;
@@ -1535,9 +1535,9 @@ symbolWidth: 40,
  
  <entry>
    <title>When I use plyr/dplyr</title>
-   <link href="http://lebebr01.github.com/2014/01/24/usePlyr/"/>
+   <link href="http://lebebr01.github.io/2014/01/24/usePlyr/"/>
    <updated>2014-01-24T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2014/01/24/usePlyr</id>
+   <id>http://lebebr01.github.io/2014/01/24/usePlyr</id>
    <content type="html">&lt;p&gt;My last post I talked about how I use the &lt;em&gt;data.table&lt;/em&gt; package for aggregating and removing duplicate observations.  Although I use the &lt;em&gt;data.table&lt;/em&gt; package quite often, there are many times when I use &lt;em&gt;plyr&lt;/em&gt; (and now the new &lt;em&gt;dplyr&lt;/em&gt;) package, primarily because of its easy, intuitive syntax.&lt;/p&gt;
 
 &lt;h3&gt;Arrange&lt;/h3&gt;
@@ -1623,9 +1623,9 @@ mtcars %.%
  
  <entry>
    <title>Two of my favorite data.table features</title>
-   <link href="http://lebebr01.github.com/2014/01/06/FavDataTable/"/>
+   <link href="http://lebebr01.github.io/2014/01/06/FavDataTable/"/>
    <updated>2014-01-06T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2014/01/06/FavDataTable</id>
+   <id>http://lebebr01.github.io/2014/01/06/FavDataTable</id>
    <content type="html">&lt;p&gt;When I started to use the &lt;em&gt;data.table&lt;/em&gt; package I was primarily using it to aggregate.  I had read about &lt;em&gt;data.table&lt;/em&gt; and its blazing speed compared to the other options from base or the &lt;em&gt;plyr&lt;/em&gt; package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using &lt;em&gt;data.table&lt;/em&gt; to do the same calculations I didn&#39;t need to wait 5 minutes to see the calculated values.&lt;/p&gt;
 
 &lt;p&gt;The speed of &lt;em&gt;data.table&lt;/em&gt; is publicized widely, however there are two features found in &lt;em&gt;data.table&lt;/em&gt; that are not talked about as frequently that I use very often.&lt;/p&gt;
@@ -1763,9 +1763,9 @@ uniqdat
  
  <entry>
    <title>Guessing Correlations&#58; A shiny app</title>
-   <link href="http://lebebr01.github.com/2013/12/30/guessCorr/"/>
+   <link href="http://lebebr01.github.io/2013/12/30/guessCorr/"/>
    <updated>2013-12-30T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2013/12/30/guessCorr</id>
+   <id>http://lebebr01.github.io/2013/12/30/guessCorr</id>
    <content type="html">&lt;p&gt;A recent hobby of mine (as with many other R users) is to play around with the relatively new R package: &lt;em&gt;shiny&lt;/em&gt;.  I started creating demo applications about a year ago just to figure out how powerful the platform could be, but it was not until this fall that I started creating some applications for others to use.&lt;/p&gt;
 
 &lt;p&gt;I encountered a problem this fall at the University of Arkansas due to the huge Java exploit going public.  As a result of this, Java was blocked on all of the computers in the classrooms that I used for my intro statistics courses.  Most days this does not impact my lectures, however on a few days throughout the semester I use applets to help show certain concepts.&lt;/p&gt;
@@ -1795,9 +1795,9 @@ uniqdat
  
  <entry>
    <title>SPSS to R&#58; An R package to convert SPSS syntax</title>
-   <link href="http://lebebr01.github.com/2013/11/26/SPSStoR/"/>
+   <link href="http://lebebr01.github.io/2013/11/26/SPSStoR/"/>
    <updated>2013-11-26T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2013/11/26/SPSStoR</id>
+   <id>http://lebebr01.github.io/2013/11/26/SPSStoR</id>
    <content type="html">&lt;p&gt;My first statistical software package I used as an undergrad was SPSS.  I was fortunate during my senior year at &lt;a href=&quot;http://www.luther.edu&quot;&gt;Luther College&lt;/a&gt; to be initially introduced to &lt;a href=&quot;http://r-project.org&quot;&gt;R&lt;/a&gt;.  I did not realize it at the time (except for the pretty graphics) that this was the start of something big for me.  Fast forward a year to graduate school at the University of Minnesota and the majority of my program was again using SPSS.  Under the tutelage of &lt;a href=&quot;http://www.cehd.umn.edu/edpsych/people/Faculty/Zieffler.html&quot;&gt;Andy&lt;/a&gt; in my first graduate statistics course I started to do analyses in both R and SPSS.  After that I started to do all my analyses in R.  Fast forward five years this time to my first full-time job after graduate school at &lt;a href=&quot;http://www.spps.org&quot;&gt;Saint Paul Public Schools&lt;/a&gt; and again everyone was using SPSS.  Fortunately in my year there I was able to significantly push them toward using R more and more.&lt;/p&gt;
 
 &lt;p&gt;This long introduction motivates the following package I started writing mostly just to play with regular expressions, but kept playing and came up with a package with many routines.  The package I came up with is called &lt;em&gt;SPSStoR&lt;/em&gt; which converts SPSS syntax into R syntax.  Using regular expressions to parse the SPSS syntax to figure out which routine is being run then prints out the R syntax to do the same analysis done by the SPSS syntax.&lt;/p&gt;
@@ -1870,9 +1870,9 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
  
  <entry>
    <title>My Course Slide Generation</title>
-   <link href="http://lebebr01.github.com/2013/11/18/CourseSlidesProcess/"/>
+   <link href="http://lebebr01.github.io/2013/11/18/CourseSlidesProcess/"/>
    <updated>2013-11-18T00:00:00-06:00</updated>
-   <id>http://lebebr01.github.com/2013/11/18/CourseSlidesProcess</id>
+   <id>http://lebebr01.github.io/2013/11/18/CourseSlidesProcess</id>
    <content type="html">&lt;p&gt;This past August I took an opportunity to step back into the University academic world as a &lt;a href=&quot;http://http://coehp.uark.edu/12216.php&quot;&gt;Visiting Assistant Professor&lt;/a&gt; at the &lt;a href=&quot;http://www.uark.edu&quot;&gt;University of Arkansas&lt;/a&gt;.  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.&lt;/p&gt;
 
 &lt;p&gt;However, there has been some growing pains, especially regarding creating my own slides for the courses I teach.  Although I am using the same books/curriculum used in previous semesters, I am making my own slides and adding my own pieces as I see fit.  In addition, I do not use powerpoint, which all of the existing slides are in.  Therefore, I am creating my own versions of the slides using a combination of &lt;a href=&quot;http://www.r-project.org/&quot;&gt;R&lt;/a&gt;, &lt;a href=&quot;http://yihui.name/knitr/&quot;&gt;knitr&lt;/a&gt;, &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;markdown&lt;/a&gt;, &lt;a href=&quot;http://johnmacfarlane.net/pandoc/&quot;&gt;pandoc&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/Talks/Tools/Slidy2/&quot;&gt;slidy&lt;/a&gt;, and &lt;a href=&quot;http://www.latex-project.org/&quot;&gt;LaTeX&lt;/a&gt;.  Below is my general process of making my slides and the slides I put online for students to have access to.&lt;/p&gt;
@@ -1913,9 +1913,9 @@ spss_to_r(file)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
  
  <entry>
    <title>Formatting Markdown Tables with R</title>
-   <link href="http://lebebr01.github.com/2013/11/01/CondFormatMarkdown/"/>
+   <link href="http://lebebr01.github.io/2013/11/01/CondFormatMarkdown/"/>
    <updated>2013-11-01T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2013/11/01/CondFormatMarkdown</id>
+   <id>http://lebebr01.github.io/2013/11/01/CondFormatMarkdown</id>
    <content type="html">&lt;p&gt;This past summer when the &lt;a href=&quot;http://www.meetup.com/twincitiesrug/&quot;&gt;twin cities R user group&lt;/a&gt; was starting to get back up and running, I offered to present on some R related things that I was working on.  One thing I was working on was a part of my last &lt;a href=&quot;http://http://educate-r.org/2013/09/28/ConditionalFormat/&quot;&gt;post&lt;/a&gt;.  In a response to discussing this during a meeting, I was posed with the problem of how to do this with a markdown table.  I replied I was unsure how to do this directly with R, but it could likely be possible.&lt;/p&gt;
 
 &lt;p&gt;After replying to this e-mail, I went to work thinking about how this could be done.  I knew you could add some CSS to the resulting HTML file, but the question remained how could this be done succintly and with conditional formatting.&lt;/p&gt;
@@ -2027,9 +2027,9 @@ highlightHTMLcells(input = &amp;quot;path/to/file&amp;quot;, output = &amp;quot;
  
  <entry>
    <title>Conditional Formatting Tables using R</title>
-   <link href="http://lebebr01.github.com/2013/09/28/ConditionalFormat/"/>
+   <link href="http://lebebr01.github.io/2013/09/28/ConditionalFormat/"/>
    <updated>2013-09-28T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2013/09/28/ConditionalFormat</id>
+   <id>http://lebebr01.github.io/2013/09/28/ConditionalFormat</id>
    <content type="html">&lt;p&gt;One thing that I had the opportunity to develop while working last year at &lt;a href=&quot;http://spps.org/&quot;&gt;Saint Paul Public Schools&lt;/a&gt; was figuring out a quick, easy, and painless way to do interactive report generation.  When I arrived in the REA department at Saint Paul Public Schools, the report generation process was roughly as follows:&lt;br/&gt;
 1. Do the analysis in SPSS (compute percent proficient for standard tests by various subgroups).&lt;br/&gt;
 2. Format output and copy output into Excel.&lt;br/&gt;
@@ -2098,9 +2098,9 @@ latex(round(mela.status, 2), title = &amp;#39;&amp;#39;, file = &amp;#39;&amp;#3
  
  <entry>
    <title>Blog Logo</title>
-   <link href="http://lebebr01.github.com/2013/09/11/BlogLogo/"/>
+   <link href="http://lebebr01.github.io/2013/09/11/BlogLogo/"/>
    <updated>2013-09-11T00:00:00-05:00</updated>
-   <id>http://lebebr01.github.com/2013/09/11/BlogLogo</id>
+   <id>http://lebebr01.github.io/2013/09/11/BlogLogo</id>
    <content type="html">&lt;p&gt;Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: &lt;a href=&quot;http://educate-r.org/projects.html&quot;&gt;R packages&lt;/a&gt;.  In addition, I&#39;ll likely talk about various topics with statistics, teaching, research, or R in general.&lt;/p&gt;
 
 &lt;p&gt;For my first post, I want to highlight my code to generate my blog logo.  The code took a lot of trial and error and definitely is dependent on the size of the image file that is outputted.  By far the most difficult part of the logo was the R logo, specifically the grey oval of the R logo.  I tried to get the oval to change sizes at the correct point and to do this I created a size variable in my data.frame and passed this variable to &lt;strong&gt;ggplot2&lt;/strong&gt; to make the size change.  It isn&#39;t perfect, but is a bit unique.&lt;/p&gt;

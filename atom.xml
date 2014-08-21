@@ -1,14 +1,14 @@
 ---
-layout: nil
+layout: null
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Brandon LeBeau</title>
- <link href="http://lebebr01.github.com/atom.xml" rel="self"/>
- <link href="http://lebebr01.github.com/"/>
+ <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
+ <link href="http://lebebr01.github.io/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://lebebr01.github.com/</id>
+ <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
@@ -17,9 +17,9 @@ layout: nil
  {% for post in site.posts limit:50 %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://lebebr01.github.com{{ post.url }}"/>
+   <link href="http://lebebr01.github.io{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://lebebr01.github.com{{ post.id }}</id>
+   <id>http://lebebr01.github.io{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}

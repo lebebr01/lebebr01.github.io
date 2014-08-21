@@ -1,6 +1,5 @@
 paginate: 1
 highlighter: null
-auto: false
 destination: _site
 permalink: /:year/:month/:day/:title/
 safe: false
