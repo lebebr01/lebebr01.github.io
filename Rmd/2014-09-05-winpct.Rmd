@@ -1,0 +1,84 @@
+---
+layout: post
+title: Offense or defense improve likelihood of becoming bowl eligible?
+tags: [graphics, r, ggplot2, trend]
+---
+
+I saw a post recently about the likelihood of a baseball team winning based on how many runs, hits, and other baseball statistics. I liked the idea and thought of applying that to college football. Particularly, I'm interested in knowing whether scoring more points or having a stout defense improves the likelihood of becoming bowl eligible.  
+
+Using some data scraped from the [cfbDatawarehouse](http://www.cfbdatawarehouse.com/) to figure out how likely a team would be bowl eligible based on the number of points they score. Below are the results of my exploration looking at both the points scores metric and the points against metric.
+
+```{r cfb, echo=FALSE}
+library(data.table)
+coaches <- read.csv("C:/Users/bleb/Dropbox/cfbFootball/Data/coaches.csv")
+coaches$bowlElig <- ifelse(coaches$Win > 5, 1, 0)
+coaches <- subset(coaches, Year > 1949)
+coaches$decade <- with(coaches, ifelse(Year < 1960, 1, ifelse(
+  Year < 1970 & Year > 1959, 2, ifelse(Year < 1980 & Year > 1969, 3, ifelse(
+    Year < 1990 & Year > 1979, 4, ifelse(Year < 2000 & Year > 1989, 5, ifelse(
+      Year < 2010 & Year > 1999, 6, 7)))))))
+coaches <- data.table(coaches)
+coaches <- unique(coaches, by = c('Year', 'Team', 'coach'))
+# removing coaches with less than 2 games for team
+coaches[, numGames := Win + Loss + Tie, ]
+coaches <- coaches[i = numGames > 2]
+
+# binning PF and PA
+coaches$PFbin <- with(coaches, ifelse(PF < 101, 1, ifelse(
+  PF < 201 & PF > 100, 2, ifelse(PF < 301 & PF > 200, 3, ifelse(
+    PF < 401 & PF > 300, 4, ifelse(PF < 501 & PF > 400, 5, 6))))))
+coaches$PAbin <- with(coaches, ifelse(PA < 101, 1, ifelse(
+  PA < 201 & PA > 100, 2, ifelse(PA < 301 & PA > 200, 3, ifelse(
+    PA < 401 & PA > 300, 4, ifelse(PA < 501 & PA > 400, 5, 6))))))
+coaches$Deltabin <- factor(cut(coaches$Delta, breaks = c(-600, -250, -200, -150, -100, -50, 0, 50, 100, 150, 200, 250, 600)))
+library(ggplot2)
+bePF <- coaches[order(PFbin), list(bpct = mean(bowlElig)), by = PFbin]
+bePF$type 
+bePA <- coaches[order(PAbin), list(bpct = mean(bowlElig)), by = PAbin]
+beDelta <- coaches[order(Deltabin), list(bpct = mean(bowlElig)), by = Deltabin]
+coaches$PFbin2 <- cut_number(coaches$PF, 150)
+coaches$PAbin2 <- cut_number(coaches$PA, 150)
+coaches$Deltabin2 <- cut_number(coaches$Delta, 150)
+
+library(magrittr)
+bePF2 <- coaches[order(PFbin2), list(bpct = mean(bowlElig)), by = PFbin2]
+temp <- gsub("\\[|\\]|\\(", "",levels(cut_number(coaches$PA, 150)))
+bePF2$avg <- temp %>% strsplit(",") %>% lapply(as.numeric) %>% lapply(mean) %>% unlist
+bePF2$group <- "Points Scored"
+bePF2 <- bePF2[-150]
+
+bePA2 <- coaches[order(PAbin2), list(bpct = mean(bowlElig)), by = PAbin2]
+temp <- gsub("\\[|\\]|\\(", "",levels(cut_number(coaches$PA, 150)))
+bePA2$avg <- temp %>% strsplit(",") %>% lapply(as.numeric) %>% lapply(mean) %>% unlist
+bePA2$group <- "Points Against"
+bePA2 <- bePA2[-150]
+
+# combine
+ovrBE <- rbind(subset(bePF2, select = -PFbin2), subset(bePA2, select = -PAbin2))
+ovrBE$bpct <- round(ovrBE$bpct, 3)
+```
+
+```{r plot}
+p <- ggplot(coaches, aes(x = PF)) + theme_bw() 
+p + stat_smooth(data = ovrBE, aes(x = avg, y = bpct, linetype = group), 
+                se = FALSE, size = 1.5, method = "loess") + 
+  geom_point(data = ovrBE, aes(x=avg, y = bpct, color = group), size = 2) + 
+  scale_x_continuous("Points", limits = c(0, 500), breaks = c(0, 100, 200, 300, 400, 500)) + 
+  scale_color_brewer(palette = "Dark2") + 
+  ylab("Bowl Eligibility Likelihood") 
+  
+```
+
+```{r rchart, tidy = FALSE, results='asis'}
+library(rCharts)
+
+h1 <- hPlot(x = "avg", y = "bpct", group = "group", data = ovrBE)
+h1$yAxis(title = list(text = "Bowl Eligibility Likelihood"), min = 0, max = 1, tickInterval = .1)
+h1$xAxis(title = list(text = "Points"),
+         min = 0, max = 500, tickInterval = 100)
+h1$legend(verticalAlign = "top", align = "right", layout = "vertical", title = list(text = "Group"))
+h1$plotOptions(series = list(lineWidth = 2))
+h1$print('chart1', include_assets = TRUE, cdn = TRUE)
+```
+
+

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SPSStoR: An R package to convert SPSS syntax
+title: SPSStoR An R package to convert SPSS syntax
 categories: r, SPSS, package
 ---
 

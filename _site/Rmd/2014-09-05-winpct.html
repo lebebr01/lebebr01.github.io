@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Offense or defense improve likelihood of becoming bowl eligible?</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -55,18 +55,44 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2014/09/05/winpct/" title="Offense or defense improve likelihood of becoming bowl eligible?" rel="bookmark">Offense or defense improve likelihood of becoming bowl eligible?</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>I saw a post recently about the likelihood of a baseball team winning based on how many runs, hits, and other baseball statistics. I liked the idea and thought of applying that to college football. Particularly, I'm interested in knowing whether scoring more points or having a stout defense improves the likelihood of becoming bowl eligible.</p>
+   <!-- <h2>Offense or defense improve likelihood of becoming bowl eligible?</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/Rmd/2014-09-05-winpct.html" title="Offense or defense improve likelihood of becoming bowl eligible?" rel="bookmark">Offense or defense improve likelihood of becoming bowl eligible?</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I saw a post recently about the likelihood of a baseball team winning based on how many runs, hits, and other baseball statistics. I liked the idea and thought of applying that to college football. Particularly, I'm interested in knowing whether scoring more points or having a stout defense improves the likelihood of becoming bowl eligible.</p>
 
-<p>Using some data scraped from the <a href="http://www.cfbdatawarehouse.com/">cfbDatawarehouse</a> to figure out how likely a team would be bowl eligible based on the number of points they score. Below are the results of my exploration looking at both the points scores metric and the points against metric (also there is a quick interactive rCharts version of the plot down further). Seems to me that scoring more points leads to more assured success in the college game, perhaps that is why offensive recruits seem to be more sought after. This would also be interesting to create by decade to see if trends have shifted over the years.</p>
+<p>Using some data scraped from the <a href="http://www.cfbdatawarehouse.com/">cfbDatawarehouse</a> to figure out how likely a team would be bowl eligible based on the number of points they score. Below are the results of my exploration looking at both the points scores metric and the points against metric.</p>
 
-<p>Enjoy, plots (and code for plots) shown below.</p>
+<pre><code>##       Year           Team Win Loss Tie    Pct  PF  PA Delta
+##    1: 1956 Air Force (CO)   6    2   1 0.7222 293 101   192
+##    2: 1957 Air Force (CO)   3    6   1 0.3500 125 184   -59
+##    3: 1956       Virginia   4    6   0 0.4000  92 167   -75
+##    4: 1957       Virginia   3    6   1 0.3500 117 171   -54
+##    5: 1958 Air Force (CO)   9    0   2 0.9091 247 102   145
+##   ---                                                      
+## 8966: 2010        Wyoming   3    9   0 0.2500 230 364  -134
+## 8967: 2011        Wyoming   8    5   0 0.6154 339 361   -22
+## 8968: 2012        Wyoming   4    7   0 0.3636 308 356   -48
+## 8969: 2013        Wyoming   5    7   0 0.4167 375 440   -65
+## 8970: 2012        Wyoming   0    1   0 0.0000  14  45   -31
+##                         coach bowlElig decade numGames
+##    1: Lawrence T. "Buck" Shaw        1      1        9
+##    2: Lawrence T. "Buck" Shaw        0      1       10
+##    3:              Ben Martin        0      1       10
+##    4:              Ben Martin        0      1       10
+##    5:              Ben Martin        1      1       11
+##   ---                                                 
+## 8966:        Dave Christensen        0      7       12
+## 8967:        Dave Christensen        1      7       13
+## 8968:        Dave Christensen        0      7       11
+## 8969:        Dave Christensen        0      7       12
+## 8970:            Pete Kaligis        0      7        1
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
 
 <pre><code class="r">p &lt;- ggplot(coaches, aes(x = PF)) + theme_bw() 
 p + stat_smooth(data = ovrBE, aes(x = avg, y = bpct, linetype = group), 
@@ -77,7 +103,7 @@ p + stat_smooth(data = ovrBE, aes(x = avg, y = bpct, linetype = group),
   ylab("Bowl Eligibility Likelihood") 
 </code></pre>
 
-<p><img src="http://educate-r.org/figs/points.png" alt="" /></p>
+<p><img src="figure/plot.png" alt="plot of chunk plot" /></p>
 
 <pre><code class="r">library(rCharts)
 
@@ -1393,7 +1419,8 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 
 
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -1406,33 +1433,34 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
     <a href="/tags.html#trend-ref" >trend</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2014/09/05/winpct/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2014-09-05 00:00:00 -0500">05 Sep 2014</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page15/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page17/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title=""></abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/Rmd/2014-09-05-winpct.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  
