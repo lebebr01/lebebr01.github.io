@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Google location data -- Where I've been.
 tags: [graphics, R, ggplot2, maps, google]
 ---
