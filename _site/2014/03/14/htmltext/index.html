@@ -96,25 +96,43 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
 
 <h3>Before and After HTML</h3>
 
-<p>Here is what the body of the HTML file looks like before running the function:</p>
+<p>Here is what the body of the HTML file looks like before running the function:
+```html
+<body></p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;body&gt;
-&lt;h1&gt;Test of Text&lt;/h1&gt;
-&lt;p&gt;Testing the ability to change the {#bgblue color} of the text.&lt;/p&gt;
-&lt;p&gt;Can also do {#bgblack multiple words of text}&lt;/p&gt;
-&lt;p&gt;{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}&lt;/p&gt;
-&lt;/body&gt;</code></pre></div>
+<h1>Test of Text</h1>
 
 
-<p>This is what the HTML document looks like after running the function:</p>
+<p>Testing the ability to change the {#bgblue color} of the text.</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;body&gt;
-&lt;h1&gt;Test of Text&lt;/h1&gt;
-&lt;p&gt;Testing the ability to change the &lt;span id=&#39;bgblue&#39;&gt; color&lt;/span&gt; of the text.&lt;/p&gt;
-&lt;p&gt;Can also do &lt;span id=&#39;bgblack&#39;&gt; multiple words of text&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span id=&#39;bgblack&#39;&gt; Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS&lt;/span&gt;&lt;/p&gt;
-&lt;/body&gt;</code></pre></div>
 
+<p>Can also do {#bgblack multiple words of text}</p>
+
+
+<p>{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}</p>
+
+
+<p></body>
+```</p>
+
+<p>This is what the HTML document looks like after running the function:
+```html
+<body></p>
+
+<h1>Test of Text</h1>
+
+
+<p>Testing the ability to change the <span id='bgblue'> color</span> of the text.</p>
+
+
+<p>Can also do <span id='bgblack'> multiple words of text</span></p>
+
+
+<p><span id='bgblack'> Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS</span></p>
+
+
+<p></body>
+```</p>
 
 <p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
 

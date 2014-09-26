@@ -28,7 +28,7 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 
 After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.
 
-{% highlight JavaScript %}
+```JavaScript
 <script type='text/javascript' src=http://code.jquery.com/jquery-1.9.1.min.js></script>
 <script type='text/javascript' src=http://code.highcharts.com/highcharts.js></script>
 <script type='text/javascript' src=http://code.highcharts.com/highcharts-more.js></script>
@@ -328,17 +328,17 @@ symbolWidth: 40,
         });
     })(jQuery);
 </script>
-{% endhighlight %}
+```
 
 Once you have that in markdown format, you can turn it into a *slidy* html presentation with the following command in *pandoc*:
 
-{% highlight bash %}
+```bash
 pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html
-{% endhighlight %}
+```
 
 This gives you a file that looks something like this:
 
-{% highlight html %}
+```html
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -661,6 +661,6 @@ symbolWidth: 40,
 </div>
 </body>
 </html>
-{% endhighlight %}
+```
 
 That should give you a html presentation with an interactive Javascript based figure.

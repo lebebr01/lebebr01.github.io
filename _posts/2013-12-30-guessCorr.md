@@ -12,18 +12,18 @@ Enter my solution, create shiny applications that attempts to mimic many of the 
 
 You can run the shiny application from my github page using the following command (make sure you have the shiny package installed first:
 
-{% highlight r %}
+```r
 shiny::runGitHub(repo = "shinyApps", username = "lebebr01", subdir = "guessCorr")
-{% endhighlight %}
+```
 
 
 This should open a session in your browser that looks like the following screenshot:
-![](/figs/GuessingCorrelations.png)
+![](http://educate-r.org/figs/GuessingCorrelations.png)
 
 As you can see from this screenshot, there is a scatterplot in the main window and the user inputs a guess into the text box.  When they hit the 'Submit Guess' button, the grey panel above the scatterplot updates to give hints about the direction the correlation is compared to the guess.  Once the user is within .05 (.05 above or below) the correlation, the correlation is printed in the top text box.
 
 The app also includes the ability to restrict the range of the scatterplot.  This can be seen in the image below (and can be done on the app by clicking the 'Restriction of Range' checkbox):
-![](/figs/GuessingCorrelationsRR.png)
+![](http://educate-r.org/figs/GuessingCorrelationsRR.png)
 
 When that checkbox is clicked, a new slider shows up that restricts the range of the original scatterplot.  The data that lies outside of the restricted range shows up as a light grey in the updated graph.  Now the user attempts to guess the correlation for the restricted range data.  The correlation for the entire data can be seen in the graph.
 

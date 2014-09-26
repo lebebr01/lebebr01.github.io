@@ -67,7 +67,7 @@
 
 <p>The next logo I need to develop is my favicon.ico.  Send me suggestions in the comments of this post.</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r">### Creating words with connected points.
+<pre><code class="r">### Creating words with connected points.
 capE &lt;- data.frame(x = c(1.5,1,1,1.25,1,1,1.5), 
                    y = c(3,3,2,2,2,1,1))
 capE$time &lt;- 1:nrow(capE)
@@ -121,29 +121,29 @@ library(ggplot2)
 library(scales)
 
 p &lt;- ggplot(capE, aes(x = x, y = y)) + theme_bw()
-p + geom_path(lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = letd, lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = letu, lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = letc, lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = leta, lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = lett,lwd = 3, lineend = &quot;round&quot;) + 
-  geom_path(data = lete, lwd = 3, lineend = &quot;round&quot;) +
-  geom_path(data = rcirclogo, aes(size = size), color = &quot;grey&quot;, 
-            lineend = &quot;round&quot;, linejoin = &quot;bevel&quot;) + 
-  geom_path(data = rlogo, color = &quot;steelblue&quot;, lwd = 6, 
-            lineend = &quot;round&quot;) + 
-  geom_path(data = rlogo, color = &quot;grey60&quot;, lwd = .5, 
-            lineend= &quot;round&quot;) +
-  theme(legend.position = &quot;none&quot;, text = element_blank(), 
+p + geom_path(lwd = 3, lineend = "round") + 
+  geom_path(data = letd, lwd = 3, lineend = "round") + 
+  geom_path(data = letu, lwd = 3, lineend = "round") + 
+  geom_path(data = letc, lwd = 3, lineend = "round") + 
+  geom_path(data = leta, lwd = 3, lineend = "round") + 
+  geom_path(data = lett,lwd = 3, lineend = "round") + 
+  geom_path(data = lete, lwd = 3, lineend = "round") +
+  geom_path(data = rcirclogo, aes(size = size), color = "grey", 
+            lineend = "round", linejoin = "bevel") + 
+  geom_path(data = rlogo, color = "steelblue", lwd = 6, 
+            lineend = "round") + 
+  geom_path(data = rlogo, color = "grey60", lwd = .5, 
+            lineend= "round") +
+  theme(legend.position = "none", text = element_blank(), 
         panel.grid = element_blank(),
-        plot.background = element_rect(fill = &quot;transparent&quot;, 
+        plot.background = element_rect(fill = "transparent", 
                                        color = NA),
-        panel.background = element_rect(fill = &quot;transparent&quot;, 
+        panel.background = element_rect(fill = "transparent", 
                                         color = NA),
         panel.border = element_blank(),
         axis.line = element_blank(), axis.ticks = element_blank(),
-        line = element_blank()) + scale_size(range = c(2, 8))</code></pre></div>
-
+        line = element_blank()) + scale_size(range = c(2, 8))
+</code></pre>
 
 <p><img src="http://educate-r.org/figs/logo.png" alt="plot of chunk logo" /></p>
 

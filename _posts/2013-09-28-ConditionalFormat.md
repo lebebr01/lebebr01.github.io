@@ -18,7 +18,7 @@ My process involved creating R script files for each report and export the table
 Here is a small minimal example.  In the example, suppose we want to calculate the average Melanoma thickness by the status of the person (i.e. did they die from Melanoma, still alive, or died from other causes).  
 
 
-{% highlight r %}
+```r
 library(MASS)   # Load for Melanoma Data
 library(Hmisc)  # Load for latex function
 library(data.table)  # Used for aggregating
@@ -45,11 +45,11 @@ my.rownamesTexCmd[index] <- "shadeRow"
 latex(round(mela.status, 2), title = '', file = '', booktabs = TRUE, 
       rownamesTexCmd = my.rownamesTexCmd, cellTexCmds = cellTex,
       rowname = NULL)
-{% endhighlight %}
+```
 
 Below is the resulting *LaTeX* code that is created from the *latex* function. The conditional formatting is the *\cellcolor{}* commands.  You need to ensure that the color is defined, either as a default color or one you define in the preamble.  Secondly, the \shadeRow command will shade that row and you need to ensure you have the first line below in your preamble.
 
-{% highlight latex %}
+```latex
 % Including a similar command in your preamble to define row shading.
 \providecommand{\shadeRow}{\rowcolor[rgb]{0, 0.99, 0}}
 % 
@@ -67,7 +67,7 @@ Below is the resulting *LaTeX* code that is created from the *latex* function. T
 \end{tabular}
 \end{center}
 \end{table}
-{% endhighlight %}
+```
 
 
 

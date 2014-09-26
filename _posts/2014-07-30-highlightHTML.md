@@ -16,7 +16,7 @@ Once any tags you want to include are in the markdown document, then the documen
 - - - - - - - - - - 
 A markdown document that looks like the following:
 
-{% highlight markdown %}
+```markdown
 # Test of {#colgold highlightHTML} package
 
 Can highlight {#bgblack multiple words}.
@@ -30,7 +30,7 @@ Even tables:
 | Orange     | 100        |  
 | Red        | 200 #bgred |  
 
-{% endhighlight %}
+```
 
 You would then convert the markdown above into a html file (I hit the knit HTML button in RStudio for this file), then run the following commands in R (assuming the highlightHTML package is not installed):
 

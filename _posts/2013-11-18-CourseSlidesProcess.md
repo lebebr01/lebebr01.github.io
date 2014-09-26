@@ -11,16 +11,16 @@ However, there has been some growing pains, especially regarding creating my own
 ## Step 1 - Create Source File
 I start with a *Rmd* file.  This allows me to embed R code into the source document.  This is particularly useful for me to include plots of distributions, graphically showing how ANOVA works, etc.  Once I am finished editing my *Rmd*, if I am using [Rstudio](http://www.rstudio.com/) I just use the *Knit HTML* button to automatically generate the markdown and HTML file for me.  Alternatively, the *knit* command from the **knitr** package will create the markdown file for you (but not the HTML file, although for me the HTML file is not needed in this step).  The defaults of the *knit* command work fine for me.
 
-{% highlight r %}
+```r
 knit(input = "/path/to/file.Rmd", output = "/path/to/file.md")
-{% endhighlight %}
+```
 
 ## Step 2 - Create HTML Presentation
 Once we have the markdown file, I now use pandoc to create my HTML presentation.  There are a few ways to create HTML presentation slides, but I personally like slidy the best.  I like slidy because it easily fills the whole screen and also allows for content to go over the edges of the slide.  If content goes outside of the edges of a single slide, you can scroll to see the missing content.  I find this useful if I want to blow up an image or have two plots where I can show one then scroll to the second.  The pandoc command I use looks something like this:  
 
-{% highlight bash %}
+```bash
 pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html
-{% endhighlight %}
+```
 
 ## Step 3 (Optional) - Edit CSS for HTML Presentation
 I use a custom CSS file to style my HTML presentation so it uses some of the official colors from the University of Arkansas.  For example, my header titles use the Arkansas red.  To use a custom CSS file, you just need to find the line that mentions CSS in the HTML file and change it to reflect your custom file.  The defaults look good, although perhaps slightly bland.
@@ -28,15 +28,15 @@ I use a custom CSS file to style my HTML presentation so it uses some of the off
 ## Step 4 - Create pdf slides
 I then create a different set of slides using LaTeX that I post on the blackboard site for each of my courses.  Pandoc is how I get the *tex* file to compile with LaTeX.  The command is very simple:
 
-{% highlight bash %}
+```r
 pandoc -s inputfile.md -o outfile.tex
-{% endhighlight %}
+```
 
 Two things I change, I make sure the base text size is 12 pt.  I also make sure to use the *float* package and change any figure positions from *htbp* to *H* which forces the figures to stay in position and not float around.  Then I compile the resulting *tex* using Rstudio or from the command line with:
 
-{% highlight bash %}
+```bash
 pdflatex -interaction=nonstopmode -synctex=1 outfile.tex
-{% endhighlight %}
+```
 
 In my opinion this creates great looking html presentations that are highly customizable.  One thing to note is that by default to get the slideshow, you need to be connected to the internet.  Both **slidy** and **mathjax** refer to javascript files that are on downloaded directly from the web.  You should be able to download these files, store them locally, and refer to the local versions.
 
