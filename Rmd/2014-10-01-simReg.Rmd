@@ -1,0 +1,68 @@
+---
+layout: post
+title: Structured simulation of regression models - simReg package.
+tags: [R, package, simReg]
+---
+
+I'd like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I'd like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation. 
+
+The package is currently on github [https://github.com/lebebr01/simReg](https://github.com/lebebr01/simReg). Therefore, you can currently install the package by using the *devtools* package like so:
+
+ 
+```{r install, eval = FALSE}
+library(devtools)
+install_github("lebebr01/simReg")
+```
+
+The primary function of interest in this package is *sim.reg*. To show the use of this function, here is a simple example simulating a single level regression mode. Note, this example is pulled directly from the **Intro** vignette.
+
+```{r single}
+library(simReg)
+set.seed(100)
+fixed <- ~ 1 + act + diff + numCourse + act:numCourse
+fixed.param <- c(2, 4, 1, 3.5, 2)
+cov.param <- list(mean = c(0, 0, 0), sd = c(4, 3, 3), var.type = c("single", "single", "single"))
+n <- 150
+errorVar <- 3
+err.dist <- "norm"
+temp.single <- sim.reg(fixed = fixed, fixed.param = fixed.param, cov.param = cov.param,
+n = n, errorVar = errorVar, err.dist = err.dist, data.str = "single")
+head(temp.single)
+```
+
+As you can see from the above code, the package uses a single sided equation to represent the fixed effects. Other arguments include the values for those fixed effects (fixed.param), the scale for the covariates (cov.param), the sample size (n), the error variance (errorVar), and the error distribution (err.dist). These are all put into the function *sim.reg* with the additional argument *data.str* to tell the function that we indeed want a single level regression and you get the following output. The data frame that is returned gives the values for the design matrix, the fixed portion of the model (Fbeta), and the random error term (err). The value of most interest if conducting a simulation would be the actually simulated value (sim.data).
+
+### Nested Example
+A slightly more complicated example is shown below where longitudinal data are simulated.
+
+```{r nested}
+fixed <- ~1 + time + diff + act + time:act
+random <- ~1 + time + diff
+fixed.param <- c(4, 2, 6, 2.3, 7)
+random.param <- c(7, 4, 2)
+cov.param <- list(mean = c(0, 0), sd = c(1.5, 4), var.type = c("lvl1", "lvl2"))
+n <- 150
+p <- 30
+errorVar <- 4
+randCor <- 0
+rand.dist <- "norm"
+err.dist <- "norm"
+serCor <- "ID"
+serCorVal <- NULL
+data.str <- "long"
+temp.long <- sim.reg(fixed, random, fixed.param, random.param, cov.param,
+n, p, errorVar, randCor, rand.dist, err.dist, serCor, serCorVal, data.str)
+head(temp.long)
+```
+Most of the arguments should look familiar to above, but a few are new. Most notably these are a one sided equation for the random effects (random), their variances (random.param), the number of observations within a cluster (p), the correlation among the random effects (randCor), the simulated distribution of the random effects (rand.dist), the serial correlation model for within cluster residuals (serCor), the values for the serial correlation models (serCorVal). Note now since this represents longitudinal data, the *data.str* argument is now specified as 'long'.
+
+### Other features
+The package also simulates cross sectional multilevel models, covariates that are either a factor, ordinal, or categorical, and the basics for power simulation are there.
+
+For further information, see the vignette by doing the following after installing the package:
+
+```{r vignette, eval = FALSE}
+vignette("Intro", package = "simReg")
+```
+
+Bugs, comments, or feature requests can be submitted on the github site [https://github.com/lebebr01/simReg/issues](https://github.com/lebebr01/simReg/issues).

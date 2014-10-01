@@ -7,6 +7,106 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Structured simulation of regression models - simReg package.</title>
+				<description>&lt;p&gt;I&#39;d like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I&#39;d like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.&lt;/p&gt;
+
+&lt;p&gt;The package is currently on github &lt;a href=&quot;https://github.com/lebebr01/simReg&quot;&gt;https://github.com/lebebr01/simReg&lt;/a&gt;. Therefore, you can currently install the package by using the &lt;em&gt;devtools&lt;/em&gt; package like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(devtools)
+install_github(&quot;lebebr01/simReg&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The primary function of interest in this package is &lt;em&gt;sim.reg&lt;/em&gt;. To show the use of this function, here is a simple example simulating a single level regression mode. Note, this example is pulled directly from the &lt;strong&gt;Intro&lt;/strong&gt; vignette.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(simReg)
+set.seed(100)
+fixed &amp;lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed.param &amp;lt;- c(2, 4, 1, 3.5, 2)
+cov.param &amp;lt;- list(mean = c(0, 0, 0), sd = c(4, 3, 3), var.type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;))
+n &amp;lt;- 150
+errorVar &amp;lt;- 3
+err.dist &amp;lt;- &quot;norm&quot;
+temp.single &amp;lt;- sim.reg(fixed = fixed, fixed.param = fixed.param, cov.param = cov.param,
+n = n, errorVar = errorVar, err.dist = err.dist, data.str = &quot;single&quot;)
+head(temp.single)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##   X.Intercept.     act     diff numCourse act.numCourse    Fbeta      err
+## 1            1 -2.0088  3.10406    -5.566       11.1815 -0.05022 -3.35921
+## 2            1  0.5261  4.96051    -3.056       -1.6077 -4.84527 -5.75176
+## 3            1 -0.3157 -0.05384    -3.135        0.9897 -8.31073  1.63173
+## 4            1  3.5471 -0.07261    -1.954       -6.9306 -4.58382  0.06435
+## 5            1  0.4679  0.75074     1.148        0.5372  9.71476 -0.44783
+## 6            1  1.2745 -1.01137     3.096        3.9455 24.81272  0.59651
+##   sim.data ID
+## 1   -3.409  1
+## 2  -10.597  2
+## 3   -6.679  3
+## 4   -4.519  4
+## 5    9.267  5
+## 6   25.409  6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see from the above code, the package uses a single sided equation to represent the fixed effects. Other arguments include the values for those fixed effects (fixed.param), the scale for the covariates (cov.param), the sample size (n), the error variance (errorVar), and the error distribution (err.dist). These are all put into the function &lt;em&gt;sim.reg&lt;/em&gt; with the additional argument &lt;em&gt;data.str&lt;/em&gt; to tell the function that we indeed want a single level regression and you get the following output. The data frame that is returned gives the values for the design matrix, the fixed portion of the model (Fbeta), and the random error term (err). The value of most interest if conducting a simulation would be the actually simulated value (sim.data).&lt;/p&gt;
+
+&lt;h3&gt;Nested Example&lt;/h3&gt;
+
+&lt;p&gt;A slightly more complicated example is shown below where longitudinal data are simulated.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;fixed &amp;lt;- ~1 + time + diff + act + time:act
+random &amp;lt;- ~1 + time + diff
+fixed.param &amp;lt;- c(4, 2, 6, 2.3, 7)
+random.param &amp;lt;- c(7, 4, 2)
+cov.param &amp;lt;- list(mean = c(0, 0), sd = c(1.5, 4), var.type = c(&quot;lvl1&quot;, &quot;lvl2&quot;))
+n &amp;lt;- 150
+p &amp;lt;- 30
+errorVar &amp;lt;- 4
+randCor &amp;lt;- 0
+rand.dist &amp;lt;- &quot;norm&quot;
+err.dist &amp;lt;- &quot;norm&quot;
+serCor &amp;lt;- &quot;ID&quot;
+serCorVal &amp;lt;- NULL
+data.str &amp;lt;- &quot;long&quot;
+temp.long &amp;lt;- sim.reg(fixed, random, fixed.param, random.param, cov.param,
+n, p, errorVar, randCor, rand.dist, err.dist, serCor, serCorVal, data.str)
+head(temp.long)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##   X.Intercept. time     diff    act time.act    b0      b1    b2   Fbeta
+## 1            1    0 -0.05455  1.608    0.000 5.118 -0.1118 0.251   7.371
+## 2            1    1 -2.23677 -1.349   -1.349 5.118 -0.1118 0.251 -19.968
+## 3            1    2  0.50321 -6.028  -12.056 5.118 -0.1118 0.251 -87.237
+## 4            1    3  1.25027  8.436   25.308 5.118 -0.1118 0.251 214.063
+## 5            1    4  2.05871  3.917   15.667 5.118 -0.1118 0.251 143.031
+## 6            1    5 -1.87968  7.598   37.990 5.118 -0.1118 0.251 286.125
+##   randEff     err sim.data withinID clustID
+## 1   5.104  3.2637    15.74        1       1
+## 2   4.444  0.9355   -14.59        2       1
+## 3   5.020 -3.1693   -85.39        3       1
+## 4   5.096  4.1523   223.31        4       1
+## 5   5.187 -3.1716   145.05        5       1
+## 6   4.086 -0.2605   289.95        6       1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most of the arguments should look familiar to above, but a few are new. Most notably these are a one sided equation for the random effects (random), their variances (random.param), the number of observations within a cluster (p), the correlation among the random effects (randCor), the simulated distribution of the random effects (rand.dist), the serial correlation model for within cluster residuals (serCor), the values for the serial correlation models (serCorVal). Note now since this represents longitudinal data, the &lt;em&gt;data.str&lt;/em&gt; argument is now specified as &#39;long&#39;.&lt;/p&gt;
+
+&lt;h3&gt;Other features&lt;/h3&gt;
+
+&lt;p&gt;The package also simulates cross sectional multilevel models, covariates that are either a factor, ordinal, or categorical, and the basics for power simulation are there.&lt;/p&gt;
+
+&lt;p&gt;For further information, see the vignette by doing the following after installing the package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;vignette(&quot;Intro&quot;, package = &quot;simReg&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bugs, comments, or feature requests can be submitted on the github site &lt;a href=&quot;https://github.com/lebebr01/simReg/issues&quot;&gt;https://github.com/lebebr01/simReg/issues&lt;/a&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Wed, 01 Oct 2014 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2014/10/01/simReg/</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/10/01/simReg/</guid>
+			</item>
+		
+			<item>
 				<title>Google location data -- Where I've been.</title>
 				<description>&lt;p&gt;I was emailed by a friend that was looking into their google location data and had asked if I had ever used a json file before in R. I said I had not, but I knew there were packages to do such things. The things I sent were things he had already tried, so what did I decide to do? I went ahead and downloaded my own google location data.&lt;/p&gt;
 
@@ -2609,315 +2709,6 @@ symbolWidth: 40,
 				<pubDate>Mon, 03 Mar 2014 00:00:00 -0600</pubDate>
 				<link>http://educate-r.org//2014/03/03/rChartsslidy/</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/03/03/rChartsslidy/</guid>
-			</item>
-		
-			<item>
-				<title>Rcharts</title>
-				<description>&lt;p&gt;---layout: post
-title: Interactive charts with rCharts&lt;/p&gt;
-
-&lt;h2&gt;tags: [R, rCharts, javascript]&lt;/h2&gt;
-
-&lt;p&gt;I have a few upcoming presentations as a part of job interviews. To prepare for these interviews, I&#39;m attempting to make my figures a bit more interactive within my presentations.  The aim is to be able to limit any large cumbersome tables I would need to include in my presentations and replace them with interactive plots that can look up values, zoom in, etc.&lt;/p&gt;
-
-&lt;p&gt;I initially explored both &lt;a href=&quot;http://plot.ly&quot;&gt;plot.ly&lt;/a&gt; and &lt;a href=&quot;http://ramnathv.github.io/rCharts/&quot;&gt;rCharts&lt;/a&gt;, but ended up using &lt;em&gt;rCharts&lt;/em&gt; as I found I was more easily able to put it directly into my presentation.  It may be possible with &lt;em&gt;plot.ly&lt;/em&gt; but I did not want to put in the time to figure it out.  I could only find a way to link to the website for the interactive version.&lt;/p&gt;
-
-&lt;p&gt;Using &lt;em&gt;highcharts.js&lt;/em&gt; that is integrated into &lt;em&gt;rCharts&lt;/em&gt; I was able to create the following interactive figure that explores the convergence rate of a portion of my dissertation.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
-
-h1 &amp;lt;- hPlot(x = &quot;GenSerCor&quot;, y = &quot;percent&quot;, group = &quot;FitSerCor&quot;, data = converge)
-h1$yAxis(title = list(text = &quot;Convergence Rate&quot;), min = 0, max = 100, tickInterval = 10)
-h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;),
-         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
-h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
-h1$plotOptions(series = list(lineWidth = 4))
-h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
-
-
-&lt;p&gt;
- &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    height: 400px;
-    font-size: 200%;
-  }&lt;br/&gt;
-  &lt;/style&gt;&lt;/p&gt;
-
-&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
-
-
-&lt;script type=&#39;text/javascript&#39;&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            800,
-&quot;height&quot;:            400,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null 
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false 
-},
-&quot;title&quot;: {
- &quot;text&quot;: null 
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;30px&#39;
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + &#39;%&#39;;
-  },
-  style: {
-   fontSize: &#39;18px&#39;
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-} 
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         68.38 
-],
-[
- &quot;AR1&quot;,
-         64.88 
-],
-[
- &quot;MA1&quot;,
-         55.12 
-],
-[
- &quot;MA2&quot;,
-         61.98 
-],
-[
- &quot;ARMA&quot;,
-         42.17 
-] 
-],
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Solid&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-          65.1 
-],
-[
- &quot;AR1&quot;,
-         60.45 
-],
-[
- &quot;MA1&quot;,
-         63.68 
-],
-[
- &quot;MA2&quot;,
-         54.88 
-],
-[
- &quot;ARMA&quot;,
-          63.6 
-] 
-],
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         72.48 
-],
-[
- &quot;AR1&quot;,
-         93.88 
-],
-[
- &quot;MA1&quot;,
-         92.23 
-],
-[
- &quot;MA2&quot;,
-         95.62 
-],
-[
- &quot;ARMA&quot;,
-         98.37 
-] 
-],
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Dash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         71.02 
-],
-[
- &quot;AR1&quot;,
-         81.37 
-],
-[
- &quot;MA1&quot;,
-         69.15 
-],
-[
- &quot;MA2&quot;,
-          84.5 
-],
-[
- &quot;ARMA&quot;,
-         88.02 
-] 
-],
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [
- &quot;Ind&quot;,
-         67.23 
-],
-[
- &quot;AR1&quot;,
-         70.78 
-],
-[
- &quot;MA1&quot;,
-         65.93 
-],
-[
- &quot;MA2&quot;,
-         68.83 
-],
-[
- &quot;ARMA&quot;,
-          72.9 
-] 
-],
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;DashDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-} 
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;30px&#39;
- }
-},
-labels: {
- style: {
-  fontSize: &#39;18px&#39;,
-  fontWeight: &#39;bold&#39;
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
-} 
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null 
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot; 
-} 
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:              4 
-} 
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;, 
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: &#39;left&#39;
-  }
- }
-} 
-});
-        });
-    })(jQuery);
-&lt;/script&gt;
-
-
-&lt;p&gt;I edited the javascript manually to get some of the effects that I was looking for.  For example, the differing line styles and adding the ability to zoom.  It is possible to add this directly through &lt;em&gt;rCharts&lt;/em&gt;, however I found it much more cumbersome compared to editing the effects I wanted manually.  I find the &lt;em&gt;rCharts&lt;/em&gt; framework is nice to give the user the barebones needed to produce an interactive plot that can be put into an HTML slideshow.  Once getting the general structure, it is easy to look at the documentation for the javascript library and customize the plot yourself.  I personally use &lt;em&gt;slidy&lt;/em&gt; for that aspect and that is where I will use plots like this in the future.  Creating these plots has also helped me to start learning some basics of Javascript which has been on my wish list for the last year or so.&lt;/p&gt;
-</description>
-				<pubDate>Sat, 15 Feb 2014 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2014/02/15/rcharts/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/02/15/rcharts/</guid>
 			</item>
 		
 	</channel>
