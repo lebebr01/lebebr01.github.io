@@ -7,6 +7,150 @@
 		<atom:link href="http://educate-r.org/feed.category.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Remove leading 0 with ggplot2.</title>
+				<description>&lt;p&gt;I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0&#39;s in the x-axis text labels using &lt;em&gt;ggplot2&lt;/em&gt;. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I&#39;ve found a workaround. The process is walked through below.&lt;/p&gt;
+
+&lt;p&gt;First, some simulated data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Sim some data
+simdata &amp;lt;- data.frame(x = runif(2400, min = .032, max = .210),
+                      y = c(rnorm(2000, mean = 0, sd = .1), 
+                            rnorm(400, mean = 1, sd = .25)),
+                      group = c(sample(1:2, 1600, replace = TRUE),
+                                rep(1, 400), 
+                                rep(2, 400)),
+                      facet = rep(1:3, each = 800))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As shown below, initially there is no group differences, but there are facet differences. Exploring the interaction between the grouping variables shows there is a two variable interaction. Note: This example is not identical to the three variable interaction I originally described above, but assume here that the x variable is also important.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;with(simdata, tapply(y, group, mean))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##          1          2 
+## 0.00342121 0.33040069
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;with(simdata, tapply(y, facet, mean))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##             1             2             3 
+## -0.0009751953  0.0025336609  0.5028529069
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;with(simdata, tapply(y, interaction(group, facet), mean))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##           1.1           2.1           1.2           2.2           1.3 
+##  0.0031464214 -0.0048761903  0.0056148873 -0.0005785326  0.0014837970 
+##           2.3 
+##  1.0042220169
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the example in the paper, I aggregated the unique x values to the third decimal place. That is done with the following &lt;em&gt;dplyr&lt;/em&gt; code. Note: The data did not need to be aggregated, but it is a bit easier to work with when plotting later.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# round value to .001 and aggregate
+simdata$x_rd &amp;lt;- round(simdata$x, 3)
+
+# aggregate
+library(dplyr)
+simdata_agg &amp;lt;- simdata %&amp;gt;%
+  group_by(x_rd, group, facet) %&amp;gt;%
+  summarise(y = mean(y))
+simdata_agg 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Source: local data frame [962 x 4]
+## Groups: x_rd, group
+## 
+##     x_rd group facet            y
+## 1  0.032     1     2 -0.088397852
+## 2  0.032     2     2  0.228654211
+## 3  0.033     1     1 -0.001843538
+## 4  0.033     1     2 -0.021662299
+## 5  0.033     1     3 -0.110077646
+## 6  0.033     2     1  0.080429131
+## 7  0.033     2     3  0.915228939
+## 8  0.034     1     1  0.025164086
+## 9  0.034     1     2 -0.046522430
+## 10 0.034     1     3  0.037889712
+## ..   ...   ...   ...          ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that the data is aggregated, it can be directly plotted with &lt;em&gt;ggplot2&lt;/em&gt;. This is the base plot that contains the leading 0&#39;s by default and treats the x variable as continuous (which it really is continuous).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(ggplot2)
+p &amp;lt;- ggplot(simdata_agg, aes(x = x_rd, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_continuous(&quot;x&quot;, limits = c(0, .25), 
+                     breaks = seq(0, .25, .05))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/plotwith0-1.png&quot; alt=&quot;&quot; /&gt;
+The plot above is a good start, but I was worried about the x-axis labels being too close together and ultimately being difficult to read. I decided I wanted to omit the leading 0&#39;s to omit some space. This was useful in my scenario as the variable on the x-axis could only take on values between 0 and 1, therefore the leading 0 is not important.&lt;/p&gt;
+
+&lt;p&gt;One way to remove the leading 0 is to convert the continuous variable into a character variable and use a simple regular expression (with &lt;em&gt;gsub&lt;/em&gt;) to remove the 0 at the beginning of the character string. Below is the code to do that and also the resulting plot. The key point of the plotting code below is the use of the &lt;em&gt;breaks&lt;/em&gt; argument to &lt;em&gt;scale_x_discrete&lt;/em&gt;. Without this all the unique character values will be plotted, not good.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;simdata_agg$x_char &amp;lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &amp;lt;- gsub(&quot;^0&quot;, &quot;&quot;, simdata_agg$x_char)
+p &amp;lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_discrete(&quot;x&quot;, breaks = c(&#39;.00&#39;, &#39;.05&#39;, &#39;.1&#39;, &#39;.15&#39;, &#39;.2&#39;, &#39;.25&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/plotno0-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The plot above has a few flaws. First, there are values at the edge of each facet. This could be fixed with the &lt;em&gt;expand&lt;/em&gt; argument to &lt;em&gt;scale_x_discrete&lt;/em&gt;, but I still wanted to include the value of .00 on the x-axis. Secondly, the x-axis text labels are not uniformly formatted which is not ideal (e.g. .1 should be .10).&lt;/p&gt;
+
+&lt;p&gt;To fix this, some made up data needs to be added to the data frame. Some care needs to be done here as well as a value of .00 can not just be added to the x variable plotted. This would place a non-uniform gap between .00 and .05 (not shown, but try it for yourself by adapting the code below). Therefore, all values between 0 and .031 need to be manually added to the data frame to keep the spacing uniform. Finally, to not plot the made up values, I created a transparency variable called alpha. This variable was used to set the alpha values to 0 for the made up values and 1 for the real values. &lt;em&gt;scale_alpha_discrete&lt;/em&gt; was used to specify the range of alpha values, this is important otherwise the made up numbers will show up as a light gray. The final code to manually add the new data is shown below. Anyone have a less workaround procedure?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Reset aggregation vector
+simdata_agg &amp;lt;- simdata %&amp;gt;%
+  group_by(x_rd, group, facet) %&amp;gt;%
+  summarise(y = mean(y))
+
+# Add values
+simdata_agg &amp;lt;- rbind(data.frame(x_rd = seq(0, .031, .001),
+                                group = rep(1, 32),
+                                facet = rep(1, 32),
+                                y = rep(0, 32)),
+                     simdata_agg)
+
+# Create a new variable to use for transparent points
+simdata_agg$alpha &amp;lt;- ifelse(simdata_agg$x_rd &amp;lt; .032, 0, 1)
+
+# Create x_char variable again
+simdata_agg$x_char &amp;lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &amp;lt;- gsub(&quot;^0&quot;, &quot;&quot;, simdata_agg$x_char)
+
+# Needed formatting
+simdata_agg$x_char &amp;lt;- ifelse(simdata_agg$x_char == &#39;&#39;, &#39;.00&#39;,
+                             simdata_agg$x_char)
+simdata_agg$x_char &amp;lt;- ifelse(simdata_agg$x_char == &#39;.2&#39;, &#39;.20&#39;,
+                             simdata_agg$x_char)
+simdata_agg$x_char &amp;lt;- ifelse(simdata_agg$x_char == &#39;.1&#39;, &#39;.10&#39;,
+                             simdata_agg$x_char)
+
+# Final plot
+p &amp;lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(aes(alpha = factor(alpha)), size = 3) + 
+  facet_grid(. ~ facet) + 
+  scale_x_discrete(&quot;x&quot;, breaks = c(&#39;.00&#39;, &#39;.05&#39;, &#39;.10&#39;, &#39;.15&#39;, &#39;.20&#39;),
+                   expand = c(.05, .05)) + 
+  scale_alpha_discrete(guide = FALSE, range = c(0, 1))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/addmadeupvalues-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Mon, 23 Mar 2015 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2015/03/23/removelead0/</link>
+				<guid isPermaLink="true">http://educate-r.org//2015/03/23/removelead0/</guid>
+			</item>
+		
+			<item>
 				<title>Structured simulation of regression models - simReg package.</title>
 				<description>&lt;p&gt;I&#39;d like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I&#39;d like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.&lt;/p&gt;
 
@@ -2011,704 +2155,6 @@ highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
 				<pubDate>Fri, 14 Mar 2014 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2014/03/14/htmltext/</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/03/14/htmltext/</guid>
-			</item>
-		
-			<item>
-				<title>rCharts with slidy</title>
-				<description>&lt;p&gt;My last post I talked about using &lt;em&gt;rCharts&lt;/em&gt; to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use &lt;em&gt;slidy&lt;/em&gt; to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a &lt;em&gt;slidy&lt;/em&gt; html presentation.&lt;/p&gt;
-
-&lt;p&gt;First off, I did not use &lt;em&gt;rCharts&lt;/em&gt; and &lt;em&gt;knitr&lt;/em&gt; in tandem, but that would make the workflow a bit easier.  The major thing you&#39;d want to remember is to make sure to add the following chunk option: &lt;strong&gt;results = &#39;asis&#39;&lt;/strong&gt;.  This will ensure that the raw html printed from &lt;em&gt;rCharts&lt;/em&gt; will be included in the markdown file as is.&lt;/p&gt;
-
-&lt;p&gt;I personally just copy and pasted the javascript into my markdown presentation (instead of using &lt;em&gt;knitr&lt;/em&gt; as talked about above).  This was easier for me as I edited many specific options in the raw Javascript to come to my final version (and created a boxplot from scratch).  It would be possible to make all the edits directly through the &lt;em&gt;rCharts&lt;/em&gt; framework, but I found it easier to edit the raw Javascript by looking at the highcharts.js documentation to get the figure I was looking for.&lt;/p&gt;
-
-&lt;p&gt;For those who did not see my last post, here is the R code I used to create my graphic:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rCharts)
-
-h1 &amp;lt;- hPlot(x = &quot;GenSerCor&quot;, y = &quot;percent&quot;, group = &quot;FitSerCor&quot;, data = converge)
-h1$yAxis(title = list(text = &quot;Convergence Rate&quot;), min = 0, max = 100, tickInterval = 10)
-h1$xAxis(title = list(text = &quot;Generated Serial Correlation Structure&quot;),
-         categories = c(&quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot;))
-h1$legend(verticalAlign = &quot;top&quot;, align = &quot;right&quot;, layout = &quot;vertical&quot;, title = list(text = &quot;Fitted SC&quot;))
-h1$plotOptions(series = list(lineWidth = 4))
-h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.&lt;/p&gt;
-
-&lt;p&gt;```JavaScript&lt;/p&gt;
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
-
-
-&lt;p&gt;
- &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    height: 400px;
-    font-size: 200%;
-  }&lt;br/&gt;
-  &lt;/style&gt;&lt;/p&gt;
-
-&lt;div id = &#39;chart1&#39; class = &#39;rChart highcharts&#39;&gt;&lt;/div&gt;
-
-
-&lt;script type=&#39;text/javascript&#39;&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            800,
-&quot;height&quot;:            400,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null 
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false 
-},
-&quot;title&quot;: {
- &quot;text&quot;: null 
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;20px&#39;
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + &#39;%&#39;;
-  },
-  style: {
-   fontSize: &#39;18px&#39;
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-} 
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   68.38 
-],
-[ &quot;AR1&quot;,
-   64.88 
-],
-[ &quot;MA1&quot;,
-   55.12 
-],
-[ &quot;MA2&quot;,
-   61.98 
-],
-[ &quot;ARMA&quot;,
-   42.17 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#e41a1c&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Solid&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  65.1 
-],
-[ &quot;AR1&quot;,
-   60.45 
-],
-[ &quot;MA1&quot;,
-  63.68 
-],
-[ &quot;MA2&quot;,
-  54.88 
-],
-[ &quot;ARMA&quot;,
-   63.6 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#377eb8&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [&quot;Ind&quot;,
-  72.48 
-],
-[ &quot;AR1&quot;,
-  93.88 
-],
-[ &quot;MA1&quot;,
-  92.23 
-],
-[ &quot;MA2&quot;,
-  95.62 
-],
-[ &quot;ARMA&quot;,
-  98.37 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#4daf4a&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Dash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  71.02 
-],
-[ &quot;AR1&quot;,
-   81.37 
-],
-[ &quot;MA1&quot;,
-   69.15 
-],
-[ &quot;MA2&quot;,
-   84.5 
-],
-[ &quot;ARMA&quot;,
-   88.02 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#984ea3&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   67.23 
-],
-[ &quot;AR1&quot;,
-   70.78 
-],
-[ &quot;MA1&quot;,
-   65.93 
-],
-[ &quot;MA2&quot;,
-   68.83 
-],
-[ &quot;ARMA&quot;,
-   72.9 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#ff7f00&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;DashDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-} 
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;20px&#39;
- }
-},
-labels: {
- style: {
-  fontSize: &#39;18px&#39;,
-  fontWeight: &#39;bold&#39;
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
-} 
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null 
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot; 
-} 
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:   4 
-} 
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;, 
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: &#39;left&#39;
-  }
- }
-} 
-});
-        });
-    })(jQuery);
-&lt;/script&gt;
-
-
-&lt;pre&gt;&lt;code&gt;
-Once you have that in markdown format, you can turn it into a *slidy* html presentation with the following command in *pandoc*:
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html
-```&lt;/p&gt;
-
-&lt;p&gt;This gives you a file that looks something like this:&lt;/p&gt;
-
-&lt;p&gt;```html
-&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
- &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot; /&gt;
-  &lt;meta name=&quot;generator&quot; content=&quot;pandoc&quot; /&gt;
-  &lt;meta name=&quot;author&quot; content=&quot;Your Name&quot; /&gt;
-  &lt;title&gt;Witty Title&lt;/title&gt;
-  &lt;style type=&quot;text/css&quot;&gt;code{white-space: pre;}&lt;/style&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen, projection, print&quot;
-    href=&quot;http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css&quot; /&gt;&lt;/p&gt;
-
-&lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
-    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
-
-
-&lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt;
-
-
-&lt;p&gt; &lt;style&gt;
-  .rChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1000px;
-    height: 800px;
-    font-size: 200%;
-  }&lt;br/&gt;
-  &lt;/style&gt;&lt;/p&gt;
-
-&lt;script src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;MathJax.Hub.Queue([&quot;Typeset&quot;,MathJax.Hub]);&lt;/script&gt;
-
-
-&lt;p&gt; &lt;!--   &lt;script src=&quot;http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js&quot;
-    charset=&quot;utf-8&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; --&gt;
-&lt;/head&gt;
-&lt;body&gt;&lt;/p&gt;
-
-&lt;div id = &#39;chart1&#39; class = &#39;rChart&#39;&gt;&lt;/div&gt;
-
-
-&lt;script type=&#39;text/javascript&#39;&gt;
-    (function($){
-        $(function () {
-            var chart = new Highcharts.Chart({
- &quot;dom&quot;: &quot;chart1&quot;,
-&quot;width&quot;:            1000,
-&quot;height&quot;:            600,
-&quot;credits&quot;: {
- &quot;href&quot;: null,
-&quot;text&quot;: null 
-},
-&quot;exporting&quot;: {
- &quot;enabled&quot;: false 
-},
-&quot;title&quot;: {
- &quot;text&quot;: null 
-},
-&quot;yAxis&quot;: [
- {
- title: {
- text: &quot;Convergence Rate&quot;,
-  style: {
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;20px&#39;
-   }
- },
- labels: {
-  formatter: function() {
-   return this.value + &#39;%&#39;;
-  },
-  style: {
-   fontSize: &#39;18px&#39;
-  }
- },
-&quot;min&quot;:              0,
-&quot;max&quot;:            100,
-&quot;tickInterval&quot;:             10 ,
-minRange: 10
-} 
-],
-&quot;series&quot;: [
- {
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  68.38 
-],
-[ &quot;AR1&quot;,
-  64.88 
-],
-[ &quot;MA1&quot;,
-  55.12 
-],
-[ &quot;MA2&quot;,
-  61.98 
-],
-[ &quot;ARMA&quot;,
-  42.17 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#e41a1c&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#e41a1c&quot;,
-&quot;name&quot;: &quot;AR1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Solid&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  65.1 
-],
-[ &quot;AR1&quot;,
-  60.45 
-],
-[ &quot;MA1&quot;,
-  63.68 
-],
-[ &quot;MA2&quot;,
-  54.88 
-],
-[ &quot;ARMA&quot;,
-   63.6 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#377eb8&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#377eb8&quot;,
-&quot;name&quot;: &quot;ARMA&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-  72.48 
-],
-[ &quot;AR1&quot;,
-  93.88 
-],
-[ &quot;MA1&quot;,
-   92.23 
-],
-[ &quot;MA2&quot;,
-   95.62 
-],
-[ &quot;ARMA&quot;,
-   98.37 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#4daf4a&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#4daf4a&quot;,
-&quot;name&quot;: &quot;Ind&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;Dash&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   71.02 
-],
-[ &quot;AR1&quot;,
-   81.37 
-],
-[ &quot;MA1&quot;,
-   69.15 
-],
-[ &quot;MA2&quot;,
-   84.5 
-],
-[ &quot;ARMA&quot;,
-   88.02 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#984ea3&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#984ea3&quot;,
-&quot;name&quot;: &quot;MA1&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;ShortDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6
-} 
-},
-{
- &quot;data&quot;: [
- [ &quot;Ind&quot;,
-   67.23 
-],
-[ &quot;AR1&quot;,
-   70.78 
-],
-[ &quot;MA1&quot;,
-   65.93 
-],
-[ &quot;MA2&quot;,
-   68.83 
-],
-[ &quot;ARMA&quot;,
-    72.9 
-] 
-],
-events: {
-            mouseOver: function () {
-                this.update({
-                    color: &#39;black&#39;
-                });                
-            },
-            mouseOut: function () {
-                this.update({
-                    color: &#39;#ff7f00&#39;
-                }); 
-            }
-        },
-&quot;color&quot;: &quot;#ff7f00&quot;,
-&quot;name&quot;: &quot;MA2&quot;,
-&quot;type&quot;: null,
-dashStyle: &#39;DashDot&#39;,
-&quot;marker&quot;: {
- &quot;radius&quot;:              6 
-} 
-} 
-],
-&quot;xAxis&quot;: [
- {
- title: {
- text: &quot;Generated Serial Correlation Structure&quot;,
-  style:{
-   fontWeight: &#39;bold&#39;,
-   fontSize: &#39;20px&#39;
- }
-},
-labels: {
- style: {
-  fontSize: &#39;18px&#39;,
-  fontWeight: &#39;bold&#39;
- }
-},
-&quot;categories&quot;: [ &quot;Ind&quot;, &quot;AR1&quot;, &quot;MA1&quot;, &quot;MA2&quot;, &quot;ARMA&quot; ] 
-} 
-],
-&quot;subtitle&quot;: {
- &quot;text&quot;: null 
-},
-&quot;legend&quot;: {
- &quot;verticalAlign&quot;: &quot;top&quot;,
-&quot;align&quot;: &quot;right&quot;,
-&quot;layout&quot;: &quot;vertical&quot;,
-symbolWidth: 40,
-&quot;title&quot;: {
- &quot;text&quot;: &quot;Fitted SC&quot; 
-} 
-},
-&quot;plotOptions&quot;: {
- &quot;series&quot;: {
- &quot;lineWidth&quot;:              4 
-} 
-},
-&quot;id&quot;: &quot;chart1&quot;,
-&quot;chart&quot;: {
- &quot;renderTo&quot;: &quot;chart1&quot;, 
- zoomType: &quot;y&quot;,
- &quot;style&quot;: {
- fontSize: &quot;24px&quot;
- },
- resetZoomButton: {
-  position: {
-   align: &#39;left&#39;
-  }
- }
-} 
-});
-        });
-    })(jQuery);
-&lt;/script&gt;
-
-
-&lt;p&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-```&lt;/p&gt;
-
-&lt;p&gt;That should give you a html presentation with an interactive Javascript based figure.&lt;/p&gt;
-</description>
-				<pubDate>Mon, 03 Mar 2014 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2014/03/03/rChartsslidy/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/03/03/rChartsslidy/</guid>
 			</item>
 		
 	</channel>

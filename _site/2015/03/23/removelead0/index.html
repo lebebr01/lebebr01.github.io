@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Remove leading 0 with ggplot2.</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -55,14 +55,13 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2015/03/23/removelead0/" title="Remove leading 0 with ggplot2." rel="bookmark">Remove leading 0 with ggplot2.</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0's in the x-axis text labels using <em>ggplot2</em>. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I've found a workaround. The process is walked through below.</p>
+   <!-- <h2>Remove leading 0 with ggplot2.</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2015/03/23/removelead0/" title="Remove leading 0 with ggplot2." rel="bookmark">Remove leading 0 with ggplot2.</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0's in the x-axis text labels using <em>ggplot2</em>. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I've found a workaround. The process is walked through below.</p>
 
 <p>First, some simulated data.</p>
 
@@ -199,7 +198,8 @@ p + geom_point(aes(alpha = factor(alpha)), size = 3) +
 
 <p><img src="http://educate-r.org/figs/addmadeupvalues-1.png" alt="" /></p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -210,33 +210,34 @@ p + geom_point(aes(alpha = factor(alpha)), size = 3) +
     <a href="/tags.html#ggplot2-ref" >ggplot2</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2015/03/23/removelead0/#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2015-03-23 00:00:00 -0500">23 Mar 2015</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page6/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page8/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2015-03-23 00:00:00 -0500">March 23 2015</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2015/03/23/removelead0/";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  

@@ -59,101 +59,145 @@
      
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2014/10/01/simReg/" title="Structured simulation of regression models - simReg package." rel="bookmark">Structured simulation of regression models - simReg package.</a>
+      <a href="/2015/03/23/removelead0/" title="Remove leading 0 with ggplot2." rel="bookmark">Remove leading 0 with ggplot2.</a>
     </h1>
     <div class="entry-content full-content">
-      <p>I'd like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I'd like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.</p>
+      <p>I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0's in the x-axis text labels using <em>ggplot2</em>. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I've found a workaround. The process is walked through below.</p>
 
-<p>The package is currently on github <a href="https://github.com/lebebr01/simReg">https://github.com/lebebr01/simReg</a>. Therefore, you can currently install the package by using the <em>devtools</em> package like so:</p>
+<p>First, some simulated data.</p>
 
-<pre><code class="r">library(devtools)
-install_github("lebebr01/simReg")
+<pre><code class="r"># Sim some data
+simdata &lt;- data.frame(x = runif(2400, min = .032, max = .210),
+                      y = c(rnorm(2000, mean = 0, sd = .1), 
+                            rnorm(400, mean = 1, sd = .25)),
+                      group = c(sample(1:2, 1600, replace = TRUE),
+                                rep(1, 400), 
+                                rep(2, 400)),
+                      facet = rep(1:3, each = 800))
 </code></pre>
 
-<p>The primary function of interest in this package is <em>sim.reg</em>. To show the use of this function, here is a simple example simulating a single level regression mode. Note, this example is pulled directly from the <strong>Intro</strong> vignette.</p>
+<p>As shown below, initially there is no group differences, but there are facet differences. Exploring the interaction between the grouping variables shows there is a two variable interaction. Note: This example is not identical to the three variable interaction I originally described above, but assume here that the x variable is also important.</p>
 
-<pre><code class="r">library(simReg)
-set.seed(100)
-fixed &lt;- ~ 1 + act + diff + numCourse + act:numCourse
-fixed.param &lt;- c(2, 4, 1, 3.5, 2)
-cov.param &lt;- list(mean = c(0, 0, 0), sd = c(4, 3, 3), var.type = c("single", "single", "single"))
-n &lt;- 150
-errorVar &lt;- 3
-err.dist &lt;- "norm"
-temp.single &lt;- sim.reg(fixed = fixed, fixed.param = fixed.param, cov.param = cov.param,
-n = n, errorVar = errorVar, err.dist = err.dist, data.str = "single")
-head(temp.single)
+<pre><code class="r">with(simdata, tapply(y, group, mean))
 </code></pre>
 
-<pre><code>##   X.Intercept.     act     diff numCourse act.numCourse    Fbeta      err
-## 1            1 -2.0088  3.10406    -5.566       11.1815 -0.05022 -3.35921
-## 2            1  0.5261  4.96051    -3.056       -1.6077 -4.84527 -5.75176
-## 3            1 -0.3157 -0.05384    -3.135        0.9897 -8.31073  1.63173
-## 4            1  3.5471 -0.07261    -1.954       -6.9306 -4.58382  0.06435
-## 5            1  0.4679  0.75074     1.148        0.5372  9.71476 -0.44783
-## 6            1  1.2745 -1.01137     3.096        3.9455 24.81272  0.59651
-##   sim.data ID
-## 1   -3.409  1
-## 2  -10.597  2
-## 3   -6.679  3
-## 4   -4.519  4
-## 5    9.267  5
-## 6   25.409  6
+<pre><code>##          1          2 
+## 0.00342121 0.33040069
 </code></pre>
 
-<p>As you can see from the above code, the package uses a single sided equation to represent the fixed effects. Other arguments include the values for those fixed effects (fixed.param), the scale for the covariates (cov.param), the sample size (n), the error variance (errorVar), and the error distribution (err.dist). These are all put into the function <em>sim.reg</em> with the additional argument <em>data.str</em> to tell the function that we indeed want a single level regression and you get the following output. The data frame that is returned gives the values for the design matrix, the fixed portion of the model (Fbeta), and the random error term (err). The value of most interest if conducting a simulation would be the actually simulated value (sim.data).</p>
-
-<h3>Nested Example</h3>
-
-<p>A slightly more complicated example is shown below where longitudinal data are simulated.</p>
-
-<pre><code class="r">fixed &lt;- ~1 + time + diff + act + time:act
-random &lt;- ~1 + time + diff
-fixed.param &lt;- c(4, 2, 6, 2.3, 7)
-random.param &lt;- c(7, 4, 2)
-cov.param &lt;- list(mean = c(0, 0), sd = c(1.5, 4), var.type = c("lvl1", "lvl2"))
-n &lt;- 150
-p &lt;- 30
-errorVar &lt;- 4
-randCor &lt;- 0
-rand.dist &lt;- "norm"
-err.dist &lt;- "norm"
-serCor &lt;- "ID"
-serCorVal &lt;- NULL
-data.str &lt;- "long"
-temp.long &lt;- sim.reg(fixed, random, fixed.param, random.param, cov.param,
-n, p, errorVar, randCor, rand.dist, err.dist, serCor, serCorVal, data.str)
-head(temp.long)
+<pre><code class="r">with(simdata, tapply(y, facet, mean))
 </code></pre>
 
-<pre><code>##   X.Intercept. time     diff    act time.act    b0      b1    b2   Fbeta
-## 1            1    0 -0.05455  1.608    0.000 5.118 -0.1118 0.251   7.371
-## 2            1    1 -2.23677 -1.349   -1.349 5.118 -0.1118 0.251 -19.968
-## 3            1    2  0.50321 -6.028  -12.056 5.118 -0.1118 0.251 -87.237
-## 4            1    3  1.25027  8.436   25.308 5.118 -0.1118 0.251 214.063
-## 5            1    4  2.05871  3.917   15.667 5.118 -0.1118 0.251 143.031
-## 6            1    5 -1.87968  7.598   37.990 5.118 -0.1118 0.251 286.125
-##   randEff     err sim.data withinID clustID
-## 1   5.104  3.2637    15.74        1       1
-## 2   4.444  0.9355   -14.59        2       1
-## 3   5.020 -3.1693   -85.39        3       1
-## 4   5.096  4.1523   223.31        4       1
-## 5   5.187 -3.1716   145.05        5       1
-## 6   4.086 -0.2605   289.95        6       1
+<pre><code>##             1             2             3 
+## -0.0009751953  0.0025336609  0.5028529069
 </code></pre>
 
-<p>Most of the arguments should look familiar to above, but a few are new. Most notably these are a one sided equation for the random effects (random), their variances (random.param), the number of observations within a cluster (p), the correlation among the random effects (randCor), the simulated distribution of the random effects (rand.dist), the serial correlation model for within cluster residuals (serCor), the values for the serial correlation models (serCorVal). Note now since this represents longitudinal data, the <em>data.str</em> argument is now specified as 'long'.</p>
-
-<h3>Other features</h3>
-
-<p>The package also simulates cross sectional multilevel models, covariates that are either a factor, ordinal, or categorical, and the basics for power simulation are there.</p>
-
-<p>For further information, see the vignette by doing the following after installing the package:</p>
-
-<pre><code class="r">vignette("Intro", package = "simReg")
+<pre><code class="r">with(simdata, tapply(y, interaction(group, facet), mean))
 </code></pre>
 
-<p>Bugs, comments, or feature requests can be submitted on the github site <a href="https://github.com/lebebr01/simReg/issues">https://github.com/lebebr01/simReg/issues</a>.</p>
+<pre><code>##           1.1           2.1           1.2           2.2           1.3 
+##  0.0031464214 -0.0048761903  0.0056148873 -0.0005785326  0.0014837970 
+##           2.3 
+##  1.0042220169
+</code></pre>
+
+<p>In the example in the paper, I aggregated the unique x values to the third decimal place. That is done with the following <em>dplyr</em> code. Note: The data did not need to be aggregated, but it is a bit easier to work with when plotting later.</p>
+
+<pre><code class="r"># round value to .001 and aggregate
+simdata$x_rd &lt;- round(simdata$x, 3)
+
+# aggregate
+library(dplyr)
+simdata_agg &lt;- simdata %&gt;%
+  group_by(x_rd, group, facet) %&gt;%
+  summarise(y = mean(y))
+simdata_agg 
+</code></pre>
+
+<pre><code>## Source: local data frame [962 x 4]
+## Groups: x_rd, group
+## 
+##     x_rd group facet            y
+## 1  0.032     1     2 -0.088397852
+## 2  0.032     2     2  0.228654211
+## 3  0.033     1     1 -0.001843538
+## 4  0.033     1     2 -0.021662299
+## 5  0.033     1     3 -0.110077646
+## 6  0.033     2     1  0.080429131
+## 7  0.033     2     3  0.915228939
+## 8  0.034     1     1  0.025164086
+## 9  0.034     1     2 -0.046522430
+## 10 0.034     1     3  0.037889712
+## ..   ...   ...   ...          ...
+</code></pre>
+
+<p>Now that the data is aggregated, it can be directly plotted with <em>ggplot2</em>. This is the base plot that contains the leading 0's by default and treats the x variable as continuous (which it really is continuous).</p>
+
+<pre><code class="r">library(ggplot2)
+p &lt;- ggplot(simdata_agg, aes(x = x_rd, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_continuous("x", limits = c(0, .25), 
+                     breaks = seq(0, .25, .05))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/plotwith0-1.png" alt="" />
+The plot above is a good start, but I was worried about the x-axis labels being too close together and ultimately being difficult to read. I decided I wanted to omit the leading 0's to omit some space. This was useful in my scenario as the variable on the x-axis could only take on values between 0 and 1, therefore the leading 0 is not important.</p>
+
+<p>One way to remove the leading 0 is to convert the continuous variable into a character variable and use a simple regular expression (with <em>gsub</em>) to remove the 0 at the beginning of the character string. Below is the code to do that and also the resulting plot. The key point of the plotting code below is the use of the <em>breaks</em> argument to <em>scale_x_discrete</em>. Without this all the unique character values will be plotted, not good.</p>
+
+<pre><code class="r">simdata_agg$x_char &lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &lt;- gsub("^0", "", simdata_agg$x_char)
+p &lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_discrete("x", breaks = c('.00', '.05', '.1', '.15', '.2', '.25'))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/plotno0-1.png" alt="" /></p>
+
+<p>The plot above has a few flaws. First, there are values at the edge of each facet. This could be fixed with the <em>expand</em> argument to <em>scale_x_discrete</em>, but I still wanted to include the value of .00 on the x-axis. Secondly, the x-axis text labels are not uniformly formatted which is not ideal (e.g. .1 should be .10).</p>
+
+<p>To fix this, some made up data needs to be added to the data frame. Some care needs to be done here as well as a value of .00 can not just be added to the x variable plotted. This would place a non-uniform gap between .00 and .05 (not shown, but try it for yourself by adapting the code below). Therefore, all values between 0 and .031 need to be manually added to the data frame to keep the spacing uniform. Finally, to not plot the made up values, I created a transparency variable called alpha. This variable was used to set the alpha values to 0 for the made up values and 1 for the real values. <em>scale_alpha_discrete</em> was used to specify the range of alpha values, this is important otherwise the made up numbers will show up as a light gray. The final code to manually add the new data is shown below. Anyone have a less workaround procedure?</p>
+
+<pre><code class="r"># Reset aggregation vector
+simdata_agg &lt;- simdata %&gt;%
+  group_by(x_rd, group, facet) %&gt;%
+  summarise(y = mean(y))
+
+# Add values
+simdata_agg &lt;- rbind(data.frame(x_rd = seq(0, .031, .001),
+                                group = rep(1, 32),
+                                facet = rep(1, 32),
+                                y = rep(0, 32)),
+                     simdata_agg)
+
+# Create a new variable to use for transparent points
+simdata_agg$alpha &lt;- ifelse(simdata_agg$x_rd &lt; .032, 0, 1)
+
+# Create x_char variable again
+simdata_agg$x_char &lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &lt;- gsub("^0", "", simdata_agg$x_char)
+
+# Needed formatting
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '', '.00',
+                             simdata_agg$x_char)
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '.2', '.20',
+                             simdata_agg$x_char)
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '.1', '.10',
+                             simdata_agg$x_char)
+
+# Final plot
+p &lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(aes(alpha = factor(alpha)), size = 3) + 
+  facet_grid(. ~ facet) + 
+  scale_x_discrete("x", breaks = c('.00', '.05', '.10', '.15', '.20'),
+                   expand = c(.05, .05)) + 
+  scale_alpha_discrete(guide = FALSE, range = c(0, 1))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/addmadeupvalues-1.png" alt="" /></p>
 
     </div>
   <p class="alt-font tight">
@@ -161,17 +205,17 @@ head(temp.long)
     
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#package-ref" >package</a>
+    <a href="/tags.html#graphics-ref" >graphics</a>
     
-    <a href="/tags.html#simReg-ref" >simReg</a>
+    <a href="/tags.html#ggplot2-ref" >ggplot2</a>
     
   </p>
     <p class="comments-link">
-      <a href='/2014/10/01/simReg/#disqus_thread'>Comments</a>
+      <a href='/2015/03/23/removelead0/#disqus_thread'>Comments</a>
     </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2014-10-01 00:00:00 -0500">01 Oct 2014</abbr>
+        <abbr class="published" title="2015-03-23 00:00:00 -0500">23 Mar 2015</abbr>
       </span>
     </p>
     <div class="clear"></div>
