@@ -10,13 +10,13 @@ title: Educate-R
         <a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
       </strong>
       <span class="date small">
-        <abbr class="published" title="{{ post.date }}">{{ post.date | date_to_string }}</abbr>
+        <abbr class="published" title="{{ post.date }}">{{ post.date | date: "%B %-d, %Y" }}</abbr>
       </span>
       <p>{{ post.excerpt }}</p>
       <p class="alt-font">
         Tags: &nbsp;
-        {% for category in post.categories %}
-        <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+        {% for tag in post.tags %}
+        <a href="/categories/{{ tag }}" title="{{ tag }}" rel="category tag">{{ tag }}</a>
         {% endfor %}
       </p>
       <p class="comments-link">

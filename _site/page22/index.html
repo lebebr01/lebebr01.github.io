@@ -33,6 +33,7 @@
   <li><a href="/contact.html">Contact</a></li>
   <li><a href="/projects.html">R Packages</a></li>
   <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
   <li><a href="/tags.html">Categories</a></li>
   <li>         <!-- Lockerz Share BEGIN -->
             <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
@@ -57,94 +58,32 @@
   <div class="blog">
    <!-- <h2>Educate-R</h2> -->
      
+  
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2015/03/31/seqspeed/" title="Speed test of sequence generation for unbalanced simulation" rel="bookmark">Speed test of sequence generation for unbalanced simulation</a>
+      <a href="/2015/12/04/centraliowaruser/" title="Web Scraping to Item Response Theory: A College Football Adventure" rel="bookmark">Web Scraping to Item Response Theory: A College Football Adventure</a>
     </h1>
-    <div class="entry-content full-content">
-      <p>I have a simulation package that allows for the simulation of regression models including nested data structures. You can see the package on github here: <a href="https://github.com/lebebr01/simReg">simReg</a>. Over the weekend I updated the package to allow for the simulation of unbalanced designs. I'm hoping to put together a new vigenette soon highlighting the functionality.</p>
-
-<p>I am working on a simulation that uses the unbalanced functionality and while simulating longitudinal data I've found the function is much slower than the cross sectional counterparts (and balanced designs). I've ran some additional testing and I believe I have the speed issues narrowed down to the fact that I am generating a time variable. Essentially, I have a vector of number of observations per cluster. The function then turns this vector of lengths into a time variable starting at 0 up to the maximum number of observations minus 1 by 1. As an example:</p>
-
-<pre><code class="r">x &lt;- round(runif(5, min = 3, max = 10), 0)
-unlist(lapply(1:length(x), function(xx) (1:x[xx]) - 1))
-</code></pre>
-
-<pre><code>##  [1] 0 1 2 3 4 5 6 7 0 1 2 0 1 2 3 4 5 6 0 1 2 3 4 0 1 2 3 4 5 6 7 8
-</code></pre>
-
-<p>From the code above, you can see that there the number of observations is generated using <em>runif</em> which is saved to the object <em>x</em>. Then I use a combination of lapply, unlist, and the ':' operator to generate the sequence. This is the same code used in my package above to generate the time variable.</p>
-
-<p>As such, I was interested in testing various ways to generate the sequence and do a performance comparison. I compared the following ways, the <em>':'</em> operator, <em>seq.int</em>, <em>seq</em>, <em>do.call</em> with <em>mapply</em>, and <em>rep.int</em> for the balanced case as a comparison to how it was done before. This was all done with the great <strong>microbenchmark</strong> package.</p>
-
-<p>Here are the results from the 7 comparisons:</p>
-
-<pre><code class="r">library(microbenchmark)
-x &lt;- round(runif(100, min = 3, max = 15), 0)
-microbenchmark(
-  colon = unlist(lapply(1:length(x), function(xx) (1:x[xx]) - 1)),
-  seq.int = unlist(lapply(1:length(x), function(xx) seq.int(0, x[xx] - 1, 1))),
-  seq = unlist(lapply(1:length(x), function(xx) seq(0, x[xx] - 1, 1))),
-  seq.int_mapply = do.call(c, mapply(seq.int, 0, x - 1)),
-  seq_mapply = do.call(c, mapply(seq, 0, x - 1)),
-  colon_mapply = do.call(c, mapply(':', 0, x - 1)),
-  rep.int = rep.int(1:8 - 1, times = 100), # balanced case for reference.
-  times = 1000L
-)
-</code></pre>
-
-<pre><code>## Unit: microseconds
-##            expr      min       lq        mean    median        uq        max neval  cld
-##           colon  133.429  148.618  255.474605  160.1145  235.8605  57706.598  1000 ab  
-##         seq.int  180.231  203.632  270.517868  223.1330  309.9640   2671.845  1000 ab  
-##             seq 2255.960 2626.685 4207.210575 2933.1590 3466.4605  88721.432  1000    d
-##  seq.int_mapply  227.854  258.235  499.000451  292.7210  397.4110 105037.011  1000  b  
-##      seq_mapply  953.293 1079.126 1534.250895 1203.9320 1543.2495  57174.117  1000   c 
-##    colon_mapply  167.094  195.832  383.431252  220.4645  299.0845  61779.643  1000 ab  
-##         rep.int    2.053    4.516    5.807329    5.7480    6.9800     30.792  1000 a
-</code></pre>
-
-<p>The results (in microseconds) show that this is where the significant slowdown is coming in my package implementing the unbalanced cases, although it appears that the ':' operator is the second best alternative. For those that have not seen the significant speed bump of the <em>seq.int</em> and <em>rep.int</em> over the <em>seq</em> and <em>rep</em> alternatives should also pay close attention (compare lines 2 and 3 above).</p>
-
-<p>I'd be interested in alternative procedures that I am not aware of as well. Although not a big deal when running the package once, doing it 50,000 times does add up.</p>
-
-<p>Lastly, for those that are interested, we can show they are all equivalent methods (except for the <em>rep.int</em> case).</p>
-
-<pre><code class="r">identical(
-  unlist(lapply(1:length(x), function(xx) (1:x[xx]) - 1)),
-  unlist(lapply(1:length(x), function(xx) seq.int(0, x[xx] - 1, 1))),
-  unlist(lapply(1:length(x), function(xx) seq(0, x[xx] - 1, 1))),
-  do.call(c, mapply(seq.int, 0, x - 1)),
-  do.call(c, mapply(seq, 0, x - 1)),
-  do.call(c, mapply(':', 0, x - 1))
-)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-    </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
+    <a href="/tags.html#slides-ref" >slides</a>
+    
     <a href="/tags.html#R-ref" >R</a>
     
-    <a href="/tags.html#sequence-ref" >sequence</a>
+    <a href="/tags.html#rvest-ref" >rvest</a>
     
-    <a href="/tags.html#speedtest-ref" >speedtest</a>
+    <a href="/tags.html#irt-ref" >irt</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2015/03/31/seqspeed/#disqus_thread'>Comments</a>
-    </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2015-03-31 00:00:00 -0500">31 Mar 2015</abbr>
+        <abbr class="published" title="2015-12-04 00:00:00 -0600">December 4, 2015</abbr>
       </span>
     </p>
     <div class="clear"></div>
   </div>
   <div class="rule"><hr/></div>
+    
 
 
 <div class="pagination">
@@ -156,6 +95,8 @@ microbenchmark(
     
   </span>
   <span class="next">
+    
+    <a href="/page23/" title="Next Page">Next &raquo;</a>
     
   </span>
 </div>

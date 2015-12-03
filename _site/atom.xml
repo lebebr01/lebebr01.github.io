@@ -4,13 +4,610 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-03-31T15:46:28-05:00</updated>
+ <updated>2015-12-03T11:46:09-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Web Scraping to Item Response Theory: A College Football Adventure</title>
+   <link href="http://lebebr01.github.io/2015/12/04/centraliowaruser/"/>
+   <updated>2015-12-04T00:00:00-06:00</updated>
+   <id>http://lebebr01.github.io/2015/12/04/centraliowaruser</id>
+   <content type="html">&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Web Scraping to Item Response Theory: A College Football Adventure&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa &amp;amp; University of Minnesota&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Began after Tim Brewster was fired&lt;/li&gt;
+&lt;li&gt;Wanted to try to predict next great coach
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Data Available&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data is avaiable at four levels
+
+&lt;ol&gt;
+&lt;li&gt;Coach&lt;/li&gt;
+&lt;li&gt;Team&lt;/li&gt;
+&lt;li&gt;Game by Game
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Coach&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data
+
+&lt;ul&gt;
+&lt;li&gt;Overall record&lt;/li&gt;
+&lt;li&gt;Team history&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Not Available:
+
+&lt;ul&gt;
+&lt;li&gt;Coordinator history
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Example Coach Data&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
+## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
+## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
+## 3 2012 Iowa   4    8   0 0.33333 232 275   -43 Kirk Ferentz
+## 4 2013 Iowa   8    5   0 0.61538 342 246    96 Kirk Ferentz
+## 5 2014 Iowa   7    6   0 0.53846 367 333    34 Kirk Ferentz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Game by Game&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data
+
+&lt;ul&gt;
+&lt;li&gt;Final score of each game&lt;/li&gt;
+&lt;li&gt;Date played&lt;/li&gt;
+&lt;li&gt;Location&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Not Available
+
+&lt;ul&gt;
+&lt;li&gt;No information within a game
+&lt;/section&gt;
+&lt;section data-markdown&gt;
+
+&lt;h1&gt;Example GBG Data&lt;/h1&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code&gt;##    Team           Official Year       Date WL          Opponent PF PA
+## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
+## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
+## 3  Iowa University of Iowa 2014  9/13/2014  L          Iowa St. 17 20
+## 4  Iowa University of Iowa 2014  9/20/2014  W   Pittsburgh (PA) 24 20
+## 5  Iowa University of Iowa 2014  9/27/2014  W       Purdue (IN) 24 10
+## 6  Iowa University of Iowa 2014 10/11/2014  W           Indiana 45 29
+## 7  Iowa University of Iowa 2014 10/18/2014  L          Maryland 31 38
+## 8  Iowa University of Iowa 2014  11/1/2014  W Northwestern (IL) 48  7
+## 9  Iowa University of Iowa 2014  11/8/2014  L         Minnesota 14 51
+## 10 Iowa University of Iowa 2014 11/15/2014  W          Illinois 30 14
+## 11 Iowa University of Iowa 2014 11/22/2014  L         Wisconsin 24 26
+## 12 Iowa University of Iowa 2014 11/28/2014  L          Nebraska 34 37
+## 13 Iowa University of Iowa 2014   1/2/2015  L         Tennessee 28 45
+##              Location
+## 1       Iowa City, IA
+## 2       Iowa City, IA
+## 3       Iowa City, IA
+## 4      Pittsburgh, PA
+## 5  West Lafayette, IN
+## 6       Iowa City, IA
+## 7    College Park, MD
+## 8       Iowa City, IA
+## 9     Minneapolis, MN
+## 10      Champaign, IL
+## 11      Iowa City, IA
+## 12      Iowa City, IA
+## 13   Jacksonville, FL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Team&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data
+
+&lt;ul&gt;
+&lt;li&gt;Overall team record&lt;/li&gt;
+&lt;li&gt;Team statistics&lt;/li&gt;
+&lt;li&gt;Rankings&lt;/li&gt;
+&lt;li&gt;Conference Affiliation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Web Scraping&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data were obtained from many sources
+
+&lt;ul&gt;
+&lt;li&gt;Much from &lt;a href=&quot;http://cfbdatawarehouse.com&quot;&gt;http://cfbdatawarehouse.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Also used wikipedia, ESPN, and rivals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Iowa Coaches Over Time&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iowa.png&quot; alt=&quot;&quot; height = &quot;500&quot; width = &quot;1200&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Iowa State Coaches Over Time&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iowa_state.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Strengths in web scraping&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data is relatively easily obtained&lt;/li&gt;
+&lt;li&gt;Structured process for obtaining data&lt;/li&gt;
+&lt;li&gt;Can be easily updated&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Challenges of web scraping&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;At the mercy of the website
+
+&lt;ul&gt;
+&lt;li&gt;Many sites are old&lt;/li&gt;
+&lt;li&gt;Not up to date on current design standards.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Data validation can be difficult and time consuming&lt;/li&gt;
+&lt;li&gt;Need some basic knowledge of html&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;When is Web Scraping Worthwhile?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Best when scraping many pages
+
+&lt;ul&gt;
+&lt;li&gt;Particularly when web addresses are not structured&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Useful when data need to be updated&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Not useful if only scraping a single page/table
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;HTML Basics&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt; HTML is structured by start tags (e.g. `&lt;table&gt;`) and end tags (e.g. `&lt;/table&gt;`) &lt;/li&gt;
+&lt;li&gt; Common tags 
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div style=&quot;float: left; width: 75%;&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; - &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;http://www.google.com&amp;quot;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+
+&lt;div style=&quot;float: right; width: 25%;&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; &amp;amp; &lt;code&gt;&amp;lt;li&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+
+&lt;hr&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt; Highly structured pages are the easiest to scrape. &lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;HTML Code Example&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ferentz_wikiside.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Tools for web scraping&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;R
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rvest&lt;/code&gt;: &lt;a href=&quot;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&quot;&gt;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;XML&lt;/code&gt;: &lt;a href=&quot;http://www.omegahat.org/RSXML/&quot;&gt;http://www.omegahat.org/RSXML/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Python
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;beautiful soup&lt;/code&gt;: &lt;a href=&quot;http://www.crummy.com/software/BeautifulSoup/&quot;&gt;http://www.crummy.com/software/BeautifulSoup/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Misc
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SelectorGadget&lt;/code&gt;: &lt;a href=&quot;http://selectorgadget.com/&quot;&gt;http://selectorgadget.com/&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Basics of rvest&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;read_html&lt;/code&gt; is the most basic function.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;html_node&lt;/code&gt; or &lt;code&gt;html_nodes&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;These functions need css selectors or xpath&lt;/li&gt;
+&lt;li&gt;SelectorGadget is the easiest way to get this
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;SelectorGadget&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SelectorGadget is a Javascript addon for web browsers.&lt;/li&gt;
+&lt;li&gt;Demo:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Kirk_Ferentz&quot;&gt;https://en.wikipedia.org/wiki/Kirk_Ferentz&lt;/a&gt;
+&lt;/section&gt;
+&lt;section data-markdown&gt;
+
+&lt;h1&gt;Combine SelectorGadget with rvest&lt;/h1&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rvest)
+wiki_kirk &amp;lt;- read_html(&quot;https://en.wikipedia.org/wiki/Kirk_Ferentz&quot;)
+wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+    html_nodes(&quot;.vcard td , .vcard th&quot;)
+head(wiki_kirk_extract)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## {xml_nodeset (6)}
+## [1] &amp;lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&amp;gt;&amp;lt;a href=&quot;/wiki/File:Kirk_p ...
+## [2] &amp;lt;th scope=&quot;row&quot;&amp;gt;Sport(s)&amp;lt;/th&amp;gt;
+## [3] &amp;lt;td class=&quot;category&quot;&amp;gt;\n  &amp;lt;a href=&quot;/wiki/American_football&quot; title=&quot;Am ...
+## [4] &amp;lt;th colspan=&quot;2&quot; style=&quot;text-align:center;background-color: lightgray ...
+## [5] &amp;lt;th scope=&quot;row&quot;&amp;gt;Title&amp;lt;/th&amp;gt;
+## [6] &amp;lt;td&amp;gt;\n  &amp;lt;a href=&quot;/wiki/Head_coach&quot; title=&quot;Head coach&quot;&amp;gt;Head coach&amp;lt;/a&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Extract text&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;code&gt;html_text&lt;/code&gt; function&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk &amp;lt;- read_html(&quot;https://en.wikipedia.org/wiki/Kirk_Ferentz&quot;)
+wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
+  html_text()
+head(wiki_kirk_extract)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [1] &quot;\nFerentz at the 2010 Orange Bowl\n&quot;
+## [2] &quot;Sport(s)&quot;                           
+## [3] &quot;Football&quot;                           
+## [4] &quot;Current position&quot;                   
+## [5] &quot;Title&quot;                              
+## [6] &quot;Head coach&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Encoding problems&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Two solutions to fix encoding problems&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repair_encoding&lt;/code&gt;: fix encoding problems&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
+  html_text() %&amp;gt;%
+  guess_encoding()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##       encoding language confidence
+## 1        UTF-8                1.00
+## 2 windows-1252       en       0.37
+## 3 windows-1250       ro       0.18
+## 4 windows-1254       tr       0.15
+## 5     UTF-16BE                0.10
+## 6     UTF-16LE                0.10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Fix Encoding Problems&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Best practice to reload page with correct encoding&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk &amp;lt;- read_html(&quot;https://en.wikipedia.org/wiki/Kirk_Ferentz&quot;, 
+                       encoding = &#39;UTF-8&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
+  html_text() %&amp;gt;% 
+  repair_encoding()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Extract html tags&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;code&gt;html_tags&lt;/code&gt; function&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
+  html_name()
+head(wiki_kirk_extract)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [1] &quot;td&quot; &quot;th&quot; &quot;td&quot; &quot;th&quot; &quot;th&quot; &quot;td&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Extract html attributes&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;code&gt;html_attrs&lt;/code&gt; function&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
+  html_attrs()
+head(wiki_kirk_extract)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [[1]]
+##             colspan               style 
+##                 &quot;2&quot; &quot;text-align:center&quot; 
+## 
+## [[2]]
+## scope 
+## &quot;row&quot; 
+## 
+## [[3]]
+##      class 
+## &quot;category&quot; 
+## 
+## [[4]]
+##                                          colspan 
+##                                              &quot;2&quot; 
+##                                            style 
+## &quot;text-align:center;background-color: lightgray;&quot; 
+## 
+## [[5]]
+## scope 
+## &quot;row&quot; 
+## 
+## [[6]]
+## named character(0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Extract links&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;code&gt;html_attrs&lt;/code&gt; function again&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.vcard a&quot;) %&amp;gt;%
+  html_attr(&#39;href&#39;)
+head(wiki_kirk_extract)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [1] &quot;/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
+## [2] &quot;/wiki/American_football&quot;                           
+## [3] &quot;/wiki/Head_coach&quot;                                  
+## [4] &quot;/wiki/Iowa_Hawkeyes_football&quot;                      
+## [5] &quot;/wiki/Big_Ten_Conference&quot;                          
+## [6] &quot;/wiki/Royal_Oak,_Michigan&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Extract Tables&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;record_kirk &amp;lt;- wiki_kirk %&amp;gt;%
+  html_nodes(&quot;.wikitable&quot;) %&amp;gt;%
+  .[[1]] %&amp;gt;%
+  html_table(fill = TRUE)
+head(record_kirk)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##                                                  Year  Team Overall
+## 1 Maine Black Bears (Yankee Conference) (1990-1992)  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;
+## 2                                                1990 Maine   3-8
+## 3                                                1991 Maine   3-8
+## 4                                                1992 Maine   6-5
+## 5                                              Maine:  &amp;lt;NA&amp;gt; 12-21
+## 6 Iowa Hawkeyes (Big Ten Conference) (1999-present)  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;
+##
+##   Conference Standing Bowl/playoffs Coaches# AP NA NA
+## 1       &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;          &amp;lt;NA&amp;gt;       NA   NA NA NA
+## 2      2-6                              NA   NA NA NA
+## 3      2-6                              NA   NA NA NA
+## 4      4-4                              NA   NA NA NA
+## 5     8-16                   &amp;lt;NA&amp;gt;       NA   NA NA NA
+## 6       &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;          &amp;lt;NA&amp;gt;       NA   NA NA NA
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;
+&lt;section data-markdown&gt;&lt;/p&gt;
+
+&lt;h1&gt;Caveats to Web Scraping&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep in mind when scraping we are using their bandwidth
+
+&lt;ul&gt;
+&lt;li&gt;Do not want to repeatedly do expensive bandwidth operations&lt;/li&gt;
+&lt;li&gt;Better to scrape once, then run only to update data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Some websites are copyrighted (i.e. illegal to scrape)
+&lt;/section&gt;
+&lt;section data-markdown&gt;
+
+&lt;h1&gt;Data Modeling&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;Research Questions
+
+&lt;ol&gt;
+&lt;li&gt;Who is the next great coach?&lt;/li&gt;
+&lt;li&gt;What characteristics are in common for these coaches?
+&lt;/section&gt;
+&lt;section data-markdown&gt;
+
+&lt;h1&gt;IRT modeling&lt;/h1&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)&lt;/li&gt;
+&lt;li&gt;IRT is commonly used to model assessment data.
+&lt;/section&gt;
+&lt;section data-markdown&gt;
+
+&lt;h1&gt;Questions&lt;/h1&gt;
+
+&lt;p&gt;brandon-lebeau@uiowa.edu&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Speed test of sequence generation for unbalanced simulation</title>
