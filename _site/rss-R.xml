@@ -247,7 +247,7 @@
 &lt;h1&gt;HTML Basics&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt; HTML is structured by start tags (e.g. `&lt;table&gt;`) and end tags (e.g. `&lt;/table&gt;`) &lt;/li&gt;
+&lt;li&gt; HTML is structured by start tags (e.g. &lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;) and end tags (e.g. &lt;code&gt;&amp;lt;&amp;frasl;table&amp;gt;&lt;/code&gt;) &lt;/li&gt;
 &lt;li&gt; Common tags 
 &lt;/li&gt;
 &lt;/ul&gt;

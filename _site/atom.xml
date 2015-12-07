@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-12-07T09:45:06-06:00</updated>
+ <updated>2015-12-07T10:10:43-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -256,7 +256,7 @@
 &lt;h1&gt;HTML Basics&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt; HTML is structured by start tags (e.g. `&lt;table&gt;`) and end tags (e.g. `&lt;/table&gt;`) &lt;/li&gt;
+&lt;li&gt; HTML is structured by start tags (e.g. &lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;) and end tags (e.g. &lt;code&gt;&amp;lt;&amp;frasl;table&amp;gt;&lt;/code&gt;) &lt;/li&gt;
 &lt;li&gt; Common tags 
 &lt;/li&gt;
 &lt;/ul&gt;

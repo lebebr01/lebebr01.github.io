@@ -149,7 +149,7 @@ tags: [R, slides, rvest, cfb]
 <section>
 # HTML Basics
 <ul>
-<li> HTML is structured by start tags (e.g. `<table>`) and end tags (e.g. `</table>`) </li>
+<li> HTML is structured by start tags (e.g. <code>&lt;table&gt;</code>) and end tags (e.g. <code>&lt;&frasl;table&gt;</code>) </li>
 <li> Common tags 
 </li>
 </ul>
