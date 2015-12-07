@@ -37,7 +37,7 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Example Coach Data
 
-```
+```r
 ##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
 ## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
 ## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
@@ -60,7 +60,7 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Example GBG Data
 
-```
+```r
 ##    Team           Official Year       Date WL          Opponent PF PA
 ## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
 ## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
@@ -218,7 +218,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```
+```r
 ## {xml_nodeset (6)}
 ## [1] <td colspan="2" style="text-align:center"><a href="/wiki/File:Kirk_p ...
 ## [2] <th scope="row">Sport(s)</th>
@@ -241,7 +241,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```
+```r
 ## [1] "\nFerentz at the 2010 Orange Bowl\n"
 ## [2] "Sport(s)"                           
 ## [3] "Football"                           
@@ -265,7 +265,7 @@ wiki_kirk %>%
   guess_encoding()
 ```
 
-```
+```r
 ##       encoding language confidence
 ## 1        UTF-8                1.00
 ## 2 windows-1252       en       0.36
@@ -309,7 +309,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```
+```r
 ## [1] "td" "th" "td" "th" "th" "td"
 ```
 </section>
@@ -326,7 +326,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```
+```r
 ## [[1]]
 ##             colspan               style 
 ##                 "2" "text-align:center" 
@@ -366,7 +366,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```
+```r
 ## [1] "/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "/wiki/American_football"                           
 ## [3] "/wiki/Head_coach"                                  
@@ -386,7 +386,7 @@ valid_links <- paste0('https://www.wikipedia.org', wiki_kirk_extract)
 head(valid_links)
 ```
 
-```
+```r
 ## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "https://www.wikipedia.org/wiki/American_football"                           
 ## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  

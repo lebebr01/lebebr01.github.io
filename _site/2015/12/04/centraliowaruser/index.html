@@ -157,7 +157,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1>Example Coach Data</h1>
 
-<pre><code>##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
+<pre><code class="r">##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
 ## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
 ## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
 ## 3 2012 Iowa   4    8   0 0.33333 232 275   -43 Kirk Ferentz
@@ -194,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1>Example GBG Data</h1>
 
-<pre><code>##    Team           Official Year       Date WL          Opponent PF PA
+<pre><code class="r">##    Team           Official Year       Date WL          Opponent PF PA
 ## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
 ## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
 ## 3  Iowa University of Iowa 2014  9/13/2014  L          Iowa St. 17 20
@@ -452,7 +452,7 @@ wiki_kirk_extract &lt;- wiki_kirk %&gt;%
 head(wiki_kirk_extract)
 </code></pre>
 
-<pre><code>## {xml_nodeset (6)}
+<pre><code class="r">## {xml_nodeset (6)}
 ## [1] &lt;td colspan="2" style="text-align:center"&gt;&lt;a href="/wiki/File:Kirk_p ...
 ## [2] &lt;th scope="row"&gt;Sport(s)&lt;/th&gt;
 ## [3] &lt;td class="category"&gt;\n  &lt;a href="/wiki/American_football" title="Am ...
@@ -478,7 +478,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 </code></pre>
 
-<pre><code>## [1] "\nFerentz at the 2010 Orange Bowl\n"
+<pre><code class="r">## [1] "\nFerentz at the 2010 Orange Bowl\n"
 ## [2] "Sport(s)"                           
 ## [3] "Football"                           
 ## [4] "Current position"                   
@@ -509,7 +509,7 @@ head(wiki_kirk_extract)
   guess_encoding()
 </code></pre>
 
-<pre><code>##       encoding language confidence
+<pre><code class="r">##       encoding language confidence
 ## 1        UTF-8                1.00
 ## 2 windows-1252       en       0.36
 ## 3 windows-1250       ro       0.18
@@ -561,7 +561,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 </code></pre>
 
-<pre><code>## [1] "td" "th" "td" "th" "th" "td"
+<pre><code class="r">## [1] "td" "th" "td" "th" "th" "td"
 </code></pre>
 
 <p></section></p>
@@ -581,7 +581,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 </code></pre>
 
-<pre><code>## [[1]]
+<pre><code class="r">## [[1]]
 ##             colspan               style 
 ##                 "2" "text-align:center" 
 ## 
@@ -624,7 +624,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 </code></pre>
 
-<pre><code>## [1] "/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+<pre><code class="r">## [1] "/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "/wiki/American_football"                           
 ## [3] "/wiki/Head_coach"                                  
 ## [4] "/wiki/Iowa_Hawkeyes_football"                      
@@ -647,7 +647,7 @@ head(wiki_kirk_extract)
 head(valid_links)
 </code></pre>
 
-<pre><code>## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+<pre><code class="r">## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "https://www.wikipedia.org/wiki/American_football"                           
 ## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  
 ## [4] "https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football"                      

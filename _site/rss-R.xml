@@ -68,7 +68,7 @@
 
 &lt;h1&gt;Example Coach Data&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code&gt;##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
 ## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
 ## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
 ## 3 2012 Iowa   4    8   0 0.33333 232 275   -43 Kirk Ferentz
@@ -105,7 +105,7 @@
 
 &lt;h1&gt;Example GBG Data&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code&gt;##    Team           Official Year       Date WL          Opponent PF PA
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##    Team           Official Year       Date WL          Opponent PF PA
 ## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
 ## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
 ## 3  Iowa University of Iowa 2014  9/13/2014  L          Iowa St. 17 20
@@ -363,7 +363,7 @@ wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## {xml_nodeset (6)}
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## {xml_nodeset (6)}
 ## [1] &amp;lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&amp;gt;&amp;lt;a href=&quot;/wiki/File:Kirk_p ...
 ## [2] &amp;lt;th scope=&quot;row&quot;&amp;gt;Sport(s)&amp;lt;/th&amp;gt;
 ## [3] &amp;lt;td class=&quot;category&quot;&amp;gt;\n  &amp;lt;a href=&quot;/wiki/American_football&quot; title=&quot;Am ...
@@ -389,7 +389,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;\nFerentz at the 2010 Orange Bowl\n&quot;
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## [1] &quot;\nFerentz at the 2010 Orange Bowl\n&quot;
 ## [2] &quot;Sport(s)&quot;                           
 ## [3] &quot;Football&quot;                           
 ## [4] &quot;Current position&quot;                   
@@ -420,7 +420,7 @@ head(wiki_kirk_extract)
   guess_encoding()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;##       encoding language confidence
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;##       encoding language confidence
 ## 1        UTF-8                1.00
 ## 2 windows-1252       en       0.36
 ## 3 windows-1250       ro       0.18
@@ -472,7 +472,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;td&quot; &quot;th&quot; &quot;td&quot; &quot;th&quot; &quot;th&quot; &quot;td&quot;
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## [1] &quot;td&quot; &quot;th&quot; &quot;td&quot; &quot;th&quot; &quot;th&quot; &quot;td&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
@@ -492,7 +492,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [[1]]
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## [[1]]
 ##             colspan               style 
 ##                 &quot;2&quot; &quot;text-align:center&quot; 
 ## 
@@ -535,7 +535,7 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## [1] &quot;/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
 ## [2] &quot;/wiki/American_football&quot;                           
 ## [3] &quot;/wiki/Head_coach&quot;                                  
 ## [4] &quot;/wiki/Iowa_Hawkeyes_football&quot;                      
@@ -558,7 +558,7 @@ head(wiki_kirk_extract)
 head(valid_links)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;## [1] &quot;https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
 ## [2] &quot;https://www.wikipedia.org/wiki/American_football&quot;                           
 ## [3] &quot;https://www.wikipedia.org/wiki/Head_coach&quot;                                  
 ## [4] &quot;https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football&quot;                      
