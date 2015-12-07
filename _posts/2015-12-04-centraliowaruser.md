@@ -267,8 +267,8 @@ head(wiki_kirk_extract)
 # Encoding problems
 - Two solutions to fix encoding problems
     - `guess_encoding`
-    - `repair_encoding` to fix encoding problems
 
+    - `repair_encoding` to fix encoding problems
 
 ```r
 wiki_kirk %>%

@@ -419,8 +419,8 @@ head(wiki_kirk_extract)
 &lt;li&gt;Two solutions to fix encoding problems
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;repair_encoding&lt;/code&gt; to fix encoding problems&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;repair_encoding&lt;/code&gt; to fix encoding problems&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

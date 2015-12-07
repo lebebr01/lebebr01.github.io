@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-12-07T11:01:08-06:00</updated>
+ <updated>2015-12-07T11:07:54-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -428,8 +428,8 @@ head(wiki_kirk_extract)
 &lt;li&gt;Two solutions to fix encoding problems
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;repair_encoding&lt;/code&gt; to fix encoding problems&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;repair_encoding&lt;/code&gt; to fix encoding problems&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
