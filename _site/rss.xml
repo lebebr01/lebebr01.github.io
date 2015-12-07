@@ -656,7 +656,7 @@ head(valid_links)
 &lt;h1&gt;Example code with lme4&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package&lt;/li&gt;
+&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using &lt;code&gt;glmer&lt;/code&gt; in the &lt;code&gt;lme4&lt;/code&gt; package&lt;/li&gt;
 &lt;/ul&gt;
 
 

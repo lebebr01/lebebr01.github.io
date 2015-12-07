@@ -451,7 +451,7 @@ record_kirk <- wiki_kirk %>%
 
 <section>    
 # Example code with lme4
-- A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package
+- A 1 parameter multilevel IRT model can be fitted using `glmer` in the `lme4` package
 
 
 ```r
@@ -477,5 +477,5 @@ fm1a <- glmer(wingbg ~ 0 + (1|coach) + (1|Team),
 - Linkedin: <https://www.linkedin.com/in/lebeaubr>
 - Website: <http://educate-r.org>
     - <http://educate-r.org/2015/12/04/centraliowaruser/>
-    
+
 </section>

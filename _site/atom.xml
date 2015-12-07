@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-12-07T10:58:14-06:00</updated>
+ <updated>2015-12-07T10:59:34-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -665,7 +665,7 @@ head(valid_links)
 &lt;h1&gt;Example code with lme4&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package&lt;/li&gt;
+&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using &lt;code&gt;glmer&lt;/code&gt; in the &lt;code&gt;lme4&lt;/code&gt; package&lt;/li&gt;
 &lt;/ul&gt;
 
 
