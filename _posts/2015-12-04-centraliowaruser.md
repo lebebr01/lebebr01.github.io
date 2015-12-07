@@ -4,20 +4,20 @@ title: Web Scraping to Item Response Theory - A College Football Adventure
 tags: [R, slides, rvest, cfb]
 ---
 
-<section data-markdown>
+<section>
     <h1 class="title">Web Scraping to Item Response Theory: A College Football Adventure</h1>
     <h2 class="author">Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem</h2>
     <h3 class="date">University of Iowa &amp; University of Minnesota</h3>
 </section>
 
 
-<section data-markdown>
+<section>
 # Background
 - Began after Tim Brewster was fired
 - Wanted to try to predict next great coach
 </section>
 
-<section data-markdown>
+<section>
 # Data Available
 - Data is available at three levels
     1. Coach
@@ -25,7 +25,7 @@ tags: [R, slides, rvest, cfb]
     3. Team
 </section>
 
-<section data-markdown>    
+<section>    
 # Coach
 - Data
     - Overall record
@@ -34,7 +34,7 @@ tags: [R, slides, rvest, cfb]
     - Coordinator history
 </section>
 
-<section data-markdown>
+<section>
 # Example Coach Data
 
 ```
@@ -47,7 +47,7 @@ tags: [R, slides, rvest, cfb]
 ```
 </section>
 
-<section data-markdown>    
+<section>    
 # Game by Game
 - Data
     - Final score of each game
@@ -57,7 +57,7 @@ tags: [R, slides, rvest, cfb]
     - No information within a game
 </section>
 
-<section data-markdown>
+<section>
 # Example GBG Data
 
 ```
@@ -92,7 +92,7 @@ tags: [R, slides, rvest, cfb]
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Team
 - Data
     - Overall team record
@@ -102,33 +102,33 @@ tags: [R, slides, rvest, cfb]
 - Data is very similar to that of the coach level
 </section>
 
-<section data-markdown>
+<section>
 # Web Scraping
 - Data were obtained from many sources
     - Much from <http://cfbdatawarehouse.com>
     - Also used wikipedia, ESPN, and rivals
 </section>
 
-<section data-markdown>
+<section>
 # Iowa Coaches Over Time
 <img src="http://educate-r.org/figs/iowa.png" alt="" height = "500" width = "1200"/>
 
 </section>
 
-<section data-markdown>
+<section>
 # Iowa State Coaches Over Time
 <img src="http://educate-r.org/figs/iowa_state.png" alt="" height = "500" width="1200"/>
 
 </section>
 
-<section data-markdown>
+<section>
 # Strengths in web scraping
 - Data is relatively easily obtained
 - Structured process for obtaining data
 - Can be easily updated
 </section>
 
-<section data-markdown>
+<section>
 # Challenges of web scraping
 - At the mercy of the website
     - Many sites are old 
@@ -137,7 +137,7 @@ tags: [R, slides, rvest, cfb]
 - Need some basic knowledge of html
 </section>
 
-<section data-markdown>
+<section>
 # When is Web Scraping Worthwhile?
 - Best when scraping many pages
     - Particularly when web addresses are not structured
@@ -146,7 +146,7 @@ tags: [R, slides, rvest, cfb]
 - Not useful if only scraping a single page/table
 </section>
 
-<section data-markdown>
+<section>
 # HTML Basics
 <ul>
 <li> HTML is structured by start tags (e.g. `<table>`) and end tags (e.g. `</table>`) </li>
@@ -175,12 +175,12 @@ tags: [R, slides, rvest, cfb]
 </ul>
 </section>
 
-<section data-markdown>
+<section>
 # HTML Code Example
 <img src="http://educate-r.org/figs/ferentz_wikiside.png" alt="" height = "500" width="1200"/>
 </section>
 
-<section data-markdown>
+<section>
 # Tools for web scraping
 - R
     - `rvest`: <http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/>
@@ -191,7 +191,7 @@ tags: [R, slides, rvest, cfb]
     - `SelectorGadget`: <http://selectorgadget.com/>
 </section>
 
-<section data-markdown>    
+<section>    
 # Basics of rvest
 - `read_html` is the most basic function
 - `html_node` or `html_nodes`
@@ -199,7 +199,7 @@ tags: [R, slides, rvest, cfb]
     - SelectorGadget is the easiest way to get this
 </section>
 
-<section data-markdown>
+<section>
 # SelectorGadget
 - SelectorGadget is a Javascript addon for web browsers
 - Can quickly identify a css selector or xpath to select correct portion of web page
@@ -207,7 +207,7 @@ tags: [R, slides, rvest, cfb]
     - <https://en.wikipedia.org/wiki/Kirk_Ferentz>
 </section>
 
-<section data-markdown>
+<section>
 # Combine SelectorGadget with rvest
 
 ```r
@@ -229,7 +229,7 @@ head(wiki_kirk_extract)
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Extract text
 - Use the `html_text` function
 
@@ -251,7 +251,7 @@ head(wiki_kirk_extract)
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Encoding problems
 - Two solutions to fix encoding problems
     - `guess_encoding`
@@ -276,7 +276,7 @@ wiki_kirk %>%
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Fix Encoding Problems
 - Best practice to reload page with correct encoding
 
@@ -297,7 +297,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Extract html tags
 - Use the `html_tags` function
 
@@ -314,7 +314,7 @@ head(wiki_kirk_extract)
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Extract html attributes
 - Use the `html_attrs` function
 
@@ -354,7 +354,7 @@ head(wiki_kirk_extract)
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Extract links
 - Use the `html_attrs` function again
 
@@ -376,7 +376,7 @@ head(wiki_kirk_extract)
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Valid Links
 - The `paste0` function is helpful for this
 
@@ -397,7 +397,7 @@ head(valid_links)
 
 </section>
 
-<section data-markdown>
+<section>
 # Extract Tables
 - The `html_table` function is useful to scrape well formatted tables
 
@@ -410,7 +410,7 @@ record_kirk <- wiki_kirk %>%
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Caveats to Web Scraping
 - Keep in mind when scraping we are using their bandwidth
     - Do not want to repeatedly do expensive bandwidth operations
@@ -418,14 +418,14 @@ record_kirk <- wiki_kirk %>%
 - Some websites are copyrighted (i.e. illegal to scrape)
 </section>
 
-<section data-markdown>
+<section>
 # Data Modeling
 - Research Questions
     1. Who is the next great coach?
     2. What characteristics are in common for these coaches?
 </section>
 
-<section data-markdown>
+<section>
 # IRT modeling
 - So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)
 - IRT is commonly used to model assessment data to estimate item parameters and person 'ability'
@@ -434,7 +434,7 @@ record_kirk <- wiki_kirk %>%
     - 0 = Otherwise
 </section>
 
-<section data-markdown>    
+<section>    
 # Example code with lme4
 - A 1 parameter multilevel IRT model can be fitted using `glmer` in the `lme4` package
 
@@ -446,14 +446,14 @@ fm1a <- glmer(wingbg ~ 0 + (1|coach) + (1|Team),
 ```
 </section>
 
-<section data-markdown>
+<section>
 # Plot Showing Team Ability
 <img src="http://educate-r.org/figs/team_ability.png" alt="" height = "500" width="1200"/>
 
 
 </section>
 
-<section data-markdown>
+<section>
 
 
 # Connect

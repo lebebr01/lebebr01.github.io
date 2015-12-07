@@ -8,13 +8,13 @@
 		
 			<item>
 				<title>Web Scraping to Item Response Theory - A College Football Adventure</title>
-				<description>&lt;p&gt;&lt;section data-markdown&gt;
+				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Web Scraping to Item Response Theory: A College Football Adventure&lt;/h1&gt;
     &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem&lt;/h2&gt;
     &lt;h3 class=&quot;date&quot;&gt;University of Iowa &amp;amp; University of Minnesota&lt;/h3&gt;
 &lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Background&lt;/h1&gt;
 
@@ -25,7 +25,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Data Available&lt;/h1&gt;
 
@@ -42,7 +42,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Coach&lt;/h1&gt;
 
@@ -64,7 +64,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Example Coach Data&lt;/h1&gt;
 
@@ -78,7 +78,7 @@
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Game by Game&lt;/h1&gt;
 
@@ -101,7 +101,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Example GBG Data&lt;/h1&gt;
 
@@ -137,7 +137,7 @@
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Team&lt;/h1&gt;
 
@@ -156,7 +156,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Web Scraping&lt;/h1&gt;
 
@@ -172,7 +172,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Iowa Coaches Over Time&lt;/h1&gt;
 
@@ -180,7 +180,7 @@
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Iowa State Coaches Over Time&lt;/h1&gt;
 
@@ -188,7 +188,7 @@
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Strengths in web scraping&lt;/h1&gt;
 
@@ -200,7 +200,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Challenges of web scraping&lt;/h1&gt;
 
@@ -218,7 +218,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;When is Web Scraping Worthwhile?&lt;/h1&gt;
 
@@ -242,7 +242,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;HTML Basics&lt;/h1&gt;
 
@@ -283,14 +283,14 @@
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;HTML Code Example&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ferentz_wikiside.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
 &lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Tools for web scraping&lt;/h1&gt;
 
@@ -318,7 +318,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Basics of rvest&lt;/h1&gt;
 
@@ -335,7 +335,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;SelectorGadget&lt;/h1&gt;
 
@@ -352,7 +352,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Combine SelectorGadget with rvest&lt;/h1&gt;
 
@@ -374,7 +374,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Extract text&lt;/h1&gt;
 
@@ -399,7 +399,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Encoding problems&lt;/h1&gt;
 
@@ -431,7 +431,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Fix Encoding Problems&lt;/h1&gt;
 
@@ -457,7 +457,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Extract html tags&lt;/h1&gt;
 
@@ -477,7 +477,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Extract html attributes&lt;/h1&gt;
 
@@ -520,7 +520,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Extract links&lt;/h1&gt;
 
@@ -545,7 +545,7 @@ head(wiki_kirk_extract)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Valid Links&lt;/h1&gt;
 
@@ -568,7 +568,7 @@ head(valid_links)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Extract Tables&lt;/h1&gt;
 
@@ -585,7 +585,7 @@ head(valid_links)
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Caveats to Web Scraping&lt;/h1&gt;
 
@@ -602,7 +602,7 @@ head(valid_links)
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Data Modeling&lt;/h1&gt;
 
@@ -618,7 +618,7 @@ head(valid_links)
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;IRT modeling&lt;/h1&gt;
 
@@ -636,7 +636,7 @@ head(valid_links)
 &lt;/ul&gt;
 
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Example code with lme4&lt;/h1&gt;
 
@@ -652,7 +652,7 @@ fm1a &amp;lt;- glmer(wingbg ~ 0 + (1|coach) + (1|Team),
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Plot Showing Team Ability&lt;/h1&gt;
 
@@ -660,7 +660,7 @@ fm1a &amp;lt;- glmer(wingbg ~ 0 + (1|coach) + (1|Team),
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;section data-markdown&gt;&lt;/p&gt;
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
 &lt;h1&gt;Connect&lt;/h1&gt;
 
