@@ -183,18 +183,18 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Tools for web scraping
 - R
-    - `rvest`: <http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/>
-    - `XML`: <http://www.omegahat.org/RSXML/>
+    - rvest: <http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/>
+    - XML: <http://www.omegahat.org/RSXML/>
 - Python
-    - `beautiful soup`: <http://www.crummy.com/software/BeautifulSoup/>
+    - beautiful soup: <http://www.crummy.com/software/BeautifulSoup/>
 - Misc
-    - `SelectorGadget`: <http://selectorgadget.com/>
+    - SelectorGadget: <http://selectorgadget.com/>
 </section>
 
 <section>    
 # Basics of rvest
-- `read_html` is the most basic function
-- `html_node` or `html_nodes`
+- read_html() is the most basic function
+- html_node() or html_nodes()
     - These functions need css selectors or xpath
     - SelectorGadget is the easiest way to get this
 </section>
@@ -231,7 +231,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Extract text
-- Use the `html_text` function
+- Use the html_text() function
 
 
 ```r
@@ -254,8 +254,8 @@ head(wiki_kirk_extract)
 <section>
 # Encoding problems
 - Two solutions to fix encoding problems
-    - `guess_encoding`
-    - `repair_encoding`: fix encoding problems
+    - guess_encoding()
+    - repair_encoding() to fix encoding problems
 
 
 ```r
@@ -299,7 +299,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 
 <section>
 # Extract html tags
-- Use the `html_tags` function
+- Use the html_tags() function
 
 
 ```r
@@ -316,7 +316,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Extract html attributes
-- Use the `html_attrs` function
+- Use the html_attrs() function
 
 
 ```r
@@ -356,7 +356,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Extract links
-- Use the `html_attrs` function again
+- Use the html_attrs() function again
 
 
 ```r
@@ -378,7 +378,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Valid Links
-- The `paste0` function is helpful for this
+- The paste0() function is helpful for this
 
 
 ```r
@@ -399,7 +399,7 @@ head(valid_links)
 
 <section>
 # Extract Tables
-- The `html_table` function is useful to scrape well formatted tables
+- The html_table() function is useful to scrape well formatted tables
 
 
 ```r
@@ -436,7 +436,7 @@ record_kirk <- wiki_kirk %>%
 
 <section>    
 # Example code with lme4
-- A 1 parameter multilevel IRT model can be fitted using `glmer` in the `lme4` package
+- A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package
 
 
 ```r

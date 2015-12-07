@@ -387,20 +387,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>R
 
 <ul>
-<li><code>rvest</code>: <a href="http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/">http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/</a></li>
-<li><code>XML</code>: <a href="http://www.omegahat.org/RSXML/">http://www.omegahat.org/RSXML/</a></li>
+<li>rvest: <a href="http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/">http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/</a></li>
+<li>XML: <a href="http://www.omegahat.org/RSXML/">http://www.omegahat.org/RSXML/</a></li>
 </ul>
 </li>
 <li>Python
 
 <ul>
-<li><code>beautiful soup</code>: <a href="http://www.crummy.com/software/BeautifulSoup/">http://www.crummy.com/software/BeautifulSoup/</a></li>
+<li>beautiful soup: <a href="http://www.crummy.com/software/BeautifulSoup/">http://www.crummy.com/software/BeautifulSoup/</a></li>
 </ul>
 </li>
 <li>Misc
 
 <ul>
-<li><code>SelectorGadget</code>: <a href="http://selectorgadget.com/">http://selectorgadget.com/</a>
+<li>SelectorGadget: <a href="http://selectorgadget.com/">http://selectorgadget.com/</a>
 </section></li>
 </ul>
 </li>
@@ -412,8 +412,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Basics of rvest</h1>
 
 <ul>
-<li><code>read_html</code> is the most basic function</li>
-<li><code>html_node</code> or <code>html_nodes</code>
+<li>read_html() is the most basic function</li>
+<li>html_node() or html_nodes()
 
 <ul>
 <li>These functions need css selectors or xpath</li>
@@ -468,7 +468,7 @@ head(wiki_kirk_extract)
 <h1>Extract text</h1>
 
 <ul>
-<li>Use the <code>html_text</code> function</li>
+<li>Use the html_text() function</li>
 </ul>
 
 
@@ -496,8 +496,8 @@ head(wiki_kirk_extract)
 <li>Two solutions to fix encoding problems
 
 <ul>
-<li><code>guess_encoding</code></li>
-<li><code>repair_encoding</code>: fix encoding problems</li>
+<li>guess_encoding()</li>
+<li>repair_encoding() to fix encoding problems</li>
 </ul>
 </li>
 </ul>
@@ -551,7 +551,7 @@ head(wiki_kirk_extract)
 <h1>Extract html tags</h1>
 
 <ul>
-<li>Use the <code>html_tags</code> function</li>
+<li>Use the html_tags() function</li>
 </ul>
 
 
@@ -571,7 +571,7 @@ head(wiki_kirk_extract)
 <h1>Extract html attributes</h1>
 
 <ul>
-<li>Use the <code>html_attrs</code> function</li>
+<li>Use the html_attrs() function</li>
 </ul>
 
 
@@ -614,7 +614,7 @@ head(wiki_kirk_extract)
 <h1>Extract links</h1>
 
 <ul>
-<li>Use the <code>html_attrs</code> function again</li>
+<li>Use the html_attrs() function again</li>
 </ul>
 
 
@@ -639,7 +639,7 @@ head(wiki_kirk_extract)
 <h1>Valid Links</h1>
 
 <ul>
-<li>The <code>paste0</code> function is helpful for this</li>
+<li>The paste0() function is helpful for this</li>
 </ul>
 
 
@@ -662,7 +662,7 @@ head(valid_links)
 <h1>Extract Tables</h1>
 
 <ul>
-<li>The <code>html_table</code> function is useful to scrape well formatted tables</li>
+<li>The html_table() function is useful to scrape well formatted tables</li>
 </ul>
 
 
@@ -730,7 +730,7 @@ head(valid_links)
 <h1>Example code with lme4</h1>
 
 <ul>
-<li>A 1 parameter multilevel IRT model can be fitted using <code>glmer</code> in the <code>lme4</code> package</li>
+<li>A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package</li>
 </ul>
 
 

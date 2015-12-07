@@ -298,20 +298,20 @@
 &lt;li&gt;R
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;rvest&lt;/code&gt;: &lt;a href=&quot;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&quot;&gt;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;XML&lt;/code&gt;: &lt;a href=&quot;http://www.omegahat.org/RSXML/&quot;&gt;http://www.omegahat.org/RSXML/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;rvest: &lt;a href=&quot;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&quot;&gt;http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;XML: &lt;a href=&quot;http://www.omegahat.org/RSXML/&quot;&gt;http://www.omegahat.org/RSXML/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Python
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;beautiful soup&lt;/code&gt;: &lt;a href=&quot;http://www.crummy.com/software/BeautifulSoup/&quot;&gt;http://www.crummy.com/software/BeautifulSoup/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;beautiful soup: &lt;a href=&quot;http://www.crummy.com/software/BeautifulSoup/&quot;&gt;http://www.crummy.com/software/BeautifulSoup/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Misc
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;SelectorGadget&lt;/code&gt;: &lt;a href=&quot;http://selectorgadget.com/&quot;&gt;http://selectorgadget.com/&lt;/a&gt;
+&lt;li&gt;SelectorGadget: &lt;a href=&quot;http://selectorgadget.com/&quot;&gt;http://selectorgadget.com/&lt;/a&gt;
 &lt;/section&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -323,8 +323,8 @@
 &lt;h1&gt;Basics of rvest&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;read_html&lt;/code&gt; is the most basic function&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;html_node&lt;/code&gt; or &lt;code&gt;html_nodes&lt;/code&gt;
+&lt;li&gt;read_html() is the most basic function&lt;/li&gt;
+&lt;li&gt;html_node() or html_nodes()
 
 &lt;ul&gt;
 &lt;li&gt;These functions need css selectors or xpath&lt;/li&gt;
@@ -379,7 +379,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Extract text&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use the &lt;code&gt;html_text&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Use the html_text() function&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -407,8 +407,8 @@ head(wiki_kirk_extract)
 &lt;li&gt;Two solutions to fix encoding problems
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;guess_encoding&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;repair_encoding&lt;/code&gt;: fix encoding problems&lt;/li&gt;
+&lt;li&gt;guess_encoding()&lt;/li&gt;
+&lt;li&gt;repair_encoding() to fix encoding problems&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -462,7 +462,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Extract html tags&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use the &lt;code&gt;html_tags&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Use the html_tags() function&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -482,7 +482,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Extract html attributes&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use the &lt;code&gt;html_attrs&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Use the html_attrs() function&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -525,7 +525,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Extract links&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use the &lt;code&gt;html_attrs&lt;/code&gt; function again&lt;/li&gt;
+&lt;li&gt;Use the html_attrs() function again&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -550,7 +550,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Valid Links&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;paste0&lt;/code&gt; function is helpful for this&lt;/li&gt;
+&lt;li&gt;The paste0() function is helpful for this&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -573,7 +573,7 @@ head(valid_links)
 &lt;h1&gt;Extract Tables&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;html_table&lt;/code&gt; function is useful to scrape well formatted tables&lt;/li&gt;
+&lt;li&gt;The html_table() function is useful to scrape well formatted tables&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -641,7 +641,7 @@ head(valid_links)
 &lt;h1&gt;Example code with lme4&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using &lt;code&gt;glmer&lt;/code&gt; in the &lt;code&gt;lme4&lt;/code&gt; package&lt;/li&gt;
+&lt;li&gt;A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package&lt;/li&gt;
 &lt;/ul&gt;
 
 
