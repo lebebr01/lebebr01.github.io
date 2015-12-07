@@ -1,10 +1,68 @@
----
-  layout: post
-title: Formatting Markdown Table with R
-categories: r, markdown, LaTeX, slidy
----
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
 
-This past August I took an opportunity to step back into the University academic world as a [Visiting Assistant Professor](http://http://coehp.uark.edu/12216.php) at the [University of Arkansas](http://www.uark.edu).  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2></h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/Rmd/2013-11-18-CourseSlidesProcess.Rmd" title="" rel="bookmark"></a>
+  </h1>
+  <div class="entry-content full-content">
+    This past August I took an opportunity to step back into the University academic world as a [Visiting Assistant Professor](http://http://coehp.uark.edu/12216.php) at the [University of Arkansas](http://www.uark.edu).  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.
 
 However, there has been some growing pains, especially regarding creating my own slides for the courses I teach.  Although I am using the same books/curriculum used in previous semesters, I am making my own slides and adding my own pieces as I see fit.  In addition, I do not use powerpoint, which all of the existing slides are in.  Therefore, I am creating my own versions of the slides using a combination of [R](http://www.r-project.org/), [knitr](http://yihui.name/knitr/), [markdown](http://daringfireball.net/projects/markdown/), [pandoc](http://johnmacfarlane.net/pandoc/), [slidy](http://www.w3.org/Talks/Tools/Slidy2/), and [LaTeX](http://www.latex-project.org/).  Below is my general process of making my slides and the slides I put online for students to have access to.
 
@@ -34,3 +92,43 @@ pdflatex -interaction=nonstopmode -synctex=1 outfile.tex
 
 In my opinion this creates great looking html presentations that are highly customizable.  One thing to note is that by default to get the slideshow, you need to be connected to the internet.  Both **slidy** and **mathjax** refer to javascript files that are on downloaded directly from the web.  You should be able to download these files, store them locally, and refer to the local versions.
 
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title=""></abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/Rmd/2013-11-18-CourseSlidesProcess.Rmd";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>

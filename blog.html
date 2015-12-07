@@ -1,28 +1,689 @@
----
-layout: default
-title: Educate-R
----
-<ol class="archive">
-{% for post in site.posts %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Educate-R</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>Educate-R</h2> -->
+     <ol class="archive">
+
   <li>
     <div class="excerpt">
       <strong class="entry-title">
-        <a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
+        <a href="/2015/12/04/centraliowaruser/" title="Web Scraping to Item Response Theory - A College Football Adventure" rel="bookmark">Web Scraping to Item Response Theory - A College Football Adventure</a>
       </strong>
       <span class="date small">
-        <abbr class="published" title="{{ post.date }}">{{ post.date | date: "%B %-d, %Y" }}</abbr>
+        <abbr class="published" title="2015-12-04 00:00:00 -0600">December 4, 2015</abbr>
       </span>
-      <p>{{ post.excerpt }}</p>
+      <p><p><section>
+    <h1 class="title">Web Scraping to Item Response Theory: A College Football Adventure</h1>
+    <h2 class="author">Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem</h2>
+    <h3 class="date">University of Iowa &amp; University of Minnesota</h3>
+</section></p>
+</p>
       <p class="alt-font">
         Tags: &nbsp;
-        {% for tag in post.tags %}
-        <a href="/categories/{{ tag }}" title="{{ tag }}" rel="category tag">{{ tag }}</a>
-        {% endfor %}
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/slides" title="slides" rel="category tag">slides</a>
+        
+        <a href="/categories/rvest" title="rvest" rel="category tag">rvest</a>
+        
+        <a href="/categories/cfb" title="cfb" rel="category tag">cfb</a>
+        
       </p>
       <p class="comments-link">
-        <a href='{{post.url}}#disqus_thread'>Comments</a>
+        <a href='/2015/12/04/centraliowaruser/#disqus_thread'>Comments</a>
       </p>
     </div>
   </li>
-{% endfor %}
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2015/03/31/seqspeed/" title="Speed test of sequence generation for unbalanced simulation" rel="bookmark">Speed test of sequence generation for unbalanced simulation</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2015-03-31 00:00:00 -0500">March 31, 2015</abbr>
+      </span>
+      <p><p>I have a simulation package that allows for the simulation of regression models including nested data structures. You can see the package on github here: <a href="https://github.com/lebebr01/simReg">simReg</a>. Over the weekend I updated the package to allow for the simulation of unbalanced designs. I'm hoping to put together a new vigenette soon highlighting the functionality.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/sequence" title="sequence" rel="category tag">sequence</a>
+        
+        <a href="/categories/speedtest" title="speedtest" rel="category tag">speedtest</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2015/03/31/seqspeed/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2015/03/23/removelead0/" title="Remove leading 0 with ggplot2." rel="bookmark">Remove leading 0 with ggplot2.</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2015-03-23 00:00:00 -0500">March 23, 2015</abbr>
+      </span>
+      <p><p>I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0's in the x-axis text labels using <em>ggplot2</em>. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I've found a workaround. The process is walked through below.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/graphics" title="graphics" rel="category tag">graphics</a>
+        
+        <a href="/categories/ggplot2" title="ggplot2" rel="category tag">ggplot2</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2015/03/23/removelead0/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/10/01/simReg/" title="Structured simulation of regression models - simReg package." rel="bookmark">Structured simulation of regression models - simReg package.</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-10-01 00:00:00 -0500">October 1, 2014</abbr>
+      </span>
+      <p><p>I'd like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I'd like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/package" title="package" rel="category tag">package</a>
+        
+        <a href="/categories/simReg" title="simReg" rel="category tag">simReg</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/10/01/simReg/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/09/26/googlelocations/" title="Google location data -- Where I've been." rel="bookmark">Google location data -- Where I've been.</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-09-26 00:00:00 -0500">September 26, 2014</abbr>
+      </span>
+      <p><p>I was emailed by a friend that was looking into their google location data and had asked if I had ever used a json file before in R. I said I had not, but I knew there were packages to do such things. The things I sent were things he had already tried, so what did I decide to do? I went ahead and downloaded my own google location data.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/graphics" title="graphics" rel="category tag">graphics</a>
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/ggplot2" title="ggplot2" rel="category tag">ggplot2</a>
+        
+        <a href="/categories/maps" title="maps" rel="category tag">maps</a>
+        
+        <a href="/categories/google" title="google" rel="category tag">google</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/09/26/googlelocations/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/09/05/winpct/" title="Offense or defense improve likelihood of becoming bowl eligible?" rel="bookmark">Offense or defense improve likelihood of becoming bowl eligible?</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-09-05 00:00:00 -0500">September 5, 2014</abbr>
+      </span>
+      <p><p>I saw a post recently about the likelihood of a baseball team winning based on how many runs, hits, and other baseball statistics. I liked the idea and thought of applying that to college football. Particularly, I'm interested in knowing whether scoring more points or having a stout defense improves the likelihood of becoming bowl eligible.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/graphics" title="graphics" rel="category tag">graphics</a>
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/ggplot2" title="ggplot2" rel="category tag">ggplot2</a>
+        
+        <a href="/categories/cfb" title="cfb" rel="category tag">cfb</a>
+        
+        <a href="/categories/rCharts" title="rCharts" rel="category tag">rCharts</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/09/05/winpct/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/08/05/trendgraphics/" title="Dodged bar charts, why not a line graph?" rel="bookmark">Dodged bar charts, why not a line graph?</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-08-05 00:00:00 -0500">August 5, 2014</abbr>
+      </span>
+      <p><p>I often see graphs that are poorly implemented in that they do not achieve their goal.  One such type of graph that I see are dodged bar charts.  Here is an example of a dodged bar chart summarizing the number of all star players by team (focusing specifically on the AL central division) and year from the <em>Lahman</em> r package:</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/graphics" title="graphics" rel="category tag">graphics</a>
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/ggplot2" title="ggplot2" rel="category tag">ggplot2</a>
+        
+        <a href="/categories/trend" title="trend" rel="category tag">trend</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/08/05/trendgraphics/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/07/30/highlightHTML/" title="Format Markdown Documents in R" rel="bookmark">Format Markdown Documents in R</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-07-30 00:00:00 -0500">July 30, 2014</abbr>
+      </span>
+      <p><p>Have you ever used a markdown file to create an html file?  Have you ever wanted to quickly format the subsequent html file to add some color or other aspects?  If your answer is yes to both of those questions, this package may be of interest to you.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/highlightHTML" title="highlightHTML" rel="category tag">highlightHTML</a>
+        
+        <a href="/categories/package" title="package" rel="category tag">package</a>
+        
+        <a href="/categories/CSS" title="CSS" rel="category tag">CSS</a>
+        
+        <a href="/categories/markdown" title="markdown" rel="category tag">markdown</a>
+        
+        <a href="/categories/html" title="html" rel="category tag">html</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/07/30/highlightHTML/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/05/27/rguirevisit/" title="R gui Revisited" rel="bookmark">R gui Revisited</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-05-27 00:00:00 -0500">May 27, 2014</abbr>
+      </span>
+      <p><p>A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (<a href="http://educate-r.org/2014/02/03/Rgui/">original post</a>).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/gui" title="gui" rel="category tag">gui</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/05/27/rguirevisit/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/04/02/aerapreview/" title="AERA Preview" rel="bookmark">AERA Preview</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-04-02 00:00:00 -0500">April 2, 2014</abbr>
+      </span>
+      <p><p>The American Educational Research Association (AERA) annual conference is this weekend in Philadelphia.  I was lucky to have a paper accepted into the conference.  I am presenting a meta analysis that I have been working on for the past two years or so titled: Model misspecification and assumption violations with the linear mixed model: A meta analysis.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/rCharts" title="rCharts" rel="category tag">rCharts</a>
+        
+        <a href="/categories/Javascript" title="Javascript" rel="category tag">Javascript</a>
+        
+        <a href="/categories/AERA" title="AERA" rel="category tag">AERA</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/04/02/aerapreview/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/03/27/evolvecode/" title="Evolution of Code" rel="bookmark">Evolution of Code</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-03-27 00:00:00 -0500">March 27, 2014</abbr>
+      </span>
+      <p><p>Recently while scraping some data from the college football data warehouse site, I started to realize the evolution of my code.  To preface this, I am definitely not a trained programmer, just a self taught junky who enjoys doing it when I have time.  I've slowly evolved my programming skills from simply statistics languages like r or SPSS, to some other languages like LaTeX, HTML, CSS, Javascript, and I've started to work through some python.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/code" title="code" rel="category tag">code</a>
+        
+        <a href="/categories/XML" title="XML" rel="category tag">XML</a>
+        
+        <a href="/categories/evolution" title="evolution" rel="category tag">evolution</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/03/27/evolvecode/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/03/14/htmltext/" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-03-14 00:00:00 -0500">March 14, 2014</abbr>
+      </span>
+      <p><p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/highlightHTML" title="highlightHTML" rel="category tag">highlightHTML</a>
+        
+        <a href="/categories/markdown" title="markdown" rel="category tag">markdown</a>
+        
+        <a href="/categories/html" title="html" rel="category tag">html</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/03/14/htmltext/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/03/03/rChartsslidy/" title="rCharts with slidy" rel="bookmark">rCharts with slidy</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-03-03 00:00:00 -0600">March 3, 2014</abbr>
+      </span>
+      <p><p>My last post I talked about using <em>rCharts</em> to create interactive graphics for my interview presentations.  They seemed to go over pretty well in my interviews and helped me greatly as I did not need to remember or write down specific numbers to talk about.  I use <em>slidy</em> to create my HTML slideshows and there was some interest from my last post to see exactly how I had these charts into a <em>slidy</em> html presentation.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/rCharts" title="rCharts" rel="category tag">rCharts</a>
+        
+        <a href="/categories/javascript" title="javascript" rel="category tag">javascript</a>
+        
+        <a href="/categories/html" title="html" rel="category tag">html</a>
+        
+        <a href="/categories/slidy" title="slidy" rel="category tag">slidy</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/03/03/rChartsslidy/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/02/15/rcharts/" title="Rcharts" rel="bookmark">Rcharts</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-02-15 00:00:00 -0600">February 15, 2014</abbr>
+      </span>
+      <p><p>---layout: post
+title: Interactive charts with rCharts</p>
+
+<h2>tags: [R, rCharts, javascript]</h2>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/02/15/rcharts/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/02/03/Rgui/" title="Picking a gui interface for R" rel="bookmark">Picking a gui interface for R</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-02-03 00:00:00 -0600">February 3, 2014</abbr>
+      </span>
+      <p><p>Recently I decided to switch statistical programs used introductory statistics course for masters students that I teach at the University of Arkansas.  Historically this course has been taught with SPSS, but I am attempting the switch to R this semester.  Most students in this class have never used a statistical program before and have no programming background/interest.  As a result, I did not want to have them learn statistics and the R language in the same semester and have them using R with a gui interface.  The two primary gui systems/packages I explored were the <em>Deducer</em> package and the <em>Rcmdr</em> package.  Here are my initial thoughts on the switch.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/gui" title="gui" rel="category tag">gui</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/02/03/Rgui/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/01/24/usePlyr/" title="When I use plyr/dplyr" rel="bookmark">When I use plyr/dplyr</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-01-24 00:00:00 -0600">January 24, 2014</abbr>
+      </span>
+      <p><p>My last post I talked about how I use the <em>data.table</em> package for aggregating and removing duplicate observations.  Although I use the <em>data.table</em> package quite often, there are many times when I use <em>plyr</em> (and now the new <em>dplyr</em>) package, primarily because of its easy, intuitive syntax.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/plyr" title="plyr" rel="category tag">plyr</a>
+        
+        <a href="/categories/dplyr" title="dplyr" rel="category tag">dplyr</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/01/24/usePlyr/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2014/01/06/FavDataTable/" title="Two of my favorite data.table features" rel="bookmark">Two of my favorite data.table features</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2014-01-06 00:00:00 -0600">January 6, 2014</abbr>
+      </span>
+      <p><p>When I started to use the <em>data.table</em> package I was primarily using it to aggregate.  I had read about <em>data.table</em> and its blazing speed compared to the other options from base or the <em>plyr</em> package especially with large amounts of data.  As an example, I remember calculating averages or percentages while at Saint Paul Public Schools and while the calculations were running would walk away for 5 minutes to wait for them to finish.  When using <em>data.table</em> to do the same calculations I didn't need to wait 5 minutes to see the calculated values.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/data.table" title="data.table" rel="category tag">data.table</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2014/01/06/FavDataTable/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/12/30/guessCorr/" title="Guessing Correlations&#58; A shiny app" rel="bookmark">Guessing Correlations&#58; A shiny app</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-12-30 00:00:00 -0600">December 30, 2013</abbr>
+      </span>
+      <p><p>A recent hobby of mine (as with many other R users) is to play around with the relatively new R package: <em>shiny</em>.  I started creating demo applications about a year ago just to figure out how powerful the platform could be, but it was not until this fall that I started creating some applications for others to use.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/shiny" title="shiny" rel="category tag">shiny</a>
+        
+        <a href="/categories/teaching" title="teaching" rel="category tag">teaching</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/12/30/guessCorr/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/11/26/SPSStoR/" title="SPSS to R&#58; An R package to convert SPSS syntax" rel="bookmark">SPSS to R&#58; An R package to convert SPSS syntax</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-11-26 00:00:00 -0600">November 26, 2013</abbr>
+      </span>
+      <p><p>My first statistical software package I used as an undergrad was SPSS.  I was fortunate during my senior year at <a href="http://www.luther.edu">Luther College</a> to be initially introduced to <a href="http://r-project.org">R</a>.  I did not realize it at the time (except for the pretty graphics) that this was the start of something big for me.  Fast forward a year to graduate school at the University of Minnesota and the majority of my program was again using SPSS.  Under the tutelage of <a href="http://www.cehd.umn.edu/edpsych/people/Faculty/Zieffler.html">Andy</a> in my first graduate statistics course I started to do analyses in both R and SPSS.  After that I started to do all my analyses in R.  Fast forward five years this time to my first full-time job after graduate school at <a href="http://www.spps.org">Saint Paul Public Schools</a> and again everyone was using SPSS.  Fortunately in my year there I was able to significantly push them toward using R more and more.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/SPSS" title="SPSS" rel="category tag">SPSS</a>
+        
+        <a href="/categories/package" title="package" rel="category tag">package</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/11/26/SPSStoR/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/11/18/CourseSlidesProcess/" title="My Course Slide Generation" rel="bookmark">My Course Slide Generation</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-11-18 00:00:00 -0600">November 18, 2013</abbr>
+      </span>
+      <p><p>This past August I took an opportunity to step back into the University academic world as a <a href="http://http://coehp.uark.edu/12216.php">Visiting Assistant Professor</a> at the <a href="http://www.uark.edu">University of Arkansas</a>.  I have enjoyed the transition back into the academic world, including a more flexible schedule, variation in topics/duties, and collaborating with colleagues.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/markdown" title="markdown" rel="category tag">markdown</a>
+        
+        <a href="/categories/LaTeX" title="LaTeX" rel="category tag">LaTeX</a>
+        
+        <a href="/categories/slidy" title="slidy" rel="category tag">slidy</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/11/18/CourseSlidesProcess/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/11/01/CondFormatMarkdown/" title="Formatting Markdown Tables with R" rel="bookmark">Formatting Markdown Tables with R</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-11-01 00:00:00 -0500">November 1, 2013</abbr>
+      </span>
+      <p><p>This past summer when the <a href="http://www.meetup.com/twincitiesrug/">twin cities R user group</a> was starting to get back up and running, I offered to present on some R related things that I was working on.  One thing I was working on was a part of my last <a href="http://http://educate-r.org/2013/09/28/ConditionalFormat/">post</a>.  In a response to discussing this during a meeting, I was posed with the problem of how to do this with a markdown table.  I replied I was unsure how to do this directly with R, but it could likely be possible.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/markdown" title="markdown" rel="category tag">markdown</a>
+        
+        <a href="/categories/CSS" title="CSS" rel="category tag">CSS</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/11/01/CondFormatMarkdown/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/09/28/ConditionalFormat/" title="Conditional Formatting Tables using R" rel="bookmark">Conditional Formatting Tables using R</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-09-28 00:00:00 -0500">September 28, 2013</abbr>
+      </span>
+      <p><p>One thing that I had the opportunity to develop while working last year at <a href="http://spps.org/">Saint Paul Public Schools</a> was figuring out a quick, easy, and painless way to do interactive report generation.  When I arrived in the REA department at Saint Paul Public Schools, the report generation process was roughly as follows:<br/>
+1. Do the analysis in SPSS (compute percent proficient for standard tests by various subgroups).<br/>
+2. Format output and copy output into Excel.<br/>
+3. Once in Excel, do lookup tables to generate the report in Excel.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/LaTeX" title="LaTeX" rel="category tag">LaTeX</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/09/28/ConditionalFormat/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
+  <li>
+    <div class="excerpt">
+      <strong class="entry-title">
+        <a href="/2013/09/11/BlogLogo/" title="Blog Logo" rel="bookmark">Blog Logo</a>
+      </strong>
+      <span class="date small">
+        <abbr class="published" title="2013-09-11 00:00:00 -0500">September 11, 2013</abbr>
+      </span>
+      <p><p>Welcome to my new website/blog.  I am aiming to highlight some of the R packages that I have created.  You can see a list of all the R packages I have in development and also see the source code on github here: <a href="http://educate-r.org/projects.html">R packages</a>.  In addition, I'll likely talk about various topics with statistics, teaching, research, or R in general.</p>
+</p>
+      <p class="alt-font">
+        Tags: &nbsp;
+        
+        <a href="/categories/R" title="R" rel="category tag">R</a>
+        
+        <a href="/categories/ggplot2" title="ggplot2" rel="category tag">ggplot2</a>
+        
+      </p>
+      <p class="comments-link">
+        <a href='/2013/09/11/BlogLogo/#disqus_thread'>Comments</a>
+      </p>
+    </div>
+  </li>
+
 </ol>
+
+  </div>
+  </div>  
+    </body>
+</html>

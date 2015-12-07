@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Web Scraping to Item Response Theory - A College Football Adventure | Educate-R
+      
+    </title>
+
+   <!-- Description -->
+    
+      <meta name="description" content="">
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/reveal.css"/>
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/theme/simple.css" id="theme"/>
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/lib/css/zenburn.css"/>
+
+  <style type="text/css">
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 {font-size: 1.25em;}
+    .reveal h3 {font-size: 1em;}
+    body {
+    background-image: url(http://educate-r.org/figs/ui_logo.jpg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 20px 900px;
+    background-size: 250px;
+  }
+  </style>
+    <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'http://educate-r.orgreveal.js/css/print/pdf.css' : 'http://educate-r.orgreveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="canonical" href="http://educate-r.org/2015/12/04/centraliowaruser/">
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <p><section>
+    <h1 class="title">Web Scraping to Item Response Theory: A College Football Adventure</h1>
+    <h2 class="author">Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem</h2>
+    <h3 class="date">University of Iowa &amp; University of Minnesota</h3>
+</section></p>
+
+<p><section></p>
+
+<h1>Background</h1>
+
+<ul>
+<li>Began after Tim Brewster was fired</li>
+<li>Wanted to try to predict next great coach
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Data Available</h1>
+
+<ul>
+<li>Data is available at three levels
+
+<ol>
+<li>Coach</li>
+<li>Game by Game</li>
+<li>Team
+</section></li>
+</ol>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Coach</h1>
+
+<ul>
+<li>Data
+
+<ul>
+<li>Overall record</li>
+<li>Team history</li>
+</ul>
+</li>
+<li>Not Available
+
+<ul>
+<li>Coordinator history
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Example Coach Data</h1>
+
+<pre><code>##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
+## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
+## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
+## 3 2012 Iowa   4    8   0 0.33333 232 275   -43 Kirk Ferentz
+## 4 2013 Iowa   8    5   0 0.61538 342 246    96 Kirk Ferentz
+## 5 2014 Iowa   7    6   0 0.53846 367 333    34 Kirk Ferentz
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Game by Game</h1>
+
+<ul>
+<li>Data
+
+<ul>
+<li>Final score of each game</li>
+<li>Date played</li>
+<li>Location</li>
+</ul>
+</li>
+<li>Not Available
+
+<ul>
+<li>No information within a game
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Example GBG Data</h1>
+
+<pre><code>##    Team           Official Year       Date WL          Opponent PF PA
+## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
+## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
+## 3  Iowa University of Iowa 2014  9/13/2014  L          Iowa St. 17 20
+## 4  Iowa University of Iowa 2014  9/20/2014  W   Pittsburgh (PA) 24 20
+## 5  Iowa University of Iowa 2014  9/27/2014  W       Purdue (IN) 24 10
+## 6  Iowa University of Iowa 2014 10/11/2014  W           Indiana 45 29
+## 7  Iowa University of Iowa 2014 10/18/2014  L          Maryland 31 38
+## 8  Iowa University of Iowa 2014  11/1/2014  W Northwestern (IL) 48  7
+## 9  Iowa University of Iowa 2014  11/8/2014  L         Minnesota 14 51
+## 10 Iowa University of Iowa 2014 11/15/2014  W          Illinois 30 14
+## 11 Iowa University of Iowa 2014 11/22/2014  L         Wisconsin 24 26
+## 12 Iowa University of Iowa 2014 11/28/2014  L          Nebraska 34 37
+## 13 Iowa University of Iowa 2014   1/2/2015  L         Tennessee 28 45
+##              Location
+## 1       Iowa City, IA
+## 2       Iowa City, IA
+## 3       Iowa City, IA
+## 4      Pittsburgh, PA
+## 5  West Lafayette, IN
+## 6       Iowa City, IA
+## 7    College Park, MD
+## 8       Iowa City, IA
+## 9     Minneapolis, MN
+## 10      Champaign, IL
+## 11      Iowa City, IA
+## 12      Iowa City, IA
+## 13   Jacksonville, FL
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Team</h1>
+
+<ul>
+<li>Data
+
+<ul>
+<li>Overall team record</li>
+<li>Team statistics</li>
+<li>Rankings</li>
+<li>Conference Affiliation</li>
+</ul>
+</li>
+<li>Data is very similar to that of the coach level
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Web Scraping</h1>
+
+<ul>
+<li>Data were obtained from many sources
+
+<ul>
+<li>Much from <a href="http://cfbdatawarehouse.com">http://cfbdatawarehouse.com</a></li>
+<li>Also used wikipedia, ESPN, and rivals
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Iowa Coaches Over Time</h1>
+
+<p><img src="http://educate-r.org/figs/iowa.png" alt="" height = "500" width = "1200"/></p>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Iowa State Coaches Over Time</h1>
+
+<p><img src="http://educate-r.org/figs/iowa_state.png" alt="" height = "500" width="1200"/></p>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Strengths in web scraping</h1>
+
+<ul>
+<li>Data is relatively easily obtained</li>
+<li>Structured process for obtaining data</li>
+<li>Can be easily updated
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Challenges of web scraping</h1>
+
+<ul>
+<li>At the mercy of the website
+
+<ul>
+<li>Many sites are old</li>
+<li>Not up to date on current design standards</li>
+</ul>
+</li>
+<li>Data validation can be difficult and time consuming</li>
+<li>Need some basic knowledge of html
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>When is Web Scraping Worthwhile?</h1>
+
+<ul>
+<li>Best when scraping many pages
+
+<ul>
+<li>Particularly when web addresses are not structured</li>
+</ul>
+</li>
+<li>Useful when data need to be updated</li>
+</ul>
+
+
+<hr>
+
+
+<ul>
+<li>Not useful if only scraping a single page/table
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>HTML Basics</h1>
+
+<ul>
+<li> HTML is structured by start tags (e.g. <code>&lt;table&gt;</code>) and end tags (e.g. <code>&lt;&frasl;table&gt;</code>) </li>
+<li> Common tags 
+</li>
+</ul>
+
+
+<div style="float: left; width: 75%;">
+<ul>
+<li><code>&lt;h1&gt;</code> - <code>&lt;h6&gt;</code></li>
+<li><code>&lt;b&gt;</code> <code>&lt;i&gt;</code></li>
+<li><code>&lt;a href=&quot;http://www.google.com&quot;&gt;</code></li>
+<li><code>&lt;table&gt;</code></li>
+</ul>
+</div>
+
+
+<div style="float: right; width: 25%;">
+<ul>
+<li><code>&lt;p&gt;</code></li>
+<li><code>&lt;ul&gt;</code> &amp; <code>&lt;li&gt;</code></li>
+<li><code>&lt;div&gt;</code></li>
+<li><code>&lt;img&gt;</code></li>
+</ul>
+</div>
+
+
+<hr>
+
+
+<ul>
+<li> Highly structured pages are the easiest to scrape </li>
+</ul>
+
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>HTML Code Example</h1>
+
+<p><img src="http://educate-r.org/figs/ferentz_wikiside.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Tools for web scraping</h1>
+
+<ul>
+<li>R
+
+<ul>
+<li><code>rvest</code>: <a href="http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/">http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/</a></li>
+<li><code>XML</code>: <a href="http://www.omegahat.org/RSXML/">http://www.omegahat.org/RSXML/</a></li>
+</ul>
+</li>
+<li>Python
+
+<ul>
+<li><code>beautiful soup</code>: <a href="http://www.crummy.com/software/BeautifulSoup/">http://www.crummy.com/software/BeautifulSoup/</a></li>
+</ul>
+</li>
+<li>Misc
+
+<ul>
+<li><code>SelectorGadget</code>: <a href="http://selectorgadget.com/">http://selectorgadget.com/</a>
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Basics of rvest</h1>
+
+<ul>
+<li><code>read_html</code> is the most basic function</li>
+<li><code>html_node</code> or <code>html_nodes</code>
+
+<ul>
+<li>These functions need css selectors or xpath</li>
+<li>SelectorGadget is the easiest way to get this
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>SelectorGadget</h1>
+
+<ul>
+<li>SelectorGadget is a Javascript addon for web browsers</li>
+<li>Can quickly identify a css selector or xpath to select correct portion of web page</li>
+<li>Demo:
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Kirk_Ferentz">https://en.wikipedia.org/wiki/Kirk_Ferentz</a>
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Combine SelectorGadget with rvest</h1>
+
+<pre><code class="r">library(rvest)
+wiki_kirk &lt;- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz")
+wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+    html_nodes(".vcard td , .vcard th")
+head(wiki_kirk_extract)
+</code></pre>
+
+<pre><code>## {xml_nodeset (6)}
+## [1] &lt;td colspan="2" style="text-align:center"&gt;&lt;a href="/wiki/File:Kirk_p ...
+## [2] &lt;th scope="row"&gt;Sport(s)&lt;/th&gt;
+## [3] &lt;td class="category"&gt;\n  &lt;a href="/wiki/American_football" title="Am ...
+## [4] &lt;th colspan="2" style="text-align:center;background-color: lightgray ...
+## [5] &lt;th scope="row"&gt;Title&lt;/th&gt;
+## [6] &lt;td&gt;\n  &lt;a href="/wiki/Head_coach" title="Head coach"&gt;Head coach&lt;/a&gt; ...
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Extract text</h1>
+
+<ul>
+<li>Use the <code>html_text</code> function</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+  html_nodes(".vcard td , .vcard th") %&gt;%
+  html_text()
+head(wiki_kirk_extract)
+</code></pre>
+
+<pre><code>## [1] "\nFerentz at the 2010 Orange Bowl\n"
+## [2] "Sport(s)"                           
+## [3] "Football"                           
+## [4] "Current position"                   
+## [5] "Title"                              
+## [6] "Head coach"
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Encoding problems</h1>
+
+<ul>
+<li>Two solutions to fix encoding problems
+
+<ul>
+<li><code>guess_encoding</code></li>
+<li><code>repair_encoding</code>: fix encoding problems</li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk %&gt;%
+  html_nodes(".vcard td , .vcard th") %&gt;%
+  html_text() %&gt;%
+  guess_encoding()
+</code></pre>
+
+<pre><code>##       encoding language confidence
+## 1        UTF-8                1.00
+## 2 windows-1252       en       0.36
+## 3 windows-1250       ro       0.18
+## 4 windows-1254       tr       0.13
+## 5     UTF-16BE                0.10
+## 6     UTF-16LE                0.10
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Fix Encoding Problems</h1>
+
+<ul>
+<li>Best practice to reload page with correct encoding</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk &lt;- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz", 
+                       encoding = 'UTF-8')
+</code></pre>
+
+<ul>
+<li>Can also repair encoding after the fact</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+  html_nodes(".vcard td , .vcard th") %&gt;%
+  html_text() %&gt;% 
+  repair_encoding()
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Extract html tags</h1>
+
+<ul>
+<li>Use the <code>html_tags</code> function</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+  html_nodes(".vcard td , .vcard th") %&gt;%
+  html_name()
+head(wiki_kirk_extract)
+</code></pre>
+
+<pre><code>## [1] "td" "th" "td" "th" "th" "td"
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Extract html attributes</h1>
+
+<ul>
+<li>Use the <code>html_attrs</code> function</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+  html_nodes(".vcard td , .vcard th") %&gt;%
+  html_attrs()
+head(wiki_kirk_extract)
+</code></pre>
+
+<pre><code>## [[1]]
+##             colspan               style 
+##                 "2" "text-align:center" 
+## 
+## [[2]]
+## scope 
+## "row" 
+## 
+## [[3]]
+##      class 
+## "category" 
+## 
+## [[4]]
+##                                          colspan 
+##                                              "2" 
+##                                            style 
+## "text-align:center;background-color: lightgray;" 
+## 
+## [[5]]
+## scope 
+## "row" 
+## 
+## [[6]]
+## named character(0)
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Extract links</h1>
+
+<ul>
+<li>Use the <code>html_attrs</code> function again</li>
+</ul>
+
+
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+  html_nodes(".vcard a") %&gt;%
+  html_attr('href')
+head(wiki_kirk_extract)
+</code></pre>
+
+<pre><code>## [1] "/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+## [2] "/wiki/American_football"                           
+## [3] "/wiki/Head_coach"                                  
+## [4] "/wiki/Iowa_Hawkeyes_football"                      
+## [5] "/wiki/Big_Ten_Conference"                          
+## [6] "/wiki/Iowa_City,_Iowa"
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Valid Links</h1>
+
+<ul>
+<li>The <code>paste0</code> function is helpful for this</li>
+</ul>
+
+
+<pre><code class="r">valid_links &lt;- paste0('https://www.wikipedia.org', wiki_kirk_extract)
+head(valid_links)
+</code></pre>
+
+<pre><code>## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+## [2] "https://www.wikipedia.org/wiki/American_football"                           
+## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  
+## [4] "https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football"                      
+## [5] "https://www.wikipedia.org/wiki/Big_Ten_Conference"                          
+## [6] "https://www.wikipedia.org/wiki/Iowa_City,_Iowa"
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Extract Tables</h1>
+
+<ul>
+<li>The <code>html_table</code> function is useful to scrape well formatted tables</li>
+</ul>
+
+
+<pre><code class="r">record_kirk &lt;- wiki_kirk %&gt;%
+  html_nodes(".wikitable") %&gt;%
+  .[[1]] %&gt;%
+  html_table(fill = TRUE)
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Caveats to Web Scraping</h1>
+
+<ul>
+<li>Keep in mind when scraping we are using their bandwidth
+
+<ul>
+<li>Do not want to repeatedly do expensive bandwidth operations</li>
+<li>Better to scrape once, then run only to update data</li>
+</ul>
+</li>
+<li>Some websites are copyrighted (i.e. illegal to scrape)
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Data Modeling</h1>
+
+<ul>
+<li>Research Questions
+
+<ol>
+<li>Who is the next great coach?</li>
+<li>What characteristics are in common for these coaches?
+</section></li>
+</ol>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>IRT modeling</h1>
+
+<ul>
+<li>So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)</li>
+<li>IRT is commonly used to model assessment data to estimate item parameters and person 'ability'</li>
+<li>We recode the Win/Loss/Tie game by game results
+
+<ul>
+<li>1 = Win</li>
+<li>0 = Otherwise
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Example code with lme4</h1>
+
+<ul>
+<li>A 1 parameter multilevel IRT model can be fitted using <code>glmer</code> in the <code>lme4</code> package</li>
+</ul>
+
+
+<pre><code class="r">library(lme4)
+fm1a &lt;- glmer(wingbg ~ 0 + (1|coach) + (1|Team), 
+              data = yby_coach, family = binomial)
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Plot Showing Team Ability</h1>
+
+<p><img src="http://educate-r.org/figs/team_ability.png" alt="" height = "500" width="1200"/></p>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Connect</h1>
+
+<ul>
+<li>e-mail: brandon-lebeau (at) uiowa.edu</li>
+<li>Twitter: @blebeau11; <a href="https://twitter.com/blebeau11">https://twitter.com/blebeau11</a></li>
+<li>Linkedin: <a href="https://www.linkedin.com/in/lebeaubr">https://www.linkedin.com/in/lebeaubr</a></li>
+<li>Website: <a href="http://educate-r.org">http://educate-r.org</a>
+
+<ul>
+<li><a href="http://educate-r.org/2015/12/04/centraliowaruser/">http://educate-r.org/2015/12/04/centraliowaruser/</a>
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+      </div>
+    </div>
+
+    <script src="http://educate-r.org/reveal.js/lib/js/head.min.js"></script>
+    <script src="http://educate-r.org/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        slideNumber: true,
+        center: true,
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://educate-r.org/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://educate-r.org/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://educate-r.org/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+
+  </body>
+</html>
