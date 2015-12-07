@@ -1,15 +1,15 @@
 ---
 layout: slide
-title: "Web Scraping to Item Response Theory: A College Football Adventure"
-date: 2015-12-04
-tags: [slides, R, rvest, irt]
+title: Web Scraping to Item Response Theory - A College Football Adventure
+tags: [R, slides, rvest, cfb]
 ---
 
-<section>
+<section data-markdown>
     <h1 class="title">Web Scraping to Item Response Theory: A College Football Adventure</h1>
     <h2 class="author">Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem</h2>
     <h3 class="date">University of Iowa &amp; University of Minnesota</h3>
 </section>
+
 
 <section data-markdown>
 # Background
@@ -19,18 +19,18 @@ tags: [slides, R, rvest, irt]
 
 <section data-markdown>
 # Data Available
-- Data is avaiable at four levels
+- Data is available at three levels
     1. Coach
-    2. Team
-    4. Game by Game
+    2. Game by Game
+    3. Team
 </section>
 
-<section data-markdown>
+<section data-markdown>    
 # Coach
 - Data
     - Overall record
     - Team history
-- Not Available:
+- Not Available
     - Coordinator history
 </section>
 
@@ -46,7 +46,8 @@ tags: [slides, R, rvest, irt]
 ## 5 2014 Iowa   7    6   0 0.53846 367 333    34 Kirk Ferentz
 ```
 </section>
-<section data-markdown>
+
+<section data-markdown>    
 # Game by Game
 - Data
     - Final score of each game
@@ -55,6 +56,7 @@ tags: [slides, R, rvest, irt]
 - Not Available
     - No information within a game
 </section>
+
 <section data-markdown>
 # Example GBG Data
 
@@ -97,7 +99,7 @@ tags: [slides, R, rvest, irt]
     - Team statistics
     - Rankings
     - Conference Affiliation
-
+- Data is very similar to that of the coach level
 </section>
 
 <section data-markdown>
@@ -105,7 +107,6 @@ tags: [slides, R, rvest, irt]
 - Data were obtained from many sources
     - Much from <http://cfbdatawarehouse.com>
     - Also used wikipedia, ESPN, and rivals
-
 </section>
 
 <section data-markdown>
@@ -113,28 +114,27 @@ tags: [slides, R, rvest, irt]
 <img src="http://educate-r.org/figs/iowa.png" alt="" height = "500" width = "1200"/>
 
 </section>
+
 <section data-markdown>
 # Iowa State Coaches Over Time
 <img src="http://educate-r.org/figs/iowa_state.png" alt="" height = "500" width="1200"/>
 
 </section>
 
-<section data-markdown>   
+<section data-markdown>
 # Strengths in web scraping
 - Data is relatively easily obtained
 - Structured process for obtaining data
 - Can be easily updated
-
 </section>
 
 <section data-markdown>
 # Challenges of web scraping
 - At the mercy of the website
     - Many sites are old 
-    - Not up to date on current design standards.
+    - Not up to date on current design standards
 - Data validation can be difficult and time consuming
 - Need some basic knowledge of html
-
 </section>
 
 <section data-markdown>
@@ -171,15 +171,15 @@ tags: [slides, R, rvest, irt]
 </div>
 <hr>
 <ul>
-<li> Highly structured pages are the easiest to scrape. </li>
+<li> Highly structured pages are the easiest to scrape </li>
 </ul>
 </section>
 
 <section data-markdown>
 # HTML Code Example
 <img src="http://educate-r.org/figs/ferentz_wikiside.png" alt="" height = "500" width="1200"/>
-
 </section>
+
 <section data-markdown>
 # Tools for web scraping
 - R
@@ -193,7 +193,7 @@ tags: [slides, R, rvest, irt]
 
 <section data-markdown>    
 # Basics of rvest
-- `read_html` is the most basic function.
+- `read_html` is the most basic function
 - `html_node` or `html_nodes`
     - These functions need css selectors or xpath
     - SelectorGadget is the easiest way to get this
@@ -201,10 +201,12 @@ tags: [slides, R, rvest, irt]
 
 <section data-markdown>
 # SelectorGadget
-- SelectorGadget is a Javascript addon for web browsers.
+- SelectorGadget is a Javascript addon for web browsers
+- Can quickly identify a css selector or xpath to select correct portion of web page
 - Demo:
     - <https://en.wikipedia.org/wiki/Kirk_Ferentz>
 </section>
+
 <section data-markdown>
 # Combine SelectorGadget with rvest
 
@@ -226,13 +228,13 @@ head(wiki_kirk_extract)
 ## [6] <td>\n  <a href="/wiki/Head_coach" title="Head coach">Head coach</a> ...
 ```
 </section>
+
 <section data-markdown>
 # Extract text
 - Use the `html_text` function
 
 
 ```r
-wiki_kirk <- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz")
 wiki_kirk_extract <- wiki_kirk %>%
   html_nodes(".vcard td , .vcard th") %>%
   html_text()
@@ -248,11 +250,12 @@ head(wiki_kirk_extract)
 ## [6] "Head coach"
 ```
 </section>
+
 <section data-markdown>
 # Encoding problems
 - Two solutions to fix encoding problems
-- `guess_encoding`
-- `repair_encoding`: fix encoding problems
+    - `guess_encoding`
+    - `repair_encoding`: fix encoding problems
 
 
 ```r
@@ -265,13 +268,14 @@ wiki_kirk %>%
 ```
 ##       encoding language confidence
 ## 1        UTF-8                1.00
-## 2 windows-1252       en       0.37
+## 2 windows-1252       en       0.36
 ## 3 windows-1250       ro       0.18
-## 4 windows-1254       tr       0.15
+## 4 windows-1254       tr       0.13
 ## 5     UTF-16BE                0.10
 ## 6     UTF-16LE                0.10
 ```
 </section>
+
 <section data-markdown>
 # Fix Encoding Problems
 - Best practice to reload page with correct encoding
@@ -282,6 +286,8 @@ wiki_kirk <- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz",
                        encoding = 'UTF-8')
 ```
 
+- Can also repair encoding after the fact
+
 
 ```r
 wiki_kirk_extract <- wiki_kirk %>%
@@ -290,6 +296,7 @@ wiki_kirk_extract <- wiki_kirk %>%
   repair_encoding()
 ```
 </section>
+
 <section data-markdown>
 # Extract html tags
 - Use the `html_tags` function
@@ -306,6 +313,7 @@ head(wiki_kirk_extract)
 ## [1] "td" "th" "td" "th" "th" "td"
 ```
 </section>
+
 <section data-markdown>
 # Extract html attributes
 - Use the `html_attrs` function
@@ -345,6 +353,7 @@ head(wiki_kirk_extract)
 ## named character(0)
 ```
 </section>
+
 <section data-markdown>
 # Extract links
 - Use the `html_attrs` function again
@@ -363,38 +372,44 @@ head(wiki_kirk_extract)
 ## [3] "/wiki/Head_coach"                                  
 ## [4] "/wiki/Iowa_Hawkeyes_football"                      
 ## [5] "/wiki/Big_Ten_Conference"                          
-## [6] "/wiki/Royal_Oak,_Michigan"
+## [6] "/wiki/Iowa_City,_Iowa"
 ```
 </section>
+
+<section data-markdown>
+# Valid Links
+- The `paste0` function is helpful for this
+
+
+```r
+valid_links <- paste0('https://www.wikipedia.org', wiki_kirk_extract)
+head(valid_links)
+```
+
+```
+## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+## [2] "https://www.wikipedia.org/wiki/American_football"                           
+## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  
+## [4] "https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football"                      
+## [5] "https://www.wikipedia.org/wiki/Big_Ten_Conference"                          
+## [6] "https://www.wikipedia.org/wiki/Iowa_City,_Iowa"
+```
+
+</section>
+
 <section data-markdown>
 # Extract Tables
+- The `html_table` function is useful to scrape well formatted tables
+
 
 ```r
 record_kirk <- wiki_kirk %>%
   html_nodes(".wikitable") %>%
   .[[1]] %>%
   html_table(fill = TRUE)
-head(record_kirk)
-```
-
-```
-##                                                  Year  Team Overall
-## 1 Maine Black Bears (Yankee Conference) (1990-1992)  <NA>    <NA>
-## 2                                                1990 Maine   3-8
-## 3                                                1991 Maine   3-8
-## 4                                                1992 Maine   6-5
-## 5                                              Maine:  <NA> 12-21
-## 6 Iowa Hawkeyes (Big Ten Conference) (1999-present)  <NA>    <NA>
-##
-##   Conference Standing Bowl/playoffs Coaches# AP NA NA
-## 1       <NA>     <NA>          <NA>       NA   NA NA NA
-## 2      2-6                              NA   NA NA NA
-## 3      2-6                              NA   NA NA NA
-## 4      4-4                              NA   NA NA NA
-## 5     8-16                   <NA>       NA   NA NA NA
-## 6       <NA>     <NA>          <NA>       NA   NA NA NA
 ```
 </section>
+
 <section data-markdown>
 # Caveats to Web Scraping
 - Keep in mind when scraping we are using their bandwidth
@@ -402,21 +417,49 @@ head(record_kirk)
     - Better to scrape once, then run only to update data
 - Some websites are copyrighted (i.e. illegal to scrape)
 </section>
+
 <section data-markdown>
 # Data Modeling
 - Research Questions
     1. Who is the next great coach?
     2. What characteristics are in common for these coaches?
 </section>
+
 <section data-markdown>
 # IRT modeling
 - So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)
-- IRT is commonly used to model assessment data.
+- IRT is commonly used to model assessment data to estimate item parameters and person 'ability'
+- We recode the Win/Loss/Tie game by game results
+    - 1 = Win 
+    - 0 = Otherwise
 </section>
+
+<section data-markdown>    
+# Example code with lme4
+- A 1 parameter multilevel IRT model can be fitted using `glmer` in the `lme4` package
+
+
+```r
+library(lme4)
+fm1a <- glmer(wingbg ~ 0 + (1|coach) + (1|Team), 
+              data = yby_coach, family = binomial)
+```
+</section>
+
 <section data-markdown>
-# Questions
-brandon-lebeau@uiowa.edu
+# Plot Showing Team Ability
+<img src="http://educate-r.org/figs/team_ability.png" alt="" height = "500" width="1200"/>
+
 
 </section>
 
-    
+<section data-markdown>
+
+
+# Connect
+- e-mail: brandon-lebeau (at) uiowa.edu
+- Twitter: @blebeau11; <https://twitter.com/blebeau11>
+- Linkedin: <https://www.linkedin.com/in/lebeaubr>
+- Website: <http://educate-r.org>
+    - <http://educate-r.org/2015/12/04/centraliowaruser/>
+</section>

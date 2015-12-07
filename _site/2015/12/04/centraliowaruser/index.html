@@ -5,7 +5,7 @@
 
     <title>
       
-        Web Scraping to Item Response Theory: A College Football Adventure | Educate-R
+        Web Scraping to Item Response Theory - A College Football Adventure | Educate-R
       
     </title>
 
@@ -97,7 +97,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
     <div class="reveal">
       <div class="slides">
-        <p><section>
+        <p><section data-markdown>
     <h1 class="title">Web Scraping to Item Response Theory: A College Football Adventure</h1>
     <h2 class="author">Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem</h2>
     <h3 class="date">University of Iowa &amp; University of Minnesota</h3>
@@ -119,12 +119,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Data Available</h1>
 
 <ul>
-<li>Data is avaiable at four levels
+<li>Data is available at three levels
 
 <ol>
 <li>Coach</li>
-<li>Team</li>
-<li>Game by Game
+<li>Game by Game</li>
+<li>Team
 </section></li>
 </ol>
 </li>
@@ -143,7 +143,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Team history</li>
 </ul>
 </li>
-<li>Not Available:
+<li>Not Available
 
 <ul>
 <li>Coordinator history
@@ -165,8 +165,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 5 2014 Iowa   7    6   0 0.53846 367 333    34 Kirk Ferentz
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Game by Game</h1>
 
@@ -183,14 +184,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul>
 <li>No information within a game
-</section>
-<section data-markdown>
-
-<h1>Example GBG Data</h1></li>
+</section></li>
 </ul>
 </li>
 </ul>
 
+
+<p><section data-markdown></p>
+
+<h1>Example GBG Data</h1>
 
 <pre><code>##    Team           Official Year       Date WL          Opponent PF PA
 ## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
@@ -238,10 +240,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Conference Affiliation</li>
 </ul>
 </li>
+<li>Data is very similar to that of the coach level
+</section></li>
 </ul>
 
-
-<p></section></p>
 
 <p><section data-markdown></p>
 
@@ -252,13 +254,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul>
 <li>Much from <a href="http://cfbdatawarehouse.com">http://cfbdatawarehouse.com</a></li>
-<li>Also used wikipedia, ESPN, and rivals</li>
+<li>Also used wikipedia, ESPN, and rivals
+</section></li>
 </ul>
 </li>
 </ul>
 
-
-<p></section></p>
 
 <p><section data-markdown></p>
 
@@ -266,8 +267,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <p><img src="http://educate-r.org/figs/iowa.png" alt="" height = "500" width = "1200"/></p>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Iowa State Coaches Over Time</h1>
 
@@ -282,11 +284,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Data is relatively easily obtained</li>
 <li>Structured process for obtaining data</li>
-<li>Can be easily updated</li>
+<li>Can be easily updated
+</section></li>
 </ul>
 
-
-<p></section></p>
 
 <p><section data-markdown></p>
 
@@ -297,15 +298,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul>
 <li>Many sites are old</li>
-<li>Not up to date on current design standards.</li>
+<li>Not up to date on current design standards</li>
 </ul>
 </li>
 <li>Data validation can be difficult and time consuming</li>
-<li>Need some basic knowledge of html</li>
+<li>Need some basic knowledge of html
+</section></li>
 </ul>
 
-
-<p></section></p>
 
 <p><section data-markdown></p>
 
@@ -366,7 +366,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <ul>
-<li> Highly structured pages are the easiest to scrape. </li>
+<li> Highly structured pages are the easiest to scrape </li>
 </ul>
 
 
@@ -376,10 +376,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1>HTML Code Example</h1>
 
-<p><img src="http://educate-r.org/figs/ferentz_wikiside.png" alt="" height = "500" width="1200"/></p>
+<p><img src="http://educate-r.org/figs/ferentz_wikiside.png" alt="" height = "500" width="1200"/>
+</section></p>
 
-<p></section>
-<section data-markdown></p>
+<p><section data-markdown></p>
 
 <h1>Tools for web scraping</h1>
 
@@ -412,7 +412,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Basics of rvest</h1>
 
 <ul>
-<li><code>read_html</code> is the most basic function.</li>
+<li><code>read_html</code> is the most basic function</li>
 <li><code>html_node</code> or <code>html_nodes</code>
 
 <ul>
@@ -429,19 +429,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>SelectorGadget</h1>
 
 <ul>
-<li>SelectorGadget is a Javascript addon for web browsers.</li>
+<li>SelectorGadget is a Javascript addon for web browsers</li>
+<li>Can quickly identify a css selector or xpath to select correct portion of web page</li>
 <li>Demo:
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Kirk_Ferentz">https://en.wikipedia.org/wiki/Kirk_Ferentz</a>
-</section>
-<section data-markdown>
-
-<h1>Combine SelectorGadget with rvest</h1></li>
+</section></li>
 </ul>
 </li>
 </ul>
 
+
+<p><section data-markdown></p>
+
+<h1>Combine SelectorGadget with rvest</h1>
 
 <pre><code class="r">library(rvest)
 wiki_kirk &lt;- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz")
@@ -459,8 +461,9 @@ head(wiki_kirk_extract)
 ## [6] &lt;td&gt;\n  &lt;a href="/wiki/Head_coach" title="Head coach"&gt;Head coach&lt;/a&gt; ...
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Extract text</h1>
 
@@ -469,8 +472,7 @@ head(wiki_kirk_extract)
 </ul>
 
 
-<pre><code class="r">wiki_kirk &lt;- read_html("https://en.wikipedia.org/wiki/Kirk_Ferentz")
-wiki_kirk_extract &lt;- wiki_kirk %&gt;%
+<pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
   html_nodes(".vcard td , .vcard th") %&gt;%
   html_text()
 head(wiki_kirk_extract)
@@ -484,15 +486,20 @@ head(wiki_kirk_extract)
 ## [6] "Head coach"
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Encoding problems</h1>
 
 <ul>
-<li>Two solutions to fix encoding problems</li>
+<li>Two solutions to fix encoding problems
+
+<ul>
 <li><code>guess_encoding</code></li>
 <li><code>repair_encoding</code>: fix encoding problems</li>
+</ul>
+</li>
 </ul>
 
 
@@ -504,15 +511,16 @@ head(wiki_kirk_extract)
 
 <pre><code>##       encoding language confidence
 ## 1        UTF-8                1.00
-## 2 windows-1252       en       0.37
+## 2 windows-1252       en       0.36
 ## 3 windows-1250       ro       0.18
-## 4 windows-1254       tr       0.15
+## 4 windows-1254       tr       0.13
 ## 5     UTF-16BE                0.10
 ## 6     UTF-16LE                0.10
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Fix Encoding Problems</h1>
 
@@ -525,14 +533,20 @@ head(wiki_kirk_extract)
                        encoding = 'UTF-8')
 </code></pre>
 
+<ul>
+<li>Can also repair encoding after the fact</li>
+</ul>
+
+
 <pre><code class="r">wiki_kirk_extract &lt;- wiki_kirk %&gt;%
   html_nodes(".vcard td , .vcard th") %&gt;%
   html_text() %&gt;% 
   repair_encoding()
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Extract html tags</h1>
 
@@ -550,8 +564,9 @@ head(wiki_kirk_extract)
 <pre><code>## [1] "td" "th" "td" "th" "th" "td"
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Extract html attributes</h1>
 
@@ -592,8 +607,9 @@ head(wiki_kirk_extract)
 ## named character(0)
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Extract links</h1>
 
@@ -613,40 +629,52 @@ head(wiki_kirk_extract)
 ## [3] "/wiki/Head_coach"                                  
 ## [4] "/wiki/Iowa_Hawkeyes_football"                      
 ## [5] "/wiki/Big_Ten_Conference"                          
-## [6] "/wiki/Royal_Oak,_Michigan"
+## [6] "/wiki/Iowa_City,_Iowa"
 </code></pre>
 
-<p></section>
-<section data-markdown></p>
+<p></section></p>
+
+<p><section data-markdown></p>
+
+<h1>Valid Links</h1>
+
+<ul>
+<li>The <code>paste0</code> function is helpful for this</li>
+</ul>
+
+
+<pre><code class="r">valid_links &lt;- paste0('https://www.wikipedia.org', wiki_kirk_extract)
+head(valid_links)
+</code></pre>
+
+<pre><code>## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
+## [2] "https://www.wikipedia.org/wiki/American_football"                           
+## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  
+## [4] "https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football"                      
+## [5] "https://www.wikipedia.org/wiki/Big_Ten_Conference"                          
+## [6] "https://www.wikipedia.org/wiki/Iowa_City,_Iowa"
+</code></pre>
+
+<p></section></p>
+
+<p><section data-markdown></p>
 
 <h1>Extract Tables</h1>
+
+<ul>
+<li>The <code>html_table</code> function is useful to scrape well formatted tables</li>
+</ul>
+
 
 <pre><code class="r">record_kirk &lt;- wiki_kirk %&gt;%
   html_nodes(".wikitable") %&gt;%
   .[[1]] %&gt;%
   html_table(fill = TRUE)
-head(record_kirk)
 </code></pre>
 
-<pre><code>##                                                  Year  Team Overall
-## 1 Maine Black Bears (Yankee Conference) (1990-1992)  &lt;NA&gt;    &lt;NA&gt;
-## 2                                                1990 Maine   3-8
-## 3                                                1991 Maine   3-8
-## 4                                                1992 Maine   6-5
-## 5                                              Maine:  &lt;NA&gt; 12-21
-## 6 Iowa Hawkeyes (Big Ten Conference) (1999-present)  &lt;NA&gt;    &lt;NA&gt;
-##
-##   Conference Standing Bowl/playoffs Coaches# AP NA NA
-## 1       &lt;NA&gt;     &lt;NA&gt;          &lt;NA&gt;       NA   NA NA NA
-## 2      2-6                              NA   NA NA NA
-## 3      2-6                              NA   NA NA NA
-## 4      4-4                              NA   NA NA NA
-## 5     8-16                   &lt;NA&gt;       NA   NA NA NA
-## 6       &lt;NA&gt;     &lt;NA&gt;          &lt;NA&gt;       NA   NA NA NA
-</code></pre>
+<p></section></p>
 
-<p></section>
-<section data-markdown></p>
+<p><section data-markdown></p>
 
 <h1>Caveats to Web Scraping</h1>
 
@@ -659,33 +687,85 @@ head(record_kirk)
 </ul>
 </li>
 <li>Some websites are copyrighted (i.e. illegal to scrape)
-</section>
-<section data-markdown>
+</section></li>
+</ul>
 
-<h1>Data Modeling</h1></li>
+
+<p><section data-markdown></p>
+
+<h1>Data Modeling</h1>
+
+<ul>
 <li>Research Questions
 
 <ol>
 <li>Who is the next great coach?</li>
 <li>What characteristics are in common for these coaches?
-</section>
-<section data-markdown>
-
-<h1>IRT modeling</h1></li>
+</section></li>
 </ol>
 </li>
-<li>So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)</li>
-<li>IRT is commonly used to model assessment data.
-</section>
-<section data-markdown>
-
-<h1>Questions</h1>
-
-<p>brandon-lebeau@uiowa.edu</p></li>
 </ul>
 
 
+<p><section data-markdown></p>
+
+<h1>IRT modeling</h1>
+
+<ul>
+<li>So far we have explored the win/loss records of teams in the BCS era with item response theory (IRT)</li>
+<li>IRT is commonly used to model assessment data to estimate item parameters and person 'ability'</li>
+<li>We recode the Win/Loss/Tie game by game results
+
+<ul>
+<li>1 = Win</li>
+<li>0 = Otherwise
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section data-markdown></p>
+
+<h1>Example code with lme4</h1>
+
+<ul>
+<li>A 1 parameter multilevel IRT model can be fitted using <code>glmer</code> in the <code>lme4</code> package</li>
+</ul>
+
+
+<pre><code class="r">library(lme4)
+fm1a &lt;- glmer(wingbg ~ 0 + (1|coach) + (1|Team), 
+              data = yby_coach, family = binomial)
+</code></pre>
+
 <p></section></p>
+
+<p><section data-markdown></p>
+
+<h1>Plot Showing Team Ability</h1>
+
+<p><img src="http://educate-r.org/figs/team_ability.png" alt="" height = "500" width="1200"/></p>
+
+<p></section></p>
+
+<p><section data-markdown></p>
+
+<h1>Connect</h1>
+
+<ul>
+<li>e-mail: brandon-lebeau (at) uiowa.edu</li>
+<li>Twitter: @blebeau11; <a href="https://twitter.com/blebeau11">https://twitter.com/blebeau11</a></li>
+<li>Linkedin: <a href="https://www.linkedin.com/in/lebeaubr">https://www.linkedin.com/in/lebeaubr</a></li>
+<li>Website: <a href="http://educate-r.org">http://educate-r.org</a>
+
+<ul>
+<li><a href="http://educate-r.org/2015/12/04/centraliowaruser/">http://educate-r.org/2015/12/04/centraliowaruser/</a>
+</section></li>
+</ul>
+</li>
+</ul>
+
 
       </div>
     </div>
