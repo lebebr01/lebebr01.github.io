@@ -37,7 +37,7 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Example Coach Data
 
-```r
+```
 ##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
 ## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
 ## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
@@ -60,7 +60,7 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Example GBG Data
 
-```r
+```
 ##    Team           Official Year       Date WL          Opponent PF PA
 ## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
 ## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
@@ -183,18 +183,18 @@ tags: [R, slides, rvest, cfb]
 <section>
 # Tools for web scraping
 - R
-    - rvest: <http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/>
-    - XML: <http://www.omegahat.org/RSXML/>
+    - `rvest`: <http://blog.rstudio.org/2014/11/24/rvest-easy-web-scraping-with-r/>
+    - `XML`: <http://www.omegahat.org/RSXML/>
 - Python
-    - beautiful soup: <http://www.crummy.com/software/BeautifulSoup/>
+    - `beautiful soup`: <http://www.crummy.com/software/BeautifulSoup/>
 - Misc
-    - SelectorGadget: <http://selectorgadget.com/>
+    - `SelectorGadget`: <http://selectorgadget.com/>
 </section>
 
 <section>    
 # Basics of rvest
-- read_html() is the most basic function
-- html_node() or html_nodes()
+- `read_html` is the most basic function
+- `html_node` or `html_nodes`
     - These functions need css selectors or xpath
     - SelectorGadget is the easiest way to get this
 </section>
@@ -218,7 +218,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```r
+```
 ## {xml_nodeset (6)}
 ## [1] <td colspan="2" style="text-align:center"><a href="/wiki/File:Kirk_p ...
 ## [2] <th scope="row">Sport(s)</th>
@@ -231,7 +231,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Extract text
-- Use the html_text() function
+- Use the `html_text` function
 
 
 ```r
@@ -241,7 +241,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```r
+```
 ## [1] "\nFerentz at the 2010 Orange Bowl\n"
 ## [2] "Sport(s)"                           
 ## [3] "Football"                           
@@ -254,8 +254,8 @@ head(wiki_kirk_extract)
 <section>
 # Encoding problems
 - Two solutions to fix encoding problems
-    - guess_encoding()
-    - repair_encoding() to fix encoding problems
+    - `guess_encoding`
+    - `repair_encoding`: fix encoding problems
 
 
 ```r
@@ -265,7 +265,7 @@ wiki_kirk %>%
   guess_encoding()
 ```
 
-```r
+```
 ##       encoding language confidence
 ## 1        UTF-8                1.00
 ## 2 windows-1252       en       0.36
@@ -299,7 +299,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 
 <section>
 # Extract html tags
-- Use the html_tags() function
+- Use the `html_tags` function
 
 
 ```r
@@ -309,14 +309,14 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```r
+```
 ## [1] "td" "th" "td" "th" "th" "td"
 ```
 </section>
 
 <section>
 # Extract html attributes
-- Use the html_attrs() function
+- Use the `html_attrs` function
 
 
 ```r
@@ -326,7 +326,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```r
+```
 ## [[1]]
 ##             colspan               style 
 ##                 "2" "text-align:center" 
@@ -356,7 +356,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Extract links
-- Use the html_attrs() function again
+- Use the `html_attrs` function again
 
 
 ```r
@@ -366,7 +366,7 @@ wiki_kirk_extract <- wiki_kirk %>%
 head(wiki_kirk_extract)
 ```
 
-```r
+```
 ## [1] "/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "/wiki/American_football"                           
 ## [3] "/wiki/Head_coach"                                  
@@ -378,7 +378,7 @@ head(wiki_kirk_extract)
 
 <section>
 # Valid Links
-- The paste0() function is helpful for this
+- The `paste0` function is helpful for this
 
 
 ```r
@@ -386,7 +386,7 @@ valid_links <- paste0('https://www.wikipedia.org', wiki_kirk_extract)
 head(valid_links)
 ```
 
-```r
+```
 ## [1] "https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG"
 ## [2] "https://www.wikipedia.org/wiki/American_football"                           
 ## [3] "https://www.wikipedia.org/wiki/Head_coach"                                  
@@ -399,7 +399,7 @@ head(valid_links)
 
 <section>
 # Extract Tables
-- The html_table() function is useful to scrape well formatted tables
+- The `html_table` function is useful to scrape well formatted tables
 
 
 ```r
@@ -436,7 +436,7 @@ record_kirk <- wiki_kirk %>%
 
 <section>    
 # Example code with lme4
-- A 1 parameter multilevel IRT model can be fitted using glmer() in the lme4 package
+- A 1 parameter multilevel IRT model can be fitted using `glmer` in the `lme4` package
 
 
 ```r
