@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-12-07T11:07:54-06:00</updated>
+ <updated>2015-12-07T11:09:31-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -78,20 +78,6 @@
 
 &lt;p&gt;&lt;section&gt;&lt;/p&gt;
 
-&lt;h1&gt;Example Coach Data&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;##   Year Team Win Loss Tie     Pct  PF  PA Delta        coach
-## 1 2010 Iowa   8    5   0 0.61538 376 221   155 Kirk Ferentz
-## 2 2011 Iowa   7    6   0 0.53846 358 310    48 Kirk Ferentz
-## 3 2012 Iowa   4    8   0 0.33333 232 275   -43 Kirk Ferentz
-## 4 2013 Iowa   8    5   0 0.61538 342 246    96 Kirk Ferentz
-## 5 2014 Iowa   7    6   0 0.53846 367 333    34 Kirk Ferentz
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
 &lt;h1&gt;Game by Game&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -111,42 +97,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Example GBG Data&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;##    Team           Official Year       Date WL          Opponent PF PA
-## 1  Iowa University of Iowa 2014  8/30/2014  W     Northern Iowa 31 23
-## 2  Iowa University of Iowa 2014   9/6/2014  W     Ball St. (IN) 17 13
-## 3  Iowa University of Iowa 2014  9/13/2014  L          Iowa St. 17 20
-## 4  Iowa University of Iowa 2014  9/20/2014  W   Pittsburgh (PA) 24 20
-## 5  Iowa University of Iowa 2014  9/27/2014  W       Purdue (IN) 24 10
-## 6  Iowa University of Iowa 2014 10/11/2014  W           Indiana 45 29
-## 7  Iowa University of Iowa 2014 10/18/2014  L          Maryland 31 38
-## 8  Iowa University of Iowa 2014  11/1/2014  W Northwestern (IL) 48  7
-## 9  Iowa University of Iowa 2014  11/8/2014  L         Minnesota 14 51
-## 10 Iowa University of Iowa 2014 11/15/2014  W          Illinois 30 14
-## 11 Iowa University of Iowa 2014 11/22/2014  L         Wisconsin 24 26
-## 12 Iowa University of Iowa 2014 11/28/2014  L          Nebraska 34 37
-## 13 Iowa University of Iowa 2014   1/2/2015  L         Tennessee 28 45
-##              Location
-## 1       Iowa City, IA
-## 2       Iowa City, IA
-## 3       Iowa City, IA
-## 4      Pittsburgh, PA
-## 5  West Lafayette, IN
-## 6       Iowa City, IA
-## 7    College Park, MD
-## 8       Iowa City, IA
-## 9     Minneapolis, MN
-## 10      Champaign, IL
-## 11      Iowa City, IA
-## 12      Iowa City, IA
-## 13   Jacksonville, FL
-&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
@@ -384,15 +334,6 @@ wiki_kirk_extract &amp;lt;- wiki_kirk %&amp;gt;%
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## {xml_nodeset (6)}
-## [1] &amp;lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&amp;gt;&amp;lt;a href=&quot;/wiki/File:Kirk_p ...
-## [2] &amp;lt;th scope=&quot;row&quot;&amp;gt;Sport(s)&amp;lt;/th&amp;gt;
-## [3] &amp;lt;td class=&quot;category&quot;&amp;gt;\n  &amp;lt;a href=&quot;/wiki/American_football&quot; title=&quot;Am ...
-## [4] &amp;lt;th colspan=&quot;2&quot; style=&quot;text-align:center;background-color: lightgray ...
-## [5] &amp;lt;th scope=&quot;row&quot;&amp;gt;Title&amp;lt;/th&amp;gt;
-## [6] &amp;lt;td&amp;gt;\n  &amp;lt;a href=&quot;/wiki/Head_coach&quot; title=&quot;Head coach&quot;&amp;gt;Head coach&amp;lt;/a&amp;gt; ...
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;section&gt;&lt;/p&gt;
@@ -408,14 +349,6 @@ head(wiki_kirk_extract)
   html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
   html_text()
 head(wiki_kirk_extract)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## [1] &quot;\nFerentz at the 2010 Orange Bowl\n&quot;
-## [2] &quot;Sport(s)&quot;                           
-## [3] &quot;Football&quot;                           
-## [4] &quot;Current position&quot;                   
-## [5] &quot;Title&quot;                              
-## [6] &quot;Head coach&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
@@ -439,15 +372,6 @@ head(wiki_kirk_extract)
   html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
   html_text() %&amp;gt;%
   guess_encoding()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##       encoding language confidence
-## 1        UTF-8                1.00
-## 2 windows-1252       en       0.36
-## 3 windows-1250       ro       0.18
-## 4 windows-1254       tr       0.13
-## 5     UTF-16BE                0.10
-## 6     UTF-16LE                0.10
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
@@ -493,9 +417,6 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;td&quot; &quot;th&quot; &quot;td&quot; &quot;th&quot; &quot;th&quot; &quot;td&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;section&gt;&lt;/p&gt;
@@ -511,32 +432,6 @@ head(wiki_kirk_extract)
   html_nodes(&quot;.vcard td , .vcard th&quot;) %&amp;gt;%
   html_attrs()
 head(wiki_kirk_extract)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## [[1]]
-##             colspan               style 
-##                 &quot;2&quot; &quot;text-align:center&quot; 
-## 
-## [[2]]
-## scope 
-## &quot;row&quot; 
-## 
-## [[3]]
-##      class 
-## &quot;category&quot; 
-## 
-## [[4]]
-##                                          colspan 
-##                                              &quot;2&quot; 
-##                                            style 
-## &quot;text-align:center;background-color: lightgray;&quot; 
-## 
-## [[5]]
-## scope 
-## &quot;row&quot; 
-## 
-## [[6]]
-## named character(0)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
@@ -556,14 +451,6 @@ head(wiki_kirk_extract)
 head(wiki_kirk_extract)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &quot;/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
-## [2] &quot;/wiki/American_football&quot;                           
-## [3] &quot;/wiki/Head_coach&quot;                                  
-## [4] &quot;/wiki/Iowa_Hawkeyes_football&quot;                      
-## [5] &quot;/wiki/Big_Ten_Conference&quot;                          
-## [6] &quot;/wiki/Iowa_City,_Iowa&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;section&gt;&lt;/p&gt;
@@ -577,14 +464,6 @@ head(wiki_kirk_extract)
 
 &lt;pre&gt;&lt;code class=&quot;r&quot;&gt;valid_links &amp;lt;- paste0(&#39;https://www.wikipedia.org&#39;, wiki_kirk_extract)
 head(valid_links)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## [1] &quot;https://www.wikipedia.org/wiki/File:Kirk_pressconference_orangebowl2010.JPG&quot;
-## [2] &quot;https://www.wikipedia.org/wiki/American_football&quot;                           
-## [3] &quot;https://www.wikipedia.org/wiki/Head_coach&quot;                                  
-## [4] &quot;https://www.wikipedia.org/wiki/Iowa_Hawkeyes_football&quot;                      
-## [5] &quot;https://www.wikipedia.org/wiki/Big_Ten_Conference&quot;                          
-## [6] &quot;https://www.wikipedia.org/wiki/Iowa_City,_Iowa&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;/section&gt;&lt;/p&gt;
