@@ -4,7 +4,7 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2015-12-07T11:54:00-06:00</updated>
+ <updated>2015-12-08T09:09:19-06:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
@@ -471,7 +471,7 @@ head(wiki_kirk_extract)
 &lt;h1&gt;Extract html tags&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use the &lt;code&gt;html_tags&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Use the &lt;code&gt;html_name&lt;/code&gt; function&lt;/li&gt;
 &lt;/ul&gt;
 
 
