@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Update to highlightHTML package</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>Update to highlightHTML package</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2014/03/14/htmltext.html" title="Update to highlightHTML package" rel="bookmark">Update to highlightHTML package</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I've added a new functionality to my <em>highlightHTML</em> package.  This package post-processes HTML files and injects CSS and adds tags to create some further customization (for example highlight cells of a HTML table).  This is most useful when writing a document using markdown and converting it into a HTML document using a tool like knitr, slidify, or even pandoc.</p>
+
+<p>Up to now, my package only worked with tables, see my old post that talks about this if you are interested: <a href="http://educate-r.org/2013/11/01/CondFormatMarkdown/">highlight tables</a>.  My update adds a similar functionality to text itself by including span tags in the document.</p>
+
+<p>The following code will install the package with the new feature from github:</p>
+
+<pre><code class="r">library(devtools)
+install_github(repo = "highlightHTML", username = "lebebr01", ref = "testing")
+</code></pre>
+
+<p>Once the package is installed, the new function is called <strong>highlightHTMLtext</strong>. This function takes a HTML file as the input and post processes the file to add span tags to format text according to the CSS calls specified by the user.  The function looks for {#id text} to add the span tags.  The braces are used to define the text range that will use the id and the #id is the CSS id itself.</p>
+
+<p>Here is an example using the HTML file that comes with the package and which can also be found in the help file.</p>
+
+<pre><code class="r">library(highlightHTML)
+file &lt;- system.file('examples', package = 'highlightHTML')
+file1 &lt;- paste(file, "bgtext.html", sep = "/")
+
+# Change background color and text color with CSS
+tags &lt;- c("#bgblack {background-color: black; color: white;}",
+  "#bgblue {background-color: #0000FF; color: white;}")
+
+# Post-process HTML file
+highlightHTMLtext(input = file1, output = NULL, updateCSS = TRUE,
+  tags = tags, browse = TRUE)
+</code></pre>
+
+<p>If you run the above command, the file should open in your browser to see the result of the new HTML file.  The result should have boxes of color in specific areas that we indicated by the {#id text} syntax in the raw markdown and HTML file.</p>
+
+<p>My next step is to develop a master function to wrap these other functions so only one call would be needed to format text and tables.  Let me know of any issues by going to the github page: <a href="https://github.com/lebebr01/highlightHTML">report bugs</a>.</p>
+
+<hr />
+
+<h3>Before and After HTML</h3>
+
+<p>Here is what the body of the HTML file looks like before running the function:
+```html
+<body></p>
+
+<h1>Test of Text</h1>
+
+
+<p>Testing the ability to change the {#bgblue color} of the text.</p>
+
+
+<p>Can also do {#bgblack multiple words of text}</p>
+
+
+<p>{#bgblack Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS}</p>
+
+
+<p></body>
+```</p>
+
+<p>This is what the HTML document looks like after running the function:
+```html
+<body></p>
+
+<h1>Test of Text</h1>
+
+
+<p>Testing the ability to change the <span id='bgblue'> color</span> of the text.</p>
+
+
+<p>Can also do <span id='bgblack'> multiple words of text</span></p>
+
+
+<p><span id='bgblack'> Even entire paragraphs that you want to really stand out from the rest of the document.  More than color could also be changed, anything alterable by CSS.  Test out the function and get creative with the CSS</span></p>
+
+
+<p></body>
+```</p>
+
+<p>The braces identify the location of the span tags and the custom CSS id tag to format the text.</p>
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#highlightHTML-ref" >highlightHTML</a>
+    
+    <a href="/tags.html#markdown-ref" >markdown</a>
+    
+    <a href="/tags.html#html-ref" >html</a>
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2014-03-14 00:00:00 -0500">March 14 2014</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2014/03/14/htmltext.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>

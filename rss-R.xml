@@ -443,8 +443,8 @@ shiny::runGitHub(&#39;lebebr01/BuildForm&#39;, subdir = &#39;R&#39;, ref = &#39;
 
 </description>
 				<pubDate>Thu, 18 Feb 2016 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2016/02/18/cspshiny/</link>
-				<guid isPermaLink="true">http://educate-r.org//2016/02/18/cspshiny/</guid>
+				<link>http://educate-r.org//2016/02/18/cspshiny.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2016/02/18/cspshiny.html</guid>
 			</item>
 		
 			<item>
@@ -1120,8 +1120,8 @@ fm1a &amp;lt;- glmer(wingbg ~ 0 + (1|coach) + (1|Team),
 
 </description>
 				<pubDate>Fri, 04 Dec 2015 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2015/12/04/centraliowaruser/</link>
-				<guid isPermaLink="true">http://educate-r.org//2015/12/04/centraliowaruser/</guid>
+				<link>http://educate-r.org//2015/12/04/centraliowaruser.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2015/12/04/centraliowaruser.html</guid>
 			</item>
 		
 			<item>
@@ -1188,8 +1188,8 @@ microbenchmark(
 &lt;/code&gt;&lt;/pre&gt;
 </description>
 				<pubDate>Tue, 31 Mar 2015 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2015/03/31/seqspeed/</link>
-				<guid isPermaLink="true">http://educate-r.org//2015/03/31/seqspeed/</guid>
+				<link>http://educate-r.org//2015/03/31/seqspeed.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2015/03/31/seqspeed.html</guid>
 			</item>
 		
 			<item>
@@ -1332,8 +1332,8 @@ p + geom_point(aes(alpha = factor(alpha)), size = 3) +
 &lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/addmadeupvalues-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
 				<pubDate>Mon, 23 Mar 2015 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2015/03/23/removelead0/</link>
-				<guid isPermaLink="true">http://educate-r.org//2015/03/23/removelead0/</guid>
+				<link>http://educate-r.org//2015/03/23/removelead0.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2015/03/23/removelead0.html</guid>
 			</item>
 		
 			<item>
@@ -1432,8 +1432,8 @@ head(temp.long)
 &lt;p&gt;Bugs, comments, or feature requests can be submitted on the github site &lt;a href=&quot;https://github.com/lebebr01/simReg/issues&quot;&gt;https://github.com/lebebr01/simReg/issues&lt;/a&gt;.&lt;/p&gt;
 </description>
 				<pubDate>Wed, 01 Oct 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/10/01/simReg/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/10/01/simReg/</guid>
+				<link>http://educate-r.org//2014/10/01/simReg.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/10/01/simReg.html</guid>
 			</item>
 		
 			<item>
@@ -1476,8 +1476,8 @@ p + geom_point(data = latlong2, aes(x = longR, y = latR),
 &lt;/code&gt;&lt;/pre&gt;
 </description>
 				<pubDate>Fri, 26 Sep 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/09/26/googlelocations/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/09/26/googlelocations/</guid>
+				<link>http://educate-r.org//2014/09/26/googlelocations.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/09/26/googlelocations.html</guid>
 			</item>
 		
 			<item>
@@ -2814,8 +2814,8 @@ h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
 
 </description>
 				<pubDate>Fri, 05 Sep 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/09/05/winpct/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/09/05/winpct/</guid>
+				<link>http://educate-r.org//2014/09/05/winpct.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/09/05/winpct.html</guid>
 			</item>
 		
 			<item>
@@ -2868,8 +2868,8 @@ l + geom_point(size = 4) + geom_line(size = 1) +
 &lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. You could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  See my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
 				<pubDate>Tue, 05 Aug 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/08/05/trendgraphics/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/08/05/trendgraphics/</guid>
+				<link>http://educate-r.org//2014/08/05/trendgraphics.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/08/05/trendgraphics.html</guid>
 			</item>
 		
 			<item>
@@ -2928,8 +2928,8 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 &lt;p&gt;Try it out and let me know of new features or bugs as you work through the package.&lt;/p&gt;
 </description>
 				<pubDate>Wed, 30 Jul 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/07/30/highlightHTML/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/07/30/highlightHTML/</guid>
+				<link>http://educate-r.org//2014/07/30/highlightHTML.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/07/30/highlightHTML.html</guid>
 			</item>
 		
 			<item>
@@ -2969,8 +2969,8 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 &lt;p&gt;With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I&#39;m imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use &lt;em&gt;Deducer&lt;/em&gt;.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).&lt;/p&gt;
 </description>
 				<pubDate>Tue, 27 May 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/05/27/rguirevisit/</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/05/27/rguirevisit/</guid>
+				<link>http://educate-r.org//2014/05/27/rguirevisit.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2014/05/27/rguirevisit.html</guid>
 			</item>
 		
 	</channel>

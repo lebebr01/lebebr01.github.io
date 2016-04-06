@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remove leading 0 with ggplot2.</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>Remove leading 0 with ggplot2.</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2015/03/23/removelead0.html" title="Remove leading 0 with ggplot2." rel="bookmark">Remove leading 0 with ggplot2.</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I recently had an occasion while working on a three variable interaction plot for a paper where I wanted to remove the leading 0's in the x-axis text labels using <em>ggplot2</em>. This was primarily due to some space concerns I had for the x-axis labels. Unfortunately, I did not find an obvious way to do this in my first go around. After tickering a bit, I've found a workaround. The process is walked through below.</p>
+
+<p>First, some simulated data.</p>
+
+<pre><code class="r"># Sim some data
+simdata &lt;- data.frame(x = runif(2400, min = .032, max = .210),
+                      y = c(rnorm(2000, mean = 0, sd = .1), 
+                            rnorm(400, mean = 1, sd = .25)),
+                      group = c(sample(1:2, 1600, replace = TRUE),
+                                rep(1, 400), 
+                                rep(2, 400)),
+                      facet = rep(1:3, each = 800))
+</code></pre>
+
+<p>As shown below, initially there is no group differences, but there are facet differences. Exploring the interaction between the grouping variables shows there is a two variable interaction. Note: This example is not identical to the three variable interaction I originally described above, but assume here that the x variable is also important.</p>
+
+<pre><code class="r">with(simdata, tapply(y, group, mean))
+</code></pre>
+
+<pre><code>##          1          2 
+## 0.00342121 0.33040069
+</code></pre>
+
+<pre><code class="r">with(simdata, tapply(y, facet, mean))
+</code></pre>
+
+<pre><code>##             1             2             3 
+## -0.0009751953  0.0025336609  0.5028529069
+</code></pre>
+
+<pre><code class="r">with(simdata, tapply(y, interaction(group, facet), mean))
+</code></pre>
+
+<pre><code>##           1.1           2.1           1.2           2.2           1.3 
+##  0.0031464214 -0.0048761903  0.0056148873 -0.0005785326  0.0014837970 
+##           2.3 
+##  1.0042220169
+</code></pre>
+
+<p>In the example in the paper, I aggregated the unique x values to the third decimal place. That is done with the following <em>dplyr</em> code. Note: The data did not need to be aggregated, but it is a bit easier to work with when plotting later.</p>
+
+<pre><code class="r"># round value to .001 and aggregate
+simdata$x_rd &lt;- round(simdata$x, 3)
+
+# aggregate
+library(dplyr)
+simdata_agg &lt;- simdata %&gt;%
+  group_by(x_rd, group, facet) %&gt;%
+  summarise(y = mean(y))
+simdata_agg 
+</code></pre>
+
+<pre><code>## Source: local data frame [962 x 4]
+## Groups: x_rd, group
+## 
+##     x_rd group facet            y
+## 1  0.032     1     2 -0.088397852
+## 2  0.032     2     2  0.228654211
+## 3  0.033     1     1 -0.001843538
+## 4  0.033     1     2 -0.021662299
+## 5  0.033     1     3 -0.110077646
+## 6  0.033     2     1  0.080429131
+## 7  0.033     2     3  0.915228939
+## 8  0.034     1     1  0.025164086
+## 9  0.034     1     2 -0.046522430
+## 10 0.034     1     3  0.037889712
+## ..   ...   ...   ...          ...
+</code></pre>
+
+<p>Now that the data is aggregated, it can be directly plotted with <em>ggplot2</em>. This is the base plot that contains the leading 0's by default and treats the x variable as continuous (which it really is continuous).</p>
+
+<pre><code class="r">library(ggplot2)
+p &lt;- ggplot(simdata_agg, aes(x = x_rd, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_continuous("x", limits = c(0, .25), 
+                     breaks = seq(0, .25, .05))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/plotwith0-1.png" alt="" />
+The plot above is a good start, but I was worried about the x-axis labels being too close together and ultimately being difficult to read. I decided I wanted to omit the leading 0's to omit some space. This was useful in my scenario as the variable on the x-axis could only take on values between 0 and 1, therefore the leading 0 is not important.</p>
+
+<p>One way to remove the leading 0 is to convert the continuous variable into a character variable and use a simple regular expression (with <em>gsub</em>) to remove the 0 at the beginning of the character string. Below is the code to do that and also the resulting plot. The key point of the plotting code below is the use of the <em>breaks</em> argument to <em>scale_x_discrete</em>. Without this all the unique character values will be plotted, not good.</p>
+
+<pre><code class="r">simdata_agg$x_char &lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &lt;- gsub("^0", "", simdata_agg$x_char)
+p &lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(size = 3) + facet_grid(. ~ facet) + 
+  scale_x_discrete("x", breaks = c('.00', '.05', '.1', '.15', '.2', '.25'))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/plotno0-1.png" alt="" /></p>
+
+<p>The plot above has a few flaws. First, there are values at the edge of each facet. This could be fixed with the <em>expand</em> argument to <em>scale_x_discrete</em>, but I still wanted to include the value of .00 on the x-axis. Secondly, the x-axis text labels are not uniformly formatted which is not ideal (e.g. .1 should be .10).</p>
+
+<p>To fix this, some made up data needs to be added to the data frame. Some care needs to be done here as well as a value of .00 can not just be added to the x variable plotted. This would place a non-uniform gap between .00 and .05 (not shown, but try it for yourself by adapting the code below). Therefore, all values between 0 and .031 need to be manually added to the data frame to keep the spacing uniform. Finally, to not plot the made up values, I created a transparency variable called alpha. This variable was used to set the alpha values to 0 for the made up values and 1 for the real values. <em>scale_alpha_discrete</em> was used to specify the range of alpha values, this is important otherwise the made up numbers will show up as a light gray. The final code to manually add the new data is shown below. Anyone have a less workaround procedure?</p>
+
+<pre><code class="r"># Reset aggregation vector
+simdata_agg &lt;- simdata %&gt;%
+  group_by(x_rd, group, facet) %&gt;%
+  summarise(y = mean(y))
+
+# Add values
+simdata_agg &lt;- rbind(data.frame(x_rd = seq(0, .031, .001),
+                                group = rep(1, 32),
+                                facet = rep(1, 32),
+                                y = rep(0, 32)),
+                     simdata_agg)
+
+# Create a new variable to use for transparent points
+simdata_agg$alpha &lt;- ifelse(simdata_agg$x_rd &lt; .032, 0, 1)
+
+# Create x_char variable again
+simdata_agg$x_char &lt;- as.character(simdata_agg$x_rd)
+simdata_agg$x_char &lt;- gsub("^0", "", simdata_agg$x_char)
+
+# Needed formatting
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '', '.00',
+                             simdata_agg$x_char)
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '.2', '.20',
+                             simdata_agg$x_char)
+simdata_agg$x_char &lt;- ifelse(simdata_agg$x_char == '.1', '.10',
+                             simdata_agg$x_char)
+
+# Final plot
+p &lt;- ggplot(simdata_agg, aes(x = x_char, y = y, shape = factor(group))) + 
+  theme_bw()
+p + geom_point(aes(alpha = factor(alpha)), size = 3) + 
+  facet_grid(. ~ facet) + 
+  scale_x_discrete("x", breaks = c('.00', '.05', '.10', '.15', '.20'),
+                   expand = c(.05, .05)) + 
+  scale_alpha_discrete(guide = FALSE, range = c(0, 1))
+</code></pre>
+
+<p><img src="http://educate-r.org/figs/addmadeupvalues-1.png" alt="" /></p>
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#graphics-ref" >graphics</a>
+    
+    <a href="/tags.html#ggplot2-ref" >ggplot2</a>
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2015-03-23 00:00:00 -0500">March 23 2015</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2015/03/23/removelead0.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>

@@ -76,18 +76,38 @@
 
 <p>A markdown document that looks like the following:</p>
 
-<div class="highlight"><pre><code class="language-markdown" data-lang="markdown"># Test of {#colgold highlightHTML} package
+<p><figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"># Test of {#colgold highlightHTML} package</p>
 
-Can highlight {#bgblack multiple words}.
+<p>Can highlight {#bgblack multiple words}.</p>
 
-Even tables:
+<p>Even tables:</p>
 
-| Color Name | Number     |  
-|------------|------------|  
-| Blue       | 5  #bgblue |  
-| Green      | 35         |  
-| Orange     | 100        |  
-| Red        | 200 #bgred |</code></pre></div>
+<table>
+<thead>
+<tr>
+<th> Color Name </th>
+<th> Number     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Blue       </td>
+<td> 5  #bgblue </td>
+</tr>
+<tr>
+<td> Green      </td>
+<td> 35         </td>
+</tr>
+<tr>
+<td> Orange     </td>
+<td> 100        </td>
+</tr>
+<tr>
+<td> Red        </td>
+<td> 200 #bgred |</code></pre></figure></td>
+</tr>
+</tbody>
+</table>
 
 
 <p>You would then convert the markdown above into a html file (I hit the knit HTML button in RStudio for this file), then run the following commands in R (assuming the highlightHTML package is not installed):</p>

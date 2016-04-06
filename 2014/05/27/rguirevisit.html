@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>R gui Revisited</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>R gui Revisited</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2014/05/27/rguirevisit.html" title="R gui Revisited" rel="bookmark">R gui Revisited</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (<a href="http://educate-r.org/2014/02/03/Rgui/">original post</a>).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.</p>
+
+<h4>Things that went well</h4>
+
+<hr />
+
+<p>Many students by the end were starting to understand the power of R (even through a gui structure).  Most were able to create new variables, run statistical analyses, produce basic graphs or figures, and even understand a few basic commands. They also enjoyed that the language and program were free and they could bring their laptops to class when we were going to talk about doing something new in R.</p>
+
+<p>I also did not hear any stories of a gui system crashing (which was one complaint of <em>Deducer</em> in the comments of my last post).  I had students using either <em>Deducer</em> or <em>Rcmdr</em>, but whenever possible steered them toward <em>Deducer</em> as it is a bit more user friendly (in my opinion) and uses <em>ggplot2</em> by default for graphics.  Although <em>Deducer</em> did crash on me once while demonstrating something during class, I did not hear any students complain about it.</p>
+
+<p>During the last two weeks of the course when more assignments surrounding basic inferential methods were due, students were becoming much more confident and better able to navigate the R gui menus.  I do also think that the students did appreciate the simpleness of the R output, only giving you what you ask for (as compared to SPSS that gives you extremely more than you ask for). One part of any gui system is to figure out the menu structure and understand the basic language of the menu.  Once I was able to point students to the correct menus, give them correct names for statistical procedures, and also point out specific R terminology they were much more comfortable doing things on their own (and even on occasion trying new things on their own).</p>
+
+<h4>Things that went poorly</h4>
+
+<hr />
+
+<p>Using both <em>Deducer</em> and <em>Rcmdr</em> in the class.  I did not want to do this initially, but was forced to do it as I was unsure initially why some students were getting an error (it is based on the Java version installed).  I should have spent more time trying to transition students to <em>Deducer</em> after figuring out the error, however did not want to have them learn a new system after starting to learn <em>Rcmdr</em>.</p>
+
+<p>Another sticky spot was that I did not have students learn <em>Markdown</em>, therefore students were copying and pasting output into Word. If anyone has tried this in the past, it usually does not format the best.  In the future (definitely for a PhD level course) I would have students learn <em>Markdown</em> as it would likely not take more than an hour.</p>
+
+<p>Students using <em>Rcmdr</em> had difficulty created dichotomous variables from a continuous variable.  With <em>Rcmdr</em>, one needs to know some basic R commands (like <em>ifelse</em>) in order to create dichotomous variables.  This is not something that I spent much time going over in class and was a definite stumbling block for many students.</p>
+
+<p>An unfortunate aspect of any course where students need to learn software (or just any type of material in general) is that some students do not feel the software is something they are going to use down the road.  As a result, a handful of students seemed to be a bit more obstinate regarding the use of R (and my guess would have been a similar reaction to using SPSS).</p>
+
+<p>Lastly, I did not have assignments that focused specifically on learning R.  If I ever teach a course of this level again (which may not occur at my new job at the University of Iowa) I would definitely have more regular small assignments to accomplish more data manipulation tasks, such as creating a new variable, turn a variable into a factor, etc.</p>
+
+<h4>Summary</h4>
+
+<hr />
+
+<p>In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.</p>
+
+<p>With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I'm imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use <em>Deducer</em>.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).</p>
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#gui-ref" >gui</a>
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2014-05-27 00:00:00 -0500">May 27 2014</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2014/05/27/rguirevisit.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>

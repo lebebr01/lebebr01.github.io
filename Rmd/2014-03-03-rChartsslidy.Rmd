@@ -84,7 +84,7 @@ h1$print('chart1', include_assets = TRUE, cdn = TRUE)
 
 After I ran this command in R, I edited the resulting Javascript code that was printed from the last line of the R code above.  My final Javascript code can be seen below.
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">&lt;script type=&#39;text/javascript&#39; src=http://code.jquery.com/jquery-1.9.1.min.js&gt;&lt;/script&gt;
 &lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts.js&gt;&lt;/script&gt;
 &lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/highcharts-more.js&gt;&lt;/script&gt;
 &lt;script type=&#39;text/javascript&#39; src=http://code.highcharts.com/modules/exporting.js&gt;&lt;/script&gt; 
@@ -407,15 +407,15 @@ symbolWidth: 40,
 });
         });
     })(jQuery);
-&lt;/script&gt;</code></pre></div>
+&lt;/script&gt;</code></pre></figure>
 
 Once you have that in markdown format, you can turn it into a *slidy* html presentation with the following command in *pandoc*:
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pandoc -s --mathjax -i -t slidy inputfile.md -o outfile.html</code></pre></figure>
 
 This gives you a file that looks something like this:
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
@@ -760,7 +760,7 @@ symbolWidth: 40,
 &lt;/script&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
+&lt;/html&gt;</code></pre></figure>
 
 That should give you a html presentation with an interactive Javascript based figure.
 

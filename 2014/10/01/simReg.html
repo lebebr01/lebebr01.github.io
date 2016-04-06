@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Structured simulation of regression models - simReg package.</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>Structured simulation of regression models - simReg package.</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2014/10/01/simReg.html" title="Structured simulation of regression models - simReg package." rel="bookmark">Structured simulation of regression models - simReg package.</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>I'd like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I'd like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.</p>
+
+<p>The package is currently on github <a href="https://github.com/lebebr01/simReg">https://github.com/lebebr01/simReg</a>. Therefore, you can currently install the package by using the <em>devtools</em> package like so:</p>
+
+<pre><code class="r">library(devtools)
+install_github("lebebr01/simReg")
+</code></pre>
+
+<p>The primary function of interest in this package is <em>sim.reg</em>. To show the use of this function, here is a simple example simulating a single level regression mode. Note, this example is pulled directly from the <strong>Intro</strong> vignette.</p>
+
+<pre><code class="r">library(simReg)
+set.seed(100)
+fixed &lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed.param &lt;- c(2, 4, 1, 3.5, 2)
+cov.param &lt;- list(mean = c(0, 0, 0), sd = c(4, 3, 3), var.type = c("single", "single", "single"))
+n &lt;- 150
+errorVar &lt;- 3
+err.dist &lt;- "norm"
+temp.single &lt;- sim.reg(fixed = fixed, fixed.param = fixed.param, cov.param = cov.param,
+n = n, errorVar = errorVar, err.dist = err.dist, data.str = "single")
+head(temp.single)
+</code></pre>
+
+<pre><code>##   X.Intercept.     act     diff numCourse act.numCourse    Fbeta      err
+## 1            1 -2.0088  3.10406    -5.566       11.1815 -0.05022 -3.35921
+## 2            1  0.5261  4.96051    -3.056       -1.6077 -4.84527 -5.75176
+## 3            1 -0.3157 -0.05384    -3.135        0.9897 -8.31073  1.63173
+## 4            1  3.5471 -0.07261    -1.954       -6.9306 -4.58382  0.06435
+## 5            1  0.4679  0.75074     1.148        0.5372  9.71476 -0.44783
+## 6            1  1.2745 -1.01137     3.096        3.9455 24.81272  0.59651
+##   sim.data ID
+## 1   -3.409  1
+## 2  -10.597  2
+## 3   -6.679  3
+## 4   -4.519  4
+## 5    9.267  5
+## 6   25.409  6
+</code></pre>
+
+<p>As you can see from the above code, the package uses a single sided equation to represent the fixed effects. Other arguments include the values for those fixed effects (fixed.param), the scale for the covariates (cov.param), the sample size (n), the error variance (errorVar), and the error distribution (err.dist). These are all put into the function <em>sim.reg</em> with the additional argument <em>data.str</em> to tell the function that we indeed want a single level regression and you get the following output. The data frame that is returned gives the values for the design matrix, the fixed portion of the model (Fbeta), and the random error term (err). The value of most interest if conducting a simulation would be the actually simulated value (sim.data).</p>
+
+<h3>Nested Example</h3>
+
+<p>A slightly more complicated example is shown below where longitudinal data are simulated.</p>
+
+<pre><code class="r">fixed &lt;- ~1 + time + diff + act + time:act
+random &lt;- ~1 + time + diff
+fixed.param &lt;- c(4, 2, 6, 2.3, 7)
+random.param &lt;- c(7, 4, 2)
+cov.param &lt;- list(mean = c(0, 0), sd = c(1.5, 4), var.type = c("lvl1", "lvl2"))
+n &lt;- 150
+p &lt;- 30
+errorVar &lt;- 4
+randCor &lt;- 0
+rand.dist &lt;- "norm"
+err.dist &lt;- "norm"
+serCor &lt;- "ID"
+serCorVal &lt;- NULL
+data.str &lt;- "long"
+temp.long &lt;- sim.reg(fixed, random, fixed.param, random.param, cov.param,
+n, p, errorVar, randCor, rand.dist, err.dist, serCor, serCorVal, data.str)
+head(temp.long)
+</code></pre>
+
+<pre><code>##   X.Intercept. time     diff    act time.act    b0      b1    b2   Fbeta
+## 1            1    0 -0.05455  1.608    0.000 5.118 -0.1118 0.251   7.371
+## 2            1    1 -2.23677 -1.349   -1.349 5.118 -0.1118 0.251 -19.968
+## 3            1    2  0.50321 -6.028  -12.056 5.118 -0.1118 0.251 -87.237
+## 4            1    3  1.25027  8.436   25.308 5.118 -0.1118 0.251 214.063
+## 5            1    4  2.05871  3.917   15.667 5.118 -0.1118 0.251 143.031
+## 6            1    5 -1.87968  7.598   37.990 5.118 -0.1118 0.251 286.125
+##   randEff     err sim.data withinID clustID
+## 1   5.104  3.2637    15.74        1       1
+## 2   4.444  0.9355   -14.59        2       1
+## 3   5.020 -3.1693   -85.39        3       1
+## 4   5.096  4.1523   223.31        4       1
+## 5   5.187 -3.1716   145.05        5       1
+## 6   4.086 -0.2605   289.95        6       1
+</code></pre>
+
+<p>Most of the arguments should look familiar to above, but a few are new. Most notably these are a one sided equation for the random effects (random), their variances (random.param), the number of observations within a cluster (p), the correlation among the random effects (randCor), the simulated distribution of the random effects (rand.dist), the serial correlation model for within cluster residuals (serCor), the values for the serial correlation models (serCorVal). Note now since this represents longitudinal data, the <em>data.str</em> argument is now specified as 'long'.</p>
+
+<h3>Other features</h3>
+
+<p>The package also simulates cross sectional multilevel models, covariates that are either a factor, ordinal, or categorical, and the basics for power simulation are there.</p>
+
+<p>For further information, see the vignette by doing the following after installing the package:</p>
+
+<pre><code class="r">vignette("Intro", package = "simReg")
+</code></pre>
+
+<p>Bugs, comments, or feature requests can be submitted on the github site <a href="https://github.com/lebebr01/simReg/issues">https://github.com/lebebr01/simReg/issues</a>.</p>
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#package-ref" >package</a>
+    
+    <a href="/tags.html#simReg-ref" >simReg</a>
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2014-10-01 00:00:00 -0500">October 01 2014</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2014/10/01/simReg.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>

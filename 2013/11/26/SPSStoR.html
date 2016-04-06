@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SPSS to R&#58; An R package to convert SPSS syntax</title>
+    <meta name="author" content="Brandon LeBeau" />
+   <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
+    <link rel="stylesheet" href="/stylesheets/xcodeDkGrey.css">
+    <script type='text/javascript' src="/stylesheets/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+   </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+ <div id="navigation">
+  <ul>
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+  <li><a href="/projects.html">R Packages</a></li>
+  <li><a href="/blog.html">Blog</a></li>
+  <li><a href="/slides.html">Slides</a></li>
+  <li><a href="/tags.html">Categories</a></li>
+  <li>         <!-- Lockerz Share BEGIN -->
+            <a class="a2a_dd" href="http://www.addtoany.com/share_save" tile"Share this Page"><span class="shareicon"><span class="hide">Share</span></span></a>
+            <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.onclick = 0;
+            a2a_config.show_title = 1;
+            a2a_config.color_main = "FFFFFF";
+            a2a_config.color_border = "FFFFFF";
+            a2a_config.color_link_text = "45462f";
+            a2a_config.color_link_text_hover = "575757";
+            a2a_config.prioritize = ["twitter", "facebook",  "google_plus", "email", "linkedin"];
+            </script>
+            <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+            <!-- Lockerz Share END -->  </li>
+  </ul>
+  </div>
+  <div id="headerimg">
+    <a href="/index.html"><img src="/images/Logo.png" alt="center" /></a>
+  </div>
+  <div class="content">
+  <div class="blog">
+   <!-- <h2>SPSS to R&#58; An R package to convert SPSS syntax</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2013/11/26/SPSStoR.html" title="SPSS to R&#58; An R package to convert SPSS syntax" rel="bookmark">SPSS to R&#58; An R package to convert SPSS syntax</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>My first statistical software package I used as an undergrad was SPSS.  I was fortunate during my senior year at <a href="http://www.luther.edu">Luther College</a> to be initially introduced to <a href="http://r-project.org">R</a>.  I did not realize it at the time (except for the pretty graphics) that this was the start of something big for me.  Fast forward a year to graduate school at the University of Minnesota and the majority of my program was again using SPSS.  Under the tutelage of <a href="http://www.cehd.umn.edu/edpsych/people/Faculty/Zieffler.html">Andy</a> in my first graduate statistics course I started to do analyses in both R and SPSS.  After that I started to do all my analyses in R.  Fast forward five years this time to my first full-time job after graduate school at <a href="http://www.spps.org">Saint Paul Public Schools</a> and again everyone was using SPSS.  Fortunately in my year there I was able to significantly push them toward using R more and more.</p>
+
+<p>This long introduction motivates the following package I started writing mostly just to play with regular expressions, but kept playing and came up with a package with many routines.  The package I came up with is called <em>SPSStoR</em> which converts SPSS syntax into R syntax.  Using regular expressions to parse the SPSS syntax to figure out which routine is being run then prints out the R syntax to do the same analysis done by the SPSS syntax.</p>
+
+<p>As you can imagine, the SPSS language has many routines and this is not all encompassing, however it provides many basic commands such as:
+* Aggregate
+* Correlations
+* Crosstab
+* Sort Cases
+* Descriptives
+* One sample t-test
+* Independent sample t-test
+* Get for sav files (SPSS data files)
+* Master SPSStoR function
+* Graphics
+* Frequencies</p>
+
+<h1>Examples</h1>
+
+<hr />
+
+<p>You can install the package directly from my github page using the devtools library:</p>
+
+<pre><code class="r">library(devtools)
+install_github("SPSStoR", "lebebr01")
+</code></pre>
+
+<p>Once you install the package, I've included some example SPSS syntax within the package to use as examples.  One example syntax file reads in an SPSS data file, sorts the file, then computes descriptive statistics on a handful of variables.  The following should run the command from your computer:
+<code>r
+library(SPSStoR)
+file &lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
+              "/getDescExamp.txt", sep = '')
+spss_to_r(file)
+</code></p>
+
+<h3>Output:</h3>
+
+<pre><code class="r">[1] "# x is the name of your data frame"
+[2] "library(foreign)"
+[3] "x &lt;- read.spss('/data/hubtemp.sav', to.data.frame = TRUE)"
+[4] "x &lt;- x[order(DIVISION, STORE, -AGE), ]"
+[5] "library(SPSStoR)"
+[6] "with(x, descmat(x = list(longmon, tollmon, equipmon, cardmon, wiremon), mean, sd, min, max))"
+</code></pre>
+
+<p>Here is another example doing a one-sample t-test:
+<code>r
+file &lt;- paste(system.file('SPSSsyntax', package = 'SPSStoR'),
+              "/ttestOneSampExamp.txt", sep = '')
+spss_to_r(file)
+</code></p>
+
+<h3>Output:</h3>
+
+<pre><code class="r">[1] "# x is the name of your data frame"
+[2] "with(x, t.test(brake, mu = 322, conf.level = .90)"
+</code></pre>
+
+<h1>Summary</h1>
+
+<hr />
+
+<p>Although some working R knowledge is needed to run this package, such as knowledge of installing packages and what an object is, this package may be useful to those trying to figure out a similar command in R.  Over time I hope to slowly add support for more SPSS routines, see my github page for those that I am currently prioritizing.  Let me know via the issues on github if you'd like support for a specific routine or run into problems.</p>
+
+<p>The package home can be found on github: <a href="https://github.com/lebebr01/SPSStoR">SPSStoR</a>
+<br>
+<br></p>
+
+    <div class="clear"></div>
+  </div>
+  <p class="alt-font tight">
+    Tags:&nbsp;
+    
+    <a href="/tags.html#R-ref" >R</a>
+    
+    <a href="/tags.html#SPSS-ref" >SPSS</a>
+    
+    <a href="/tags.html#package-ref" >package</a>
+    
+  </p>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2013-11-26 00:00:00 -0600">November 26 2013</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
+</div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2013/11/26/SPSStoR.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  </div>  
+    </body>
+</html>
