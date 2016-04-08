@@ -2934,7 +2934,7 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 		
 			<item>
 				<title>R gui Revisited</title>
-				<description>&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui/&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
+				<description>&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui.html&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
 
 &lt;h4&gt;Things that went well&lt;/h4&gt;
 

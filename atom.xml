@@ -4,13 +4,277 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2016-04-06T13:50:26-05:00</updated>
+ <updated>2016-04-08T16:57:34-05:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Informative vs uninformative prior distributions with characteristic curve linking methods</title>
+   <link href="http://lebebr01.github.io/2016/04/08/aera2016.html"/>
+   <updated>2016-04-08T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.io/2016/04/08/aera2016</id>
+   <content type="html">&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Informative vs uninformative prior distributions with characteristic curve linking methods&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau, Keyu Chen, Wei Cheng Liu, and Aaron McVay&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Linking overview&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;With item response theory (IRT), the ability scale is arbitrarily defined (commonly mean of 0 and sd of 1).&lt;/li&gt;
+&lt;li&gt;Linking is useful to help place individual ability and IRT item parameters on the same scale.
+
+&lt;ul&gt;
+&lt;li&gt;Particularly when two forms are administered to non-equivalent groups.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Four linking methods are common:
+
+&lt;ul&gt;
+&lt;li&gt;Mean/Mean&lt;/li&gt;
+&lt;li&gt;Mean/Sigma&lt;/li&gt;
+&lt;li&gt;Haebara&lt;/li&gt;
+&lt;li&gt;Stocking Lord
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Linking Transformation&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/link.PNG&quot; alt=&quot;&quot; height = &quot;400&quot; width=&quot;800&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Linking Designs&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Random Groups&lt;/li&gt;
+&lt;li&gt;Single group with counterbalancing&lt;/li&gt;
+&lt;li&gt;Common-item nonequivalent group design&lt;/li&gt;
+&lt;li&gt;More details in Kolen &amp;amp; Brennan (2014).
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Common-item NEG Design&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/commonitem.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Prior Weights&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The proficiency points and weights can be specified to reflect the ability distribution of the original scale.&lt;/li&gt;
+&lt;li&gt;In addition, proficiency points and weights can be specified to reflect the ability distribution of the new scale.&lt;/li&gt;
+&lt;li&gt;More details are provided in Kim &amp;amp; Lee (2006).&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Research Questions:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;To what extent does the prior distribution have an impact on the estimation of the transformation constants?&lt;/li&gt;
+&lt;li&gt;To what extent does the relationship from #1 generalize across the simulation conditions?
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Simulation Design&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/simulation_conditions.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Simulation Design 2&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The A and B transformation constants were also simulated as a part of the design.
+
+&lt;ul&gt;
+&lt;li&gt;This was done in an attempt to increase generalizeability of study results.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both were simulated from a random uniform distribution.
+
+&lt;ul&gt;
+&lt;li&gt;A ranged from 0.5 to 1.5 rounded to nearest .05 (21 possibilities)&lt;/li&gt;
+&lt;li&gt;B ranged from -2 to 2 rounded to nearest 0.10 (41 possibilities)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;1000 replications
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Simulation Procedures&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A population of 55 items were simulated as Form X from a normal ability distribution.&lt;/li&gt;
+&lt;li&gt;Form Y consisted of common items from Form X (transformed based on A and B parameters).
+
+&lt;ul&gt;
+&lt;li&gt;Additional items were simulated to fill out Form Y.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Form Y was calibrated with Bilog-MG using a 3PL IRT model.&lt;/li&gt;
+&lt;li&gt;Transformation constants were computed from calibrated Form Y item parameters and population Form X item parameters.
+
+&lt;ul&gt;
+&lt;li&gt;An R package, plink, was used.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Study Outcomes&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bias in the transformation constants (A and B) were explored descriptively and inferentially:&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/bias.PNG&quot; alt=&quot;&quot; height = &quot;200&quot; width=&quot;800&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Simulation recovery&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/heatmap_b.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Results&lt;/h1&gt;
+
+&lt;table style=&quot;font-size: 26pt;&quot;&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th style=&quot;text-align: left;&quot;&gt;Variable&lt;/th&gt;
+&lt;th style=&quot;text-align: right;&quot;&gt;Eta A&lt;/th&gt;
+&lt;th style=&quot;text-align: right;&quot;&gt;Eta B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Ability Dist&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.699&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Prior Dist&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.012&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.009&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;A Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.149&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;B Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.012&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.522&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Ability Dist:Prior Dist&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.004&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Ability Dist:A Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.045&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Ability Dist:B Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.008&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.387&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Prior Dist:A Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.004&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.002&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td style=&quot;text-align: left;&quot;&gt;Ability Dist:Prior Dist:B Pop&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.002&lt;/td&gt;
+&lt;td style=&quot;text-align: right;&quot;&gt;0.002&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Results A Constant&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/a_ab_bias_large.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Results B Constant&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/b_ab_bias_large.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Prior distribution used for linking the two forms does not have a large impact on the estimation of the A and B constants.&lt;/li&gt;
+&lt;li&gt;Even correctly specifying the shape of the ability distribution through the weights does not help with non-normal ability distributions.&lt;/li&gt;
+&lt;li&gt;The ability distribution shape has the most impact on accurate estimation of the A and B constants.
+
+&lt;ul&gt;
+&lt;li&gt;Normalizing transformations of the ability distribution may be helpful to limit bias when estimating these linking constants.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Questions?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt; &lt;br/&gt; &lt;a href=&quot;http://www2.education.uiowa.edu/directories/person?id=bleb&quot;&gt;http://www2.education.uiowa.edu/directories/person?id=bleb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/04/08/aera2016/&quot;&gt;http://educate-r.org/2016/04/08/aera2016/&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>AERA Poster 2016 Monte Carlo</title>
@@ -2954,7 +3218,7 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
    <link href="http://lebebr01.github.io/2014/05/27/rguirevisit.html"/>
    <updated>2014-05-27T00:00:00-05:00</updated>
    <id>http://lebebr01.github.io/2014/05/27/rguirevisit</id>
-   <content type="html">&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui/&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
+   <content type="html">&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui.html&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
 
 &lt;h4&gt;Things that went well&lt;/h4&gt;
 
