@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Assessing the validity of item response theory models when calibrating field test items | Educate-R
+      
+    </title>
+
+   <!-- Description -->
+    
+      <meta name="description" content="">
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/reveal.css"/>
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/theme/simple.css" id="theme"/>
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/lib/css/zenburn.css"/>
+
+  <style type="text/css">
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 {font-size: 1.25em;}
+    .reveal h3 {font-size: 1em;}
+    body {
+    background-image: url(http://educate-r.org/figs/ui_logo.jpg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 20px 900px;
+    background-size: 250px;
+  }
+  </style>
+    <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'http://educate-r.orgreveal.js/css/print/pdf.css' : 'http://educate-r.orgreveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="canonical" href="http://educate-r.org/2016/04/09/ncme2016.html">
+
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <p><section>
+    <h1 class="title">Assessing the validity of item response theory models when calibrating field test items</h1>
+    <h2 class="author">Brandon LeBeau</h2>
+    <h3 class="date">University of Iowa</h3>
+</section></p>
+
+<p><section></p>
+
+<h1>Validity for IRT Models</h1>
+
+<ul>
+<li>Validity is important for any assessment and the argument should begin with psychometrics.</li>
+<li>How the psychometrics is performed directly impacts properties of the assessment that are assessed later for evidence of validity.
+
+<ul>
+<li>Are scores reported below chance level?</li>
+</ul>
+</li>
+<li>The validity of the psychometrics is particularly important for field test data.
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>IRT Model</h1>
+
+<p><img src="http://educate-r.org/figs/irt.PNG" alt="" height = "200" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Field Testing</h1>
+
+<ul>
+<li>Field testing (FT) is essential to new assessment development or form building.
+
+<ul>
+<li>A way to gather information to make informed decisions about which items become operational.</li>
+</ul>
+</li>
+<li>Limitations:
+
+<ul>
+<li>Many items are tried that do not become operational.
+
+<ul>
+<li>This spreads a fixed pool of individuals (respondents) across many field test items.</li>
+<li>Ultimately, sample size can be significantly smaller compared to operational assessments.</li>
+</ul>
+</li>
+<li>Issues with distractors.
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Threats to Validity in FT</h1>
+
+<ul>
+<li>Generalizeability
+
+<ul>
+<li>Is the FT sample representative of the desired population?</li>
+<li>Over-fitting with 3PL model?</li>
+</ul>
+</li>
+<li>Uncertainty in estimates
+
+<ul>
+<li>Sample size and lower asymptote estimation</li>
+<li>Interconnected parameter estimates
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Generalizeability</h1>
+
+<ul>
+<li>We assume respondents are randomly sampled from some population.
+
+<ul>
+<li>Are item responses truly randomly sampled from the population of interest?
+
+<ul>
+<li>Selection or Measurement bias</li>
+</ul>
+</li>
+<li>If not, estimates are extremely sample dependent.</li>
+</ul>
+</li>
+<li>3PL model may provide better fit, but is this at the cost of overfitting?
+
+<ul>
+<li>Fit should not be the only consideration when deciding on an IRT model for FT data.
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Uncertainty</h1>
+
+<ul>
+<li>Sample size (1000 commonly cited for 3PL model):
+
+<ul>
+<li>Tends to be smaller in field test designs.</li>
+<li>Even with small samples, can achieve convergence with 3PL model with help of priors, ridge, etc.
+
+<ul>
+<li>Are our estimates now biased?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Estimating Lower Asymptote (pseudo-guessing):
+
+<ul>
+<li>Difficulty in estimating this term ($c_{j}$) has direct impact on estimation of the other two terms.
+
+<ul>
+<li>This leads to a cascading vortex of problems.</li>
+</ul>
+</li>
+<li>The pseudo-guessing is commonly a nuisance parameter, why allow a nuisance parameter to drastically affect estimation of other terms?
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Methodology</h1>
+
+<ul>
+<li>Individual response strings were resampled in a two stage framework:
+
+<ul>
+<li>First, individuals who took the field test were resampled with replacement within each field test booklet.</li>
+<li>Second, individuals who only took operational items were resampled with replacement to fill out the remaining observations.</li>
+</ul>
+</li>
+<li>After resampling, items were calibrated with Bilog-MG.</li>
+<li>This process was replicated 5000 times to generate bootstrapped item parameters.
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Example ICC Math FT Item 3PL</h1>
+
+<p><img src="http://educate-r.org/figs/iccgr3math57.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Example ICC Math FT Item 2PL</h1>
+
+<p><img src="http://educate-r.org/figs/iccgr3math572pl.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Example ICC ELA FT Item 3PL</h1>
+
+<p><img src="http://educate-r.org/figs/iccread653pl.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Example ICC ELA FT Item 2PL</h1>
+
+<p><img src="http://educate-r.org/figs/iccread652pl.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>ICC Summary</h1>
+
+<ul>
+<li>For individual items, the variation in the ICCs for a 3PL model can be large.
+
+<ul>
+<li>This may lower usefulness of estimates in helping to select operational (best) items.</li>
+</ul>
+</li>
+<li>How can these 3PL curves be expected to generalize beyond this sample with so much variability?
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>b and c est and SE</h1>
+
+<p><img src="http://educate-r.org/figs/pairs_bc_ela.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>a and c est and SE</h1>
+
+<p><img src="http://educate-r.org/figs/pairs_ac_ela.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>a and b est and SE</h1>
+
+<p><img src="http://educate-r.org/figs/pairs_ab_ela.png" alt="" height = "500" width="1200"/>
+</section></p>
+
+<p><section></p>
+
+<h1>Uncertainty Summary</h1>
+
+<ul>
+<li>The pseudo-guessing estimates are:
+
+<ul>
+<li>negatively related to the estimates of the b and a.</li>
+<li>positively related to the uncertainty in the b parameter, likely the parameter of most interest.</li>
+</ul>
+</li>
+<li>In turn, increasing the uncertainty in the b parameter:
+
+<ul>
+<li>further increases the uncertainty in the a parameter.</li>
+<li>is also negatively related to estimates of the a parameter.</li>
+</ul>
+</li>
+<li>Thus, creating the cascading vortex of problems.
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Conclusions</h1>
+
+<ul>
+<li>Item parameters estimated from FT data should not be treated as truth.
+
+<ul>
+<li>Variation in these parameter estimates needs to be considered.</li>
+</ul>
+</li>
+<li>Fit should not be the only concern when selecting an IRT model, uncertainty, generalizeability, and usefulness should also be considered.</li>
+<li>Estimates are much more stable when using the 2PL model.
+
+<ul>
+<li>Thus providing a stronger foundation with which to start the validity argument for an assessment.
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Questions?</h1>
+
+<ul>
+<li>Twitter: @blebeau11</li>
+<li>Website: <a href="http://educate-r.org">http://educate-r.org</a> <br/> <a href="http://www2.education.uiowa.edu/directories/person?id=bleb">http://www2.education.uiowa.edu/directories/person?id=bleb</a></li>
+<li>Slides: <a href="http://educate-r.org/2016/04/09/ncme2016.html">http://educate-r.org/2016/04/09/ncme2016.html</a>
+</section></li>
+</ul>
+
+
+      </div>
+    </div>
+
+    <script src="http://educate-r.org/reveal.js/lib/js/head.min.js"></script>
+    <script src="http://educate-r.org/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        slideNumber: true,
+        center: true,
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://educate-r.org/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://educate-r.org/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://educate-r.org/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+
+  </body>
+</html>

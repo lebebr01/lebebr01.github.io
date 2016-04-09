@@ -7,6 +7,295 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Assessing the validity of item response theory models when calibrating field test items</title>
+				<description>&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Assessing the validity of item response theory models when calibrating field test items&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Validity for IRT Models&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Validity is important for any assessment and the argument should begin with psychometrics.&lt;/li&gt;
+&lt;li&gt;How the psychometrics is performed directly impacts properties of the assessment that are assessed later for evidence of validity.
+
+&lt;ul&gt;
+&lt;li&gt;Are scores reported below chance level?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The validity of the psychometrics is particularly important for field test data.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;IRT Model&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/irt.PNG&quot; alt=&quot;&quot; height = &quot;200&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Field Testing&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Field testing (FT) is essential to new assessment development or form building.
+
+&lt;ul&gt;
+&lt;li&gt;A way to gather information to make informed decisions about which items become operational.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Limitations:
+
+&lt;ul&gt;
+&lt;li&gt;Many items are tried that do not become operational.
+
+&lt;ul&gt;
+&lt;li&gt;This spreads a fixed pool of individuals (respondents) across many field test items.&lt;/li&gt;
+&lt;li&gt;Ultimately, sample size can be significantly smaller compared to operational assessments.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Issues with distractors.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Threats to Validity in FT&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Generalizeability
+
+&lt;ul&gt;
+&lt;li&gt;Is the FT sample representative of the desired population?&lt;/li&gt;
+&lt;li&gt;Over-fitting with 3PL model?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Uncertainty in estimates
+
+&lt;ul&gt;
+&lt;li&gt;Sample size and lower asymptote estimation&lt;/li&gt;
+&lt;li&gt;Interconnected parameter estimates
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Generalizeability&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We assume respondents are randomly sampled from some population.
+
+&lt;ul&gt;
+&lt;li&gt;Are item responses truly randomly sampled from the population of interest?
+
+&lt;ul&gt;
+&lt;li&gt;Selection or Measurement bias&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;If not, estimates are extremely sample dependent.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;3PL model may provide better fit, but is this at the cost of overfitting?
+
+&lt;ul&gt;
+&lt;li&gt;Fit should not be the only consideration when deciding on an IRT model for FT data.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Uncertainty&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample size (1000 commonly cited for 3PL model):
+
+&lt;ul&gt;
+&lt;li&gt;Tends to be smaller in field test designs.&lt;/li&gt;
+&lt;li&gt;Even with small samples, can achieve convergence with 3PL model with help of priors, ridge, etc.
+
+&lt;ul&gt;
+&lt;li&gt;Are our estimates now biased?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Estimating Lower Asymptote (pseudo-guessing):
+
+&lt;ul&gt;
+&lt;li&gt;Difficulty in estimating this term ($c_{j}$) has direct impact on estimation of the other two terms.
+
+&lt;ul&gt;
+&lt;li&gt;This leads to a cascading vortex of problems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The pseudo-guessing is commonly a nuisance parameter, why allow a nuisance parameter to drastically affect estimation of other terms?
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Methodology&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Individual response strings were resampled in a two stage framework:
+
+&lt;ul&gt;
+&lt;li&gt;First, individuals who took the field test were resampled with replacement within each field test booklet.&lt;/li&gt;
+&lt;li&gt;Second, individuals who only took operational items were resampled with replacement to fill out the remaining observations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;After resampling, items were calibrated with Bilog-MG.&lt;/li&gt;
+&lt;li&gt;This process was replicated 5000 times to generate bootstrapped item parameters.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Example ICC Math FT Item 3PL&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iccgr3math57.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Example ICC Math FT Item 2PL&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iccgr3math572pl.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Example ICC ELA FT Item 3PL&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iccread653pl.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Example ICC ELA FT Item 2PL&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/iccread652pl.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;ICC Summary&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For individual items, the variation in the ICCs for a 3PL model can be large.
+
+&lt;ul&gt;
+&lt;li&gt;This may lower usefulness of estimates in helping to select operational (best) items.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;How can these 3PL curves be expected to generalize beyond this sample with so much variability?
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;b and c est and SE&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/pairs_bc_ela.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;a and c est and SE&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/pairs_ac_ela.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;a and b est and SE&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/pairs_ab_ela.png&quot; alt=&quot;&quot; height = &quot;500&quot; width=&quot;1200&quot;/&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Uncertainty Summary&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The pseudo-guessing estimates are:
+
+&lt;ul&gt;
+&lt;li&gt;negatively related to the estimates of the b and a.&lt;/li&gt;
+&lt;li&gt;positively related to the uncertainty in the b parameter, likely the parameter of most interest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;In turn, increasing the uncertainty in the b parameter:
+
+&lt;ul&gt;
+&lt;li&gt;further increases the uncertainty in the a parameter.&lt;/li&gt;
+&lt;li&gt;is also negatively related to estimates of the a parameter.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Thus, creating the cascading vortex of problems.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Item parameters estimated from FT data should not be treated as truth.
+
+&lt;ul&gt;
+&lt;li&gt;Variation in these parameter estimates needs to be considered.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Fit should not be the only concern when selecting an IRT model, uncertainty, generalizeability, and usefulness should also be considered.&lt;/li&gt;
+&lt;li&gt;Estimates are much more stable when using the 2PL model.
+
+&lt;ul&gt;
+&lt;li&gt;Thus providing a stronger foundation with which to start the validity argument for an assessment.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Questions?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt; &lt;br/&gt; &lt;a href=&quot;http://www2.education.uiowa.edu/directories/person?id=bleb&quot;&gt;http://www2.education.uiowa.edu/directories/person?id=bleb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/04/09/ncme2016.html&quot;&gt;http://educate-r.org/2016/04/09/ncme2016.html&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				<pubDate>Sat, 09 Apr 2016 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2016/04/09/ncme2016.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2016/04/09/ncme2016.html</guid>
+			</item>
+		
+			<item>
 				<title>Informative vs uninformative prior distributions with characteristic curve linking methods</title>
 				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Informative vs uninformative prior distributions with characteristic curve linking methods&lt;/h1&gt;
@@ -3091,60 +3380,6 @@ h1$print(&#39;chart1&#39;, include_assets = TRUE, cdn = TRUE)
 				<pubDate>Fri, 05 Sep 2014 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2014/09/05/winpct.html</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/09/05/winpct.html</guid>
-			</item>
-		
-			<item>
-				<title>Dodged bar charts, why not a line graph?</title>
-				<description>&lt;p&gt;I often see graphs that are poorly implemented in that they do not achieve their goal.  One such type of graph that I see are dodged bar charts.  Here is an example of a dodged bar chart summarizing the number of all star players by team (focusing specifically on the AL central division) and year from the &lt;em&gt;Lahman&lt;/em&gt; r package:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(Lahman)
-library(dplyr)
-library(ggplot2)
-library(RColorBrewer)
-
-AllstarFull$selected &amp;lt;- 1
-
-numAS &amp;lt;- AllstarFull  %&amp;gt;% 
-  filter(yearID &amp;gt; 2006, lgID == &#39;AL&#39;, teamID %in% c(&#39;MIN&#39;, &#39;CLE&#39;, &#39;DET&#39;, &#39;CHA&#39;, &#39;KCA&#39;)) %&amp;gt;%
-  group_by(teamID, yearID) %&amp;gt;%
-  summarise(number = sum(selected))
-
-b &amp;lt;- ggplot(numAS, aes(x = teamID, y = number, fill = factor(yearID))) + theme_bw()
-b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
-  scale_fill_brewer(&quot;Year&quot;, palette = &quot;Dark2&quot;) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/bar.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Note: If you are curious from the above graph, there appears to be two typos in the teamIDs, where CHA should be CHW (Chicago White Sox) and KCA should be KCR (Kansas City Royals).&lt;/p&gt;
-
-&lt;p&gt;The plot above can be good for a few things, predominantly for comparison within a team. It is more difficult to compare between teams (although not impossible).  One way to possibly improve the plot would be to add the number either above each bar or inside of each bar.  This can be done in &lt;em&gt;ggplot2&lt;/em&gt; with the &lt;em&gt;geom_text&lt;/em&gt; function.  For example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;b &amp;lt;- ggplot(numAS, aes(x = teamID, y = number, fill = factor(yearID))) + theme_bw()
-b + geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
-  scale_fill_brewer(&quot;Year&quot;, palette = &quot;Dark2&quot;) + 
-  geom_text(aes(label = number), position = position_dodge(width = 0.9), 
-            vjust = 1.5)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/bartext.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A better alternative to a dodged bar chart in my opinion would be a simple line graph.  The line graph simplifies the graph to only include one variable on the x-axis and uses colors or shapes to differentiate the teams. See below.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;l &amp;lt;- ggplot(numAS, aes(x = yearID, y = number, color = teamID, shape = teamID))
-l + geom_point(size = 4) + geom_line(size = 1) +
-  scale_y_continuous(limits = c(0, 7), expand = c(0,0)) + 
-  scale_color_brewer(&quot;Team&quot;, palette = &quot;Dark2&quot;) + scale_shape_discrete(&quot;Team&quot;) + 
-  xlab(&quot;Year&quot;) + theme_bw()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This presentation makes it much easier to compare teams within a single year and also see how the teams have changed over time. The ability to see differences also increases as the variability in the variable increases. In my opinion this is a much simpler graphic and usually is a better option to serve the purpose for the graphic. As always though, the best graphic is one that conveys the message in the simplest, easiest to understand form. You could improve this by making it interactive with &lt;em&gt;rCharts&lt;/em&gt;.  See my post on &lt;em&gt;rCharts&lt;/em&gt; &lt;a href=&quot;/2014/02/15/rcharts/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;/2014/03/03/rChartsslidy/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description>
-				<pubDate>Tue, 05 Aug 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/08/05/trendgraphics.html</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/08/05/trendgraphics.html</guid>
 			</item>
 		
 	</channel>
