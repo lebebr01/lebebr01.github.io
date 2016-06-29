@@ -7,6 +7,163 @@
 		<atom:link href="http://educate-r.org/feed.category.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Simulation and power analysis of generalized linear mixed models</title>
+				<description>&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Simulation and power analysis of generalized linear mixed models&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Overview&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;(G)LMMs&lt;/li&gt;
+&lt;li&gt;Power&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;simglm&lt;/code&gt; package&lt;/li&gt;
+&lt;li&gt;Demo Shiny App!
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Linear Mixed Model (LMM)&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/equations.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Power&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Power is the ability to statistically detect a true effect (i.e. non-zero population effect).&lt;/li&gt;
+&lt;li&gt;For simple models (e.g. t-tests, regression) there are closed form equations for generating power.
+
+&lt;ul&gt;
+&lt;li&gt;R has routines for these: &lt;code&gt;power.t.test, power.anova.test&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Gpower3
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Power Example&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;n &amp;lt;- seq(4, 1000, 2)
+power &amp;lt;- sapply(seq_along(n), function(i) 
+  power.t.test(n = n[i], delta = .15, sd = 1, type = &#39;two.sample&#39;)$power)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/power_plot-1.png&quot; alt=&quot;&quot; /&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Power for (G)LMM&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Power for more complex models is not as straightforward;
+
+&lt;ul&gt;
+&lt;li&gt;particularly with messy real world data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is software for the GLMM models to generate power:
+
+&lt;ul&gt;
+&lt;li&gt;Optimal Design: &lt;a href=&quot;http://hlmsoft.net/od/&quot;&gt;http://hlmsoft.net/od/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MLPowSim: &lt;a href=&quot;http://www.bristol.ac.uk/cmm/software/mlpowsim/&quot;&gt;http://www.bristol.ac.uk/cmm/software/mlpowsim/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Snijders, &lt;em&gt;Power and Sample Size in Multilevel Linear Models&lt;/em&gt;.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Power is hard&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In practice, power is hard.&lt;/li&gt;
+&lt;li&gt;Need to make many assumptions on data that has not been collected.
+
+&lt;ul&gt;
+&lt;li&gt;Therefore, data assumptions made for power computations will likely differ from collected sample.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;A power analysis needs to be flexible, exploratory, and well thought out.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;&lt;code&gt;simglm&lt;/code&gt; Overview&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;simglm&lt;/code&gt; aims to simulate (G)LMMs with up to three levels of nesting (aim to add more later).&lt;/li&gt;
+&lt;li&gt;Flexible data generation allows:
+
+&lt;ul&gt;
+&lt;li&gt;any number of covariates and discrete covariates&lt;/li&gt;
+&lt;li&gt;change random distribution&lt;/li&gt;
+&lt;li&gt;unbalanced data&lt;/li&gt;
+&lt;li&gt;missing data&lt;/li&gt;
+&lt;li&gt;serial correlation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Also has routines to generate power.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Demo Shiny App&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shiny::runGitHub(&#39;simglm&#39;, username = &#39;lebebr01&#39;, subdir = &#39;inst/shiny_examples/demo&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;devtools::install_github(&#39;lebebr01/simglm&#39;)
+library(simglm)
+run_shiny()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Must have following packages installed: &lt;code&gt;simglm, shiny, shinydashboard, ggplot2, lme4, DT&lt;/code&gt;.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Questions?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/06/29/user2016.html&quot;&gt;http://educate-r.org/2016/06/29/user2016.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub: &lt;a href=&quot;http://github.com/lebebr01&quot;&gt;http://github.com/lebebr01&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				<pubDate>Wed, 29 Jun 2016 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2016/06/29/user2016.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2016/06/29/user2016.html</guid>
+			</item>
+		
+			<item>
 				<title>Interactively building test forms from an IRT perspective An application of R and Shiny</title>
 				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Interactively building test forms from an IRT perspective: An application of R and Shiny&lt;/h1&gt;
@@ -2930,47 +3087,6 @@ highlightHTML(input = &quot;path/to/infile.html&quot;, output = &quot;path/to/ou
 				<pubDate>Wed, 30 Jul 2014 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2014/07/30/highlightHTML.html</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/07/30/highlightHTML.html</guid>
-			</item>
-		
-			<item>
-				<title>R gui Revisited</title>
-				<description>&lt;p&gt;A couple months ago I wrote about switching my class from using SPSS to one that uses R with a gui frontend (&lt;a href=&quot;http://educate-r.org/2014/02/03/Rgui.html&quot;&gt;original post&lt;/a&gt;).  Since the semester has wrapped up, below are my thoughts on how the course went with respect to the students using R.&lt;/p&gt;
-
-&lt;h4&gt;Things that went well&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Many students by the end were starting to understand the power of R (even through a gui structure).  Most were able to create new variables, run statistical analyses, produce basic graphs or figures, and even understand a few basic commands. They also enjoyed that the language and program were free and they could bring their laptops to class when we were going to talk about doing something new in R.&lt;/p&gt;
-
-&lt;p&gt;I also did not hear any stories of a gui system crashing (which was one complaint of &lt;em&gt;Deducer&lt;/em&gt; in the comments of my last post).  I had students using either &lt;em&gt;Deducer&lt;/em&gt; or &lt;em&gt;Rcmdr&lt;/em&gt;, but whenever possible steered them toward &lt;em&gt;Deducer&lt;/em&gt; as it is a bit more user friendly (in my opinion) and uses &lt;em&gt;ggplot2&lt;/em&gt; by default for graphics.  Although &lt;em&gt;Deducer&lt;/em&gt; did crash on me once while demonstrating something during class, I did not hear any students complain about it.&lt;/p&gt;
-
-&lt;p&gt;During the last two weeks of the course when more assignments surrounding basic inferential methods were due, students were becoming much more confident and better able to navigate the R gui menus.  I do also think that the students did appreciate the simpleness of the R output, only giving you what you ask for (as compared to SPSS that gives you extremely more than you ask for). One part of any gui system is to figure out the menu structure and understand the basic language of the menu.  Once I was able to point students to the correct menus, give them correct names for statistical procedures, and also point out specific R terminology they were much more comfortable doing things on their own (and even on occasion trying new things on their own).&lt;/p&gt;
-
-&lt;h4&gt;Things that went poorly&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Using both &lt;em&gt;Deducer&lt;/em&gt; and &lt;em&gt;Rcmdr&lt;/em&gt; in the class.  I did not want to do this initially, but was forced to do it as I was unsure initially why some students were getting an error (it is based on the Java version installed).  I should have spent more time trying to transition students to &lt;em&gt;Deducer&lt;/em&gt; after figuring out the error, however did not want to have them learn a new system after starting to learn &lt;em&gt;Rcmdr&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Another sticky spot was that I did not have students learn &lt;em&gt;Markdown&lt;/em&gt;, therefore students were copying and pasting output into Word. If anyone has tried this in the past, it usually does not format the best.  In the future (definitely for a PhD level course) I would have students learn &lt;em&gt;Markdown&lt;/em&gt; as it would likely not take more than an hour.&lt;/p&gt;
-
-&lt;p&gt;Students using &lt;em&gt;Rcmdr&lt;/em&gt; had difficulty created dichotomous variables from a continuous variable.  With &lt;em&gt;Rcmdr&lt;/em&gt;, one needs to know some basic R commands (like &lt;em&gt;ifelse&lt;/em&gt;) in order to create dichotomous variables.  This is not something that I spent much time going over in class and was a definite stumbling block for many students.&lt;/p&gt;
-
-&lt;p&gt;An unfortunate aspect of any course where students need to learn software (or just any type of material in general) is that some students do not feel the software is something they are going to use down the road.  As a result, a handful of students seemed to be a bit more obstinate regarding the use of R (and my guess would have been a similar reaction to using SPSS).&lt;/p&gt;
-
-&lt;p&gt;Lastly, I did not have assignments that focused specifically on learning R.  If I ever teach a course of this level again (which may not occur at my new job at the University of Iowa) I would definitely have more regular small assignments to accomplish more data manipulation tasks, such as creating a new variable, turn a variable into a factor, etc.&lt;/p&gt;
-
-&lt;h4&gt;Summary&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;In general I was pleased with using R and more specifically using a R gui for the the course.  The scope of the class was not to teach students a statistical language and for many of these students this was likely their last research/statistics course. This gave me one shot to try to get them familiar enough with the program to be an option for them in the future.  I do feel that the students became familiar enough with R during the course to be able to use it for basic data manipulation and analysis in the future, but are still tied to the gui system.&lt;/p&gt;
-
-&lt;p&gt;With that being said, if I ever teach a similar course in the future, I would likely create a shiny app that allows students to interact in the browser instead of using the R gui. The scope of the course is focused more on interpretation of the output rather than learning the statistical package to get the output, so the shiny app would work well (I&#39;m imagining a Tinkerplots-esque look and feel). I would also recommend for anyone who has students and a course at a similar level and you choose to use a gui system for R, to use &lt;em&gt;Deducer&lt;/em&gt;.  Once the initial setup bottlenecks are worked out it is much easier for the students to learn and use (and is more similar to SPSS if they use that program in the future).&lt;/p&gt;
-</description>
-				<pubDate>Tue, 27 May 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/05/27/rguirevisit.html</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/05/27/rguirevisit.html</guid>
 			</item>
 		
 	</channel>
