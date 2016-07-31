@@ -4,13 +4,198 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2016-06-29T10:23:11-05:00</updated>
+ <updated>2016-07-31T15:13:22-05:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory</title>
+   <link href="http://lebebr01.github.io/2016/07/31/jsm2016.html"/>
+   <updated>2016-07-31T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.io/2016/07/31/jsm2016</id>
+   <content type="html">&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa &amp;amp; University of Minnesota&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Began after Tim Brewster was fired at the University of Minnesota.
+
+&lt;ul&gt;
+&lt;li&gt;Now they have a new coach again!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Wanted to try to predict next great coach.&lt;/li&gt;
+&lt;li&gt;Proceeded to explore data available to answer this question.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Data&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data came from a few sources:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;http://www.cfbdatawarehouse.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Wikipedia
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Goals&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Predict the &#39;ability&#39; of the coaches.&lt;/li&gt;
+&lt;li&gt;Find other variables that explain variation in the &#39;ability&#39; of the coaches.&lt;/li&gt;
+&lt;li&gt;Predict the next &#39;great&#39; coach.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Model&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/cfbmodel.png&quot; alt=&quot;&quot; /&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Model 2&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Not a traditional IRT model as the game ID is not included.
+
+&lt;ul&gt;
+&lt;li&gt;The model does allow for a coaches ability to vary with years.&lt;/li&gt;
+&lt;li&gt;The team effect is constant.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This model was fitted using R: &lt;code&gt;lme4&lt;/code&gt; and &lt;code&gt;rstan&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Results shown throughout are from &lt;code&gt;lme4&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&#39;Modern&#39; era data, 1998 onward and coaches with at least 6 games per year.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Team Effect&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/teameffect.png&quot; alt=&quot;&quot; /&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Ability Estimates&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ISU.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Iowa State made good hire?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ISU_good_hire.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Fire Tim Brewster?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/UMN.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Does a coach overperform compared to average team ability?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Value-added like logic.&lt;/li&gt;
+&lt;li&gt;If coaches over/under perform compared to a team average
+
+&lt;ul&gt;
+&lt;li&gt;are they more likely to be retained?&lt;/li&gt;
+&lt;li&gt;if fired, are they a good fit for another team?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;How quickly does team expectation change?
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;6 Coaches on the Hot Seat&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Hot_seat_coach_plot.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Which of these 6 should be fired?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Hot_seat_relative_plot.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Back to Minnesota&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Minnesota-Coaches-2.png&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+    &lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Next Steps&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add covariates to model shown above
+
+&lt;ul&gt;
+&lt;li&gt;or use the ability estimates obtained above as an outcome.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Explore moving average for team expectation.&lt;/li&gt;
+&lt;li&gt;Explore good vs bad coaching hires.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Connect&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;e-mail: brandon-lebeau (at) uiowa.edu&lt;/li&gt;
+&lt;li&gt;Twitter: @blebeau11; &lt;a href=&quot;https://twitter.com/blebeau11&quot;&gt;https://twitter.com/blebeau11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://educate-r.org/2016/07/31/jsm2016.html&quot;&gt;http://educate-r.org/2016/07/31/jsm2016.html&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Simulation and power analysis of generalized linear mixed models</title>

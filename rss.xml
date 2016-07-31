@@ -7,6 +7,191 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory</title>
+				<description>&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau, Andrew Zieffler, and Kyle Nickodem&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa &amp;amp; University of Minnesota&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Began after Tim Brewster was fired at the University of Minnesota.
+
+&lt;ul&gt;
+&lt;li&gt;Now they have a new coach again!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Wanted to try to predict next great coach.&lt;/li&gt;
+&lt;li&gt;Proceeded to explore data available to answer this question.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Data&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data came from a few sources:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cfbdatawarehouse.com/&quot;&gt;http://www.cfbdatawarehouse.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Wikipedia
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Goals&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Predict the &#39;ability&#39; of the coaches.&lt;/li&gt;
+&lt;li&gt;Find other variables that explain variation in the &#39;ability&#39; of the coaches.&lt;/li&gt;
+&lt;li&gt;Predict the next &#39;great&#39; coach.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Model&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/cfbmodel.png&quot; alt=&quot;&quot; /&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Model 2&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Not a traditional IRT model as the game ID is not included.
+
+&lt;ul&gt;
+&lt;li&gt;The model does allow for a coaches ability to vary with years.&lt;/li&gt;
+&lt;li&gt;The team effect is constant.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This model was fitted using R: &lt;code&gt;lme4&lt;/code&gt; and &lt;code&gt;rstan&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Results shown throughout are from &lt;code&gt;lme4&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&#39;Modern&#39; era data, 1998 onward and coaches with at least 6 games per year.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Team Effect&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/teameffect.png&quot; alt=&quot;&quot; /&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Ability Estimates&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ISU.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Iowa State made good hire?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/ISU_good_hire.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Fire Tim Brewster?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/UMN.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Does a coach overperform compared to average team ability?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Value-added like logic.&lt;/li&gt;
+&lt;li&gt;If coaches over/under perform compared to a team average
+
+&lt;ul&gt;
+&lt;li&gt;are they more likely to be retained?&lt;/li&gt;
+&lt;li&gt;if fired, are they a good fit for another team?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;How quickly does team expectation change?
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;6 Coaches on the Hot Seat&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Hot_seat_coach_plot.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Which of these 6 should be fired?&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Hot_seat_relative_plot.svg&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Back to Minnesota&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Minnesota-Coaches-2.png&quot; alt=&quot;&quot; height=&quot;525px&quot; width=&quot;1000px&quot;&gt;
+    &lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Next Steps&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add covariates to model shown above
+
+&lt;ul&gt;
+&lt;li&gt;or use the ability estimates obtained above as an outcome.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Explore moving average for team expectation.&lt;/li&gt;
+&lt;li&gt;Explore good vs bad coaching hires.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Connect&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;e-mail: brandon-lebeau (at) uiowa.edu&lt;/li&gt;
+&lt;li&gt;Twitter: @blebeau11; &lt;a href=&quot;https://twitter.com/blebeau11&quot;&gt;https://twitter.com/blebeau11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://educate-r.org/2016/07/31/jsm2016.html&quot;&gt;http://educate-r.org/2016/07/31/jsm2016.html&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				<pubDate>Sun, 31 Jul 2016 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2016/07/31/jsm2016.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2016/07/31/jsm2016.html</guid>
+			</item>
+		
+			<item>
 				<title>Simulation and power analysis of generalized linear mixed models</title>
 				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Simulation and power analysis of generalized linear mixed models&lt;/h1&gt;
@@ -2155,50 +2340,6 @@ head(temp.long)
 				<pubDate>Wed, 01 Oct 2014 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2014/10/01/simReg.html</link>
 				<guid isPermaLink="true">http://educate-r.org//2014/10/01/simReg.html</guid>
-			</item>
-		
-			<item>
-				<title>Google location data -- Where I've been.</title>
-				<description>&lt;p&gt;I was emailed by a friend that was looking into their google location data and had asked if I had ever used a json file before in R. I said I had not, but I knew there were packages to do such things. The things I sent were things he had already tried, so what did I decide to do? I went ahead and downloaded my own google location data.&lt;/p&gt;
-
-&lt;p&gt;If you use google services (particularly have an android phone) you can get your google location information here buried in google&#39;s settings page: &lt;a href=&quot;https://www.google.com/settings/datatools&quot;&gt;Google Data Page&lt;/a&gt;. From there you can click on create new archive at the bottom of the rightmost column under &quot;Download your data&quot;. If you&#39;d like to replicate the map below, you just need the location data, therefore I unselected all of the options except for location. Then there is some thinking on google&#39;s servers and they give you a download file (either .zip, .tbz, or .tgz) from which you can download. Mine did not take long to prepare, if they have more location information on you it may take longer.&lt;/p&gt;
-
-&lt;p&gt;Below is a map of all the locations I&#39;ve been. I rounded the latitude and longitude values to two decimals (and had to add the decimals) to create less exact location values. This step could obviously be omitted. You&#39;ll notice in the ggplot2 code that I set the alpha equal to .01, this allowed the locations where I&#39;ve been longer to be darker. You could get more fancy with this, especially if you are able to figure out the code google uses for their timestamp. Just looked like mumbo jumbo to me. There is also accuracy, velocity, heading, altitude, and activity data.&lt;/p&gt;
-
-&lt;p&gt;Kind of a cool process. The map shows places I&#39;ve been the last year or so (does not include San Francisco from AERA two years ago) including living in Fayetteville, Iowa City, Saint Paul. It also shows a few places I was for interviews last year including travel through some airports (Dallas, Houston, Charlotte, Chicago) and even shows my honeymoon to the panhandle of Florida. It also made me realize how much more I need to explore to the west (and east to some extent).&lt;/p&gt;
-
-&lt;p&gt;Below is the code I used to load, manipulate, and plot my google location data. To replicate you would need to download your own google location data. Has anyone else made sense of all this data?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/myjson.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(rjson)
-json_file &amp;lt;- &quot;path/to/your/json/file&quot;
-json_data &amp;lt;- fromJSON(file = json_file)
-latlong &amp;lt;- data.frame(do.call(&quot;rbind&quot;, json_data[[2]]))
-latlong2 &amp;lt;- subset(latlong, select = c(latitudeE7, longitudeE7))
-latlong2$latR &amp;lt;- as.numeric(paste0(substr(as.character(latlong2$latitudeE7), 1, 2), 
-                                   &quot;.&quot;, substr(as.character(latlong2$latitudeE7), 3, 4)))
-latlong2$longR &amp;lt;- as.numeric(paste0(substr(as.character(latlong2$longitudeE7), 1, 3), 
-                                    &quot;.&quot;, substr(as.character(latlong2$longitudeE7), 4, 5)))
-
-library(maps)
-library(ggplot2)
-
-states &amp;lt;- map_data(&quot;state&quot;)
-
-p &amp;lt;- ggplot(states) + 
-  geom_polygon(aes(x = long, y = lat, group = group), 
-               fill = &quot;white&quot;, color = &quot;black&quot;) + 
-  theme_bw() + 
-  theme(axis.text = element_blank(), line = element_blank(), 
-        rect = element_blank(), axis.title = element_blank())
-p + geom_point(data = latlong2, aes(x = longR, y = latR), 
-               alpha = .01, color = &quot;red&quot;, size = 3)
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-				<pubDate>Fri, 26 Sep 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/09/26/googlelocations.html</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/09/26/googlelocations.html</guid>
 			</item>
 		
 	</channel>
