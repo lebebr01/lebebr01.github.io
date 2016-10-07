@@ -7,6 +7,317 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Extending accessibility of open-source statistical software to the masses A shiny case study</title>
+				<description>&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Extending accessibility of open-source statistical software to the masses: A shiny case study&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;R&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;R is an open source statistical programming language.
+
+&lt;ul&gt;
+&lt;li&gt;Pros:
+
+&lt;ul&gt;
+&lt;li&gt;Common statistical procedures are found in R&lt;/li&gt;
+&lt;li&gt;Can extend functionality with packages/functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Cons:
+
+&lt;ul&gt;
+&lt;li&gt;Need to be comfortable with code
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Flexibility of R&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;R is powerful and flexible due to the many user written packages.&lt;/li&gt;
+&lt;li&gt;However, to capture this flexibility:
+
+&lt;ul&gt;
+&lt;li&gt;users need to be comfortable with programming&lt;/li&gt;
+&lt;li&gt;users need to find the package&lt;/li&gt;
+&lt;li&gt;users need to understand package specific syntax
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;R package documentation and examples&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise&quot;&gt;https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Blog posts&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.rstudio.org/2014/01/17/introducing-dplyr/&quot;&gt;https://blog.rstudio.org/2014/01/17/introducing-dplyr/&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Vignettes&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&quot;&gt;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Weaknesses of these types of documentations&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They still rely on user understanding and reading R code.&lt;/li&gt;
+&lt;li&gt;Not interactive, although the user can copy and paste code into an R session.&lt;/li&gt;
+&lt;li&gt;This type of documentation will not capture the nontraditional useR.&lt;/li&gt;
+&lt;li&gt;Shiny is the path to the nontraditional useR.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;What is Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shiny is an open-source framework for creating applications viewed in a web browser with R.&lt;/li&gt;
+&lt;li&gt;Shiny Examples:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/movie-explorer.html&quot;&gt;http://shiny.rstudio.com/gallery/movie-explorer.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gallery.shinyapps.io/drinkr/&quot;&gt;https://gallery.shinyapps.io/drinkr/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://wordbank.stanford.edu/analyses?name=item_trajectories&quot;&gt;http://wordbank.stanford.edu/analyses?name=item_trajectories&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Advantages of Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;User needs no R knowledge&lt;/li&gt;
+&lt;li&gt;App is viewed in the browser so able to use
+
+&lt;ul&gt;
+&lt;li&gt;Javascript&lt;/li&gt;
+&lt;li&gt;HTML&lt;/li&gt;
+&lt;li&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Multiple hosting options&lt;/li&gt;
+&lt;li&gt;Flexible Output
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Disadvantages of Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Need a R developer to create the app.
+
+&lt;ul&gt;
+&lt;li&gt;More difficult as the code is somewhat different compared to traditional R code.&lt;/li&gt;
+&lt;li&gt;Shiny uses reactive programming.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Components of Shiny&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;User Interface (ui.r)
+
+&lt;ul&gt;
+&lt;li&gt;What the user sees and interacts with&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;R Analysis (server.r)
+
+&lt;ul&gt;
+&lt;li&gt;The R code running behind the scenes
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;User Interface&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Simple user interface example from RStudio
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyUI(
+  fluidPage(    
+    titlePanel(&quot;Telephones by region&quot;),
+    sidebarLayout(      
+      sidebarPanel(
+        selectInput(&quot;region&quot;, &quot;Region:&quot;, 
+                    choices = colnames(WorldPhones)),
+        hr(),
+        helpText(&quot;Data from AT&amp;amp;T (1961) The World&#39;s Telephones.&quot;)
+      ),
+
+      mainPanel(
+        plotOutput(&quot;phonePlot&quot;)  
+      )
+    )
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Server File&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The server file for RStudio example
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyServer(function(input, output) {
+
+  output$phonePlot &amp;lt;- renderPlot({
+
+    barplot(WorldPhones[ , input$region] * 1000, 
+            main = input$region,
+            ylab = &quot;Number of Telephones&quot;,
+            xlab = &quot;Year&quot;)
+  })
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Case Study&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;pdfsearch
+
+&lt;ul&gt;
+&lt;li&gt;Note, you may need &lt;em&gt;rtools&lt;/em&gt; to install this package.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This following commands will run the pdfsearch shiny application locally.
+
+&lt;ul&gt;
+&lt;li&gt;Note, the following packages are required: shiny, shinydashboard, pdfsearch, DT
+&lt;a href=&quot;https://github.com/lebebr01/pdfsearch&quot;&gt;https://github.com/lebebr01/pdfsearch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;install.packages(&#39;devtools&#39;)
+devtools::install_github(&#39;lebebr01/pdfsearch&#39;)
+pdfsearch::run_shiny()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Case Study 2&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;simglm
+
+&lt;ul&gt;
+&lt;li&gt;Note, need the following packages: shiny, shinydashboard, DT, simglm, ggplot2, lme4, highcharter
+&lt;a href=&quot;https://github.com/lebebr01/simglm&quot;&gt;https://github.com/lebebr01/simglm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;devtools::install_github(&#39;lebebr01/simglm&#39;)
+simglm::run_shiny()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shiny can give useRs an interactive framework to try out an R package.&lt;/li&gt;
+&lt;li&gt;Benefits include
+
+&lt;ul&gt;
+&lt;li&gt;interactivity&lt;/li&gt;
+&lt;li&gt;no errors (for well developed Shiny applications)&lt;/li&gt;
+&lt;li&gt;no need to learn R or package specific syntax&lt;/li&gt;
+&lt;li&gt;only need a browser, no need to have R install locally when hosted on a server.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Questions?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/10/07/canam.html&quot;&gt;http://educate-r.org/2016/10/07/canam.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub: &lt;a href=&quot;http://github.com/lebebr01&quot;&gt;http://github.com/lebebr01&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				<pubDate>Fri, 07 Oct 2016 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2016/10/07/canam.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2016/10/07/canam.html</guid>
+			</item>
+		
+			<item>
 				<title>Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory</title>
 				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory&lt;/h1&gt;
@@ -2240,106 +2551,6 @@ p + geom_point(aes(alpha = factor(alpha)), size = 3) +
 				<pubDate>Mon, 23 Mar 2015 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2015/03/23/removelead0.html</link>
 				<guid isPermaLink="true">http://educate-r.org//2015/03/23/removelead0.html</guid>
-			</item>
-		
-			<item>
-				<title>Structured simulation of regression models - simReg package.</title>
-				<description>&lt;p&gt;I&#39;d like to introduce a package that simulates regression models. This includes both single level and multilevel (i.e. hierarchical or linear mixed) models up to two levels of nesting. The package produces a unified framework to simulate all types of continuous regression models. In the future, I&#39;d like to add the ability to simulate generalized linear models. This package is an extension of the functions I used to simulate data for my dissertation.&lt;/p&gt;
-
-&lt;p&gt;The package is currently on github &lt;a href=&quot;https://github.com/lebebr01/simReg&quot;&gt;https://github.com/lebebr01/simReg&lt;/a&gt;. Therefore, you can currently install the package by using the &lt;em&gt;devtools&lt;/em&gt; package like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(devtools)
-install_github(&quot;lebebr01/simReg&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The primary function of interest in this package is &lt;em&gt;sim.reg&lt;/em&gt;. To show the use of this function, here is a simple example simulating a single level regression mode. Note, this example is pulled directly from the &lt;strong&gt;Intro&lt;/strong&gt; vignette.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(simReg)
-set.seed(100)
-fixed &amp;lt;- ~ 1 + act + diff + numCourse + act:numCourse
-fixed.param &amp;lt;- c(2, 4, 1, 3.5, 2)
-cov.param &amp;lt;- list(mean = c(0, 0, 0), sd = c(4, 3, 3), var.type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;))
-n &amp;lt;- 150
-errorVar &amp;lt;- 3
-err.dist &amp;lt;- &quot;norm&quot;
-temp.single &amp;lt;- sim.reg(fixed = fixed, fixed.param = fixed.param, cov.param = cov.param,
-n = n, errorVar = errorVar, err.dist = err.dist, data.str = &quot;single&quot;)
-head(temp.single)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##   X.Intercept.     act     diff numCourse act.numCourse    Fbeta      err
-## 1            1 -2.0088  3.10406    -5.566       11.1815 -0.05022 -3.35921
-## 2            1  0.5261  4.96051    -3.056       -1.6077 -4.84527 -5.75176
-## 3            1 -0.3157 -0.05384    -3.135        0.9897 -8.31073  1.63173
-## 4            1  3.5471 -0.07261    -1.954       -6.9306 -4.58382  0.06435
-## 5            1  0.4679  0.75074     1.148        0.5372  9.71476 -0.44783
-## 6            1  1.2745 -1.01137     3.096        3.9455 24.81272  0.59651
-##   sim.data ID
-## 1   -3.409  1
-## 2  -10.597  2
-## 3   -6.679  3
-## 4   -4.519  4
-## 5    9.267  5
-## 6   25.409  6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you can see from the above code, the package uses a single sided equation to represent the fixed effects. Other arguments include the values for those fixed effects (fixed.param), the scale for the covariates (cov.param), the sample size (n), the error variance (errorVar), and the error distribution (err.dist). These are all put into the function &lt;em&gt;sim.reg&lt;/em&gt; with the additional argument &lt;em&gt;data.str&lt;/em&gt; to tell the function that we indeed want a single level regression and you get the following output. The data frame that is returned gives the values for the design matrix, the fixed portion of the model (Fbeta), and the random error term (err). The value of most interest if conducting a simulation would be the actually simulated value (sim.data).&lt;/p&gt;
-
-&lt;h3&gt;Nested Example&lt;/h3&gt;
-
-&lt;p&gt;A slightly more complicated example is shown below where longitudinal data are simulated.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;fixed &amp;lt;- ~1 + time + diff + act + time:act
-random &amp;lt;- ~1 + time + diff
-fixed.param &amp;lt;- c(4, 2, 6, 2.3, 7)
-random.param &amp;lt;- c(7, 4, 2)
-cov.param &amp;lt;- list(mean = c(0, 0), sd = c(1.5, 4), var.type = c(&quot;lvl1&quot;, &quot;lvl2&quot;))
-n &amp;lt;- 150
-p &amp;lt;- 30
-errorVar &amp;lt;- 4
-randCor &amp;lt;- 0
-rand.dist &amp;lt;- &quot;norm&quot;
-err.dist &amp;lt;- &quot;norm&quot;
-serCor &amp;lt;- &quot;ID&quot;
-serCorVal &amp;lt;- NULL
-data.str &amp;lt;- &quot;long&quot;
-temp.long &amp;lt;- sim.reg(fixed, random, fixed.param, random.param, cov.param,
-n, p, errorVar, randCor, rand.dist, err.dist, serCor, serCorVal, data.str)
-head(temp.long)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##   X.Intercept. time     diff    act time.act    b0      b1    b2   Fbeta
-## 1            1    0 -0.05455  1.608    0.000 5.118 -0.1118 0.251   7.371
-## 2            1    1 -2.23677 -1.349   -1.349 5.118 -0.1118 0.251 -19.968
-## 3            1    2  0.50321 -6.028  -12.056 5.118 -0.1118 0.251 -87.237
-## 4            1    3  1.25027  8.436   25.308 5.118 -0.1118 0.251 214.063
-## 5            1    4  2.05871  3.917   15.667 5.118 -0.1118 0.251 143.031
-## 6            1    5 -1.87968  7.598   37.990 5.118 -0.1118 0.251 286.125
-##   randEff     err sim.data withinID clustID
-## 1   5.104  3.2637    15.74        1       1
-## 2   4.444  0.9355   -14.59        2       1
-## 3   5.020 -3.1693   -85.39        3       1
-## 4   5.096  4.1523   223.31        4       1
-## 5   5.187 -3.1716   145.05        5       1
-## 6   4.086 -0.2605   289.95        6       1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Most of the arguments should look familiar to above, but a few are new. Most notably these are a one sided equation for the random effects (random), their variances (random.param), the number of observations within a cluster (p), the correlation among the random effects (randCor), the simulated distribution of the random effects (rand.dist), the serial correlation model for within cluster residuals (serCor), the values for the serial correlation models (serCorVal). Note now since this represents longitudinal data, the &lt;em&gt;data.str&lt;/em&gt; argument is now specified as &#39;long&#39;.&lt;/p&gt;
-
-&lt;h3&gt;Other features&lt;/h3&gt;
-
-&lt;p&gt;The package also simulates cross sectional multilevel models, covariates that are either a factor, ordinal, or categorical, and the basics for power simulation are there.&lt;/p&gt;
-
-&lt;p&gt;For further information, see the vignette by doing the following after installing the package:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;vignette(&quot;Intro&quot;, package = &quot;simReg&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Bugs, comments, or feature requests can be submitted on the github site &lt;a href=&quot;https://github.com/lebebr01/simReg/issues&quot;&gt;https://github.com/lebebr01/simReg/issues&lt;/a&gt;.&lt;/p&gt;
-</description>
-				<pubDate>Wed, 01 Oct 2014 00:00:00 -0500</pubDate>
-				<link>http://educate-r.org//2014/10/01/simReg.html</link>
-				<guid isPermaLink="true">http://educate-r.org//2014/10/01/simReg.html</guid>
 			</item>
 		
 	</channel>

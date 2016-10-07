@@ -142,6 +142,7 @@ p code {font-size:100%; color:black;
 a {
   color: black;
   text-decoration: underline;
+  word-wrap: break-word;
 }
 
 a:hover {

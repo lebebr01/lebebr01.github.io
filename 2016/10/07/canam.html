@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Extending accessibility of open-source statistical software to the masses A shiny case study | Educate-R
+      
+    </title>
+
+   <!-- Description -->
+    
+      <meta name="description" content="">
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/reveal.css"/>
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/css/theme/simple.css" id="theme"/>
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="http://educate-r.org/reveal.js/lib/css/zenburn.css"/>
+
+  <style type="text/css">
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 {font-size: 1.25em;}
+    .reveal h3 {font-size: 1em;}
+    body {
+    background-image: url(http://educate-r.org/figs/ui_logo.jpg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 20px 900px;
+    background-size: 250px;
+  }
+  </style>
+    <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'http://educate-r.orgreveal.js/css/print/pdf.css' : 'http://educate-r.orgreveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="canonical" href="http://educate-r.org/2016/10/07/canam.html">
+
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43425299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <p><section>
+    <h1 class="title">Extending accessibility of open-source statistical software to the masses: A shiny case study</h1>
+    <h2 class="author">Brandon LeBeau</h2>
+    <h3 class="date">University of Iowa</h3>
+</section></p>
+
+<p><section></p>
+
+<h1>R</h1>
+
+<ul>
+<li>R is an open source statistical programming language.
+
+<ul>
+<li>Pros:
+
+<ul>
+<li>Common statistical procedures are found in R</li>
+<li>Can extend functionality with packages/functions</li>
+</ul>
+</li>
+<li>Cons:
+
+<ul>
+<li>Need to be comfortable with code
+</section></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Flexibility of R</h1>
+
+<ul>
+<li>R is powerful and flexible due to the many user written packages.</li>
+<li>However, to capture this flexibility:
+
+<ul>
+<li>users need to be comfortable with programming</li>
+<li>users need to find the package</li>
+<li>users need to understand package specific syntax
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>R package documentation and examples</h1>
+
+<p><a href="https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise">https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise</a>
+</section></p>
+
+<p><section></p>
+
+<h1>Blog posts</h1>
+
+<p><a href="https://blog.rstudio.org/2014/01/17/introducing-dplyr/">https://blog.rstudio.org/2014/01/17/introducing-dplyr/</a>
+</section></p>
+
+<p><section></p>
+
+<h1>Vignettes</h1>
+
+<p><a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html</a>
+</section></p>
+
+<p><section></p>
+
+<h1>Weaknesses of these types of documentations</h1>
+
+<ul>
+<li>They still rely on user understanding and reading R code.</li>
+<li>Not interactive, although the user can copy and paste code into an R session.</li>
+<li>This type of documentation will not capture the nontraditional useR.</li>
+<li>Shiny is the path to the nontraditional useR.
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>What is Shiny</h1>
+
+<ul>
+<li>Shiny is an open-source framework for creating applications viewed in a web browser with R.</li>
+<li>Shiny Examples:
+
+<ul>
+<li><a href="http://shiny.rstudio.com/gallery/movie-explorer.html">http://shiny.rstudio.com/gallery/movie-explorer.html</a></li>
+<li><a href="https://gallery.shinyapps.io/drinkr/">https://gallery.shinyapps.io/drinkr/</a></li>
+<li><a href="http://wordbank.stanford.edu/analyses?name=item_trajectories">http://wordbank.stanford.edu/analyses?name=item_trajectories</a>
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Advantages of Shiny</h1>
+
+<ul>
+<li>User needs no R knowledge</li>
+<li>App is viewed in the browser so able to use
+
+<ul>
+<li>Javascript</li>
+<li>HTML</li>
+<li>CSS</li>
+</ul>
+</li>
+<li>Multiple hosting options</li>
+<li>Flexible Output
+</section></li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Disadvantages of Shiny</h1>
+
+<ul>
+<li>Need a R developer to create the app.
+
+<ul>
+<li>More difficult as the code is somewhat different compared to traditional R code.</li>
+<li>Shiny uses reactive programming.
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Components of Shiny</h1>
+
+<ol>
+<li>User Interface (ui.r)
+
+<ul>
+<li>What the user sees and interacts with</li>
+</ul>
+</li>
+<li>R Analysis (server.r)
+
+<ul>
+<li>The R code running behind the scenes
+</section></li>
+</ul>
+</li>
+</ol>
+
+
+<p><section></p>
+
+<h1>User Interface</h1>
+
+<ul>
+<li>Simple user interface example from RStudio
+
+<ul>
+<li><a href="http://shiny.rstudio.com/gallery/telephones-by-region.html">http://shiny.rstudio.com/gallery/telephones-by-region.html</a></li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="r">shinyUI(
+  fluidPage(    
+    titlePanel("Telephones by region"),
+    sidebarLayout(      
+      sidebarPanel(
+        selectInput("region", "Region:", 
+                    choices = colnames(WorldPhones)),
+        hr(),
+        helpText("Data from AT&amp;T (1961) The World's Telephones.")
+      ),
+
+      mainPanel(
+        plotOutput("phonePlot")  
+      )
+    )
+  )
+)
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Server File</h1>
+
+<ul>
+<li>The server file for RStudio example
+
+<ul>
+<li><a href="http://shiny.rstudio.com/gallery/telephones-by-region.html">http://shiny.rstudio.com/gallery/telephones-by-region.html</a></li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="r">shinyServer(function(input, output) {
+
+  output$phonePlot &lt;- renderPlot({
+
+    barplot(WorldPhones[ , input$region] * 1000, 
+            main = input$region,
+            ylab = "Number of Telephones",
+            xlab = "Year")
+  })
+})
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Case Study</h1>
+
+<ul>
+<li>pdfsearch
+
+<ul>
+<li>Note, you may need <em>rtools</em> to install this package.</li>
+</ul>
+</li>
+<li>This following commands will run the pdfsearch shiny application locally.
+
+<ul>
+<li>Note, the following packages are required: shiny, shinydashboard, pdfsearch, DT
+<a href="https://github.com/lebebr01/pdfsearch">https://github.com/lebebr01/pdfsearch</a></li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="r">install.packages('devtools')
+devtools::install_github('lebebr01/pdfsearch')
+pdfsearch::run_shiny()
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Case Study 2</h1>
+
+<ul>
+<li>simglm
+
+<ul>
+<li>Note, need the following packages: shiny, shinydashboard, DT, simglm, ggplot2, lme4, highcharter
+<a href="https://github.com/lebebr01/simglm">https://github.com/lebebr01/simglm</a></li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="r">devtools::install_github('lebebr01/simglm')
+simglm::run_shiny()
+</code></pre>
+
+<p></section></p>
+
+<p><section></p>
+
+<h1>Conclusions</h1>
+
+<ul>
+<li>Shiny can give useRs an interactive framework to try out an R package.</li>
+<li>Benefits include
+
+<ul>
+<li>interactivity</li>
+<li>no errors (for well developed Shiny applications)</li>
+<li>no need to learn R or package specific syntax</li>
+<li>only need a browser, no need to have R install locally when hosted on a server.
+</section></li>
+</ul>
+</li>
+</ul>
+
+
+<p><section></p>
+
+<h1>Questions?</h1>
+
+<ul>
+<li>Twitter: @blebeau11</li>
+<li>Website: <a href="http://educate-r.org">http://educate-r.org</a></li>
+<li>Slides: <a href="http://educate-r.org/2016/10/07/canam.html">http://educate-r.org/2016/10/07/canam.html</a></li>
+<li>GitHub: <a href="http://github.com/lebebr01">http://github.com/lebebr01</a>
+</section></li>
+</ul>
+
+
+      </div>
+    </div>
+
+    <script src="http://educate-r.org/reveal.js/lib/js/head.min.js"></script>
+    <script src="http://educate-r.org/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        slideNumber: true,
+        center: true,
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://educate-r.org/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://educate-r.org/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://educate-r.org/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+
+  </body>
+</html>

@@ -4,13 +4,324 @@
  <title>Brandon LeBeau</title>
  <link href="http://lebebr01.github.io/atom.xml" rel="self"/>
  <link href="http://lebebr01.github.io/"/>
- <updated>2016-07-31T15:13:22-05:00</updated>
+ <updated>2016-10-07T13:05:40-05:00</updated>
  <id>http://lebebr01.github.io/</id>
  <author>
    <name>Brandon LeBeau</name>
    <email>lebebr01@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Extending accessibility of open-source statistical software to the masses A shiny case study</title>
+   <link href="http://lebebr01.github.io/2016/10/07/canam.html"/>
+   <updated>2016-10-07T00:00:00-05:00</updated>
+   <id>http://lebebr01.github.io/2016/10/07/canam</id>
+   <content type="html">&lt;p&gt;&lt;section&gt;
+    &lt;h1 class=&quot;title&quot;&gt;Extending accessibility of open-source statistical software to the masses: A shiny case study&lt;/h1&gt;
+    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau&lt;/h2&gt;
+    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;R&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;R is an open source statistical programming language.
+
+&lt;ul&gt;
+&lt;li&gt;Pros:
+
+&lt;ul&gt;
+&lt;li&gt;Common statistical procedures are found in R&lt;/li&gt;
+&lt;li&gt;Can extend functionality with packages/functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Cons:
+
+&lt;ul&gt;
+&lt;li&gt;Need to be comfortable with code
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Flexibility of R&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;R is powerful and flexible due to the many user written packages.&lt;/li&gt;
+&lt;li&gt;However, to capture this flexibility:
+
+&lt;ul&gt;
+&lt;li&gt;users need to be comfortable with programming&lt;/li&gt;
+&lt;li&gt;users need to find the package&lt;/li&gt;
+&lt;li&gt;users need to understand package specific syntax
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;R package documentation and examples&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise&quot;&gt;https://www.rdocumentation.org/packages/dplyr/versions/0.5.0/topics/summarise&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Blog posts&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.rstudio.org/2014/01/17/introducing-dplyr/&quot;&gt;https://blog.rstudio.org/2014/01/17/introducing-dplyr/&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Vignettes&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&quot;&gt;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&lt;/a&gt;
+&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Weaknesses of these types of documentations&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They still rely on user understanding and reading R code.&lt;/li&gt;
+&lt;li&gt;Not interactive, although the user can copy and paste code into an R session.&lt;/li&gt;
+&lt;li&gt;This type of documentation will not capture the nontraditional useR.&lt;/li&gt;
+&lt;li&gt;Shiny is the path to the nontraditional useR.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;What is Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shiny is an open-source framework for creating applications viewed in a web browser with R.&lt;/li&gt;
+&lt;li&gt;Shiny Examples:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/movie-explorer.html&quot;&gt;http://shiny.rstudio.com/gallery/movie-explorer.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gallery.shinyapps.io/drinkr/&quot;&gt;https://gallery.shinyapps.io/drinkr/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://wordbank.stanford.edu/analyses?name=item_trajectories&quot;&gt;http://wordbank.stanford.edu/analyses?name=item_trajectories&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Advantages of Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;User needs no R knowledge&lt;/li&gt;
+&lt;li&gt;App is viewed in the browser so able to use
+
+&lt;ul&gt;
+&lt;li&gt;Javascript&lt;/li&gt;
+&lt;li&gt;HTML&lt;/li&gt;
+&lt;li&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Multiple hosting options&lt;/li&gt;
+&lt;li&gt;Flexible Output
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Disadvantages of Shiny&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Need a R developer to create the app.
+
+&lt;ul&gt;
+&lt;li&gt;More difficult as the code is somewhat different compared to traditional R code.&lt;/li&gt;
+&lt;li&gt;Shiny uses reactive programming.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Components of Shiny&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;User Interface (ui.r)
+
+&lt;ul&gt;
+&lt;li&gt;What the user sees and interacts with&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;R Analysis (server.r)
+
+&lt;ul&gt;
+&lt;li&gt;The R code running behind the scenes
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;User Interface&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Simple user interface example from RStudio
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyUI(
+  fluidPage(    
+    titlePanel(&quot;Telephones by region&quot;),
+    sidebarLayout(      
+      sidebarPanel(
+        selectInput(&quot;region&quot;, &quot;Region:&quot;, 
+                    choices = colnames(WorldPhones)),
+        hr(),
+        helpText(&quot;Data from AT&amp;amp;T (1961) The World&#39;s Telephones.&quot;)
+      ),
+
+      mainPanel(
+        plotOutput(&quot;phonePlot&quot;)  
+      )
+    )
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Server File&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The server file for RStudio example
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyServer(function(input, output) {
+
+  output$phonePlot &amp;lt;- renderPlot({
+
+    barplot(WorldPhones[ , input$region] * 1000, 
+            main = input$region,
+            ylab = &quot;Number of Telephones&quot;,
+            xlab = &quot;Year&quot;)
+  })
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Case Study&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;pdfsearch
+
+&lt;ul&gt;
+&lt;li&gt;Note, you may need &lt;em&gt;rtools&lt;/em&gt; to install this package.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This following commands will run the pdfsearch shiny application locally.
+
+&lt;ul&gt;
+&lt;li&gt;Note, the following packages are required: shiny, shinydashboard, pdfsearch, DT
+&lt;a href=&quot;https://github.com/lebebr01/pdfsearch&quot;&gt;https://github.com/lebebr01/pdfsearch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;install.packages(&#39;devtools&#39;)
+devtools::install_github(&#39;lebebr01/pdfsearch&#39;)
+pdfsearch::run_shiny()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Case Study 2&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;simglm
+
+&lt;ul&gt;
+&lt;li&gt;Note, need the following packages: shiny, shinydashboard, DT, simglm, ggplot2, lme4, highcharter
+&lt;a href=&quot;https://github.com/lebebr01/simglm&quot;&gt;https://github.com/lebebr01/simglm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;devtools::install_github(&#39;lebebr01/simglm&#39;)
+simglm::run_shiny()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shiny can give useRs an interactive framework to try out an R package.&lt;/li&gt;
+&lt;li&gt;Benefits include
+
+&lt;ul&gt;
+&lt;li&gt;interactivity&lt;/li&gt;
+&lt;li&gt;no errors (for well developed Shiny applications)&lt;/li&gt;
+&lt;li&gt;no need to learn R or package specific syntax&lt;/li&gt;
+&lt;li&gt;only need a browser, no need to have R install locally when hosted on a server.
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;section&gt;&lt;/p&gt;
+
+&lt;h1&gt;Questions?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
+&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/10/07/canam.html&quot;&gt;http://educate-r.org/2016/10/07/canam.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub: &lt;a href=&quot;http://github.com/lebebr01&quot;&gt;http://github.com/lebebr01&lt;/a&gt;
+&lt;/section&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Estimating NCAA Football Coaches’ Abilities An Application of Item Response Theory</title>
