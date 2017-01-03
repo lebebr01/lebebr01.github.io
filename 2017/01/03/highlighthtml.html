@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Educate-R</title>
+    <title>Use CSS to format markdown or HTML files</title>
     <meta name="author" content="Brandon LeBeau" />
    <link rel="alternate" type="application/rss+xml" title="Educate-R" href="http://educate-r.org/feed.xml">
     <link rel="stylesheet" type="text/css" href="/stylesheets/newstyle.css">
@@ -42,15 +42,13 @@
   </div>
   <div class="content">
   <div class="blog">
-   <!-- <h2>Educate-R</h2> -->
-     
-  
-  <div class="full">
-    <h1 class="entry-title">
-      <a href="/2017/01/03/highlighthtml.html" title="Use CSS to format markdown or HTML files" rel="bookmark">Use CSS to format markdown or HTML files</a>
-    </h1>
-    <div class="entry-content full-content">
-      <p>Markdown (and Rmarkdown) are great ways to quickly develop material without worrying about the formatting. The documents can then be compiled using the <code>knitr</code> or <code>rmarkdown</code> packages to output formats such as HTML, latex, or even word. The main drawback of this approach is that formatting of documents is limited to italics, bold, or strikethrough. Markdown does have support for inline HTML, therefore you can add your own formatting inline using CSS or other HTML attributes, however this moves away from the quick markdown flavor.</p>
+   <!-- <h2>Use CSS to format markdown or HTML files</h2> -->
+     <div class="full">
+  <h1 class="entry-title">
+    <a href="/2017/01/03/highlighthtml.html" title="Use CSS to format markdown or HTML files" rel="bookmark">Use CSS to format markdown or HTML files</a>
+  </h1>
+  <div class="entry-content full-content">
+    <p>Markdown (and Rmarkdown) are great ways to quickly develop material without worrying about the formatting. The documents can then be compiled using the <code>knitr</code> or <code>rmarkdown</code> packages to output formats such as HTML, latex, or even word. The main drawback of this approach is that formatting of documents is limited to italics, bold, or strikethrough. Markdown does have support for inline HTML, therefore you can add your own formatting inline using CSS or other HTML attributes, however this moves away from the quick markdown flavor.</p>
 
 <p>To help solve this problem, many R packages are useful for formatting tables, either through conditional formatting or otherwise. The most interesting to me is the <a href="https://renkun.me/formattable/">formattable</a> package. Other options include the <a href="http://davidgohel.github.io/ReporteRs/">ReporteRs</a> and <a href="https://cran.r-project.org/web/packages/condformat/index.html">condformat</a> packages. These packages however focus on table formatting. An option I started working on a few years ago, <a href="https://github.com/lebebr01/highlightHTML">highlightHTML</a>, is a relatively simple package that will help inject CSS automatically into an HTML document to take care of formatting of text and tables.</p>
 
@@ -146,7 +144,7 @@ highlight_html(input = file,
 
 <p>This command will return an HTML file that automatically injects the CSS tags shown above. The new HTML file will add background color to the HTML file as such:</p>
 
-<p><img src="figs/highlight_table.png" alt="" /></p>
+<p><img src="http://educate-r.org/figs/highlight_table.png" alt="" /></p>
 
 <h2>Formatting Text</h2>
 
@@ -171,7 +169,7 @@ highlight_html(input = file, output = tempfile(fileext = ".html"),
 
 <p>The HTML file would look as follows:</p>
 
-<p><img src="figs/highlight_text.png" alt="" /></p>
+<p><img src="http://educate-r.org/figs/highlight_text.png" alt="" /></p>
 
 <h2>Markdown to HTML Directly</h2>
 
@@ -192,7 +190,8 @@ highlight_html(input = file, output = tempfile(fileext = '.html'),
 
 <p>Enjoy!</p>
 
-    </div>
+    <div class="clear"></div>
+  </div>
   <p class="alt-font tight">
     Tags:&nbsp;
     
@@ -207,34 +206,34 @@ highlight_html(input = file, output = tempfile(fileext = '.html'),
     <a href="/tags.html#HTML-ref" >HTML</a>
     
   </p>
-    <p class="comments-link">
-      <a href='/2017/01/03/highlighthtml.html#disqus_thread'>Comments</a>
-    </p>
-    <p class="by-line">
-      <span class="date full-date">
-        <abbr class="published" title="2017-01-03 00:00:00 -0600">January 3, 2017</abbr>
-      </span>
-    </p>
-    <div class="clear"></div>
-  </div>
-  <div class="rule"><hr/></div>
-  
-
-
-<div class="pagination">
-  <span class="previous">
-    
-      
-      <a href="/page21/" title="Previous Page">&laquo; Previous</a>
-      
-    
-  </span>
-  <span class="next">
-    
-    <a href="/page23/" title="Next Page">Next &raquo;</a>
-    
-  </span>
+  <p class="by-line">
+    <span class="date full-date">
+      <abbr class="published" title="2017-01-03 00:00:00 -0600">January 03 2017</abbr>
+    </span>
+  </p>
+  <div class="clear"></div>
 </div>
+<div class="rule">
+  <hr/>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rjourney';
+
+  var disqus_url = "http://lebebr01.github.com/2017/01/03/highlighthtml.html";
+
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
 
   </div>
   </div>  
