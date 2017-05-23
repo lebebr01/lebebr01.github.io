@@ -47,12 +47,114 @@
   
   <div class="full">
     <h1 class="entry-title">
-      <a href="/2017/02/24/csp2017.html" title="Make Power Fun (Again?)" rel="bookmark">Make Power Fun (Again?)</a>
+      <a href="/2017/05/23/simglmcran.html" title="simglm submission to CRAN this week" rel="bookmark">simglm submission to CRAN this week</a>
     </h1>
+    <div class="entry-content full-content">
+      <p>This is a quick note looking for any further feedback on the simglm package prior to CRAN submission later this week. The goal is to submit Thursday or Friday this week. The last few documentation finishing touches are happening now working toward a version 0.5.0 release on CRAN.</p>
+
+<p>For those who have not seen this package yet, the aim is to simulate regression models (single level and multilevel models) as well as employ empirical power analyses based on Monte Carlo simulation. The package is relatively flexible in user control of inputs to generate data.</p>
+
+<p>To install the package and also build the vignettes:</p>
+
+<pre><code class="r">devtools::install_github("lebebr01/simglm", build_vignettes = TRUE)
+</code></pre>
+
+<p>Then to generate a simple single level data set.</p>
+
+<pre><code class="r">library(simglm)
+
+fixed &lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed_param &lt;- c(2, 4, 1, 3.5, 2)
+cov_param &lt;- list(dist_fun = c('rnorm', 'rnorm', 'rnorm'), 
+                  var_type = c("single", "single", "single"),
+                  cov_param = list(list(mean = 0, sd = 4),
+                                   list(mean = 0, sd = 3),
+                                   list(mean = 0, sd = 3)))
+n &lt;- 150
+error_var &lt;- 3
+with_err_gen = 'rnorm'
+temp_single &lt;- sim_reg(fixed = fixed, fixed_param = fixed_param, 
+                       cov_param = cov_param,
+                       n = n, error_var = error_var, 
+                       with_err_gen = with_err_gen, 
+                       data_str = "single")
+head(temp_single)
+</code></pre>
+
+<pre><code>##   X.Intercept.         act       diff   numCourse act.numCourse     Fbeta
+## 1            1 -2.11697901 -0.1490870 -0.90292680  1.9114770938 -5.954293
+## 2            1  0.01298227 -0.1310381 -0.06197237 -0.0008045421  1.702379
+## 3            1  0.44564723  0.5913073 -0.59650183 -0.2658293887  1.754481
+## 4            1 -0.03528805 -0.5113031 -0.05915731  0.0020875460  1.144669
+## 5            1  1.77940941  0.5097288  0.54804919  0.9752038827 13.495946
+## 6            1 -1.42185444  0.4145870  1.08424301 -1.5416357400 -2.561252
+##          err  sim_data ID
+## 1 -0.9567737 -6.911066  1
+## 2  1.3386926  3.041071  2
+## 3  0.3470914  2.101572  3
+## 4  0.9178861  2.062555  4
+## 5  0.8016335 14.297580  5
+## 6  0.2499601 -2.311292  6
+</code></pre>
+
+<p>Then one can extend this to conduct of power analysis. The benefit of this approach is that you are able to generate data that hopefully more closely resembles data that is to be collected and can also evaluate assumption violations, sample size differences, and other conditions directly into the power analysis similar to a Monte Carlo simulation.</p>
+
+<pre><code class="r">fixed &lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed_param &lt;- c(0.5, 1.1, 0.6, 0.9, 1.1)
+cov_param &lt;- list(dist_fun = c('rnorm', 'rnorm', 'rnorm'), 
+                  var_type = c("single", "single", "single"),
+                  opts = list(list(mean = 0, sd = 2),
+                              list(mean = 0, sd = 2),
+                              list(mean = 0, sd = 1)))
+n &lt;- NULL
+error_var &lt;- NULL
+with_err_gen &lt;- 'rnorm'
+pow_param &lt;- c('(Intercept)', 'act', 'diff', 'numCourse')
+alpha &lt;- .01
+pow_dist &lt;- "t"
+pow_tail &lt;- 2
+replicates &lt;- 10
+terms_vary &lt;- list(n = c(20, 40, 60, 80, 100), error_var = c(5, 10, 20),
+                   fixed_param = list(c(0.5, 1.1, 0.6, 0.9, 1.1), 
+                                      c(0.6, 1.1, 0.6, 0.9, 1.1)),
+                cov_param = list(list(dist_fun = c('rnorm', 'rnorm', 'rnorm'),
+                                       mean = c(0, 0, 0), sd = c(2, 2, 1), 
+                                  var_type = c("single", "single", "single")),
+                                  list(dist_fun = c('rnorm', 'rnorm', 'rnorm'),
+                                       mean = c(0.5, 0, 0), sd = c(2, 2, 1), 
+                                  var_type = c("single", "single", "single"))
+                                  )
+                   )
+power_out &lt;- sim_pow(fixed = fixed, fixed_param = fixed_param, 
+                     cov_param = cov_param,
+                     n = n, error_var = error_var, with_err_gen = with_err_gen, 
+                     data_str = "single", pow_param = pow_param, alpha = alpha,
+                     pow_dist = pow_dist, pow_tail = pow_tail, 
+                     replicates = replicates, terms_vary = terms_vary)
+head(power_out)
+</code></pre>
+
+<pre><code>## Source: local data frame [6 x 11]
+## Groups: var, n, error_var, fixed_param [3]
+## 
+##           var     n error_var         fixed_param
+##        &lt;fctr&gt; &lt;dbl&gt;     &lt;dbl&gt;              &lt;fctr&gt;
+## 1 (Intercept)    20         5 0.5,1.1,0.6,0.9,1.1
+## 2 (Intercept)    20         5 0.5,1.1,0.6,0.9,1.1
+## 3 (Intercept)    20         5 0.6,1.1,0.6,0.9,1.1
+## 4 (Intercept)    20         5 0.6,1.1,0.6,0.9,1.1
+## 5 (Intercept)    20        10 0.5,1.1,0.6,0.9,1.1
+## 6 (Intercept)    20        10 0.5,1.1,0.6,0.9,1.1
+## # ... with 7 more variables: cov_param &lt;fctr&gt;, avg_test_stat &lt;dbl&gt;,
+## #   sd_test_stat &lt;dbl&gt;, power &lt;dbl&gt;, num_reject &lt;dbl&gt;, num_repl &lt;dbl&gt;,
+## #   data &lt;list&gt;
+</code></pre>
+
+<p>Questions and feedback are welcomed by filing an issue on GitHub here: <a href="https://github.com/lebebr01/simglm/issues">https://github.com/lebebr01/simglm/issues</a>.</p>
+
+    </div>
   <p class="alt-font tight">
     Tags:&nbsp;
-    
-    <a href="/tags.html#slides-ref" >slides</a>
     
     <a href="/tags.html#R-ref" >R</a>
     
@@ -61,15 +163,18 @@
     <a href="/tags.html#package-ref" >package</a>
     
   </p>
+    <p class="comments-link">
+      <a href='/2017/05/23/simglmcran.html#disqus_thread'>Comments</a>
+    </p>
     <p class="by-line">
       <span class="date full-date">
-        <abbr class="published" title="2017-02-24 00:00:00 -0600">February 24, 2017</abbr>
+        <abbr class="published" title="2017-05-23 00:00:00 -0500">May 23, 2017</abbr>
       </span>
     </p>
     <div class="clear"></div>
   </div>
   <div class="rule"><hr/></div>
-    
+  
 
 
 <div class="pagination">
@@ -81,6 +186,8 @@
     
   </span>
   <span class="next">
+    
+    <a href="/page34/" title="Next Page">Next &raquo;</a>
     
   </span>
 </div>

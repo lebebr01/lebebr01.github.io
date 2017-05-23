@@ -7,6 +7,115 @@
 		<atom:link href="http://educate-r.org/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>simglm submission to CRAN this week</title>
+				<description>&lt;p&gt;This is a quick note looking for any further feedback on the simglm package prior to CRAN submission later this week. The goal is to submit Thursday or Friday this week. The last few documentation finishing touches are happening now working toward a version 0.5.0 release on CRAN.&lt;/p&gt;
+
+&lt;p&gt;For those who have not seen this package yet, the aim is to simulate regression models (single level and multilevel models) as well as employ empirical power analyses based on Monte Carlo simulation. The package is relatively flexible in user control of inputs to generate data.&lt;/p&gt;
+
+&lt;p&gt;To install the package and also build the vignettes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;devtools::install_github(&quot;lebebr01/simglm&quot;, build_vignettes = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then to generate a simple single level data set.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library(simglm)
+
+fixed &amp;lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed_param &amp;lt;- c(2, 4, 1, 3.5, 2)
+cov_param &amp;lt;- list(dist_fun = c(&#39;rnorm&#39;, &#39;rnorm&#39;, &#39;rnorm&#39;), 
+                  var_type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;),
+                  cov_param = list(list(mean = 0, sd = 4),
+                                   list(mean = 0, sd = 3),
+                                   list(mean = 0, sd = 3)))
+n &amp;lt;- 150
+error_var &amp;lt;- 3
+with_err_gen = &#39;rnorm&#39;
+temp_single &amp;lt;- sim_reg(fixed = fixed, fixed_param = fixed_param, 
+                       cov_param = cov_param,
+                       n = n, error_var = error_var, 
+                       with_err_gen = with_err_gen, 
+                       data_str = &quot;single&quot;)
+head(temp_single)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##   X.Intercept.         act       diff   numCourse act.numCourse     Fbeta
+## 1            1 -2.11697901 -0.1490870 -0.90292680  1.9114770938 -5.954293
+## 2            1  0.01298227 -0.1310381 -0.06197237 -0.0008045421  1.702379
+## 3            1  0.44564723  0.5913073 -0.59650183 -0.2658293887  1.754481
+## 4            1 -0.03528805 -0.5113031 -0.05915731  0.0020875460  1.144669
+## 5            1  1.77940941  0.5097288  0.54804919  0.9752038827 13.495946
+## 6            1 -1.42185444  0.4145870  1.08424301 -1.5416357400 -2.561252
+##          err  sim_data ID
+## 1 -0.9567737 -6.911066  1
+## 2  1.3386926  3.041071  2
+## 3  0.3470914  2.101572  3
+## 4  0.9178861  2.062555  4
+## 5  0.8016335 14.297580  5
+## 6  0.2499601 -2.311292  6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then one can extend this to conduct of power analysis. The benefit of this approach is that you are able to generate data that hopefully more closely resembles data that is to be collected and can also evaluate assumption violations, sample size differences, and other conditions directly into the power analysis similar to a Monte Carlo simulation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;fixed &amp;lt;- ~ 1 + act + diff + numCourse + act:numCourse
+fixed_param &amp;lt;- c(0.5, 1.1, 0.6, 0.9, 1.1)
+cov_param &amp;lt;- list(dist_fun = c(&#39;rnorm&#39;, &#39;rnorm&#39;, &#39;rnorm&#39;), 
+                  var_type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;),
+                  opts = list(list(mean = 0, sd = 2),
+                              list(mean = 0, sd = 2),
+                              list(mean = 0, sd = 1)))
+n &amp;lt;- NULL
+error_var &amp;lt;- NULL
+with_err_gen &amp;lt;- &#39;rnorm&#39;
+pow_param &amp;lt;- c(&#39;(Intercept)&#39;, &#39;act&#39;, &#39;diff&#39;, &#39;numCourse&#39;)
+alpha &amp;lt;- .01
+pow_dist &amp;lt;- &quot;t&quot;
+pow_tail &amp;lt;- 2
+replicates &amp;lt;- 10
+terms_vary &amp;lt;- list(n = c(20, 40, 60, 80, 100), error_var = c(5, 10, 20),
+                   fixed_param = list(c(0.5, 1.1, 0.6, 0.9, 1.1), 
+                                      c(0.6, 1.1, 0.6, 0.9, 1.1)),
+                cov_param = list(list(dist_fun = c(&#39;rnorm&#39;, &#39;rnorm&#39;, &#39;rnorm&#39;),
+                                       mean = c(0, 0, 0), sd = c(2, 2, 1), 
+                                  var_type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;)),
+                                  list(dist_fun = c(&#39;rnorm&#39;, &#39;rnorm&#39;, &#39;rnorm&#39;),
+                                       mean = c(0.5, 0, 0), sd = c(2, 2, 1), 
+                                  var_type = c(&quot;single&quot;, &quot;single&quot;, &quot;single&quot;))
+                                  )
+                   )
+power_out &amp;lt;- sim_pow(fixed = fixed, fixed_param = fixed_param, 
+                     cov_param = cov_param,
+                     n = n, error_var = error_var, with_err_gen = with_err_gen, 
+                     data_str = &quot;single&quot;, pow_param = pow_param, alpha = alpha,
+                     pow_dist = pow_dist, pow_tail = pow_tail, 
+                     replicates = replicates, terms_vary = terms_vary)
+head(power_out)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Source: local data frame [6 x 11]
+## Groups: var, n, error_var, fixed_param [3]
+## 
+##           var     n error_var         fixed_param
+##        &amp;lt;fctr&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;              &amp;lt;fctr&amp;gt;
+## 1 (Intercept)    20         5 0.5,1.1,0.6,0.9,1.1
+## 2 (Intercept)    20         5 0.5,1.1,0.6,0.9,1.1
+## 3 (Intercept)    20         5 0.6,1.1,0.6,0.9,1.1
+## 4 (Intercept)    20         5 0.6,1.1,0.6,0.9,1.1
+## 5 (Intercept)    20        10 0.5,1.1,0.6,0.9,1.1
+## 6 (Intercept)    20        10 0.5,1.1,0.6,0.9,1.1
+## # ... with 7 more variables: cov_param &amp;lt;fctr&amp;gt;, avg_test_stat &amp;lt;dbl&amp;gt;,
+## #   sd_test_stat &amp;lt;dbl&amp;gt;, power &amp;lt;dbl&amp;gt;, num_reject &amp;lt;dbl&amp;gt;, num_repl &amp;lt;dbl&amp;gt;,
+## #   data &amp;lt;list&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Questions and feedback are welcomed by filing an issue on GitHub here: &lt;a href=&quot;https://github.com/lebebr01/simglm/issues&quot;&gt;https://github.com/lebebr01/simglm/issues&lt;/a&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 23 May 2017 00:00:00 -0500</pubDate>
+				<link>http://educate-r.org//2017/05/23/simglmcran.html</link>
+				<guid isPermaLink="true">http://educate-r.org//2017/05/23/simglmcran.html</guid>
+			</item>
+		
+			<item>
 				<title>Make Power Fun (Again?)</title>
 				<description>&lt;p&gt;&lt;section&gt;
     &lt;h1 class=&quot;title&quot;&gt;Make Power Fun (Again?)&lt;/h1&gt;
@@ -2041,447 +2150,6 @@ run_shiny()
 				<pubDate>Wed, 06 Apr 2016 00:00:00 -0500</pubDate>
 				<link>http://educate-r.org//2016/04/06/aeraposter.html</link>
 				<guid isPermaLink="true">http://educate-r.org//2016/04/06/aeraposter.html</guid>
-			</item>
-		
-			<item>
-				<title>Interactively building test forms from an IRT perspective An application of R and Shiny</title>
-				<description>&lt;p&gt;&lt;section&gt;
-    &lt;h1 class=&quot;title&quot;&gt;Interactively building test forms from an IRT perspective: An application of R and Shiny&lt;/h1&gt;
-    &lt;h2 class=&quot;author&quot;&gt;Brandon LeBeau&lt;/h2&gt;
-    &lt;h3 class=&quot;date&quot;&gt;University of Iowa&lt;/h3&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Overview&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/flowchart.png&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;R&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;R is an open source statistical programming language.
-
-&lt;ul&gt;
-&lt;li&gt;Pros:
-
-&lt;ul&gt;
-&lt;li&gt;Common statistical procedures are found in R&lt;/li&gt;
-&lt;li&gt;Can extend functionality with packages/functions&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Cons:
-
-&lt;ul&gt;
-&lt;li&gt;Need to be comfortable with code&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/Rlogo.png&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Reproducible Research&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Reproducible research has become popular.
-
-&lt;ul&gt;
-&lt;li&gt;Commonly a document that contains both analysis and text.&lt;/li&gt;
-&lt;li&gt;This can be done with &lt;code&gt;Rmarkdown&lt;/code&gt; and &lt;code&gt;knitr.&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/rmarkdown.PNG&quot; alt=&quot;&quot;/&gt;
-&lt;img src=&quot;http://educate-r.org/figs/knitr.PNG&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Iterative/Interactive Data Analysis&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This type of analysis requires some input from the user.
-
-&lt;ul&gt;
-&lt;li&gt;Data analysts may use &lt;code&gt;R&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Shiny&lt;/code&gt; is a great option for code novices&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/shiny.PNG&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Iterative Task Examples&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Building Assessments&lt;/li&gt;
-&lt;li&gt;Exploratory Data Analysis&lt;/li&gt;
-&lt;li&gt;Exploring Missing Data Patterns&lt;/li&gt;
-&lt;li&gt;Model Selection/Building
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Iterative Analysis Structure&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/useless_meeting.PNG&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;What is Shiny?&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Shiny&lt;/code&gt; is an interactive web application framework for R.
-
-&lt;ul&gt;
-&lt;li&gt;Example: &lt;a href=&quot;http://shiny.rstudio.com/gallery/movie-explorer.html&quot;&gt;http://shiny.rstudio.com/gallery/movie-explorer.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/shiny_example.PNG&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Components of Shiny&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;User Interface (ui.r)
-
-&lt;ul&gt;
-&lt;li&gt;What the user sees and interacts with&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;R Analysis (server.r)
-
-&lt;ul&gt;
-&lt;li&gt;The R code running behind the scenes
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;User Interface&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Simple user interface example from RStudio
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyUI(
-
-  fluidPage(    
-
-    titlePanel(&quot;Telephones by region&quot;),
-
-    sidebarLayout(      
-
-      sidebarPanel(
-        selectInput(&quot;region&quot;, &quot;Region:&quot;, 
-                    choices = colnames(WorldPhones)),
-        hr(),
-        helpText(&quot;Data from AT&amp;amp;T (1961) The World&#39;s Telephones.&quot;)
-      ),
-
-      mainPanel(
-        plotOutput(&quot;phonePlot&quot;)  
-      )
-
-    )
-  )
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Server File&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The server file for RStudio example
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/telephones-by-region.html&quot;&gt;http://shiny.rstudio.com/gallery/telephones-by-region.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;shinyServer(function(input, output) {
-
-  output$phonePlot &amp;lt;- renderPlot({
-
-    barplot(WorldPhones[ , input$region] * 1000, 
-            main = input$region,
-            ylab = &quot;Number of Telephones&quot;,
-            xlab = &quot;Year&quot;)
-  })
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Interactivity is Key&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/interactivity.png&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Tools for Interactivity&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Interactive Graphics
-
-&lt;ul&gt;
-&lt;li&gt;Using JavaScript - D3 graphics (&lt;code&gt;rCharts&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Interactive static graphics - Garrett&#39;s presentation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Interactive Tables
-
-&lt;ul&gt;
-&lt;li&gt;Using DT R package
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Reporting from Shiny&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Using &lt;code&gt;Rmarkdown&lt;/code&gt; and &lt;code&gt;knitr&lt;/code&gt; to create customizable reproducible reports
-
-&lt;ul&gt;
-&lt;li&gt;Example: generate report button&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Generate final data files
-
-&lt;ul&gt;
-&lt;li&gt;Example: download data button
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Strengths of Using Shiny&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The app can be written solely using R code
-
-&lt;ul&gt;
-&lt;li&gt;Can use CSS, JavaScript, or HTML as needed&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;User does not need to know any R&lt;/li&gt;
-&lt;li&gt;Many hosting options&lt;/li&gt;
-&lt;li&gt;Application can be as simple or complex as needed (both visually and functionally)&lt;/li&gt;
-&lt;li&gt;Flexible output
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Weaknesses of Using Shiny&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;May take more time to develop initially&lt;/li&gt;
-&lt;li&gt;Need some R familiarity for development
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Background for Demo&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;In educational assessment, we need to create new test forms
-
-&lt;ul&gt;
-&lt;li&gt;Exposure concerns&lt;/li&gt;
-&lt;li&gt;Add new content&lt;/li&gt;
-&lt;li&gt;Altering test landscape&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Building test forms is an iterative process that involves gathering information from:
-
-&lt;ul&gt;
-&lt;li&gt;Item analyses&lt;/li&gt;
-&lt;li&gt;Test blueprints&lt;/li&gt;
-&lt;li&gt;Item response theory (IRT)
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;IRT Data&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;##      Item.1 Item.2 Item.3 Item.4 Item.5 Item.6 Item.7 Item.8
-## [1,]      1      1      1      1      1      1      1      1
-## [2,]      0      1      0      0      1      0      1      0
-## [3,]      1      1      1      0      1      0      1      0
-## [4,]      0      1      0      1      1      0      1      0
-## [5,]      0      1      1      1      1      0      1      1
-## [6,]      1      1      0      0      1      0      1      0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Logistic Curve&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/logistic-1.png&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Demo&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/lebebr01/BuildForm&quot;&gt;https://github.com/lebebr01/BuildForm&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;# Basic Theme
-shiny::runGitHub(&#39;lebebr01/BuildForm&#39;, subdir = &#39;R&#39;, ref = &#39;basic&#39;)
-
-# shinydashboard
-shiny::runGitHub(&#39;lebebr01/BuildForm&#39;, subdir = &#39;R&#39;, ref = &#39;testmodule&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Benefits of Shiny for Iterative Data Analysis&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Free valuable data analyst/scientist resources.&lt;/li&gt;
-&lt;li&gt;Improve data literacy in the organization.&lt;/li&gt;
-&lt;li&gt;Highly customizable
-
-&lt;ul&gt;
-&lt;li&gt;Analysis (server.r)&lt;/li&gt;
-&lt;li&gt;User interface (ui.r)&lt;/li&gt;
-&lt;li&gt;Reporting
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Weaknesses of Shiny for Iterative Data Analysis&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Need to train users
-
-&lt;ul&gt;
-&lt;li&gt;Analysis&lt;/li&gt;
-&lt;li&gt;Navigating web application&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Knowledge of JavaScript, CSS, or HTML useful.
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Guidelines for Building Shiny Apps&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Understand reactive coding.&lt;/li&gt;
-&lt;li&gt;Modularize your code - define functions for repetitive code chunks.&lt;/li&gt;
-&lt;li&gt;Define scope early.
-
-&lt;ul&gt;
-&lt;li&gt;Define output.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Clean up UI last.
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://educate-r.org/figs/flowchart.png&quot; alt=&quot;&quot;/&gt;
-&lt;/section&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Shiny Resources&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/&quot;&gt;http://shiny.rstudio.com/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/articles/&quot;&gt;http://shiny.rstudio.com/articles/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://shiny.rstudio.com/gallery/&quot;&gt;http://shiny.rstudio.com/gallery/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.rstudio.com/products/shiny/shiny-user-showcase/&quot;&gt;https://www.rstudio.com/products/shiny/shiny-user-showcase/&lt;/a&gt;
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;section&gt;&lt;/p&gt;
-
-&lt;h1&gt;Questions?&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Twitter: @blebeau11&lt;/li&gt;
-&lt;li&gt;Website: &lt;a href=&quot;http://educate-r.org&quot;&gt;http://educate-r.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Slides: &lt;a href=&quot;http://educate-r.org/2016/02/18/cspshiny/&quot;&gt;http://educate-r.org/2016/02/18/cspshiny/&lt;/a&gt;
-&lt;/section&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-				<pubDate>Thu, 18 Feb 2016 00:00:00 -0600</pubDate>
-				<link>http://educate-r.org//2016/02/18/cspshiny.html</link>
-				<guid isPermaLink="true">http://educate-r.org//2016/02/18/cspshiny.html</guid>
 			</item>
 		
 	</channel>
